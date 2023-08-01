@@ -1,8 +1,9 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Nunito_Sans } from 'next/font/google'
+import { Providers } from './providers'
 
-const inter = Inter({ subsets: ['latin'] })
+const nunitoSans = Nunito_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Spotify',
@@ -16,7 +17,11 @@ export default function RootLayout ({
 }) {
   return (
     <html lang='es'>
-      <body className={inter.className}>{children}</body>
+      <body className={`${nunitoSans.className} dark bg-background text-tx`}>
+        <Providers>
+          {children}
+        </Providers>
+      </body>
     </html>
   )
 }
