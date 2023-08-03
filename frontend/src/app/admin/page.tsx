@@ -1,7 +1,7 @@
 export default function AdminPage () {
   return (
-    <main className='h-screen'>
-      <h1>Admin</h1>
-    </main>
+    <section>
+      <h1>Admin Page</h1>
+    </section>
   )
 }
