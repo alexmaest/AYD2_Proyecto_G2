@@ -8,18 +8,8 @@ class LoginController {//JA
         console.log("------- login -------")
         console.log(req.body)
         console.log("---------------------")
-
-        /*
-        const jsonData = req.body;
-        const email = JSON.parse(jsonData).Email;
-        const password = JSON.parse(jsonData).Password;
-        console.log("correo: "+email+" password: "+password);*/
-
         
-
         /* // nomas tenga la BD <<descomentar>>
-
-        return new Promise((resolve, reject) => {
             const query = `SELECT * FROM UsersContentCreator WHERE email='${req.body.Email}' and password='${req.body.Password}';`;
             db.connection.query(query, (err, results) => {
                 if (err) {
@@ -27,10 +17,12 @@ class LoginController {//JA
                 } else {
                     //si quito el map entonces debo de usar results.id, results.email etc
                     const usersCC = results.map((user) => new ContentCreator(user.id, user.name, user.dateBirth, user.email, user.password, user.photo));
-                    resolve(usersCC);
+                    
+                    //como ya verifique que concuerden password y user
+                    res.send(JSON.stringify(usersCC)); // o res.send({"result":true,"name":req.body.Email})
                 }
-            });
-        });*/
+            });*/
+     
 
         res.send({ "message": "todo bien!" })
     }
