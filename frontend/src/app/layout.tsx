@@ -17,7 +17,7 @@ export default function RootLayout ({
 }) {
   return (
     <html lang='es'>
-      <body className={`${nunitoSans.className} dark bg-background text-tx`}>
+      <body className={`${nunitoSans.className} dark bg-retro-black text-white`}>
         <Providers>
           {children}
         </Providers>

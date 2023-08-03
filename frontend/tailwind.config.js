@@ -16,11 +16,11 @@ module.exports = {
     themes: {
       dark: {
         colors: {
-          tx: '#F3EFE0',
-          background: '#222222',
-          primary: '#EF6262',
-          secondary: '#F3AA60',
-          accent: '#1D5B79'
+          'retro-white': '#F3EFE0',
+          'retro-black': '#222222',
+          'retro-green': '#1B5045',
+          'retro-orange': '#F3AA60',
+          'retro-blue': '#1D5B79'
         }
       }
     }
