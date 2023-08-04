@@ -1,13 +1,13 @@
 import React from 'react'
 
 interface InputWrapperProps {
+  className?: string
   children: React.ReactNode
-  width: string
 }
 
-function InputWrapper ({ children, width }: InputWrapperProps) {
+function InputWrapper ({ className, children }: InputWrapperProps) {
   return (
-    <div className={`${width} flex flex-col gap-2 items-start`}>
+    <div className={`w-full flex items-center text-[16px] text-retro-white border-2 rounded-md  h-[48px] focus:outline-none focus:ring-1 focus:ring-retro-white hover:ring-1 hover:ring-retro-white-300 active:border-retro-white-50 ${className !== undefined ? className : ''}`}>
       {children}
     </div>
   )
