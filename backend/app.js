@@ -5,7 +5,7 @@ const cors = require('cors');
 
 const mainRoute = require('./routers/mainRoute');
 const loginRoute = require('./routers/loginRoute');
-const allCCRoute = require('./routers/alllCreatorsRoute');
+const adminRoute = require('./routers/adminRoute');
 
 class Server {
     constructor() {
@@ -18,7 +18,7 @@ class Server {
     initRoutes() {
         this.app.use('/', mainRoute);
         this.app.use('/login', loginRoute);
-        this.app.use('/getAllCC', allCCRoute);
+        this.app.use('/admin', adminRoute);
     }
 
     start() {
