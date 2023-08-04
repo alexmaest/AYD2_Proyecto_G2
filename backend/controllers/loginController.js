@@ -1,4 +1,4 @@
-const { ContentCreator } = require('../models/contentCreator');
+const { ContentCreator } = require('../models/artistModel');
 
 class LoginController {//JA
     constructor() { }
