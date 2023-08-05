@@ -2,7 +2,7 @@ const db = require('../database');
 
 class userRepository {
   //JA
-  findByCredentials(id,tipo) { // para el login del usuario
+  findByCredentials(id, tipo) { // para el login del usuario
     return new Promise((resolve, reject) => {
       //cambiar para la base del proyecto
       const query = 'SELECT * FROM Usuario WHERE idUsuario = ? and Tipo = ?';
@@ -28,6 +28,24 @@ class userRepository {
       });
     });
   }
+
+  async findByEmail(email) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM usuario WHERE email = ?';
+      db.connection.query(query, [email], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            resolve(results[0]);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
 }
 
 module.exports = userRepository;

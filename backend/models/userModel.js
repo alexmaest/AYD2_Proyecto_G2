@@ -16,6 +16,15 @@ class artistModel {
     }
   }
 
+  async getUserByEmail(email) {
+    try {
+      const user = await this.repository.findByEmail(email);
+      return user;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching content creator by email');
+    }
+  }
 }
 
 module.exports = new artistModel();
