@@ -19,7 +19,7 @@ class LoginController {//JA
     async passwordChange(req, res) {
         try {
             const email = req.body.email;
-            const user = await userRepository.findByEmail(email);
+            const user = await userModel.getUserByEmail(email);
 
             if (user) {
                 const transporter = nodemailer.createTransport({
