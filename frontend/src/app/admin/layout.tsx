@@ -1,3 +1,4 @@
+import Brand from '@/components/Brand'
 
 export default function AdminLayout ({
   children
@@ -9,11 +10,7 @@ export default function AdminLayout ({
       <nav className='fixed w-full top-0 px-20 py-4 bg-retro-black'>
         <ul className='flex items-center justify-between'>
           <li className='font-semibold'>
-            <div className='flex items-center space-x-4'>
-              <p className='text-white text-xl'>
-                RetroMusic
-              </p>
-            </div>
+            <Brand className='h-[36px] w-[136.8px]' color='#F3EFE0' />
           </li>
           <div className='flex space-x-4'>
             <li className='text-white'>Inicio</li>
