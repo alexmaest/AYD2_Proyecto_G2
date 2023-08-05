@@ -8,6 +8,7 @@ class Database {
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
             ssh: "Amazon RDS",
+            //port: 3306,//test
             database: process.env.DB_NAME,
             multipleStatements: true
         });
