@@ -45,7 +45,7 @@ class artistModel {
     }
   }
 
-  async getAllArtists() {
+  async getAllArtists() {//modulo admin visualice a todos los CC
     try {
       const creators = await this.repository.findAll();
       return creators;

@@ -5,7 +5,7 @@ class adminController {
 
     async artists(req, res) {
         try {
-            const allArtists = await artist.getAllArtists();
+            const allArtists = await artist.getAllArtists();//modulo admin visualice a todos los CC
             res.status(200).json(allArtists);
         } catch (err) {
             console.error(err);
