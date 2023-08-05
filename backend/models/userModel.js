@@ -6,9 +6,9 @@ class artistModel {
   }
 
   //JA
-  async getUserByCredentials(id,tipo) {
+  async getUserByCredentials(email,pwd) {
     try {
-      const user = await this.repository.findByCredentials(id,tipo);
+      const user = await this.repository.findByCredentials(email,pwd);
       return user;
     } catch (err) {
       console.error(err);
