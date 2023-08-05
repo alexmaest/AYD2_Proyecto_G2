@@ -4,6 +4,6 @@ const router = express.Router();
 const loginController = require('../controllers/loginController');
 
 router.post('/', loginController.usersLogin);
-//router.post('/2', loginController.login);//para cuando vaya escalando
+router.post('/passwordChange', loginController.passwordChange);
 
 module.exports = router;
