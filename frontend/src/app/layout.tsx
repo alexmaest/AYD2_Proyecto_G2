@@ -5,7 +5,7 @@ import { Nunito_Sans } from 'next/font/google'
 const nunitoSans = Nunito_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Spotify',
+  title: 'RetroMusic',
   description: 'A platform for music lovers'
 }
 
