@@ -1,13 +1,15 @@
 'use client'
+import { useEffect, useMemo, useState } from 'react'
+import { TbEye, TbEyeOff } from 'react-icons/tb'
+import { baseUrl, apiUrls } from '@/constants/urls'
 import Brand from '@/components/Brand'
 import Button from '@/components/Button'
 import FormInput from '@/components/FormInput'
 import RadioButton from '@/components/RadioButton'
 import Link from 'next/link'
 import Input from '@/components/Input'
-import { useMemo, useState } from 'react'
-import { TbEye, TbEyeOff } from 'react-icons/tb'
 import Select from '@/components/Select'
+import InputError from '@/components/InputError'
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
@@ -25,6 +27,9 @@ function Register () {
   const [year, setYear] = useState('')
   const [gender, setGender] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState('')
+  const [errorMonth, setErrorMonth] = useState('')
+  const [errorGender, setErrorGender] = useState('')
 
   const validationStateEmail = useMemo(() => {
     const validateEmail = (email: string) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i)
@@ -63,14 +68,76 @@ function Register () {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(email)
-    console.log(password)
-    console.log(username)
-    console.log(day)
-    console.log(month)
-    console.log(year)
-    console.log(gender)
+    let allValid = true
+    if (validationStateEmail === 'invalid') {
+      allValid = false
+    }
+
+    if (validationStatePassword === 'invalid') {
+      allValid = false
+    }
+
+    if (validationStateUsername === 'invalid') {
+      allValid = false
+    }
+
+    if (validationStateDay === 'invalid') {
+      allValid = false
+    }
+
+    if (validationStateYear === 'invalid') {
+      allValid = false
+    }
+
+    if (month === '') {
+      setErrorMonth('Please select a month!')
+      allValid = false
+    }
+
+    if (gender === '') {
+      setErrorGender('Please select a gender!')
+      allValid = false
+    }
+
+    if (!allValid) return
+
+    try {
+      const formData = {
+        email,
+        password,
+        username,
+        day,
+        month,
+        year,
+        gender
+      }
+
+      const response = await fetch(`${baseUrl}/${apiUrls.auth.register}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(formData)
+      })
+
+      if (response.status === 200) {
+        alert('Registro realizado con éxito')
+      } else {
+        const { error } = await response.json()
+        setError(error)
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
+
+  useEffect(() => {
+    setErrorMonth('')
+  }, [month])
+
+  useEffect(() => {
+    setErrorGender('')
+  }, [gender])
 
   return (
     <section className='flex flex-col gap-12 items-center my-16'>
@@ -78,6 +145,9 @@ function Register () {
         <Brand className='text-retro-white w-[182.4px] h-[48px]' color='#F3EFE0' />
       </Link>
       <h4 className='text-retro-white font-bold text-[25px]'>Sign up for free to start listening.</h4>
+      {error !== '' && (
+        <p className='bg-red-200 border-none rounded text-red-500 text-lg text-center italic p-2'>{error}</p>
+      )}
       <form action='post' className='flex flex-col items-start gap-6' onSubmit={handleSubmit}>
         <Input
           value={email}
@@ -87,8 +157,9 @@ function Register () {
           label='What&apos;s your email?'
           placeholder='Enter your email.'
           autoComplete='email'
-          isValid={validationStateEmail === undefined ? true : validationStateEmail === 'valid'}
-          note={validationStateEmail === 'invalid' ? 'Please enter a valid email.' : undefined}
+          isValid={validationStateEmail !== 'invalid'}
+          errorMessage='Please enter a valid email address.'
+          isRequired
         />
         <Input
           value={password}
@@ -99,8 +170,9 @@ function Register () {
           placeholder='Create a password.'
           isPassword={showPassword}
           autoComplete='off'
-          isValid={validationStatePassword === undefined ? true : validationStatePassword === 'valid'}
-          note={validationStatePassword === 'invalid' ? 'Your password must be at least 8 characters long.' : undefined}
+          isValid={validationStatePassword !== 'invalid'}
+          errorMessage='Your password must be at least 8 characters long.'
+          isRequired
         >
           <button type='button' onClick={() => setShowPassword(!showPassword)}>
             {showPassword
@@ -118,8 +190,10 @@ function Register () {
           label='What should we call you?'
           placeholder='Enter a profile name.'
           autoComplete='off'
-          isValid={validationStateUsername === undefined ? true : validationStateUsername === 'valid'}
-          note={validationStateUsername === 'invalid' ? 'Your username must be at least 2 characters long.' : 'This appears on your profile.'}
+          isValid={validationStateUsername !== 'invalid'}
+          note='This appears on your profile.'
+          errorMessage='Please enter a valid username.'
+          isRequired
         />
         <FormInput width='w-[450px]'>
           <label htmlFor='date' className='font-bold text-[16px]'>
@@ -135,8 +209,8 @@ function Register () {
               placeholder='DD'
               width='w-1/5'
               autoComplete='off'
-              isValid={validationStateDay === undefined ? true : validationStateDay === 'valid'}
-              note={validationStateDay === 'invalid' ? 'Please enter a valid day.' : undefined}
+              isValid={validationStateDay !== 'invalid'}
+              isRequired
             />
             <Select
               values={months}
@@ -144,6 +218,8 @@ function Register () {
               id='month'
               label='Month'
               width='w-[45%]'
+              isRequired
+              isValid={errorMonth === ''}
             />
             <Input
               value={year}
@@ -154,10 +230,13 @@ function Register () {
               placeholder='YYYY'
               width='w-1/4'
               autoComplete='off'
-              isValid={validationStateYear === undefined ? true : validationStateYear === 'valid'}
-              note={validationStateYear === 'invalid' ? 'Please enter a valid year.' : undefined}
+              isValid={validationStateYear !== 'invalid'}
+              isRequired
             />
           </div>
+          {validationStateDay === 'invalid' && (<InputError message='Please enter a valid day.' />)}
+          {errorMonth !== '' && (<InputError message={errorMonth} />)}
+          {validationStateYear === 'invalid' && (<InputError message='Please enter a valid year.' />)}
         </FormInput>
         <FormInput width='w-[450px]'>
           <label htmlFor='gender' className='font-bold text-[16px]'>
@@ -173,6 +252,7 @@ function Register () {
               />
             ))}
           </div>
+          {errorGender !== '' && (<InputError message={errorGender} />)}
         </FormInput>
         <div className='flex flex-col w-full items-center gap-6'>
           <Button type='primary'>

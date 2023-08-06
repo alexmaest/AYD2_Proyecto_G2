@@ -8,11 +8,12 @@ interface SelectProps {
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
   id: string
   label: string
-  note?: string
+  isValid: boolean
+  isRequired?: boolean
   width?: string
 }
 
-function Select ({ values, onChange, id, label, note, width }: SelectProps) {
+function Select ({ values, onChange, id, label, isValid, isRequired, width }: SelectProps) {
   return (
     <FormInput width={(width == null) ? 'w-[450px]' : width}>
       <label htmlFor={id}>{label}</label>
@@ -23,6 +24,7 @@ function Select ({ values, onChange, id, label, note, width }: SelectProps) {
           className='w-full py-2 px-3 border-none rounded-md focus:outline-none h-full appearance-none bg-retro-black'
           onChange={onChange}
           defaultValue='none'
+          required={isRequired}
         >
           <option className='relative' value='none' disabled>{label}</option>
           {values.map((value, index) => (
@@ -33,7 +35,6 @@ function Select ({ values, onChange, id, label, note, width }: SelectProps) {
           <TbChevronDown className='h-8 w-8 opacity-70 my-2 mx-3' />
         </div>
       </InputWrapper>
-      {(note != null) && <p className='text-[14px]'>{note}</p>}
     </FormInput>
   )
 }

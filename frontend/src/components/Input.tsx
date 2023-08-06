@@ -1,4 +1,5 @@
 import FormInput from './FormInput'
+import InputError from './InputError'
 import InputWrapper from './InputWrapper'
 
 interface InputProps {
@@ -13,6 +14,8 @@ interface InputProps {
   note?: string
   width?: string
   isValid: boolean
+  isRequired: boolean
+  errorMessage?: string
   children?: React.ReactNode
 }
 
@@ -28,6 +31,8 @@ function Input ({
   note,
   width,
   isValid,
+  isRequired,
+  errorMessage,
   children
 }: InputProps) {
   return (
@@ -44,10 +49,12 @@ function Input ({
           value={value}
           onChange={onChange}
           autoComplete={autoComplete}
+          required={isRequired}
         />
         {children}
       </InputWrapper>
-      {(note != null) && <p className={`text-[14px] ${isValid ? '' : 'text-red-400'}`}>{note}</p>}
+      {(note != null) && isValid && <p className='text-[14px]'>{note}</p>}
+      {(!isValid && errorMessage != null) && <InputError message={errorMessage} />}
     </FormInput>
   )
 }
