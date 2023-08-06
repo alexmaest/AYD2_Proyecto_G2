@@ -1,10 +1,10 @@
-//const db = require('../database');
+const db = require('../database');
 
 class artistRepository {
 
   save(artist) {
     return new Promise((resolve, reject) => {
-      const query = 'INSERT INTO artist SET ?';
+      const query = 'INSERT INTO usuario SET ?';
       db.connection.query(query, artist, (err, result) => {
         if (err) {
           reject(err);
@@ -17,7 +17,7 @@ class artistRepository {
 
   update(artist) {
     return new Promise((resolve, reject) => {
-      const query = 'UPDATE artist SET ? WHERE id = ?';
+      const query = 'UPDATE usuario SET ? WHERE id = ?';
       db.connection.query(query, [artist, artist.id], (err, result) => {
         if (err) {
           reject(err);
@@ -30,7 +30,7 @@ class artistRepository {
 
   delete(id) {
     return new Promise((resolve, reject) => {
-      const query = 'DELETE FROM artist WHERE id = ?';
+      const query = 'DELETE FROM usuario WHERE id = ?';
       db.connection.query(query, id, (err, result) => {
         if (err) {
           reject(err);
@@ -43,7 +43,7 @@ class artistRepository {
 
   findById(id) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM artist WHERE id = ?';
+      const query = 'SELECT * FROM usuario WHERE id = ?';
       db.connection.query(query, id, (err, results) => {
         if (err) {
           reject(err);
@@ -68,13 +68,17 @@ class artistRepository {
 
   findAll() { //query que obtiene todo de la BD (esto es para el modulo de admin donde se enlista a todos los CC)
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM artist'; //BD en mi pc local
+      const query = 'SELECT * FROM usuario WHERE tipo_usuario=2'; //BD en mi pc local
       db.connection.query(query, (err, results) => {
         if (err) {
           reject(err);
         } else {
-          const artists = results.map((artist) => new artist(artist.id, artist.name, artist.dateBirth, artist.email, artist.password, artist.photo));
-          resolve(artists);
+          /*
+          console.log(":::::::::::::::::::::::::::::::::")
+            console.log(results)
+            console.log("............")*/
+          //const artists = results.map((artist) => new artist(artist.id, artist.name, artist.dateBirth, artist.email, artist.password, artist.photo));
+          resolve(results);
         }
       });
     });

@@ -8,7 +8,7 @@ class LoginController {//JA
     //JA
     async usersLogin(req, res) {
         try {
-            const user = await userModel.getUserByCredentials(req.body.id, req.body.tipo);
+            const user = await userModel.getUserByCredentials(req.body.email, req.body.pwd);
             res.status(200).json(user);
         } catch (err) {
             console.error(err);
