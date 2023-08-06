@@ -1,6 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Nunito_Sans } from 'next/font/google'
+import AuthProvider from './context/AuthProvider'
+import Navbar from '@/components/Navbar'
 
 const nunitoSans = Nunito_Sans({ subsets: ['latin'] })
 
@@ -17,7 +19,10 @@ export default function RootLayout ({
   return (
     <html lang='es'>
       <body className={`${nunitoSans.className} bg-retro-black`}>
-        {children}
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )
