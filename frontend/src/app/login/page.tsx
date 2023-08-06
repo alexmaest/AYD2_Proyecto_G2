@@ -27,9 +27,9 @@ function Login () {
 
   return (
     <>
-      <header className='flex px-16 py-8 bg-[#1D1D1D] shadow-header'>
+      <header className='flex px-16 py-6 bg-[#1D1D1D] shadow-header'>
         <Link href='/' passHref>
-          <Brand className='h-[36px] w-[136.8px]' color='#F3EFE0' />
+          <Brand className='h-[48px] w-[182.4px]' color='#F3EFE0' />
         </Link>
       </header>
       <main className='flex items-center justify-center my-16'>
