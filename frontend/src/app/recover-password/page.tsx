@@ -16,12 +16,12 @@ function RecoverPassword () {
   }, [email])
   return (
     <>
-      <header className='flex px-16 py-8 bg-[#1D1D1D] justify-center box-border border-b-2 border-retro-black-500'>
+      <header className='flex px-16 py-6 bg-[#1D1D1D] justify-center box-border border-b-2 border-retro-black-500'>
         <Link href='/' passHref>
-          <Brand className='h-[36px] w-[136.8px]' color='#F3EFE0' />
+          <Brand className='h-[48px] w-[182.4px]' color='#F3EFE0' />
         </Link>
       </header>
-      <main className='flex flex-col items-center justify-center mx-auto my-16 w-1/2 gap-12'>
+      <main className='flex flex-col items-center justify-center mx-auto w-1/2 gap-12 section-min-height'>
         <h2 className='text-4xl font-bold text-retro-white'>Recover Your Password</h2>
         <p className='w-[400px] text-center font-normal text-base text-retro-white'>Enter your RetroMusic <b>email address</b> that you used to register. We'll send you an email with your username and a link to reset your password.</p>
         <Input
