@@ -81,6 +81,18 @@ module.exports = {
       },
       boxShadow: {
         header: '0px 4.372265338897705px 6.4753804206848145px 0px rgba(243, 239, 224, 0.03), 0px 10.507161140441895px 15.561239242553711px 0px rgba(243, 239, 224, 0.04), 0px 19.7840518951416px 29.300432205200195px 0px rgba(243, 239, 224, 0.05), 0px 35.29136657714844px 52.266963958740234px 0px rgba(243, 239, 224, 0.06), 0px 66.00862121582031px 97.75960540771484px 0px rgba(243, 239, 224, 0.07), 0px 158px 234px 0px rgba(243, 239, 224, 0.10)'
+      },
+      animation: {
+        'spin-slow': 'spin 3s ease-in-out',
+        'pulse-once': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1)',
+        wiggle: 'wiggle 1s ease-in-out infinite',
+        'wiggle-once': 'wiggle 3s ease-in-out normal forwards'
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-20deg)' },
+          '50%': { transform: 'rotate(5deg)' }
+        }
       }
     }
   },
