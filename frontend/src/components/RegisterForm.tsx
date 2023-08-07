@@ -101,13 +101,13 @@ function RegisterForm () {
     if (!allValid) return
 
     try {
+      const formattedMonth = `${months.indexOf(month) + 1}`.padStart(2, '0')
+      const birthday = `${year}-${formattedMonth}-${day}`
       const formData = {
         email,
         password,
         username,
-        day,
-        month,
-        year,
+        birthday,
         gender
       }
 
