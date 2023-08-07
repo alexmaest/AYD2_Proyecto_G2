@@ -1,4 +1,5 @@
 import Brand from '@/components/Brand'
+import Link from 'next/link'
 
 export default function ArtistLayout ({
   children
@@ -13,7 +14,13 @@ export default function ArtistLayout ({
             <Brand className='h-[36px] w-[136.8px]' color='#F3EFE0' />
           </li>
           <div className='flex space-x-4'>
-            <li className='text-white'>Inicio</li>
+            <Link href='/artist'>
+              <li className='text-white font-bold'>Inicio</li>
+            </Link>
+            <Link href='/artist/profile/banner'>
+              <li className='text-white font-bold'>Banner</li>
+            </Link>
+
           </div>
         </ul>
       </nav>
