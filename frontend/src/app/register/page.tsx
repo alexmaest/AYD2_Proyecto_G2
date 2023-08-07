@@ -10,6 +10,7 @@ import Link from 'next/link'
 import Input from '@/components/Input'
 import Select from '@/components/Select'
 import InputError from '@/components/InputError'
+import { signIn } from 'next-auth/react'
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
@@ -148,7 +149,7 @@ function Register () {
       {error !== '' && (
         <p className='bg-red-200 border-none rounded text-red-500 text-lg text-center italic p-2'>{error}</p>
       )}
-      <form action='post' className='flex flex-col items-start gap-6' onSubmit={handleSubmit}>
+      <form action='post' className='flex flex-col items-center gap-6' onSubmit={handleSubmit}>
         <Input
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -254,18 +255,22 @@ function Register () {
           </div>
           {errorGender !== '' && (<InputError message={errorGender} />)}
         </FormInput>
-        <div className='flex flex-col w-full items-center gap-6'>
-          <Button type='primary'>
-            <span className='text-retro-white text-center font-bold text-[16px]'>Sign Up</span>
-          </Button>
-          <div>
-            <span className='text-retro-white text-[16px]'>Already have an account?&nbsp;</span>
-            <Link href='/login' passHref className='text-retro-orange underline text-[16px] font-bold hover:scale-105'>
-              Log in
-            </Link>
-          </div>
-        </div>
+        <Button type='primary'>
+          <span className='text-retro-white text-center font-bold text-[16px]'>Sign Up</span>
+        </Button>
       </form>
+      <div className='flex flex-col w-full items-center gap-6'>
+        <div>
+          <span className='text-retro-white text-[16px]'>Already have an account?&nbsp;</span>
+          <button
+            className='text-retro-orange underline text-[16px] font-bold hover:scale-105'
+            onClick={async () => await signIn()}
+            type='button'
+          >
+            Log in
+          </button>
+        </div>
+      </div>
     </section>
   )
 }

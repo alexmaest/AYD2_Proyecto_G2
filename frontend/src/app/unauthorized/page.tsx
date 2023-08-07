@@ -36,7 +36,7 @@ function Page () {
           <p className='text-xl text-center text-retro-white'>No tienes permiso para acceder a esta página.</p>
           <Button
             type='white'
-            width='w-1/2 self-end'
+            className='w-1/2 self-end'
             onClick={handleClick}
           >
             <span className='text-retro-black text-center font-bold text-[16px]'>Back to Home</span>

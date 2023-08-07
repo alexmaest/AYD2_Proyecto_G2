@@ -67,7 +67,7 @@ function Login () {
         <div className='flex flex-col gap-6 items-center'>
           <Button
             type='primary'
-            width='w-[450px]'
+            className='w-[450px]'
           >
             <span className='text-retro-white text-center font-bold text-[16px]'>Log In</span>
           </Button>
