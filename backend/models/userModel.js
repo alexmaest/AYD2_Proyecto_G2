@@ -25,6 +25,16 @@ class artistModel {
       throw new Error('Error while fetching content creator by email');
     }
   }
+
+  async getUserByUsername(username) {
+    try {
+      const user = await this.repository.findByUsername(username);
+      return user;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching content creator by username');
+    }
+  }
 }
 
 module.exports = new artistModel();
