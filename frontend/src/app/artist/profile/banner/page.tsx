@@ -51,7 +51,7 @@ export default function BannerPage () {
           <h2 className='text-retro-white text-lg font-bold'>Previsualización</h2>
           <img
             className='w-full h-96 object-cover rounded-lg'
-            src={base64Image} alt='Imagen'
+            src={base64Image} alt='Previsualización de la imagen'
           />
         </div>
       )}
