@@ -4,6 +4,6 @@ export const apiUrls = {
   auth: {
     login: '/login',
     register: '/register',
-    recoverPassword: '/recover-password'
+    recoverPassword: '/login/passwordChange'
   }
 }
