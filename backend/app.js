@@ -5,11 +5,14 @@ const cors = require('cors');
 const mainRoute = require('./routers/mainRoute');
 const loginRoute = require('./routers/loginRoute');
 const adminRoute = require('./routers/adminRoute');
+const artistRegister = require('./routers/register/artistRegisterRoute');
 
 class Server {
     constructor() {
         this.app = express();
         this.port = 5000;
+        this.app.use(cors());
+        this.app.use(express.json());
         this.app.use(bodyParser.json({ limit: '10mb' }));
         this.initRoutes();
     }
@@ -18,11 +21,10 @@ class Server {
         this.app.use('/', mainRoute);
         this.app.use('/login', loginRoute);
         this.app.use('/admin', adminRoute);
+        this.app.use('/artistRegister', artistRegister);
     }
 
     start() {
-        this.app.use(cors());
-        this.app.use(express.json());
         this.app.listen(this.port, () => {
             console.log(`Information: Server running on http://localhost:${this.port}`);
         });
