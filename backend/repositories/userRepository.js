@@ -22,7 +22,19 @@ class userRepository {
               results[0].Nombre
             );*/
             //console.log("yupii")//delete
-            resolve(results[0]);
+            //console.log(results)
+            //OBJ
+            const User = {
+              id: results[0].id,
+              username: results[0].nombre,
+              role: results[0].tipo_usuario,
+              email: results[0].email,
+              photo: results[0].link_foto,
+              token: "xd"
+            };
+            //resolve(results[0]);
+            console.log(User)
+            resolve(User);
           } else {
             resolve(null);
           }
