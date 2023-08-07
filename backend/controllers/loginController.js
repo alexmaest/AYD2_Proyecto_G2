@@ -1,5 +1,6 @@
 const userModel = require('../models/userModel');
 const nodemailer = require('nodemailer');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 class LoginController {//JA
@@ -9,7 +10,33 @@ class LoginController {//JA
     async usersLogin(req, res) {
         try {
             const user = await userModel.getUserByCredentials(req.body.email, req.body.pwd);
-            res.status(200).json(user);
+
+            /*console.log("::::::::::;;")
+            console.log(user);*/
+
+            if (user === null) {//ubo error con el correo/password
+                res.status(200).json(user);
+            } else {
+                //JWT
+                const correo = user[0].email
+                const rol = user[0].tipo_usuario
+
+                //OBJ
+                const User = {
+                    id: user[0].id,
+                    username: user[0].nombre,
+                    role: user[0].tipo_usuario,
+                    email: user[0].email,
+                    photo: user[0].link_foto,
+                    token: "xd"
+                };
+                const token = jwt.sign({ correo, rol }, 'secret_key');
+                User.token = token
+
+                //console.log(User)
+                res.status(200).json(User);
+            }
+
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
@@ -36,7 +63,7 @@ class LoginController {//JA
                     from: process.env.EMAIL_USER,
                     to: user.email,
                     subject: 'Recuperación de contraseña',
-                    text : `Estimado/a ${user.nombre},\n\nTu contraseña es: ${user.pwd}`
+                    text: `Estimado/a ${user.nombre},\n\nTu contraseña es: ${user.pwd}`
                 };
 
                 transporter.sendMail(mailOptions, (err, info) => {

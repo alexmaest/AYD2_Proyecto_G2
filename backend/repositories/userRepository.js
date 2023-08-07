@@ -1,11 +1,12 @@
 const db = require('../database');
 
+
 class userRepository {
   //JA
   findByCredentials(email, pwd) { // para el login del usuario
     return new Promise((resolve, reject) => {
       //cambiar para la base del proyecto
-      const query = 'SELECT id,nombre,tipo_usuario ,email,link_foto FROM usuario WHERE email = ? and pwd = ?';
+      const query = 'SELECT usuario.id,usuario.nombre,usuario.tipo_usuario ,usuario.email,usuario.link_foto FROM usuario INNER JOIN tipo_usuario ON tipo_usuario.id_tipo = usuario.tipo_usuario WHERE usuario.email = ? and usuario.pwd = ?';
       db.connection.query(query, [email, pwd], (err, results) => {//por ahora esto luego busco password
         if (err) {
           reject(err);
@@ -13,28 +14,10 @@ class userRepository {
           if (results.length > 0) {
             /*
             console.log(":::::::::::::::::::::::::::::::::")
-            console.log(results)
+            console.log(results[0])
             console.log("............")*/
-
-            /* //deprecated
-            const artist = new Usuario(
-              results[0].idUsuario,
-              results[0].Nombre
-            );*/
-            //console.log("yupii")//delete
-            //console.log(results)
-            //OBJ
-            const User = {
-              id: results[0].id,
-              username: results[0].nombre,
-              role: results[0].tipo_usuario,
-              email: results[0].email,
-              photo: results[0].link_foto,
-              token: "xd"
-            };
-            //resolve(results[0]);
-            console.log(User)
-            resolve(User);
+            
+            resolve(results);
           } else {
             resolve(null);
           }
