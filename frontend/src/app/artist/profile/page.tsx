@@ -4,7 +4,7 @@ export default function ProfilePage () {
   return (
     <div className=''>
       <section className='m-6 mt-20'>
-        <article className='relative -z-10 shadow-2xl shadow-red-500'>
+        <article className='relative -z-10 shadow-header shadow-retro-white-200/20 rounded-lg'>
           <div className='flex absolute bottom-1/2 ml-6 space-x-3'>
             <BsFillPatchCheckFill className='w-6 h-6 text-retro-orange-500' />
             <p className='text-white'>Artista verificado</p>
