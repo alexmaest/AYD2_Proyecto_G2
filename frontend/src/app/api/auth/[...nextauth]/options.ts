@@ -11,7 +11,7 @@ export const options: NextAuthOptions = {
         pwd: { label: 'Password', type: 'password', placeholder: 'Enter your password.' }
       },
       async authorize (credentials) {
-        const res = await fetch(`${baseUrl}/${apiUrls.auth.login}`, {
+        const res = await fetch(baseUrl + apiUrls.auth.login, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(credentials)

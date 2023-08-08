@@ -4,8 +4,9 @@ import Input from '@/components/Input'
 import Link from 'next/link'
 import { useSession, signIn } from 'next-auth/react'
 import { redirect } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TbEye, TbEyeOff } from 'react-icons/tb'
+import Alert from '@/components/Alert'
 
 function Login () {
   const { data: session } = useSession()
@@ -13,49 +14,25 @@ function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [isAlertOpen, setIsAlertOpen] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-
-  const validationStateEmail = useMemo(() => {
-    const validateEmail = (email: string) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i)
-    if (email === '') return undefined
-
-    return (validateEmail(email) != null) ? 'valid' : 'invalid'
-  }, [email])
-
-  const validationStatePassword = useMemo(() => {
-    const validatePassword = (password: string) => password.length >= 8
-    if (password === '') return undefined
-
-    return (validatePassword(password)) ? 'valid' : 'invalid'
-  }, [password])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    let allValid = true
-
-    if (validationStateEmail === 'invalid') {
-      allValid = false
-    }
-
-    if (validationStatePassword === 'invalid') {
-      allValid = false
-    }
-
-    if (!allValid) {
-      return
-    }
-
     try {
-      const res = await signIn('credentials', {
+      const response = await signIn('credentials', {
         email,
-        password,
+        pwd: password,
         redirect: false
       })
-      if (res?.status === 401) {
-        setError('El usuario aún no está habilitado o no existe!')
+      console.log(response)
+      if (response?.status !== 200) {
+        setError('Correo o contraseña incorrectos')
+        setIsAlertOpen(true)
       }
-    } catch (error) {
-      setError('Correo o contraseña incorrectos')
+    } catch (error: any) {
+      setError(error.message)
+      setIsAlertOpen(true)
     }
   }
   useEffect(() => {
@@ -81,10 +58,10 @@ function Login () {
         className='flex p-16 gap-12 flex-col items-center bg-[#1D1D1D]'
         onSubmit={handleSubmit}
       >
+        <Alert type='danger' className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
+          <p>{error}</p>
+        </Alert>
         <h2 className='text-4xl font-bold text-retro-white'>Login to RetroMusic</h2>
-        {error !== '' && (
-          <p className='border-2 border-red-500 text-red-500 text-lg text-center italic p-2'>{error}</p>
-        )}
         <section className='flex flex-col items-start gap-6'>
           <Input
             value={email}
@@ -94,8 +71,6 @@ function Login () {
             label='Email'
             placeholder='Enter your email.'
             autoComplete='email'
-            isValid={validationStateEmail !== 'invalid'}
-            errorMessage='Please enter a valid email address.'
             isRequired
           />
           <Input
@@ -107,8 +82,6 @@ function Login () {
             placeholder='Password.'
             isPassword={showPassword}
             autoComplete='off'
-            isValid={validationStatePassword !== 'invalid'}
-            errorMessage='Please enter a valid password.'
             isRequired
           >
             <button type='button' onClick={() => setShowPassword(!showPassword)}>

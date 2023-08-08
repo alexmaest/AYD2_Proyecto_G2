@@ -9,6 +9,7 @@ import Input from '@/components/Input'
 import Select from '@/components/Select'
 import InputError from '@/components/InputError'
 import { signIn } from 'next-auth/react'
+import Alert from './Alert'
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
@@ -26,7 +27,9 @@ function RegisterForm () {
   const [year, setYear] = useState('')
   const [gender, setGender] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState('')
+  const [alertMessage, setAlertMessage] = useState('')
+  const [isAlertOpen, setIsAlertOpen] = useState(false)
+  const [alertType, setAlertType] = useState<'danger' | 'success'>('danger')
   const [errorMonth, setErrorMonth] = useState('')
   const [errorGender, setErrorGender] = useState('')
 
@@ -101,17 +104,17 @@ function RegisterForm () {
     if (!allValid) return
 
     try {
+      const formattedMonth = `${months.indexOf(month) + 1}`.padStart(2, '0')
+      const birthday = `${year}-${formattedMonth}-${day}`
       const formData = {
         email,
         password,
         username,
-        day,
-        month,
-        year,
+        birthday,
         gender
       }
 
-      const response = await fetch(`${baseUrl}/${apiUrls.auth.register}`, {
+      const response = await fetch(baseUrl + apiUrls.auth.register, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -120,13 +123,19 @@ function RegisterForm () {
       })
 
       if (response.status === 200) {
-        alert('Registro realizado con éxito')
+        setAlertType('success')
+        setAlertMessage('You have successfully registered!')
+        setIsAlertOpen(true)
       } else {
         const { error } = await response.json()
-        setError(error)
+        setAlertType('danger')
+        setAlertMessage(error)
+        setIsAlertOpen(true)
       }
-    } catch (error) {
-      console.error(error)
+    } catch (error: any) {
+      setAlertType('danger')
+      setAlertMessage(error.message)
+      setIsAlertOpen(true)
     }
   }
 
@@ -139,9 +148,9 @@ function RegisterForm () {
   }, [gender])
   return (
     <>
-      {error !== '' && (
-        <p className='border-2 border-red-500 text-red-500 text-lg text-center italic p-2'>{error}</p>
-      )}
+      <Alert type={alertType} className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
+        <p>{alertMessage}</p>
+      </Alert>
       <form action='post' className='flex flex-col items-center gap-6' onSubmit={handleSubmit}>
         <Input
           value={email}

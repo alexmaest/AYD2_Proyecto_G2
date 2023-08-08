@@ -1,4 +1,5 @@
 'use client'
+import Alert from '@/components/Alert'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { apiUrls, baseUrl } from '@/constants/urls'
@@ -7,6 +8,7 @@ import { useMemo, useState } from 'react'
 function RecoverPassword () {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
+  const [isAlertOpen, setIsAlertOpen] = useState(false)
 
   const validationStateEmail = useMemo(() => {
     const validateEmail = (email: string) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i)
@@ -22,7 +24,7 @@ function RecoverPassword () {
     }
 
     try {
-      const response = await fetch(`${baseUrl}/${apiUrls.auth.recoverPassword}`, {
+      const response = await fetch(baseUrl + apiUrls.auth.recoverPassword, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -34,19 +36,21 @@ function RecoverPassword () {
         alert('Registro realizado con éxito')
       } else {
         const { error } = await response.json()
+        setIsAlertOpen(true)
         setError(error)
       }
-    } catch (error) {
-      console.log(error)
+    } catch (error: any) {
+      setError(error.message)
+      setIsAlertOpen(true)
     }
   }
 
   return (
     <main className='flex flex-col items-center justify-center mx-auto w-1/2 gap-12 section-min-height'>
+      <Alert type='danger' className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
+        <p>{error}</p>
+      </Alert>
       <h2 className='text-4xl font-bold text-retro-white'>Recover Your Password</h2>
-      {error !== '' && (
-        <p className='border-2 border-red-500 text-red-500 text-lg text-center italic p-2'>{error}</p>
-      )}
       <p className='w-[400px] text-center font-normal text-base text-retro-white'>
         Enter your RetroMusic <b>email address</b> that you used to register.
         We'll send you an email with your username and a link to reset your password.
