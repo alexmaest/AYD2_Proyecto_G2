@@ -13,8 +13,8 @@ interface InputProps {
   autoComplete?: string
   note?: string
   width?: string
-  isValid: boolean
-  isRequired: boolean
+  isValid?: boolean
+  isRequired?: boolean
   errorMessage?: string
   children?: React.ReactNode
 }
@@ -40,7 +40,7 @@ function Input ({
       <label htmlFor={id} className='font-bold text-[16px]'>
         {label}
       </label>
-      <InputWrapper className={isValid ? 'border-retro-white' : 'border-red-500'}>
+      <InputWrapper className={(isValid ?? true) ? 'border-retro-white' : 'border-red-500'}>
         <input
           type={(isPassword ?? false) ? 'text' : type}
           id={id}
@@ -53,8 +53,8 @@ function Input ({
         />
         {children}
       </InputWrapper>
-      {(note != null) && isValid && <p className='text-[14px]'>{note}</p>}
-      {(!isValid && errorMessage != null) && <InputError message={errorMessage} />}
+      {(note != null) && (isValid ?? false) && <p className='text-[14px]'>{note}</p>}
+      {(!(isValid ?? false) && errorMessage != null) && <InputError message={errorMessage} />}
     </FormInput>
   )
 }
