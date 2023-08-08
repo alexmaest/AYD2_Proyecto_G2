@@ -4,8 +4,21 @@ class artistRepository {
 
   save(artist) {
     return new Promise((resolve, reject) => {
-      const query = 'INSERT INTO usuario SET ?';
-      db.connection.query(query, artist, (err, result) => {
+      const query = `
+        INSERT INTO usuario (nombre, pwd, tipo_usuario, email, link_foto, fecha_nacimiento, genero)
+        VALUES (?, ?, 2, ?, ?, ?, ?);
+      `;
+
+      const values = [
+        artist.username,
+        artist.password,
+        artist.email,
+        null,
+        artist.birthday,
+        artist.gender
+      ];
+
+      db.connection.query(query, values, (err, result) => {
         if (err) {
           reject(err);
         } else {

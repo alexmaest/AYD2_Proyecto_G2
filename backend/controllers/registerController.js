@@ -1,4 +1,5 @@
 const userModel = require('../models/userModel');
+const artistModel = require('../models/artistModel');
 
 class registerController {
     constructor() { }
@@ -6,17 +7,29 @@ class registerController {
     async artistRegister(req, res) {
         try {
             const { email, password, username, birthday, gender } = req.body;
-            console.log(email, password, username, birthday, gender);
-            const userByEmail = await userModel.getUserByEmail(email);
+            const genderMapping = {
+                'Male': 1,
+                'Female': 2,
+                'Non-binary': 3,
+                'Other': 4,
+                'Prefer not to say': 5
+            };
+            const artist = { username: username, password: password, email: email, birthday: birthday, gender: genderMapping[gender] };
+
+            const userByEmail = await userModel.getUserByEmail(artist.email);
             if (userByEmail) {
                 res.status(501).send('Account with that email already exist');
             } else {
-                const userByUsername = await userModel.getUserByUsername(username);
+                const userByUsername = await userModel.getUserByUsername(artist.username);
                 if (userByUsername) {
                     res.status(502).send('Account with that username already exist');
                 } else {
-                    console.log("Usuario creado");
-                    res.status(200).send('Account created');
+                    const userAdded = await artistModel.saveArtist(artist);
+                    if (userAdded) {
+                        res.status(200).send('Account created');
+                    } else {
+                        res.status(503).send('Failed artist account creation');
+                    }
                 }
             }
         } catch (err) {
