@@ -5,5 +5,9 @@ export const apiUrls = {
     login: '/login',
     register: '/register',
     recoverPassword: '/login/passwordChange'
+  },
+  artist: {
+    uploadBanner: '/artist/banner',
+    banner: '/artist/banner'
   }
 }
