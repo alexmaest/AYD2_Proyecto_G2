@@ -1,4 +1,7 @@
+'use client'
 import Brand from '@/components/Brand'
+import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 
 export default function AdminLayout ({
   children
@@ -13,7 +16,14 @@ export default function AdminLayout ({
             <Brand className='h-[36px] w-[136.8px]' color='#F3EFE0' />
           </li>
           <div className='flex space-x-4'>
-            <li className='text-white'>Inicio</li>
+            <Link href='/admin'>
+              <li className='text-white font-bold'>Inicio</li>
+            </Link>
+            <li
+              className='text-white font-bold cursor-pointer'
+              onClick={async () => await signOut()}
+            >Logout
+            </li>
           </div>
         </ul>
       </nav>
