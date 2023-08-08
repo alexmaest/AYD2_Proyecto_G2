@@ -3,12 +3,12 @@ import { NextResponse } from 'next/server'
 
 export default withAuth(
   function middleware (req) {
-    if (req.nextUrl.pathname.startsWith('/admin') && req.nextauth.token?.role !== 0) {
+    if (req.nextUrl.pathname.startsWith('/admin') && req.nextauth.token?.role !== 1) {
       return NextResponse.rewrite(
         new URL('/auth/unauthorized', req.url)
       )
     }
-    if (req.nextUrl.pathname.startsWith('/artist') && req.nextauth.token?.role !== 1) {
+    if (req.nextUrl.pathname.startsWith('/artist') && req.nextauth.token?.role !== 2) {
       return NextResponse.rewrite(
         new URL('/auth/unauthorized', req.url)
       )
