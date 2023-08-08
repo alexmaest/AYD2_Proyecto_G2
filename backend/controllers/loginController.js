@@ -15,7 +15,7 @@ class LoginController {//JA
             console.log(user);*/
 
             if (user === null) {//ubo error con el correo/password
-                res.status(200).json(user);
+                res.status(401).send('Invalid user or password');
             } else {
                 //JWT
                 const correo = user[0].email
