@@ -42,7 +42,7 @@ function Login () {
   useEffect(() => {
     if (session?.user != null) {
       const role = session?.user.role
-      if (role === 0) {
+      if (role === 1) {
         redirect('/admin')
       } else {
         redirect('/artist')
