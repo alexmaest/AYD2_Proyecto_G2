@@ -25,10 +25,9 @@ function Login () {
         pwd: password,
         redirect: false
       })
-      console.log(response)
-      if (response?.status !== 200) {
-        setError('Correo o contraseña incorrectos')
-        setIsAlertOpen(true)
+
+      if (response?.error !== '') {
+        throw new Error('Incorrect username or password.')
       }
     } catch (error: any) {
       setError(error.message)
