@@ -49,6 +49,19 @@ class LoginController {//JA
             const user = await userModel.getUserByEmail(email);
 
             if (user) {
+
+                if (user[0].fecha_expiracion_token) {
+                    const currentDate = new Date();
+                    const tokenExpirationDate = new Date(user[0].fecha_expiracion_token);
+                    if (currentDate <= tokenExpirationDate) {
+                        res.status(406).send('User has an active token');
+                        return;
+                    }
+                }
+                const newToken = await userModel.createUserToken();
+                const tokenExpiration = new Date(Date.now() + 15 * 60 * 1000); // Token active 15 minutes from now
+                await userModel.updateUserToken(user[0].id, newToken, tokenExpiration);
+
                 const transporter = nodemailer.createTransport({
                     host: process.env.EMAIL_HOST,
                     port: 465,
@@ -61,9 +74,9 @@ class LoginController {//JA
 
                 const mailOptions = {
                     from: process.env.EMAIL_USER,
-                    to: user.email,
+                    to: user[0].email,
                     subject: 'Recuperación de contraseña',
-                    text: `Estimado/a ${user.nombre},\n\nTu contraseña es: ${user.pwd}`
+                    text: `Estimado/a ${user[0].nombre},\n\nHas solicitado un cambio de contraseña, en la página que se te ha redirigido ingresa el siguiente token: ${newToken}\n\nTienes 15 minutos para que el token sea válido.\n\nEquipo de RetroMusic.`
                 };
 
                 transporter.sendMail(mailOptions, (err, info) => {

@@ -6,7 +6,7 @@ class userRepository {
   findByEmail(email) { // para el login del usuario
     return new Promise((resolve, reject) => {
       //cambiar para la base del proyecto
-      const query = `SELECT usuario.id, usuario.nombre, usuario.pwd, usuario.tipo_usuario, usuario.email, usuario.link_foto 
+      const query = `SELECT usuario.id, usuario.nombre, usuario.pwd, usuario.tipo_usuario, usuario.email, usuario.link_foto, usuario.fecha_expiracion_token 
         FROM usuario 
         INNER JOIN 
         tipo_usuario ON tipo_usuario.id_tipo = usuario.tipo_usuario 
@@ -42,6 +42,19 @@ class userRepository {
       });
     });
   }
+
+  async saveUserToken(id, newToken, tokenExpiration) {
+    return new Promise((resolve, reject) => {
+        const query = 'UPDATE usuario SET token = ?, fecha_expiracion_token = ? WHERE id = ?';
+        db.connection.query(query, [newToken, tokenExpiration, id], (err, results) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(results.affectedRows > 0);
+            }
+        });
+    });
+}
 
 }
 
