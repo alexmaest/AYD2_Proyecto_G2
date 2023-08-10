@@ -89,7 +89,7 @@ class artistRepository {
 
   findAll() { //query que obtiene todo de la BD (esto es para el modulo de admin donde se enlista a todos los CC)
     return new Promise((resolve, reject) => {
-      const query = 'SELECT u.id,u.nombre,u.tipo_usuario as tipoUsuario,u.email,u.link_foto as linkPhoto,g.nombre as genero,u.fecha_nacimiento as dateBirth,u.pwd  FROM usuario as u JOIN genero as g on g.id_tipo = u.genero WHERE u.tipo_usuario !=1;'
+      const query = 'SELECT u.id,u.nombre,u.tipo_usuario as tipoUsuario,u.email,u.link_foto as linkPhoto,g.nombre as genero,u.fecha_nacimiento as dateBirth  FROM usuario as u JOIN genero as g on g.id_tipo = u.genero WHERE u.tipo_usuario !=1;'
       db.connection.query(query, (err, results) => {
         if (err) {
           reject(err);
