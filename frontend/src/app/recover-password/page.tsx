@@ -3,6 +3,7 @@ import Alert from '@/components/Alert'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { apiUrls, baseUrl } from '@/constants/urls'
+import { redirect } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
 function RecoverPassword () {
@@ -36,9 +37,8 @@ function RecoverPassword () {
       if (response.status !== 200) {
         throw new Error("We couldn't find an account with that email address.")
       }
-      setAlertType('success')
-      setAlertMessage('You have successfully registered!')
-      setIsAlertOpen(true)
+
+      redirect('/change-password')
     } catch (error: any) {
       setAlertType('danger')
       setAlertMessage(error.message)

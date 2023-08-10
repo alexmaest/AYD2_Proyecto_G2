@@ -11,7 +11,7 @@ function Navbar () {
     <>
       {pathname === '/' && (<HomeNavbar />)}
       {pathname === '/login' && (<LoginNavbar />)}
-      {pathname === '/recover-password' && (<RecoverPasswordNavbar />)}
+      {(pathname === '/recover-password' || pathname === '/change-password') && (<RecoverPasswordNavbar />)}
     </>
   )
 }
