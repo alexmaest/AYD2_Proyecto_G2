@@ -7,7 +7,8 @@ import { useMemo, useState } from 'react'
 
 function RecoverPassword () {
   const [email, setEmail] = useState('')
-  const [error, setError] = useState('')
+  const [alertMessage, setAlertMessage] = useState('')
+  const [alertType, setAlertType] = useState<'danger' | 'success'>('danger')
   const [isAlertOpen, setIsAlertOpen] = useState(false)
 
   const validationStateEmail = useMemo(() => {
@@ -32,23 +33,23 @@ function RecoverPassword () {
         body: JSON.stringify({ email })
       })
 
-      if (response.status === 200) {
-        alert('Registro realizado con éxito')
-      } else {
-        const { error } = await response.json()
-        setIsAlertOpen(true)
-        setError(error)
+      if (response.status !== 200) {
+        throw new Error("We couldn't find an account with that email address.")
       }
+      setAlertType('success')
+      setAlertMessage('You have successfully registered!')
+      setIsAlertOpen(true)
     } catch (error: any) {
-      setError(error.message)
+      setAlertType('danger')
+      setAlertMessage(error.message)
       setIsAlertOpen(true)
     }
   }
 
   return (
     <main className='flex flex-col items-center justify-center mx-auto w-1/2 gap-12 section-min-height'>
-      <Alert type='danger' className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
-        <p>{error}</p>
+      <Alert type={alertType} className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
+        <p>{alertMessage}</p>
       </Alert>
       <h2 className='text-4xl font-bold text-retro-white'>Recover Your Password</h2>
       <p className='w-[400px] text-center font-normal text-base text-retro-white'>

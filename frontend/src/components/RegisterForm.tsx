@@ -122,16 +122,24 @@ function RegisterForm () {
         body: JSON.stringify(formData)
       })
 
-      if (response.status === 200) {
-        setAlertType('success')
-        setAlertMessage('You have successfully registered!')
-        setIsAlertOpen(true)
-      } else {
-        const { error } = await response.json()
-        setAlertType('danger')
-        setAlertMessage(error)
-        setIsAlertOpen(true)
+      if (response.status !== 200) {
+        let message = ''
+        switch (response.status) {
+          case 501:
+            message = 'This email is already registered!'
+            break
+          case 502:
+            message = 'This username is already registered!'
+            break
+          default:
+            message = 'Something went wrong!'
+            break
+        }
+        throw new Error(message)
       }
+      setAlertType('success')
+      setAlertMessage('You have successfully registered!')
+      setIsAlertOpen(true)
     } catch (error: any) {
       setAlertType('danger')
       setAlertMessage(error.message)
