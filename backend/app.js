@@ -6,6 +6,7 @@ const mainRoute = require('./routers/mainRoute');
 const loginRoute = require('./routers/loginRoute');
 const adminRoute = require('./routers/adminRoute');
 const artistRegister = require('./routers/register/artistRegisterRoute');
+const artistRoute = require('./routers/artistRoute')
 
 class Server {
     constructor() {
@@ -21,6 +22,7 @@ class Server {
         this.app.use('/', mainRoute);
         this.app.use('/login', loginRoute);
         this.app.use('/admin', adminRoute);
+        this.app.use('/artist', artistRoute);
         this.app.use('/artistRegister', artistRegister);
     }
 
