@@ -1,4 +1,4 @@
-const creatorModel = require('../models/creatorModel');
+const artistModel = require('../models/artistModel');
 const filesController = require('./filesController')
 require('dotenv').config();
 
@@ -11,7 +11,7 @@ class CreatorController { //FG
             if (banner === null){
                 res.status(401).send('Error')
             }else{
-                const bannerCreator = await creatorModel.updateBanner(banner,req.body.userId)
+                const bannerCreator = await artistModel.updateArtistBanner(banner,req.body.userId)
                 if (bannerCreator === null){
                     res.status(401).send('Error')
                 }else{
@@ -26,7 +26,7 @@ class CreatorController { //FG
 
     async getBanner(req,res){
         try{
-            const banner = await creatorModel.getBanner(req.params.userId)
+            const banner = await artistModel.getArtistBanner(req.params.userId)
             if(banner === null){
                 res.status(401).send('Invalid user');                    
             }else{

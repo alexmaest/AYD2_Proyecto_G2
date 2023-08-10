@@ -13,8 +13,8 @@ class Server {
         this.app = express();
         this.port = 5000;
         this.app.use(cors());
+        this.app.use(bodyParser.json({ limit: '50mb' }));
         this.app.use(express.json());
-        this.app.use(bodyParser.json({ limit: '10mb' }));
         this.initRoutes();
     }
 

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const creatorController = require('../controllers/creatorController');
+const artistController = require('../controllers/artistController');
 
-router.post('/banner',creatorController.updateBanner);
-router.get('/banner/:userId',creatorController.getBanner);
+router.post('/banner', artistController.updateBanner);
+router.get('/banner/:userId', artistController.getBanner);
 
 module.exports = router;
