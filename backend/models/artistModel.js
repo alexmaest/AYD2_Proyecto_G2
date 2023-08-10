@@ -54,6 +54,26 @@ class artistModel {
       throw new Error('Error while fetching all content creators');
     }
   }
+
+  async updateArtistBanner(bannerUrl, userId) {
+    try {
+      const banner = await this.repository.updateArtistBanner(bannerUrl, userId);
+      return banner;
+    } catch (err) {
+      console.log(err);
+      throw new Error('Error while updating banner');
+    }
+  }
+
+  async getArtistBanner(userId) {
+    try {
+      const banner = await this.repository.findArtistBannerById(userId);
+      return banner;
+    } catch (err) {
+      console.log(err);
+      throw new Error('Error while updating banner');
+    }
+  }
 }
 
 module.exports = new artistModel();

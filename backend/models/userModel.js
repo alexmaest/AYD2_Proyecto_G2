@@ -1,4 +1,5 @@
 const userRepository = require('../repositories/userRepository');
+const crypto = require('crypto');
 
 class artistModel {
   constructor() {
@@ -6,16 +7,6 @@ class artistModel {
   }
 
   //JA
-  async getUserByCredentials(email,pwd) {
-    try {
-      const user = await this.repository.findByCredentials(email,pwd);
-      return user;
-    } catch (err) {
-      console.error(err);
-      throw new Error('Error while fetching content creator by ID or TYPE');
-    }
-  }
-
   async getUserByEmail(email) {
     try {
       const user = await this.repository.findByEmail(email);
@@ -33,6 +24,61 @@ class artistModel {
     } catch (err) {
       console.error(err);
       throw new Error('Error while fetching content creator by username');
+    }
+  }
+
+  async getUserByToken(token) {
+    try {
+      const user = await this.repository.findByToken(token);
+      return user;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching content creator by token');
+    }
+  }
+
+  async createUserHashedPassword(password) {
+    try {
+      const md5 = crypto.createHash('md5');
+      return md5.update(password).digest('hex');
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while hashing password');
+    }
+  }
+
+  async createUserToken() {
+    try {
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < 10; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length);
+        code += characters.charAt(randomIndex);
+      }
+      return code;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while generating token');
+    }
+  }
+
+  async updateUserToken(id, newToken, tokenExpiration) {
+    try {
+      const user = await this.repository.saveUserToken(id, newToken, tokenExpiration);
+      return user;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching content creator by email');
+    }
+  }
+
+  async changeUserPassword(id, newPassword, nowDate) {
+    try {
+      const userId = await this.repository.saveUserPassword(id, newPassword, nowDate);
+      return userId;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while changing artist password');
     }
   }
 }
