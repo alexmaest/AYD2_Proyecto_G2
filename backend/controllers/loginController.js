@@ -9,34 +9,34 @@ class LoginController {//JA
     //JA
     async usersLogin(req, res) {
         try {
-            const user = await userModel.getUserByCredentials(req.body.email, req.body.pwd);
-
-            /*console.log("::::::::::;;")
-            console.log(user);*/
-
-            if (user === null) {//ubo error con el correo/password
-                res.status(401).send('Invalid user or password');
+            const user = await userModel.getUserByEmail(req.body.email);
+            if (user === null) {
+                res.status(401).send('Invalid user');
             } else {
-                //JWT
-                const correo = user[0].email
-                const rol = user[0].tipo_usuario
+                const hashedPassword = await userModel.createUserHashedPassword(req.body.pwd);
+                if (hashedPassword !== user[0].pwd) {
+                    res.status(401).send('Invalid password');
+                } else {
+                    // JWT
+                    const correo = user[0].email;
+                    const rol = user[0].tipo_usuario;
 
-                //OBJ
-                const User = {
-                    id: user[0].id,
-                    username: user[0].nombre,
-                    role: user[0].tipo_usuario,
-                    email: user[0].email,
-                    photo: user[0].link_foto,
-                    token: "xd"
-                };
-                const token = jwt.sign({ correo, rol }, 'secret_key');
-                User.token = token
+                    // OBJ
+                    const User = {
+                        id: user[0].id,
+                        username: user[0].nombre,
+                        role: user[0].tipo_usuario,
+                        email: user[0].email,
+                        photo: user[0].link_foto,
+                        token: "xd" // Esto se actualizará con el token JWT
+                    };
 
-                //console.log(User)
-                res.status(200).json(User);
+                    const token = jwt.sign({ correo, rol }, 'secret_key');
+                    User.token = token;
+
+                    res.status(200).json(User);
+                }
             }
-
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');

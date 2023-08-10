@@ -4,12 +4,12 @@ class artistRepository {
 
   save(artist) {
     return new Promise((resolve, reject) => {
-      const query = `
+      const userQuery = `
         INSERT INTO usuario (nombre, pwd, tipo_usuario, email, link_foto, fecha_nacimiento, genero)
         VALUES (?, ?, 2, ?, ?, ?, ?);
       `;
 
-      const values = [
+      const userValues = [
         artist.username,
         artist.password,
         artist.email,
@@ -18,11 +18,19 @@ class artistRepository {
         artist.gender
       ];
 
-      db.connection.query(query, values, (err, result) => {
-        if (err) {
-          reject(err);
+      db.connection.query(userQuery, userValues, (userErr, userResult) => {
+        if (userErr) {
+          reject(userErr);
         } else {
-          resolve(result.insertId);
+          const userId = userResult.insertId;
+          const creatorQuery = `INSERT INTO creador_contenido (usuario_id) VALUES (?);`;
+          db.connection.query(creatorQuery, [userId], (creatorErr, creatorResult) => {
+            if (creatorErr) {
+              reject(creatorErr);
+            } else {
+              resolve(userId);
+            }
+          });
         }
       });
     });
@@ -92,6 +100,57 @@ class artistRepository {
             console.log("............")*/
           //const artists = results.map((artist) => new artist(artist.id, artist.name, artist.dateBirth, artist.email, artist.password, artist.photo));
           resolve(results);
+        }
+      });
+    });
+  }
+
+  /*save(creator) {
+    return new Promise((resolve, reject) => {
+      const query = `
+            INSERT INTO creador_contenido (usuario_id) VALUES (?);
+            `;
+      const values = [
+        creator.userId,
+      ]
+
+      db.connection.query(query, values, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result.insertId);
+        }
+      });
+    }
+
+    );
+  }*/
+
+  updateArtistBanner(url, creator) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE creador_contenido SET banner = ? WHERE usuario_id = ?';
+      db.connection.query(query, [url, creator], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
+        }
+      });
+    });
+  }
+
+  findArtistBannerById(id) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT banner as image FROM creador_contenido WHERE usuario_id = ?';
+      db.connection.query(query, [id], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            resolve(results[0]);
+          } else {
+            resolve(null);
+          }
         }
       });
     });

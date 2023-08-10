@@ -5,7 +5,7 @@ const cors = require('cors');
 const mainRoute = require('./routers/mainRoute');
 const loginRoute = require('./routers/loginRoute');
 const adminRoute = require('./routers/adminRoute');
-const artistRegister = require('./routers/register/artistRegisterRoute');
+const artistRegisterRoute = require('./routers/register/artistRegisterRoute');
 const artistRoute = require('./routers/artistRoute')
 
 class Server {
@@ -23,7 +23,7 @@ class Server {
         this.app.use('/login', loginRoute);
         this.app.use('/admin', adminRoute);
         this.app.use('/artist', artistRoute);
-        this.app.use('/artistRegister', artistRegister);
+        this.app.use('/artistRegister', artistRegisterRoute);
     }
 
     start() {

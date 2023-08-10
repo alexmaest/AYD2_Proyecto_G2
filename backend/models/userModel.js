@@ -1,4 +1,5 @@
 const userRepository = require('../repositories/userRepository');
+const crypto = require('crypto');
 
 class artistModel {
   constructor() {
@@ -6,16 +7,6 @@ class artistModel {
   }
 
   //JA
-  async getUserByCredentials(email,pwd) {
-    try {
-      const user = await this.repository.findByCredentials(email,pwd);
-      return user;
-    } catch (err) {
-      console.error(err);
-      throw new Error('Error while fetching content creator by ID or TYPE');
-    }
-  }
-
   async getUserByEmail(email) {
     try {
       const user = await this.repository.findByEmail(email);
@@ -33,6 +24,36 @@ class artistModel {
     } catch (err) {
       console.error(err);
       throw new Error('Error while fetching content creator by username');
+    }
+  }
+
+  async createUserHashedPassword(password) {
+    try {
+      const md5 = crypto.createHash('md5');
+      return md5.update(password).digest('hex');
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while hashing password');
+    }
+  }
+
+  async updateArtistBanner(bannerUrl, userId) {
+    try {
+      const banner = await this.repository.update(bannerUrl, userId)
+      return banner
+    } catch (err) {
+      console.log(err)
+      throw new Error('Error while updating banner');
+    }
+  }
+
+  async getArtistBanner(userId) {
+    try {
+      const banner = await this.repository.findById(userId)
+      return banner
+    } catch (err) {
+      console.log(err)
+      throw new Error('Error while updating banner');
     }
   }
 }
