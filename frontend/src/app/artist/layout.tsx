@@ -1,5 +1,7 @@
+'use client'
 import Brand from '@/components/Brand'
 import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 
 export default function ArtistLayout ({
   children
@@ -20,7 +22,12 @@ export default function ArtistLayout ({
             <Link href='/artist/profile/banner'>
               <li className='text-white font-bold'>Banner</li>
             </Link>
-
+            <li
+              className='text-white font-bold cursor-pointer'
+              onClick={async () => await signOut()}
+            >
+              Logout
+            </li>
           </div>
         </ul>
       </nav>
