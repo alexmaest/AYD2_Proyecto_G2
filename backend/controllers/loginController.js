@@ -43,7 +43,7 @@ class LoginController {//JA
         }
     }
 
-    async passwordChange(req, res) {
+    async passwordSend(req, res) {
         try {
             const email = req.body.email;
             const user = await userModel.getUserByEmail(email);
@@ -96,6 +96,40 @@ class LoginController {//JA
             res.status(500).send('Internal Server Error');
         }
     }
+
+    async passwordUpdate(req, res) {
+        try {
+            const { newPassword, token } = req.body;
+            const userByToken = await userModel.getUserByToken(token);
+            if (userByToken === null) {
+                res.status(401).send('Invalid token');
+            } else {
+                const currentDate = new Date();
+                const guatemalaTimezoneOffset = -6 * 60; // Guatemala is UTC-6
+                currentDate.setMinutes(currentDate.getMinutes() + guatemalaTimezoneOffset);
+
+                const tokenExpirationDate = new Date(userByToken.fecha_expiracion_token);
+                tokenExpirationDate.setMinutes(tokenExpirationDate.getMinutes() + guatemalaTimezoneOffset);
+                if (currentDate <= tokenExpirationDate) {
+                    const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+                    const newPasswordHashed = await userModel.createUserHashedPassword(newPassword);
+
+                    const userAdded = await userModel.changeUserPassword(userByToken.id, newPasswordHashed, formattedDate);
+                    if (userAdded) {
+                        res.status(200).send('User password changed');
+                    } else {
+                        res.status(500).send('Failed user password change');
+                    }
+                } else {
+                    res.status(406).send('User does not have an active token');
+                }
+            }
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
 }
 
 module.exports = new LoginController();

@@ -43,19 +43,48 @@ class userRepository {
     });
   }
 
+  async findByToken(token) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM usuario WHERE token = ?';
+      db.connection.query(query, [token], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            resolve(results[0]);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
   async saveUserToken(id, newToken, tokenExpiration) {
     return new Promise((resolve, reject) => {
-        const query = 'UPDATE usuario SET token = ?, fecha_expiracion_token = ? WHERE id = ?';
-        db.connection.query(query, [newToken, tokenExpiration, id], (err, results) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(results.affectedRows > 0);
-            }
-        });
+      const query = 'UPDATE usuario SET token = ?, fecha_expiracion_token = ? WHERE id = ?';
+      db.connection.query(query, [newToken, tokenExpiration, id], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results.affectedRows > 0);
+        }
+      });
     });
-}
+  }
 
+  async saveUserPassword(id, newPassword, nowDate) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE usuario SET pwd = ?, fecha_expiracion_token = ? WHERE id = ?';
+      db.connection.query(query, [newPassword, nowDate, id], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results.affectedRows > 0);
+        }
+      });
+    });
+  }
 }
 
 module.exports = userRepository;

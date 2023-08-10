@@ -27,6 +27,16 @@ class artistModel {
     }
   }
 
+  async getUserByToken(token) {
+    try {
+      const user = await this.repository.findByToken(token);
+      return user;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching content creator by token');
+    }
+  }
+
   async createUserHashedPassword(password) {
     try {
       const md5 = crypto.createHash('md5');
@@ -59,6 +69,16 @@ class artistModel {
     } catch (err) {
       console.error(err);
       throw new Error('Error while fetching content creator by email');
+    }
+  }
+
+  async changeUserPassword(id, newPassword, nowDate) {
+    try {
+      const userId = await this.repository.saveUserPassword(id, newPassword, nowDate);
+      return userId;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while changing artist password');
     }
   }
 }
