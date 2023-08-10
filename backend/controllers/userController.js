@@ -11,7 +11,7 @@ const client = new s3.S3Client({
     }
 })
 
-class filesController {//FG
+class userController {//FG
     constructor() { }
     async uploadImage(image) {
         try {
@@ -36,4 +36,4 @@ class filesController {//FG
     }
 }
 
-module.exports = new filesController();
+module.exports = new userController();

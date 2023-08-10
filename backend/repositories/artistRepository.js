@@ -105,27 +105,6 @@ class artistRepository {
     });
   }
 
-  /*save(creator) {
-    return new Promise((resolve, reject) => {
-      const query = `
-            INSERT INTO creador_contenido (usuario_id) VALUES (?);
-            `;
-      const values = [
-        creator.userId,
-      ]
-
-      db.connection.query(query, values, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result.insertId);
-        }
-      });
-    }
-
-    );
-  }*/
-
   updateArtistBanner(url, creator) {
     return new Promise((resolve, reject) => {
       const query = 'UPDATE creador_contenido SET banner = ? WHERE usuario_id = ?';

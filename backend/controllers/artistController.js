@@ -1,13 +1,13 @@
 const artistModel = require('../models/artistModel');
-const filesController = require('./filesController')
+const userController = require('./userController')
 require('dotenv').config();
 
-class CreatorController { //FG
+class artistController { //FG
     constructor() { }
 
     async updateBanner(req,res) {
         try{
-            const banner = await filesController.uploadImage(req.body.image)
+            const banner = await userController.uploadImage(req.body.image)
             if (banner === null){
                 res.status(401).send('Error')
             }else{
@@ -39,4 +39,4 @@ class CreatorController { //FG
     }
 }
 
-module.exports = new CreatorController();
+module.exports = new artistController();
