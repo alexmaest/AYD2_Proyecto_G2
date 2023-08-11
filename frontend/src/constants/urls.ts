@@ -4,7 +4,8 @@ export const apiUrls = {
   auth: {
     login: '/login',
     register: '/artistRegister',
-    recoverPassword: '/login/passwordChange'
+    recoverPassword: '/login/passwordChange',
+    updatePassword: '/login/passwordChange/update'
   },
   artist: {
     uploadBanner: '/artist/banner',

@@ -28,19 +28,19 @@ function RecoverPassword () {
     }
 
     try {
-      const response = await fetch(baseUrl + apiUrls.auth.recoverPassword, {
+      const response = await fetch(baseUrl + apiUrls.auth.updatePassword, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email: password })
+        body: JSON.stringify({ newPassword: password, token })
       })
 
       if (response.status !== 200) {
-        throw new Error("We couldn't find an account with that email address.")
+        throw new Error("We couldn't update your password.")
       }
       setAlertType('success')
-      setAlertMessage('You have successfully registered!')
+      setAlertMessage('Your password has been changed successfully!')
       setIsAlertOpen(true)
     } catch (error: any) {
       setAlertType('danger')
