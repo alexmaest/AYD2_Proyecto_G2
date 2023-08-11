@@ -10,6 +10,8 @@ export default function BannerPage () {
   const [base64Image, setBase64Image] = useState<string | null>(null)
   const [error, setError] = useState('')
   const [isAlertOpen, setIsAlertOpen] = useState(false)
+  const [success, setSuccess] = useState('')
+  const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -26,9 +28,6 @@ export default function BannerPage () {
 
       reader.readAsDataURL(file)
     }
-
-    console.log(file)
-    console.log(base64Image)
   }
 
   const handleUpload = async () => {
@@ -53,18 +52,29 @@ export default function BannerPage () {
           setIsAlertOpen(true)
           throw new Error('Error al subir la imagen')
         }
+
+        setSuccess('Imagen subida correctamente')
+        setIsSuccessAlertOpen(true)
       } catch (error) {
         setError('Algo salió mal al subir la imagen')
         setIsAlertOpen(true)
       }
+    } else {
+      setError('No se ha seleccionado una imagen')
+      setIsAlertOpen(true)
     }
   }
 
   return (
     <section className='mt-20 mx-6 flex flex-col items-center'>
-      <Alert type='danger' className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
+      <Alert type='warning' className='w-[450px] absolute' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
         <p>{error}</p>
       </Alert>
+      {success !== '' && (
+        <Alert type='success' className='w-[450px] absolute' isOpen={isSuccessAlertOpen} onClick={() => setIsSuccessAlertOpen(false)}>
+          <p>{success}</p>
+        </Alert>
+      )}
       <div className='flex items-center justify-center w-full'>
         <label htmlFor='dropzone-file' className='flex flex-col items-center justify-center w-1/2 h-44 border-2 border-dashed rounded-lg cursor-pointer bg-retro-black-800 border-retro-black-600 hover:border-retro-black-500 hover:bg-retro-black-600'>
           <div className='flex flex-col items-center justify-center pt-5 pb-6'>
