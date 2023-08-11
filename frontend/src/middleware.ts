@@ -10,7 +10,7 @@ export default withAuth(
     }
     if (req.nextUrl.pathname.startsWith('/artist') && req.nextauth.token?.role !== 2) {
       return NextResponse.rewrite(
-        new URL('/auth/unauthorized', req.url)
+        new URL('/unauthorized', req.url)
       )
     }
   },
