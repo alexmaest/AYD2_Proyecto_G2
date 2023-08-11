@@ -1,7 +1,7 @@
-const s3 = require('@aws-sdk/client-s3')
+const s3 = require('@aws-sdk/client-s3');
 require('dotenv').config();
-const url = require('@aws-sdk/s3-request-presigner')
-const fs = require('fs')
+const url = require('@aws-sdk/s3-request-presigner');
+const fs = require('fs');
 
 const client = new s3.S3Client({
     region: process.env.AWS_BUCKET_REGION,
@@ -9,10 +9,9 @@ const client = new s3.S3Client({
         accessKeyId: process.env.AWS_PUBLIC_KEY,
         secretAccessKey: process.env.AWS_SECRET_KEY
     }
-
 })
 
-class filesController {//FG
+class userController {//FG
     constructor() { }
     async uploadImage(image) {
         try {
@@ -35,8 +34,6 @@ class filesController {//FG
             return null
         }
     }
-
-
 }
 
-module.exports = new filesController();
+module.exports = new userController();

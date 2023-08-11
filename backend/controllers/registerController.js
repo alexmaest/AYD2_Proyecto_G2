@@ -1,5 +1,5 @@
-const userModel = require('../models/userModel');
 const artistModel = require('../models/artistModel');
+const userModel = require('../models/userModel');
 
 class registerController {
     constructor() { }
@@ -14,7 +14,8 @@ class registerController {
                 'Other': 4,
                 'Prefer not to say': 5
             };
-            const artist = { username: username, password: password, email: email, birthday: birthday, gender: genderMapping[gender] };
+            const hash = await userModel.createUserHashedPassword(password);
+            const artist = { username: username, password: hash, email: email, birthday: birthday, gender: genderMapping[gender] };
 
             const userByEmail = await userModel.getUserByEmail(artist.email);
             if (userByEmail) {
