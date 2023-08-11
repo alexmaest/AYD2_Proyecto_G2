@@ -19,6 +19,9 @@ export default function ArtistLayout ({
             <Link href='/artist'>
               <li className='text-white font-bold'>Inicio</li>
             </Link>
+            <Link href='/artist/profile'>
+              <li className='text-white font-bold'>Profile</li>
+            </Link>
             <Link href='/artist/profile/banner'>
               <li className='text-white font-bold'>Banner</li>
             </Link>
