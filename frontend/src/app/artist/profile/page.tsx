@@ -33,8 +33,8 @@ export default function ProfilePage () {
 
     if (session?.user != null) {
       const setBannerHandler = async () => {
-        const banner = await getBanner()
-        setBanner(banner)
+        const { image } = await getBanner()
+        setBanner(image)
       }
 
       void setBannerHandler()
