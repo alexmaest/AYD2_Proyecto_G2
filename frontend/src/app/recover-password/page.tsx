@@ -3,7 +3,6 @@ import Alert from '@/components/Alert'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { apiUrls, baseUrl } from '@/constants/urls'
-import { redirect } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
 function RecoverPassword () {
@@ -35,10 +34,16 @@ function RecoverPassword () {
       })
 
       if (response.status !== 200) {
-        throw new Error("We couldn't find an account with that email address.")
+        if (response.status === 406) {
+          setAlertMessage('This email address currently has a valid token. Please check your email.')
+          setIsAlertOpen(true)
+          setTimeout(() => window.location.replace('/change-password'), 3000)
+        } else {
+          throw new Error("We couldn't find an account with that email address.")
+        }
       }
 
-      redirect('/change-password')
+      setTimeout(() => window.location.replace('/change-password'), 3000)
     } catch (error: any) {
       setAlertType('danger')
       setAlertMessage(error.message)
