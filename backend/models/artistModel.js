@@ -74,6 +74,19 @@ class artistModel {
       throw new Error('Error while updating banner');
     }
   }
+
+
+  //JA
+  async updateArtistStatus(userId) {
+    try {
+      const status = await this.repository.updateArtistStatus(userId);
+      return status;
+    } catch (err) {
+      console.log(err);
+      throw new Error('Error while updating user status');
+    }
+  }
+
 }
 
 module.exports = new artistModel();
