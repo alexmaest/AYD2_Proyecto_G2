@@ -9,8 +9,9 @@ class userRepository {
       const query = `SELECT usuario.id, usuario.nombre, usuario.pwd, usuario.tipo_usuario, usuario.email, usuario.link_foto, usuario.fecha_expiracion_token 
         FROM usuario 
         INNER JOIN 
-        tipo_usuario ON tipo_usuario.id_tipo = usuario.tipo_usuario 
-        WHERE usuario.email = ?
+        tipo_usuario ON tipo_usuario.id_tipo = usuario.tipo_usuario
+        JOIN creador_contenido as cc on cc.usuario_id = usuario.id 
+        WHERE usuario.email = ? and cc.estado=0
       `;
       db.connection.query(query, [email], (err, results) => {//por ahora esto luego busco password
         if (err) {
