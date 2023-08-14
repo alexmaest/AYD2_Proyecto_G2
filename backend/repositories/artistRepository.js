@@ -89,7 +89,7 @@ class artistRepository {
 
   findAll() { //query que obtiene todo de la BD (esto es para el modulo de admin donde se enlista a todos los CC)
     return new Promise((resolve, reject) => {
-      const query = 'SELECT u.id,u.nombre,u.tipo_usuario as tipoUsuario,u.email,u.link_foto as linkPhoto,g.nombre as genero,u.fecha_nacimiento as dateBirth  FROM usuario as u JOIN genero as g on g.id_tipo = u.genero WHERE u.tipo_usuario !=1;'
+      const query = 'SELECT u.id,u.nombre,u.tipo_usuario as tipoUsuario,u.email,u.link_foto as linkPhoto,g.nombre as genero,u.fecha_nacimiento as dateBirth,cc.estado as estado  FROM usuario as u JOIN genero as g on g.id_tipo = u.genero JOIN creador_contenido as cc on cc.usuario_id = u.id WHERE u.tipo_usuario !=1;'
       db.connection.query(query, (err, results) => {
         if (err) {
           reject(err);
@@ -136,6 +136,7 @@ class artistRepository {
   }
 
 
+  // SPRINT 2 F1  ----------------------------------------------------------------------------
 
 
   //JA
@@ -178,6 +179,24 @@ class artistRepository {
         }
       });
 
+    });
+  }
+
+
+  //JA
+  updateArtistInfo(url, creator) {
+    //console.log(">>>>>>>>>>>>>>")
+    //console.log(creator)
+
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE usuario SET link_foto = ? , nombre = ? , pwd = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
+      db.connection.query(query, [url, creator.username,creator.password,creator.email,creator.birthday,creator.gender,creator.userId], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
+        }
+      });
     });
   }
 
