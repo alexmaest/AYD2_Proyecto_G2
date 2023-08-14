@@ -1,17 +1,17 @@
-const creatorModel = require('../models/creatorModel');
-const filesController = require('./filesController')
+const artistModel = require('../models/artistModel');
+const userController = require('./userController')
 require('dotenv').config();
 
-class CreatorController { //FG
+class artistController { //FG
     constructor() { }
 
     async updateBanner(req,res) {
         try{
-            const banner = await filesController.uploadImage(req.body.image)
+            const banner = await userController.uploadImage(req.body.image)
             if (banner === null){
                 res.status(401).send('Error')
             }else{
-                const bannerCreator = await creatorModel.updateBanner(banner,req.body.userId)
+                const bannerCreator = await artistModel.updateArtistBanner(banner,req.body.userId)
                 if (bannerCreator === null){
                     res.status(401).send('Error')
                 }else{
@@ -26,7 +26,7 @@ class CreatorController { //FG
 
     async getBanner(req,res){
         try{
-            const banner = await creatorModel.getBanner(req.params.userId)
+            const banner = await artistModel.getArtistBanner(req.params.userId)
             if(banner === null){
                 res.status(401).send('Invalid user');                    
             }else{
@@ -39,4 +39,4 @@ class CreatorController { //FG
     }
 }
 
-module.exports = new CreatorController();
+module.exports = new artistController();
