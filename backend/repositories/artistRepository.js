@@ -134,6 +134,58 @@ class artistRepository {
       });
     });
   }
+
+
+
+
+  //JA
+  updateArtistStatus(creator) {
+
+    return new Promise((resolve, reject) => {
+
+      const query0 = 'SELECT u.email,u.nombre,cc.estado FROM usuario as u JOIN creador_contenido as cc on cc.usuario_id=u.id  WHERE u.id = ?';
+      db.connection.query(query0, [creator], (err, results0) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results0.length > 0) {
+            //console.log("**************************** correo")
+            //console.log(results0)
+
+            //sub-query
+            const query = 'UPDATE creador_contenido SET estado = !estado WHERE usuario_id = ?';
+            db.connection.query(query, [creator], (err, result) => {
+              if (err) {
+                reject(err);
+              } else {
+                // OBJ
+                const UserStatus = {
+                  email: results0[0].email,
+                  nombre: results0[0].nombre,
+                  estado: results0[0].estado,
+                  affected: result.affectedRows > 0
+                };
+
+                //console.log("**************************** habilitar/deshabilitar")
+                //console.log(UserStatus)
+                resolve(UserStatus);
+              }
+            });
+
+          } else {
+            resolve(null);
+          }
+        }
+      });
+
+    });
+  }
+
+
+
+
 }
+
+
 
 module.exports = artistRepository;
