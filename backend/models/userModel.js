@@ -17,6 +17,17 @@ class artistModel {
     }
   }
 
+  //JA
+  async getUserByTipoCC(id) {// esta habilitado o no
+    try {
+      const user = await this.repository.findByTipoCC(id);
+      return user;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching content creator by email');
+    }
+  }
+
   async getUserByUsername(username) {
     try {
       const user = await this.repository.findByUsername(username);

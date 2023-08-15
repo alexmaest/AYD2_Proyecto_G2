@@ -7,13 +7,35 @@ class userRepository {
     return new Promise((resolve, reject) => {
       //cambiar para la base del proyecto
       const query = `SELECT usuario.id, usuario.nombre, usuario.pwd, usuario.tipo_usuario, usuario.email, usuario.link_foto, usuario.fecha_expiracion_token 
-        FROM usuario 
-        INNER JOIN 
-        tipo_usuario ON tipo_usuario.id_tipo = usuario.tipo_usuario
-        JOIN creador_contenido as cc on cc.usuario_id = usuario.id 
-        WHERE usuario.email = ? and cc.estado=0
-      `;
+      FROM usuario 
+      INNER JOIN 
+      tipo_usuario ON tipo_usuario.id_tipo = usuario.tipo_usuario 
+      WHERE usuario.email = ?
+    `;
       db.connection.query(query, [email], (err, results) => {//por ahora esto luego busco password
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            resolve(results);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+
+  findByTipoCC(id) { // para el login del usuario
+    return new Promise((resolve, reject) => {
+      //cambiar para la base del proyecto
+      const query = `SELECT cc.estado
+        FROM usuario 
+        JOIN creador_contenido as cc on cc.usuario_id = usuario.id 
+        WHERE usuario.id = ?
+      `;
+      db.connection.query(query, [id], (err, results) => {//por ahora esto luego busco password
         if (err) {
           reject(err);
         } else {

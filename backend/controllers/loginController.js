@@ -17,6 +17,23 @@ class LoginController {//JA
                 if (hashedPassword !== user[0].pwd) {
                     res.status(401).send('Invalid password');
                 } else {
+
+                    if(user[0].tipo_usuario===2){// como es CC vemos si esta baneado o no
+                        const status = await userModel.getUserByTipoCC(user[0].id);
+                        console.log("::::::::::::::::::::::::")
+                        console.log(user[0].email)
+                        console.log(status[0].estado)
+
+                        
+                        var banned = false
+                        if (status[0].estado === 1) {
+                            console.log("XXXXXXXXXXXXXXXXXXXXXXXXXX")
+                            //res.status(401).send('User banned');
+                            banned = true
+                        }
+                    }
+
+                   
                     // JWT
                     const correo = user[0].email;
                     const rol = user[0].tipo_usuario;
@@ -34,7 +51,13 @@ class LoginController {//JA
                     const token = jwt.sign({ correo, rol }, 'secret_key');
                     User.token = token;
 
-                    res.status(200).json(User);
+                    //console.log(banned)
+                    if(banned){
+                        res.status(401).send('User banned');
+                    }else{
+                        res.status(200).json(User);
+                    }
+                
                 }
             }
         } catch (err) {
