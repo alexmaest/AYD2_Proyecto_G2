@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 class adminController {
-    constructor() {}
+    constructor() { }
 
     async artists(req, res) {
         try {
@@ -23,12 +23,13 @@ class adminController {
 
             //console.log(":::::::::::::::::::::::")
             //console.log(Artist)
-            let UserStatus="Reactivada"
-            let UserStatusD="que el caso de su cuenta ha sido revisado y se determino su aceptacion de nuevo al servicio."
-            
-            if(Artist.estado===1){
-                UserStatus="Desactivada"
-                UserStatusD="que su cuenta ha sido reportada como inapropiada y/o viola la clausula de uso del servicio."
+
+            let UserStatus = "Desactivada"
+            let UserStatusD = "que su cuenta ha sido reportada como inapropiada y/o viola la clausula de uso del servicio."
+
+            if (Artist.estado === 1) {
+                UserStatus = "Reactivada"
+                UserStatusD = "que el caso de su cuenta ha sido revisado y se determino su aceptacion de nuevo al servicio."
             }
 
             //enviamos informacion al CC
