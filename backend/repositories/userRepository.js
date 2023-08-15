@@ -1,6 +1,5 @@
 const db = require('../database');
 
-
 class userRepository {
   //JA
   findByEmail(email) { // para el login del usuario
@@ -25,7 +24,6 @@ class userRepository {
       });
     });
   }
-
 
   findByTipoCC(id) { // para el login del usuario
     return new Promise((resolve, reject) => {
