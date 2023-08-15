@@ -33,7 +33,6 @@ class Server {
     }
 }
 
-
 class SingletonServer {
     constructor() {
         if (!SingletonServer.instance) {
