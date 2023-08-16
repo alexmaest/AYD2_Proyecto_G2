@@ -12,6 +12,7 @@ export const apiUrls = {
     banner: '/artist/banner'
   },
   admin: {
-    artists: '/admin/artists'
+    artists: '/admin/artists',
+    artistsManagment: '/admin/artistsManagment'
   }
 }
