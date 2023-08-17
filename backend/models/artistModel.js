@@ -55,6 +55,16 @@ class artistModel {
     }
   }
 
+  async getArtistIdByUserId(userId) {
+    try {
+      const artistId = await this.repository.findArtistIdByUserId(userId);
+      return artistId;
+    } catch (err) {
+      console.log(err);
+      throw new Error('Error while searching content creator id');
+    }
+  }
+
   async updateArtistBanner(bannerUrl, userId) {
     try {
       const banner = await this.repository.updateArtistBanner(bannerUrl, userId);
@@ -74,7 +84,6 @@ class artistModel {
       throw new Error('Error while updating banner');
     }
   }
-
 
   //JA
   async updateArtistStatus(userId) {

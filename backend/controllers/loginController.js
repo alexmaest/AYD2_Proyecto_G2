@@ -20,14 +20,14 @@ class LoginController {//JA
 
                     if(user[0].tipo_usuario===2){// como es CC vemos si esta baneado o no
                         const status = await userModel.getUserByTipoCC(user[0].id);
-                        console.log("::::::::::::::::::::::::")
+                        /*console.log("::::::::::::::::::::::::")
                         console.log(user[0].email)
-                        console.log(status[0].estado)
+                        console.log(status[0].estado)*/
 
                         
                         var banned = false
                         if (status[0].estado === 1) {
-                            console.log("XXXXXXXXXXXXXXXXXXXXXXXXXX")
+                            /*console.log("XXXXXXXXXXXXXXXXXXXXXXXXXX")*/
                             //res.status(401).send('User banned');
                             banned = true
                         }

@@ -4,23 +4,16 @@ class songRepository {
 
   save(song) {
     return new Promise((resolve, reject) => {
-      const userQuery = `
-        INSERT INTO usuario (nombre, pwd, tipo_usuario, email, link_foto, fecha_nacimiento, genero)
-        VALUES (?, ?, 2, ?, ?, ?, ?);
+      const songQuery = `
+        INSERT INTO cancion (nombre, link_cancion, duracion, genero, id_creador, id_album)
+        VALUES (?, ?, ?, ?, ?, NULL);
       `;
-      db.connection.query(userQuery, userValues, (userErr, userResult) => {
+      db.connection.query(songQuery, [song.name, song.songUrl, song.duration, song.genre, song.artistId], (userErr, userResult) => {
         if (userErr) {
           reject(userErr);
         } else {
           const userId = userResult.insertId;
-          const creatorQuery = `INSERT INTO creador_contenido (usuario_id) VALUES (?);`;
-          db.connection.query(creatorQuery, [userId], (creatorErr, creatorResult) => {
-            if (creatorErr) {
-              reject(creatorErr);
-            } else {
-              resolve(userId);
-            }
-          });
+          resolve(userId);
         }
       });
     });
@@ -28,7 +21,7 @@ class songRepository {
 
   update(song) {
     return new Promise((resolve, reject) => {
-      const query = 'UPDATE usuario SET ? WHERE id = ?';
+      const query = 'UPDATE cancion SET ? WHERE id = ?';
       db.connection.query(query, [song, song.id], (err, result) => {
         if (err) {
           reject(err);
@@ -41,7 +34,7 @@ class songRepository {
 
   delete(id) {
     return new Promise((resolve, reject) => {
-      const query = 'DELETE FROM usuario WHERE id = ?';
+      const query = 'DELETE FROM cancion WHERE id = ?';
       db.connection.query(query, id, (err, result) => {
         if (err) {
           reject(err);
@@ -52,23 +45,22 @@ class songRepository {
     });
   }
 
-  findById(id) {
+  findAllArtistSongs(songId) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM usuario WHERE id = ?';
-      db.connection.query(query, id, (err, results) => {
+      const query = 'SELECT * FROM cancion WHERE id_creador = ?';
+      db.connection.query(query, [songId], (err, results) => {
         if (err) {
           reject(err);
         } else {
           if (results.length > 0) {
-            const song = new song(
-              results[0].id,
-              results[0].name,
-              results[0].dateBirth,
-              results[0].email,
-              results[0].password,
-              results[0].photo
-            );
-            resolve(song);
+            const songs = results.map(result => ({
+              id: result.id_cancion,
+              name: result.nombre,
+              songUrl: result.link_cancion,
+              duration: result.duracion,
+              genre: result.genero
+            }));
+            resolve(songs);
           } else {
             resolve(null);
           }

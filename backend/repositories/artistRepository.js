@@ -239,9 +239,22 @@ class artistRepository {
     });
   }
 
-
-
-
+  findArtistIdByUserId(userId) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT id_creador as artistId FROM creador_contenido WHERE usuario_id = ?';
+      db.connection.query(query, userId, (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            resolve(results[0].artistId);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
 }
 
 

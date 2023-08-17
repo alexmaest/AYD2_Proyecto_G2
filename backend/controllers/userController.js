@@ -37,20 +37,22 @@ class userController {//FG
 
     async uploadSong(song) {
         try {
-            const random = Math.floor(Math.random() * 10000)
-            const filename = "file" + random
+            const random = Math.floor(Math.random() * 10000);
+            const filename = "file" + random;
+        
             const uploadParams = {
-                Bucket: process.env.AWS_BUCKET_NAME,
-                Key: filename,
-                Body: song.buffer,
-                ContentType: "audio/mpeg"
-            }
-            const command = new s3.PutObjectCommand(uploadParams)
-            const result = await client.send(command)
-            const urlFile = `https://bucketretromusic.s3.us-east-2.amazonaws.com/${filename}`
-            return (urlFile)
+              Bucket: process.env.AWS_BUCKET_NAME,
+              Key: filename,
+              Body: song,
+              ContentType: 'audio/mpeg'
+            };
+            const command = new s3.PutObjectCommand(uploadParams);
+            const result = await client.send(command);
+            const urlFile = `https://bucketretromusic.s3.us-east-2.amazonaws.com/${filename}`;
+            return urlFile;
         } catch (err) {
-            return null
+            console.error(err);
+            return null;
         }
     }
 }

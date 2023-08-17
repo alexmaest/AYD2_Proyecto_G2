@@ -45,13 +45,13 @@ class songModel {
     }
   }
 
-  async getAllSongs() {
+  async getAllArtistSongs(songId) {
     try {
-      const songs = await this.repository.findAll();
+      const songs = await this.repository.findAllArtistSongs(songId);
       return songs;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while fetching all songs');
+      throw new Error('Error while fetching all artist songs');
     }
   }
 }
