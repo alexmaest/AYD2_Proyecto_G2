@@ -2,6 +2,7 @@
 import Brand from '@/components/Brand'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
+import Button from '@/components/Button'
 
 export default function ArtistLayout ({
   children
@@ -9,32 +10,53 @@ export default function ArtistLayout ({
   children: React.ReactNode
 }) {
   return (
-    <main>
-      <nav className='fixed w-full top-0 px-20 py-4 bg-retro-black'>
-        <ul className='flex items-center justify-between'>
-          <li className='font-semibold'>
-            <Brand className='h-[36px] w-[136.8px]' color='#F3EFE0' />
-          </li>
-          <div className='flex space-x-4'>
-            <Link href='/artist'>
-              <li className='text-white font-bold'>Inicio</li>
-            </Link>
-            <Link href='/artist/profile'>
-              <li className='text-white font-bold'>Profile</li>
-            </Link>
-            <Link href='/artist/profile/banner'>
-              <li className='text-white font-bold'>Banner</li>
-            </Link>
-            <li
-              className='text-white font-bold cursor-pointer'
-              onClick={async () => await signOut()}
-            >
-              Logout
+    <>
+      <header>
+        <nav className='flex flex-row px-16 py-2 bg-[#1D1D1D] items-center justify-between sticky top-0 z-50'>
+          <ul className='flex items-center gap-4'>
+            <li>
+              <Link href='/artist'>
+                <Brand className='h-[48px] w-[182.4px]' color='#F3EFE0' />
+              </Link>
             </li>
-          </div>
-        </ul>
-      </nav>
+            <li>
+              <Link
+                href='/artist/upload'
+                className='group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out bg-[#1D1D1D] hover:brightness-90 hover:scale-105'
+              >
+                <span className='text-retro-white text-center font-bold text-[16px]'>Upload</span>
+              </Link>
+            </li>
+          </ul>
+          <ul className='flex items-center gap-4'>
+            <li>
+              <Link
+                href='/artist/profile'
+                className='group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out bg-[#1D1D1D] hover:brightness-90 hover:scale-105'
+              >
+                <span className='text-retro-white text-center font-bold text-[16px]'>Profile</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/artist/profile/banner'
+                className='group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out bg-[#1D1D1D] hover:brightness-90 hover:scale-105'
+              >
+                <span className='text-retro-white text-center font-bold text-[16px]'>Banner</span>
+              </Link>
+            </li>
+            <li>
+              <Button
+                type='white'
+                onClick={async () => await signOut()}
+              >
+                <span className='text-retro-black text-center font-bold text-[16px]'>Logout</span>
+              </Button>
+            </li>
+          </ul>
+        </nav>
+      </header>
       {children}
-    </main>
+    </>
   )
 }

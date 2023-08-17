@@ -1,7 +1,7 @@
 export default function ArtistPage () {
   return (
-    <div>
+    <main>
       <h1>Artist Page</h1>
-    </div>
+    </main>
   )
 }
