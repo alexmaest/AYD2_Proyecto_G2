@@ -45,7 +45,7 @@ function Input ({
           type={(isPassword ?? false) ? 'text' : type}
           id={id}
           placeholder={placeholder}
-          className='w-full py-2 px-3 placeholder:text-retro-white placeholder:opacity-70 bg-transparent border-none focus:outline-none h-full'
+          className='w-full py-2 px-3 placeholder:text-retro-white text-white placeholder:opacity-70 bg-transparent border-none focus:outline-none h-full'
           value={value}
           onChange={onChange}
           autoComplete={autoComplete}
