@@ -10,7 +10,8 @@ export const apiUrls = {
   artist: {
     uploadBanner: '/artist/banner',
     banner: '/artist/banner',
-    uploadSong: '/artist//uploadSong'
+    uploadSong: '/artist//uploadSong',
+    profileConfig: '/artist/ProfileConfig'
   },
   admin: {
     artists: '/admin/artists',
