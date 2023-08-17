@@ -1,6 +1,6 @@
+const url = require('@aws-sdk/s3-request-presigner');
 const s3 = require('@aws-sdk/client-s3');
 require('dotenv').config();
-const url = require('@aws-sdk/s3-request-presigner');
 const fs = require('fs');
 
 const client = new s3.S3Client({
@@ -25,6 +25,25 @@ class userController {//FG
                 Body: blob,
                 ContentType: "image",
                 ContentEncoding: "base64"
+            }
+            const command = new s3.PutObjectCommand(uploadParams)
+            const result = await client.send(command)
+            const urlFile = `https://bucketretromusic.s3.us-east-2.amazonaws.com/${filename}`
+            return (urlFile)
+        } catch (err) {
+            return null
+        }
+    }
+
+    async uploadSong(song) {
+        try {
+            const random = Math.floor(Math.random() * 10000)
+            const filename = "file" + random
+            const uploadParams = {
+                Bucket: process.env.AWS_BUCKET_NAME,
+                Key: filename,
+                Body: song.buffer,
+                ContentType: "audio/mpeg"
             }
             const command = new s3.PutObjectCommand(uploadParams)
             const result = await client.send(command)
