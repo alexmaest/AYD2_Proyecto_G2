@@ -9,6 +9,7 @@ const songController = require('../controllers/songController');
 router.get('/banner/:userId', artistController.getBanner);
 
 router.post('/banner', artistController.updateBanner);
+router.post('/Profile', artistController.getInfo);
 router.post('/ProfileConfig', artistController.updateProfile);//JA
 router.post('/uploadSong', upload.single('song'), songController.createSong);
 

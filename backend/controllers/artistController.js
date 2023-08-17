@@ -44,66 +44,90 @@ class artistController { //FG
         try {
 
             //primero verificar que tanto el nombre como email no EXISTAN previamente en otro usuario distinto en RetroMusic
-            
+
             //console.log("::::::::::::::")
             //console.log(req.body)
 
 
             var userByEmail = false
             //valido si el flag de correo esta ACTIVO (si el usuario en frontend cambio el correo)
-            if(req.body.flagEmail){
+            if (req.body.flagEmail) {
                 userByEmail = await userModel.getUserByEmail(req.body.email);
 
             }
 
             var userByUsername = false
             //valido si el flag de correo esta ACTIVO (si el usuario en frontend cambio el correo)
-            if(req.body.flagUsername){
+            if (req.body.flagUsername) {
                 userByUsername = await userModel.getUserByUsername(req.body.username);
 
             }
 
-            //console.log("- - - ")
-            //console.log(userByEmail)
-            //console.log(userByUsername)
 
-            if (userByEmail) {
+            if (userByEmail) {// si el correo ya exite F
                 res.status(501).send('Account with that email already exist');
             } else {
-                if (userByUsername) {
+                if (userByUsername) {// si el username ya exite F
                     res.status(502).send('Account with that username already exist');
+
+                //como username y email son nuevos y validos o son los mismos procedo a actualizar la info
                 } else {
 
-                    //guardar la imagen en bucket -> db
-                    //console.log(":::::::::::::::::::::::::")
-                    //console.log(req.body)
-
-                    console.log(req.body.password)
-                    const hash = await userModel.createUserHashedPassword(req.body.password);
-                    req.body.password = hash
-
-                    console.log("- - - - - - - - -")
+                    console.log(":::::::::::::::::::::::::")
+                    console.log(req.body)
+                    console.log("---password---")
                     console.log(req.body.password)
 
-                    
+
+                    //si el password es nuevo lo hasheo
+                    if (req.body.flagPassword) {
+                        const hash = await userModel.createUserHashedPassword(req.body.password);
+                        req.body.password = hash
+                    }
+
+                    console.log("- - - - - - - - -hash")
+                    console.log(req.body.password)
+
+
+
+
+
+                    //PARTE DE LA IMAGEN
+                    //guardar la imagen en bucket -> db si agrego imagen sino F
                     //FORMA BUCKET
-                
-                    //PASO 1: guardar en bucket
-                    const banner = await userController.uploadImage(req.body.image)
-                    if (banner === null) {
-                        res.status(401).send('Error')
+                    if (req.body.image != null) {// porq me piden una imagen
+                        //PASO 1: guardar en bucket
+                        const banner = await userController.uploadImage(req.body.image)
+                        if (banner === null) {
+                            res.status(401).send('Error')
+                            console.log("F en actualizar foto en bucket")
 
-                    } else {
-                        //PASO 2: ahora guardar en db + la info cambiada
-                        const bannerCreator = await artistModel.updateArtistInfo(banner, req.body)
+                        } else {// guardo imagen en db
+                            //PASO 2: ahora guardar en db + la info cambiada
+                            const bannerCreator = await artistModel.updateArtistInfo(banner, req.body)
+                            if (bannerCreator === null) {
+                                console.log("F en actualizar info")
+                                res.status(401).send('Error')
+                            } else {
+                                res.status(200).send('Account updated!')
+                            }
+                        }
+
+
+                    //ME PIDEN UPDATE SIN CAMBIO EN IMAGEN -------------------------------------
+
+                    }else{//guardo sin imagen
+                        console.log("---GUARDO SIN IMAGEN---")
+                        const bannerCreator = await artistModel.updateArtistInfo2(req.body)
                         if (bannerCreator === null) {
+                            console.log("F en actualizar info")
                             res.status(401).send('Error')
                         } else {
                             res.status(200).send('Account updated!')
                         }
                     }
 
-                    
+
                     /*
 
                     //modo chafa xd
@@ -122,6 +146,22 @@ class artistController { //FG
             console.error(err);
             res.status(500).send('Internal Server Error');
         }
+    }
+
+    //JA
+    async getInfo(req, res){// para el update de perfil
+        try {
+            const user = await artistModel.getArtistById(req.body.userId)
+            if (user === null) {
+                res.status(401).send('Invalid user');
+            } else {
+                res.status(200).send(user)
+            }
+        } catch (err) {
+            console.log(err)
+            res.status(500).send('Internal Server Error');
+        }
+
     }
 }
 

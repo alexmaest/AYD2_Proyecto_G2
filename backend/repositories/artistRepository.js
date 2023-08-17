@@ -63,21 +63,43 @@ class artistRepository {
   }
 
   findById(id) {
+
+    console.log(">>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<")
+    console.log(id)
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM usuario WHERE id = ?';
-      db.connection.query(query, id, (err, results) => {
+      db.connection.query(query, [id], (err, results) => {
         if (err) {
           reject(err);
         } else {
           if (results.length > 0) {
-            const artist = new artist(
-              results[0].id,
-              results[0].name,
-              results[0].dateBirth,
-              results[0].email,
-              results[0].password,
-              results[0].photo
-            );
+
+
+            const artist = {
+              email: results[0].email,
+              nombre: results[0].nombre,
+              dateBirth: results[0].fecha_nacimiento,
+              year: 0,
+              month: 0,
+              day: 0,
+              gender: results[0].genero
+            }
+
+            //const dateBirth = "2012-05-09T06:00:00.000Z";
+
+            const date = new Date(artist.dateBirth);
+
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+
+            console.log(year, month, day);
+            artist.year = year
+            artist.month = month
+            artist.day = day
+
+            console.log(">>>>>>><<<<<<<")
+            console.log(artist)
             resolve(artist);
           } else {
             resolve(null);
@@ -183,14 +205,31 @@ class artistRepository {
   }
 
 
-  //JA
+  //JA con imagen el update
   updateArtistInfo(url, creator) {
     //console.log(">>>>>>>>>>>>>>")
     //console.log(creator)
 
     return new Promise((resolve, reject) => {
       const query = 'UPDATE usuario SET link_foto = ? , nombre = ? , pwd = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
-      db.connection.query(query, [url, creator.username,creator.password,creator.email,creator.birthday,creator.gender,creator.userId], (err, result) => {
+      db.connection.query(query, [url, creator.username, creator.password, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
+        }
+      });
+    });
+  }
+
+  //JA sin imagen
+  updateArtistInfo2(creator) {
+    //console.log(">>>>>>>>>>>>>>")
+    //console.log(creator)
+
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE usuario SET nombre = ? , pwd = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
+      db.connection.query(query, [creator.username, creator.password, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
         if (err) {
           reject(null);
         } else {

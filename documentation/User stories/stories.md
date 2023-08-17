@@ -170,6 +170,27 @@
 
 ### _Perfil creador de contenido_
 
+
+**Prioridad 8**
+|Historia | Tarea | Prioridad |Descripción |
+|---|---|---|---|
+| Edición de perfil de creador de contenido - HUG210004| Formulario de cambio de informacion de perfil CC | 8 | El usuario creador de contenido debe de poder cambiar la información referente a su perfil, para así tener dicha información actualizada en el servicio de RetroMusic.|
+
+|Historia | Tarea | Prioridad |Descripción |
+|---|---|---|---|
+| Actualización del banner de un creador de contenido-HUG230004| Panel de control para subir banner a cuenta de creador de contenido | 8 | El usuario creador de contenido de la plataforma debe de poder subir o actualizar la imagen de su respectivo banner.|
+
+|Historia | Tarea | Prioridad |Descripción |
+|---|---|---|---|
+| Eliminar Albúm-HUG240003|Opcion de eliminar album propiedad de creador de contenido | 8 | El artista creador de contenido necesita de la opción de eliminar cualquier álbum que haya publicado por cualquier problema que se pueda llegar a ocurrir.|
+
+|Historia | Tarea | Prioridad |Descripción |
+|---|---|---|---|
+| Eliminar canción-HUG240006|Opcion de eliminar cancion propiedad de creador de contenido  | 8 | El creador de contenido debe de tener la capacidad de eliminar cualquier canción de su propiedad. El creador de contenido puede seleccionar cualquier canción que quiera eliminar.|
+
+
+
+
 **Prioridad 13**
 |Historia | Tarea | Prioridad |Descripción |
 |---|---|---|---|
@@ -200,22 +221,6 @@
 |---|---|---|---|
 | Subir música en vista catálogo-HUG240004|Ingreso de musica a album personal | 20 | El creador de contenido debe de poder subir sus canciones a su respectivo perfil para posteriormente pueda el usuario agregarlas a los álbumes que tiene en su cuenta, para que los usuarios puedan escucharlas y apoyarlo.|
 
-**Prioridad 8**
-|Historia | Tarea | Prioridad |Descripción |
-|---|---|---|---|
-| Edición de perfil de creador de contenido - HUG210004| Formulario de cambio de informacion de perfil CC | 8 | El usuario creador de contenido debe de poder cambiar la información referente a su perfil, para así tener dicha información actualizada en el servicio de RetroMusic.|
-
-|Historia | Tarea | Prioridad |Descripción |
-|---|---|---|---|
-| Actualización del banner de un creador de contenido-HUG230004| Panel de control para subir banner a cuenta de creador de contenido | 8 | El usuario creador de contenido de la plataforma debe de poder subir o actualizar la imagen de su respectivo banner.|
-
-|Historia | Tarea | Prioridad |Descripción |
-|---|---|---|---|
-| Eliminar Albúm-HUG240003|Opcion de eliminar album propiedad de creador de contenido | 8 | El artista creador de contenido necesita de la opción de eliminar cualquier álbum que haya publicado por cualquier problema que se pueda llegar a ocurrir.|
-
-|Historia | Tarea | Prioridad |Descripción |
-|---|---|---|---|
-| Eliminar canción-HUG240006|Opcion de eliminar cancion propiedad de creador de contenido  | 8 | El creador de contenido debe de tener la capacidad de eliminar cualquier canción de su propiedad. El creador de contenido puede seleccionar cualquier canción que quiera eliminar.|
 
 
 
@@ -227,94 +232,4 @@
 
 
 
-
-
-
-
-
-
-
-
-
----
-
-### Pruebas asociadas 
-
-**Registro**
-
-|Numero|Descripcion|
-|---|---|
-
-
-
-**Login**
-
-|Numero|Descripcion|
-|---|---|
-
-
-
-**Panel de recuperacion de contraseña**
-|Numero|Descripcion|
-|---|---|
-|1|El usuario ingresa su dirección de correo electrónico correctamente y el sistema envía un correo electrónico con su una url en donde se definira su nueva contraseña.|
-|2|El usuario ingresa su dirección de correo electrónico incorrectamente y el sistema muestra un mensaje de error solicitandole que el usuario chequee el campo solicitado.|
-
-**Perfil administrador**
-
-|Numero|Descripcion|
-|---|---|
-
-
-|Numero|Descripcion|
-|---|---|
-
-
-|Numero|Descripcion|
-|---|---|
-
-
-
-**Perfil creador de contenido**
-
-| Historia:  Perfil creador de contenido|
-| ----- |
-
-
-| Historia: Landing page, navbar y footer |
-| ----- |
-
-| Historia: Crear albunes en su respectivo perfil |
-| ----- |
-
-
-| Historia: Subir musica en el catalogo |
-| ----- |
-
-
-| Historia: Edicion de perfil |
-| ----- |
-
-
-| Historia: Actualizacion de banner |
-| ----- |
-
-
-| Historia: Editar informacion de album  |
-| ----- |
-
-
-| Historia: Eliminar album |
-| ----- |
-
-
-| Historia: Subir musica en vista catalogo |
-| ----- |
-
-
-| Historia: Editar informacion de cancion |
-
-
-| Historia: Eliminar cancion |
-| ----- |
 
