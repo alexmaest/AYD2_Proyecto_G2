@@ -31,7 +31,7 @@ class songRepository {
       });
     });
   }
-  
+
 
   delete(id) {
     return new Promise((resolve, reject) => {
@@ -46,10 +46,34 @@ class songRepository {
     });
   }
 
-  findAllArtistSongs(songId) {
+  findAllArtistSongs(artistId) {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM cancion WHERE id_creador = ?';
-      db.connection.query(query, [songId], (err, results) => {
+      db.connection.query(query, [artistId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const songs = results.map(result => ({
+              id: result.id_cancion,
+              name: result.nombre,
+              songUrl: result.link_cancion,
+              duration: result.duracion,
+              genre: result.genero
+            }));
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+  findAllAlbumSongs(albumId) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM cancion WHERE id_album = ?';
+      db.connection.query(query, [albumId], (err, results) => {
         if (err) {
           reject(err);
         } else {

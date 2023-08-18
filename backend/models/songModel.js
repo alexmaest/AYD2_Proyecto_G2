@@ -54,6 +54,16 @@ class songModel {
       throw new Error('Error while fetching all artist songs');
     }
   }
+
+  async getAllAlbumSongs(albumId) {
+    try {
+      const songs = await this.repository.findAllAlbumSongs(albumId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all album songs');
+    }
+  }
 }
 
 module.exports = new songModel();

@@ -45,9 +45,9 @@ class albumModel {
     }
   }
 
-  async getAllArtistAlbums(albumId) {
+  async getAllArtistAlbums(artistId) {
     try {
-      const albums = await this.repository.findAllArtistAlbums(albumId);
+      const albums = await this.repository.findAllArtistAlbums(artistId);
       return albums;
     } catch (err) {
       console.error(err);

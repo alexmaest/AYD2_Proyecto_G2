@@ -46,10 +46,10 @@ class albumRepository {
     });
   }
 
-  findAllArtistalbums(albumId) {
+  findAllArtistAlbums(artistId) {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM album WHERE id_creador = ?';
-      db.connection.query(query, [albumId], (err, results) => {
+      db.connection.query(query, [artistId], (err, results) => {
         if (err) {
           reject(err);
         } else {
@@ -57,9 +57,9 @@ class albumRepository {
             const albums = results.map(result => ({
               id: result.id_album,
               name: result.nombre,
-              albumUrl: result.link_album,
-              duration: result.duracion,
-              genre: result.genero
+              albumUrl: result.link_foto,
+              releaseDate: result.fecha_lanzamiento,
+              type: result.tipo_album === 1 ? "Sencillo" : "Álbum"
             }));
             resolve(albums);
           } else {
