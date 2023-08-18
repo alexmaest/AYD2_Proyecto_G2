@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import ArtistSong from './ArtistSong'
-import { apiUrls, baseUrl } from '@/constants/urls'
-
+import fetchSongs from '@/lib/fetchSongs'
 interface Props {
   artistID: number
   artistName: string
@@ -9,18 +8,8 @@ interface Props {
   children?: React.ReactNode
 }
 
-async function getSongs (id: number) {
-  const response = await fetch(baseUrl + apiUrls.artist.getSongs + `/${id}`)
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
-  }
-
-  return await response.json()
-}
-
 export default async function ArtistSongs ({ artistID, artistName, limit, children }: Props) {
-  const songs = await getSongs(artistID)
+  const songs = await fetchSongs(artistID) ?? []
 
   if (limit !== undefined && songs.length > limit) {
     songs.splice(limit)
