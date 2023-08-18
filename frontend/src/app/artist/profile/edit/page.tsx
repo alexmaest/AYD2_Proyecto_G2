@@ -18,7 +18,7 @@ const months = [
 
 const genders = ['Male', 'Female', 'Non-binary', 'Other', 'Prefer not to say']
 
-function RegisterForm () {
+function UpdateForm () {
   const { data: session } = useSession()
   const [file, setFile] = useState<File | null>(null)
   const [base64Image, setBase64Image] = useState<string | null>(null)
@@ -351,4 +351,4 @@ function RegisterForm () {
   )
 }
 
-export default RegisterForm
+export default UpdateForm
