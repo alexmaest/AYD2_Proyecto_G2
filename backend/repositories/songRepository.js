@@ -48,7 +48,7 @@ class songRepository {
 
   findAllArtistSongs(artistId) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM cancion WHERE id_creador = ?';
+      const query = 'SELECT * FROM cancion WHERE id_creador = ? AND id_album IS NULL';
       db.connection.query(query, [artistId], (err, results) => {
         if (err) {
           reject(err);

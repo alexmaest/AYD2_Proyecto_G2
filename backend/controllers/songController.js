@@ -64,7 +64,7 @@ class songController {
                 if (songs) {
                     res.status(200).json(songs);
                 } else {
-                    res.status(401).send('The songs could not be obtained');
+                    res.status(204).json('The songs could not be obtained or available');
                 }
             }
         } catch (err) {
