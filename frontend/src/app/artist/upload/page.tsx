@@ -5,9 +5,11 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import InputWrapper from '@/components/InputWrapper'
 import { apiUrls, baseUrl } from '@/constants/urls'
+import { useSession } from 'next-auth/react'
 import { useEffect, useState, useRef } from 'react'
 
 function Upload () {
+  const { data: session, status } = useSession()
   const [name, setName] = useState('')
   const [duration, setDuration] = useState('00:00')
   const [file, setFile] = useState<null | File>(null)
@@ -27,8 +29,11 @@ function Upload () {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const id = session?.user.id
+    if (id == null) { return }
     try {
       const formData = new FormData()
+      formData.append('userId', `${id}`)
       formData.append('name', name)
       formData.append('duration', duration)
       formData.append('genre', genre)
@@ -72,12 +77,15 @@ function Upload () {
         const { result } = e.target
         if ((Boolean(result)) && !isCancel) {
           setFileDataURL(result)
-          audioRef.current.src = result
+          if (audioRef.current != null) { audioRef.current.src = result }
         }
-        audioRef.current.onloadedmetadata = () => {
-          const minutes = Math.floor(audioRef.current.duration / 60)
-          const seconds = Math.floor(audioRef.current.duration - minutes * 60)
-          setDuration(`${minutes}:${seconds}`)
+        if (audioRef.current != null) {
+          audioRef.current.onloadedmetadata = () => {
+            if (audioRef.current == null) { return }
+            const minutes = Math.floor(audioRef.current.duration / 60)
+            const seconds = Math.floor(audioRef.current.duration - minutes * 60)
+            setDuration(`${minutes}:${seconds}`)
+          }
         }
       }
       fileReader.readAsDataURL(file)
@@ -90,9 +98,13 @@ function Upload () {
     }
   }, [file])
 
+  if (status === 'loading') {
+    return 'Loading or not authenticated...'
+  }
+
   return (
     <main className='flex flex-col items-center justify-center mx-auto w-1/2 gap-12 section-min-height'>
-      <audio ref={audioRef} src={fileDataURL} />
+      <audio className='hidden' ref={audioRef} src={fileDataURL} />
       <Alert type={alertType} className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
         <p>{alertMessage}</p>
       </Alert>
