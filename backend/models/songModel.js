@@ -15,13 +15,13 @@ class songModel {
     }
   }
 
-  async updateSong(song) {
+  async updateSongAlbumId(albumId, songId) {
     try {
-      const updated = await this.repository.update(song);
+      const updated = await this.repository.updateAlbumId(albumId, songId);
       return updated;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while updating content song');
+      throw new Error('Error while updating song');
     }
   }
 

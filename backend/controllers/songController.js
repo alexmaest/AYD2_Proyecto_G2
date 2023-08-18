@@ -41,7 +41,7 @@ class songController {
                         if (savedSong) {
                             res.status(200).send('The song has been saved');
                         } else {
-                            res.status(501).send('The song could not be stored');
+                            res.status(501).send('The song could not be saved');
                         }
                     }
                 } else {
