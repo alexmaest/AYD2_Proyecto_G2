@@ -40,7 +40,7 @@ class artistController { //FG
     }
 
     //JA
-    async updateProfile(req, res) {
+    async updateProfile(req, res) {//metodo que agrega los cambios del perfil de un artista en RetroMusic
         try {
 
             //primero verificar que tanto el nombre como email no EXISTAN previamente en otro usuario distinto en RetroMusic
@@ -151,7 +151,7 @@ class artistController { //FG
     }
 
     //JA
-    async getInfo(req, res){// para el update de perfil
+    async getInfo(req, res){// para el update de perfil en el apartado de artistas(asi ve la info que agrego en el form)
         try {
             const user = await artistModel.getArtistById(req.body.userId)
             if (user === null) {
