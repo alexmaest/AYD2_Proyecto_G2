@@ -7,6 +7,7 @@ const albumController = require('../controllers/albumController');
 
 router.get('/banner/:userId', artistController.getBanner);
 router.get('/songs/:userId', songController.getSongs);
+router.get('/availableSongs/:userId', songController.getAvailableSongs);
 router.get('/albums/:userId', albumController.getAlbums);
 
 router.post('/banner', artistController.updateBanner);

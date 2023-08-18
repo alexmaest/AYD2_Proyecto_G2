@@ -55,6 +55,16 @@ class songModel {
     }
   }
 
+  async getAllArtistAvailableSongs(songId) {
+    try {
+      const songs = await this.repository.findAllArtistAvailableSongs(songId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist available songs');
+    }
+  }
+
   async getAllAlbumSongs(albumId) {
     try {
       const songs = await this.repository.findAllAlbumSongs(albumId);

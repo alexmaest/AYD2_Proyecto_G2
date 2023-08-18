@@ -48,6 +48,30 @@ class songRepository {
 
   findAllArtistSongs(artistId) {
     return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM cancion WHERE id_creador = ?';
+      db.connection.query(query, [artistId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const songs = results.map(result => ({
+              id: result.id_cancion,
+              name: result.nombre,
+              songUrl: result.link_cancion,
+              duration: result.duracion,
+              genre: result.genero
+            }));
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+  findAllArtistAvailableSongs(artistId) {
+    return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM cancion WHERE id_creador = ? AND id_album IS NULL';
       db.connection.query(query, [artistId], (err, results) => {
         if (err) {

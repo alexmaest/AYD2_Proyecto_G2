@@ -64,6 +64,25 @@ class songController {
                 if (songs) {
                     res.status(200).json(songs);
                 } else {
+                    res.status(204).json('The songs could not be obtained');
+                }
+            }
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async getAvailableSongs(req, res) {
+        try {
+            const artistId = await artistModel.getArtistIdByUserId(req.params.userId);
+            if (!artistId) {
+                res.status(502).send('Artist account with that id doesnt exist');
+            } else {
+                const songs = await songModel.getAllArtistAvailableSongs(artistId);
+                if (songs) {
+                    res.status(200).json(songs);
+                } else {
                     res.status(204).json('The songs could not be obtained or available');
                 }
             }
