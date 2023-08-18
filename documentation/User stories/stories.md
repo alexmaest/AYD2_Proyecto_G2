@@ -196,13 +196,6 @@
 |---|---|---|---|
 | Perfil Creador de Contenido - HUG230002|Perfil creador contenido  | 13 | El creador de contenido debe de poseer un perfil que muestre tanto sus respectivos datos personales cómo su banner personalizado de forma atractiva.|
 
-|Historia | Tarea | Prioridad |Descripción |
-|---|---|---|---|
-| Editar información del Albúm-HUG240002| Formulario de edicion de album  | 13 | El usuario creador de contenido debe de poseer la opcion de actualizar la información de un álbum especifico, esto si por algún motivo ingrese algún dato erróneo al momento de crear el álbum o simplemente quiero cambiar algún dato sobre el álbum.|
-
-|Historia | Tarea | Prioridad |Descripción |
-|---|---|---|---|
-| Editar información de canción-HUG240005| Formulario de edicion de cancion | 13 | El creador de contenido debe de tener la capacidad de actualizar la información perteneciente a una canción propia.|
 
 **Prioridad 20**
 |Historia | Tarea | Prioridad |Descripción |
