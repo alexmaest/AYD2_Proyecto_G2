@@ -23,8 +23,10 @@ function UpdateForm () {
   const [file, setFile] = useState<File | null>(null)
   const [base64Image, setBase64Image] = useState<string | null>(null)
   const [email, setEmail] = useState('')
+  const [entryEmail, setEntryEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
+  const [entryUsername, setEntryUsername] = useState('')
   const [day, setDay] = useState('')
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
@@ -120,8 +122,8 @@ function UpdateForm () {
       const formData = {
         userId: session?.user?.id,
         flagPassword: password !== '',
-        flagEmail: email !== session?.user?.email,
-        flagUsername: username !== session?.user?.username,
+        flagEmail: email !== entryEmail,
+        flagUsername: username !== entryUsername,
         email,
         password,
         username,
@@ -189,7 +191,9 @@ function UpdateForm () {
         const data = await response.json()
 
         setEmail(data.email)
+        setEntryEmail(data.email)
         setUsername(data.nombre)
+        setEntryUsername(data.nombre)
         setEntryGender(data.gender)
         setGender(genders[entryGender - 1])
         setYear(String(data.year))
@@ -203,8 +207,6 @@ function UpdateForm () {
       }
     }
     if (session?.user != null) void getArtistInfo()
-
-    console.log({ session })
   }, [session, entryGender])
 
   if (session?.user == null) return <h1 className='text-white font-bold'>Loading...</h1>
