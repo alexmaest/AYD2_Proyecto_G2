@@ -11,7 +11,8 @@ export const apiUrls = {
     uploadBanner: '/artist/banner',
     banner: '/artist/banner',
     uploadSong: '/artist//uploadSong',
-    profileConfig: '/artist/ProfileConfig'
+    profileConfig: '/artist/ProfileConfig',
+    profile: '/artist/Profile'
   },
   admin: {
     artists: '/admin/artists',

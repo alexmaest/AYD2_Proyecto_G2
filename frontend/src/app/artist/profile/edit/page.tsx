@@ -18,7 +18,7 @@ const months = [
 
 const genders = ['Male', 'Female', 'Non-binary', 'Other', 'Prefer not to say']
 
-function RegisterForm () {
+function UpdateForm () {
   const { data: session } = useSession()
   const [file, setFile] = useState<File | null>(null)
   const [base64Image, setBase64Image] = useState<string | null>(null)
@@ -29,6 +29,7 @@ function RegisterForm () {
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
   const [gender, setGender] = useState('')
+  const [entryGender, setEntryGender] = useState<number>(0)
   const [showPassword, setShowPassword] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
   const [isAlertOpen, setIsAlertOpen] = useState(false)
@@ -125,7 +126,7 @@ function RegisterForm () {
         password,
         username,
         birthday,
-        gender,
+        gender: genders.indexOf(gender) + 1,
         image: base64Image
       }
 
@@ -153,7 +154,7 @@ function RegisterForm () {
         throw new Error(message)
       }
       setAlertType('success')
-      setAlertMessage('You have successfully registered!')
+      setAlertMessage('You have successfully updated your profile!')
       setIsAlertOpen(true)
     } catch (error: any) {
       setAlertType('danger')
@@ -169,6 +170,42 @@ function RegisterForm () {
   useEffect(() => {
     setErrorGender('')
   }, [gender])
+
+  useEffect(() => {
+    const getArtistInfo = async () => {
+      try {
+        const response = await fetch(baseUrl + apiUrls.artist.profile, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST',
+          body: JSON.stringify({ userId: session?.user?.id })
+        })
+
+        if (response.status !== 200) {
+          throw new Error('Something went wrong!')
+        }
+
+        const data = await response.json()
+
+        setEmail(data.email)
+        setUsername(data.nombre)
+        setEntryGender(data.gender)
+        setGender(genders[entryGender - 1])
+        setYear(String(data.year))
+        const formmatedDay = `${data.day as string}`.padStart(2, '0')
+        setDay(formmatedDay)
+        setMonth(months[data.month - 1])
+      } catch (error: any) {
+        setAlertType('danger')
+        setAlertMessage(error.message)
+        setIsAlertOpen(true)
+      }
+    }
+    if (session?.user != null) void getArtistInfo()
+
+    console.log({ session })
+  }, [session, entryGender])
 
   if (session?.user == null) return <h1 className='text-white font-bold'>Loading...</h1>
 
@@ -244,6 +281,7 @@ function RegisterForm () {
               label='Month'
               width='w-[45%]'
               isRequired
+              entryMonth={month}
               isValid={errorMonth === ''}
             />
             <Input
@@ -267,14 +305,17 @@ function RegisterForm () {
             Do you want to update your gender?
           </label>
           <div className='flex flex-wrap flex-row items-start gap-4'>
-            {genders.map((gender, index) => (
-              <RadioButton
-                label={gender}
-                value={gender}
-                onChange={(event) => setGender(event.target.value)}
-                key={index}
-              />
-            ))}
+            {genders.map((gender_, index) => {
+              return (
+                <RadioButton
+                  label={gender_}
+                  value={gender_}
+                  onChange={(event) => setGender(event.target.value)}
+                  key={index}
+                  entryGender={genders[entryGender]}
+                />
+              )
+            })}
           </div>
           {errorGender !== '' && (<InputError message={errorGender} />)}
         </FormInput>
@@ -310,4 +351,4 @@ function RegisterForm () {
   )
 }
 
-export default RegisterForm
+export default UpdateForm

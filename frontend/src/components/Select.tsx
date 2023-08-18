@@ -1,4 +1,3 @@
-import React from 'react'
 import InputWrapper from './InputWrapper'
 import FormInput from './FormInput'
 import { TbChevronDown } from 'react-icons/tb'
@@ -11,9 +10,11 @@ interface SelectProps {
   isValid: boolean
   isRequired?: boolean
   width?: string
+  entryMonth?: string
 }
 
-function Select ({ values, onChange, id, label, isValid, isRequired, width }: SelectProps) {
+function Select ({ values, onChange, id, label, isValid, isRequired, width, entryMonth }: SelectProps) {
+  if (entryMonth === '') return null
   return (
     <FormInput width={(width == null) ? 'w-[450px]' : width}>
       <label htmlFor={id}>{label}</label>
@@ -23,7 +24,7 @@ function Select ({ values, onChange, id, label, isValid, isRequired, width }: Se
           id={id}
           className='w-full py-2 px-3 border-none rounded-md focus:outline-none h-full appearance-none bg-retro-black'
           onChange={onChange}
-          defaultValue='none'
+          defaultValue={entryMonth}
           required={isRequired}
         >
           <option className='relative' value='none' disabled>{label}</option>
