@@ -41,7 +41,7 @@ class songController {
                         if (savedSong) {
                             res.status(200).send('The song has been saved');
                         } else {
-                            res.status(501).send('The song could not be stored');
+                            res.status(501).send('The song could not be saved');
                         }
                     }
                 } else {
@@ -64,14 +64,14 @@ class songController {
                 if (songs) {
                     res.status(200).json(songs);
                 } else {
-                    res.status(401).send('Invalid user');
+                    res.status(401).send('The songs could not be obtained');
                 }
             }
-        } catch(err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
     }
-}
 }
 
 module.exports = new songController();

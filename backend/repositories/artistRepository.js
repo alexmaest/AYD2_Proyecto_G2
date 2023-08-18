@@ -64,8 +64,8 @@ class artistRepository {
 
   findById(id) {
 
-    console.log(">>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<")
-    console.log(id)
+    //console.log(">>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<")
+    //console.log(id)
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM usuario WHERE id = ?';
       db.connection.query(query, [id], (err, results) => {
@@ -98,8 +98,8 @@ class artistRepository {
             artist.month = month
             artist.day = day
 
-            console.log(">>>>>>><<<<<<<")
-            console.log(artist)
+            //console.log(">>>>>>><<<<<<<")
+            //console.log(artist)
             resolve(artist);
           } else {
             resolve(null);

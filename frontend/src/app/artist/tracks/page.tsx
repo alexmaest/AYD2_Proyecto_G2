@@ -1,10 +1,10 @@
 import ArtistSongs from '@/components/ArtistSongs'
-import { options } from '../api/auth/[...nextauth]/options'
+import { options } from '../../api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth/next'
 import { Suspense } from 'react'
 import Link from 'next/link'
 
-export default async function ArtistPage () {
+export default async function Tracks () {
   const session = await getServerSession(options)
 
   return (
@@ -16,10 +16,10 @@ export default async function ArtistPage () {
         >
           <h3 className='font-bold text-3xl text-white'>Tracks</h3>
           <Link
-            href='/artist/tracks'
+            href='/artist'
             className='text-white text-xl font-bold hover:underline cursor-pointer'
           >
-            See All
+            Go Back
           </Link>
         </ArtistSongs>
       </Suspense>
