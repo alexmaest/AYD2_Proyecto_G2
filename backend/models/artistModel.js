@@ -97,7 +97,7 @@ class artistModel {
   }
 
   //JA
-  async updateArtistInfo(bannerUrl, userBody) {
+  async updateArtistInfo(bannerUrl, userBody,passwordNew) {
     try {
 
       /*
@@ -106,7 +106,7 @@ class artistModel {
       console.log("- - -")
       console.log(userBody)*/
 
-      const banner = await this.repository.updateArtistInfo(bannerUrl, userBody);
+      const banner = await this.repository.updateArtistInfo(bannerUrl, userBody,passwordNew);
       return banner;//true
 
     } catch (err) {
@@ -116,7 +116,7 @@ class artistModel {
   }
 
   //JA
-  async updateArtistInfo2(userBody) {
+  async updateArtistInfo2(userBody,passwordNew) {
     try {
 
       /*
@@ -125,7 +125,7 @@ class artistModel {
       console.log("- - -")
       console.log(userBody)*/
 
-      const banner = await this.repository.updateArtistInfo2( userBody);
+      const banner = await this.repository.updateArtistInfo2( userBody,passwordNew);
       return banner;//true
 
     } catch (err) {
