@@ -79,10 +79,12 @@ class artistController { //FG
                     console.log(req.body.password)
 
 
+                    var passwordNew = false
                     //si el password es nuevo lo hasheo
                     if (req.body.flagPassword) {
                         const hash = await userModel.createUserHashedPassword(req.body.password);
                         req.body.password = hash
+                        passwordNew = true
                     }
 
                     console.log("- - - - - - - - -hash")
@@ -104,7 +106,7 @@ class artistController { //FG
 
                         } else {// guardo imagen en db
                             //PASO 2: ahora guardar en db + la info cambiada
-                            const bannerCreator = await artistModel.updateArtistInfo(banner, req.body)
+                            const bannerCreator = await artistModel.updateArtistInfo(banner, req.body,passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                             if (bannerCreator === null) {
                                 console.log("F en actualizar info")
                                 res.status(401).send('Error')
@@ -118,7 +120,7 @@ class artistController { //FG
 
                     }else{//guardo sin imagen
                         console.log("---GUARDO SIN IMAGEN---")
-                        const bannerCreator = await artistModel.updateArtistInfo2(req.body)
+                        const bannerCreator = await artistModel.updateArtistInfo2(req.body,passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                         if (bannerCreator === null) {
                             console.log("F en actualizar info")
                             res.status(401).send('Error')

@@ -206,38 +206,87 @@ class artistRepository {
 
 
   //JA con imagen el update
-  updateArtistInfo(url, creator) {
+  updateArtistInfo(url, creator, passwordNew) {
     //console.log(">>>>>>>>>>>>>>")
     //console.log(creator)
 
-    return new Promise((resolve, reject) => {
-      const query = 'UPDATE usuario SET link_foto = ? , nombre = ? , pwd = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
-      db.connection.query(query, [url, creator.username, creator.password, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
-        if (err) {
-          reject(null);
-        } else {
-          resolve(result.affectedRows > 0);
-        }
+    if (passwordNew === true) {
+
+      return new Promise((resolve, reject) => {
+        const query = 'UPDATE usuario SET link_foto = ? , nombre = ? , pwd = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
+        db.connection.query(query, [url, creator.username, creator.password, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
+          if (err) {
+            reject(null);
+          } else {
+            resolve(result.affectedRows > 0);
+          }
+        });
       });
-    });
+
+
+    } else {
+
+      return new Promise((resolve, reject) => {
+        const query = 'UPDATE usuario SET link_foto = ? , nombre = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
+        db.connection.query(query, [url, creator.username, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
+          if (err) {
+            reject(null);
+          } else {
+            resolve(result.affectedRows > 0);
+          }
+        });
+      });
+
+
+    }
   }
+
+
+
+
+
 
   //JA sin imagen
-  updateArtistInfo2(creator) {
+  updateArtistInfo2(creator, passwordNew) {
     //console.log(">>>>>>>>>>>>>>")
     //console.log(creator)
 
-    return new Promise((resolve, reject) => {
-      const query = 'UPDATE usuario SET nombre = ? , pwd = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
-      db.connection.query(query, [creator.username, creator.password, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
-        if (err) {
-          reject(null);
-        } else {
-          resolve(result.affectedRows > 0);
-        }
+
+    if (passwordNew === true) {
+
+
+      return new Promise((resolve, reject) => {
+        const query = 'UPDATE usuario SET nombre = ? , pwd = ? , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
+        db.connection.query(query, [creator.username, creator.password, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
+          if (err) {
+            reject(null);
+          } else {
+            resolve(result.affectedRows > 0);
+          }
+        });
       });
-    });
+
+
+    } else {
+
+      return new Promise((resolve, reject) => {
+        const query = 'UPDATE usuario SET nombre = ?  , email = ? , fecha_nacimiento = ? , genero = ?  WHERE id = ?';
+        db.connection.query(query, [creator.username, creator.email, creator.birthday, creator.gender, creator.userId], (err, result) => {
+          if (err) {
+            reject(null);
+          } else {
+            resolve(result.affectedRows > 0);
+          }
+        });
+      });
+
+
+    }
   }
+
+
+
+
 
   findArtistIdByUserId(userId) {
     return new Promise((resolve, reject) => {
