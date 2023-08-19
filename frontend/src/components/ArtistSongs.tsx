@@ -37,6 +37,7 @@ export default async function ArtistSongs ({ artistID, artistName, limit, childr
             {songs.map((song: any) => (
               <ArtistSong
                 key={song.id}
+                songID={song.id}
                 name={song.name}
                 artist={artistName}
                 duration={song.duration}

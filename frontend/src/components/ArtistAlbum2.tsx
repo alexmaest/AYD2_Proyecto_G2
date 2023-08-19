@@ -3,6 +3,8 @@
 import { Song } from '@/types/interfaces'
 import Link from 'next/link'
 import Button from './Button'
+import { apiUrls, baseUrl } from '@/constants/urls'
+import { revalidatePath } from 'next/cache'
 
 interface Props {
   artistName: string
@@ -17,6 +19,21 @@ interface Props {
 export default function ArtistAlbum2 ({ artistName, albumName, albumID, type, releaseDate, albumCover, songs }: Props) {
   const date = new Date(releaseDate)
   const year = date.getFullYear()
+
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(baseUrl + apiUrls.artist.deleteAlbum + `/${id}`, {
+        method: 'DELETE'
+      })
+      if (response.status !== 200) {
+        throw new Error('Error deleting album')
+      }
+      revalidatePath('/artist/albums')
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   return (
     <div className='w-full flex flex-row items-start gap-8'>
       <Link href={`/artist/albums/${albumID}`}>
@@ -39,6 +56,7 @@ export default function ArtistAlbum2 ({ artistName, albumName, albumID, type, re
           </div>
           <Button
             type='secondary'
+            onClick={async () => { await handleDelete(albumID) }}
           >
             <span className='text-retro-black font-bold text-[16px]'>Delete</span>
           </Button>
