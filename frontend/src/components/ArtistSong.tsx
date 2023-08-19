@@ -3,14 +3,31 @@
 import Image from 'next/image'
 import Button from './Button'
 import { TbCircleFilled, TbPlayerPlayFilled } from 'react-icons/tb'
+import { apiUrls, baseUrl } from '@/constants/urls'
+import { revalidatePath } from 'next/cache'
 
 interface Pops {
+  songID: number
   name: string
   artist: string
   duration: string
 }
 
-function ArtistSong ({ name, artist, duration }: Pops) {
+function ArtistSong ({ songID, name, artist, duration }: Pops) {
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(baseUrl + apiUrls.artist.deleteSong + `/${id}`, {
+        method: 'DELETE'
+      })
+      if (response.status !== 200) {
+        throw new Error('Error deleting song')
+      }
+      revalidatePath('/artist/songs')
+    } catch (error) {
+      alert(error)
+    }
+  }
+
   return (
     <div className='w-full flex flex-row items-center justify-between'>
       <div className='flex items-start gap-6'>
@@ -39,6 +56,7 @@ function ArtistSong ({ name, artist, duration }: Pops) {
         </Button>
         <Button
           type='secondary'
+          onClick={async () => { await handleDelete(songID) }}
         >
           <span className='text-retro-black text-center font-bold text-[16px]'>Delete</span>
         </Button>
