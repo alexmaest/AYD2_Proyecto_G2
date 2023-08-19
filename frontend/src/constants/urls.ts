@@ -14,7 +14,8 @@ export const apiUrls = {
     profileConfig: '/artist/ProfileConfig',
     profile: '/artist/Profile',
     getSongs: '/artist/songs',
-    createAlbum: '/artist/createAlbum'
+    createAlbum: '/artist/createAlbum',
+    getAlbums: '/artist/albums'
   },
   admin: {
     artists: '/admin/artists',
