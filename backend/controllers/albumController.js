@@ -81,6 +81,22 @@ class albumController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+    async deleteAlbum(req, res) {
+        try {
+            const deletedReference = await songModel.deleteAlbum(req.params.id);
+            const deleted = await albumModel.deleteAlbum(req.params.id);
+            if (deleted) {
+                res.status(200);
+            } else {
+                res.status(401).send('The albums could not be deleted');
+            }
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
 }
 
 module.exports = new albumController();

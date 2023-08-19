@@ -83,7 +83,7 @@ class songController {
                 if (songs) {
                     res.status(200).json(songs);
                 } else {
-                    res.status(204).json('The songs could not be obtained or available');
+                    res.status(501).json('The songs could not be deleted');
                 }
             }
         } catch (err) {
@@ -91,6 +91,30 @@ class songController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+    async deleteSong(req, res) {
+        try{
+            const deleted = await songModel.deleteSong(req.params.id)
+            if(deleted){
+                res.status(200)
+            }else{
+
+            }            
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async deleteAlbum(req, res) {
+        try{
+            console.log(req.body)
+            res.status(200)
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }    
 }
 
 module.exports = new songController();
