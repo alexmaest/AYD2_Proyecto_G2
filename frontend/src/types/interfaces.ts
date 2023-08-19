@@ -6,3 +6,20 @@ export interface User {
   photo: string
   token: string
 }
+
+export interface Song {
+  id: number
+  name: string
+  songUrl: string
+  duration: number
+  genre: string
+}
+
+export interface Album {
+  id: number
+  name: string
+  albumUrl: string
+  releaseDate: string
+  type: string
+  songs: Song[]
+}
