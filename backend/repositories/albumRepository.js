@@ -22,7 +22,7 @@ class albumRepository {
 
   update(album) {
     return new Promise((resolve, reject) => {
-      const query = 'UPDATE album SET ? WHERE id = ?';
+      const query = 'UPDATE album SET ? WHERE id_album = ?';
       db.connection.query(query, [album, album.id], (err, result) => {
         if (err) {
           reject(err);
@@ -35,7 +35,7 @@ class albumRepository {
 
   delete(id) {
     return new Promise((resolve, reject) => {
-      const query = 'DELETE FROM album WHERE id = ?';
+      const query = 'DELETE FROM album WHERE id_album = ?';
       db.connection.query(query, id, (err, result) => {
         if (err) {
           reject(err);

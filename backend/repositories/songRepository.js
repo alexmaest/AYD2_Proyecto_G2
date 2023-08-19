@@ -35,7 +35,7 @@ class songRepository {
 
   delete(id) {
     return new Promise((resolve, reject) => {
-      const query = 'DELETE FROM cancion WHERE id = ?';
+      const query = 'DELETE FROM cancion WHERE id_cancion = ?';
       db.connection.query(query, id, (err, result) => {
         if (err) {
           reject(err);
@@ -89,6 +89,19 @@ class songRepository {
           } else {
             resolve(null);
           }
+        }
+      });
+    });
+  }
+
+  deleteAlbum(albumId) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE cancion SET id_album = ? WHERE id_album = ?';
+      db.connection.query(query, [null, albumId], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result.affectedRows > 0);
         }
       });
     });
