@@ -17,7 +17,8 @@ export const apiUrls = {
     deleteSong: '/artist/deleteSong',
     createAlbum: '/artist/createAlbum',
     getAlbums: '/artist/albums',
-    deleteAlbum: '/artist/deleteAlbum'
+    deleteAlbum: '/artist/deleteAlbum',
+    getAvailableSongs: '/artist/availableSongs'
   },
   admin: {
     artists: '/admin/artists',

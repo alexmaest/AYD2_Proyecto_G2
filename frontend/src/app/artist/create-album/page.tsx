@@ -95,7 +95,7 @@ export default function Page () {
   useEffect(() => {
     const getSongs = async () => {
       try {
-        const response = await fetch(baseUrl + apiUrls.artist.getSongs + `/${String(session?.user?.id)}`)
+        const response = await fetch(baseUrl + apiUrls.artist.getAvailableSongs + `/${String(session?.user?.id)}`)
 
         if (!response.ok) {
           throw new Error('Something went wrong')
