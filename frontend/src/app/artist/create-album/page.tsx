@@ -95,7 +95,7 @@ export default function Page () {
   useEffect(() => {
     const getSongs = async () => {
       try {
-        const response = await fetch(baseUrl + apiUrls.artist.getSongs + `/${String(session?.user?.id)}`)
+        const response = await fetch(baseUrl + apiUrls.artist.getAvailableSongs + `/${String(session?.user?.id)}`)
 
         if (!response.ok) {
           throw new Error('Something went wrong')
@@ -120,12 +120,6 @@ export default function Page () {
       setCheckedState(checkedState)
     }
   }, [songs])
-
-  useEffect(() => {
-    console.log({ checkedState })
-    console.log({ songs })
-    console.log({ selectedSongs })
-  }, [checkedState, songs, selectedSongs])
 
   return (
     <>
@@ -165,7 +159,7 @@ export default function Page () {
                 <h2 className='text-white'>Select songs for your album</h2>
                 <ul>
                   {
-                  songs.map((song, index) => (
+                  songs?.length > 0 && songs.map((song, index) => (
                     <li key={song.id}>
                       <input
                         type='checkbox'
