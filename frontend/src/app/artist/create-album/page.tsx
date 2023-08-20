@@ -121,12 +121,6 @@ export default function Page () {
     }
   }, [songs])
 
-  useEffect(() => {
-    console.log({ checkedState })
-    console.log({ songs })
-    console.log({ selectedSongs })
-  }, [checkedState, songs, selectedSongs])
-
   return (
     <>
       <Alert type={alertType} className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
@@ -165,7 +159,7 @@ export default function Page () {
                 <h2 className='text-white'>Select songs for your album</h2>
                 <ul>
                   {
-                  songs.map((song, index) => (
+                  songs?.length > 0 && songs.map((song, index) => (
                     <li key={song.id}>
                       <input
                         type='checkbox'
