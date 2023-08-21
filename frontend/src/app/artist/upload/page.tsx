@@ -42,24 +42,22 @@ function Upload () {
         method: 'POST',
         body: formData
       })
-      const data = await response.json()
-      if (response.ok) {
-        setAlertType('success')
-        setAlertMessage(data.message)
-        setIsAlertOpen(true)
-        setName('')
-        setDuration('00:00')
-        setFile(null)
-        setFileName('')
-        setFileDataURL('')
-        setGenre('')
-        if (audioRef.current != null) {
-          audioRef.current.src = ''
-        }
-      } else {
-        setAlertType('danger')
-        setAlertMessage(data.message)
-        setIsAlertOpen(true)
+
+      if (response.status !== 200) {
+        throw new Error('Something went wrong!')
+      }
+
+      setAlertType('success')
+      setAlertMessage('Track uploaded successfully!')
+      setIsAlertOpen(true)
+      setName('')
+      setDuration('00:00')
+      setFile(null)
+      setFileName('')
+      setFileDataURL('')
+      setGenre('')
+      if (audioRef.current != null) {
+        audioRef.current.src = ''
       }
     } catch (error: any) {
       setAlertType('danger')

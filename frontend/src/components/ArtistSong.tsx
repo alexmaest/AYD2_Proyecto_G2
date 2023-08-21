@@ -5,6 +5,7 @@ import Button from './Button'
 import { TbCircleFilled, TbPlayerPlayFilled } from 'react-icons/tb'
 import { apiUrls, baseUrl } from '@/constants/urls'
 import { revalidatePath } from 'next/cache'
+import { useRouter } from 'next/navigation'
 
 interface Pops {
   songID: number
@@ -14,6 +15,7 @@ interface Pops {
 }
 
 function ArtistSong ({ songID, name, artist, duration }: Pops) {
+  const router = useRouter()
   const handleDelete = async (id: number) => {
     try {
       const response = await fetch(baseUrl + apiUrls.artist.deleteSong + `/${id}`, {
@@ -22,7 +24,9 @@ function ArtistSong ({ songID, name, artist, duration }: Pops) {
       if (response.status !== 200) {
         throw new Error('Error deleting song')
       }
-      revalidatePath('/artist/songs')
+      const currentPath = window.location.pathname
+      revalidatePath(currentPath)
+      router.refresh()
     } catch (error) {
       alert(error)
     }
