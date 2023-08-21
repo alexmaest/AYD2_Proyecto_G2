@@ -93,7 +93,7 @@ class artistRepository {
             const month = date.getMonth() + 1;
             const day = date.getDate();
 
-            console.log(year, month, day);
+            //console.log(year, month, day);
             artist.year = year
             artist.month = month
             artist.day = day
