@@ -62,16 +62,18 @@ export default function ArtistAlbum2 ({ artistName, albumName, albumID, type, re
           </Button>
         </div>
 
-        <div className='w-full flex flex-col items-start gap-2 border border-retro-black-500 mt-8'>
+        <div className='w-full flex flex-col items-start border border-retro-black-500 mt-8'>
           {songs.map((song: Song, index) => (
-            <Link
-              href={`/artist/tacks/${song.id}`}
+            <a
+              href={song.songUrl}
               key={song.id}
+              target='_blank'
               className='flex gap-4 px-4 py-2 border-b border-retro-black-500 w-full hover:bg-retro-black-500 hover:bg-opacity-10'
+              rel='noreferrer'
             >
-              <span className='text-retro-white text-[14px]'>{index + 1}</span>
-              <p className='text-retro-white text-[14px] cursor-pointer'>{song.name}</p>
-            </Link>
+              <span className='text-retro-white text-[14px]'>{index + 1}. </span>
+              <p className='text-retro-white text-[14px]'>{song.name}</p>
+            </a>
           ))}
         </div>
       </div>
