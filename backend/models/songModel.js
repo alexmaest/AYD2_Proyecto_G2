@@ -35,6 +35,16 @@ class songModel {
     }
   }
 
+  async deleteAlbum(id) {
+    try{
+      const deleted = await this.repository.deleteAlbum(id);
+      return deleted;
+    }catch (err) {
+      console.error(err);
+      throw new Error('Error while deleting id album from song');      
+    }
+  }
+
   async getSongById(id) {
     try {
       const song = await this.repository.findById(id);
@@ -52,6 +62,16 @@ class songModel {
     } catch (err) {
       console.error(err);
       throw new Error('Error while fetching all artist songs');
+    }
+  }
+
+  async getAllArtistAvailableSongs(songId) {
+    try {
+      const songs = await this.repository.findAllArtistAvailableSongs(songId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist available songs');
     }
   }
 

@@ -13,7 +13,12 @@ export const apiUrls = {
     uploadSong: '/artist//uploadSong',
     profileConfig: '/artist/ProfileConfig',
     profile: '/artist/Profile',
-    getSongs: '/artist/songs'
+    getSongs: '/artist/songs',
+    deleteSong: '/artist/deleteSong',
+    createAlbum: '/artist/createAlbum',
+    getAlbums: '/artist/albums',
+    deleteAlbum: '/artist/deleteAlbum',
+    getAvailableSongs: '/artist/availableSongs'
   },
   admin: {
     artists: '/admin/artists',

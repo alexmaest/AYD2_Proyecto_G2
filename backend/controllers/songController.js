@@ -64,7 +64,7 @@ class songController {
                 if (songs) {
                     res.status(200).json(songs);
                 } else {
-                    res.status(401).send('The songs could not be obtained');
+                    res.status(204).json('The songs could not be obtained');
                 }
             }
         } catch (err) {
@@ -72,6 +72,49 @@ class songController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+    async getAvailableSongs(req, res) {
+        try {
+            const artistId = await artistModel.getArtistIdByUserId(req.params.userId);
+            if (!artistId) {
+                res.status(502).send('Artist account with that id doesnt exist');
+            } else {
+                const songs = await songModel.getAllArtistAvailableSongs(artistId);
+                if (songs) {
+                    res.status(200).json(songs);
+                } else {
+                    res.status(501).json('The songs could not be deleted');
+                }
+            }
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async deleteSong(req, res) {
+        try{
+            const deleted = await songModel.deleteSong(req.params.id)
+            if(deleted){
+                res.status(200)
+            }else{
+
+            }            
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async deleteAlbum(req, res) {
+        try{
+            console.log(req.body)
+            res.status(200)
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }    
 }
 
 module.exports = new songController();

@@ -27,6 +27,14 @@ export default function ArtistLayout ({
                 <span className='text-retro-white text-center font-bold text-[16px]'>Upload</span>
               </Link>
             </li>
+            <li>
+              <Link
+                href='/artist/create-album'
+                className='group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out bg-[#1D1D1D] hover:brightness-90 hover:scale-105'
+              >
+                <span className='text-retro-white text-center font-bold text-[16px]'>Create Album</span>
+              </Link>
+            </li>
           </ul>
           <ul className='flex items-center gap-4'>
             <li>
