@@ -73,10 +73,10 @@ class artistController { //FG
                 //como username y email son nuevos y validos o son los mismos procedo a actualizar la info
                 } else {
 
-                    console.log(":::::::::::::::::::::::::")
-                    console.log(req.body)
-                    console.log("---password---")
-                    console.log(req.body.password)
+                    //console.log(":::::::::::::::::::::::::")
+                    //console.log(req.body)
+                    //console.log("---password---")
+                    //console.log(req.body.password)
 
 
                     var passwordNew = false
@@ -87,8 +87,8 @@ class artistController { //FG
                         passwordNew = true
                     }
 
-                    console.log("- - - - - - - - -hash")
-                    console.log(req.body.password)
+                    //console.log("- - - - - - - - -hash")
+                    //console.log(req.body.password)
 
 
 
@@ -102,13 +102,13 @@ class artistController { //FG
                         const banner = await userController.uploadImage(req.body.image)
                         if (banner === null) {
                             res.status(401).send('Error')
-                            console.log("F en actualizar foto en bucket")
+                            //console.log("F en actualizar foto en bucket")
 
                         } else {// guardo imagen en db
                             //PASO 2: ahora guardar en db + la info cambiada
                             const bannerCreator = await artistModel.updateArtistInfo(banner, req.body,passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                             if (bannerCreator === null) {
-                                console.log("F en actualizar info")
+                                //console.log("F en actualizar info")
                                 res.status(401).send('Error')
                             } else {
                                 res.status(200).send('Account updated!')
@@ -119,10 +119,10 @@ class artistController { //FG
                     //ME PIDEN UPDATE SIN CAMBIO EN IMAGEN -------------------------------------
 
                     }else{//guardo sin imagen
-                        console.log("---GUARDO SIN IMAGEN---")
+                        //console.log("---GUARDO SIN IMAGEN---")
                         const bannerCreator = await artistModel.updateArtistInfo2(req.body,passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                         if (bannerCreator === null) {
-                            console.log("F en actualizar info")
+                            //console.log("F en actualizar info")
                             res.status(401).send('Error')
                         } else {
                             res.status(200).send('Account updated!')
