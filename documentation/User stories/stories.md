@@ -1,8 +1,6 @@
 ![Net Image](banner.jpg "Banner | RetroMusic")
 
-## Reporte Sprint 1 | Fase 1 <img src="https://media.tenor.com/dHk-LfzHrtwAAAAi/linux-computer.gif" alt="drawing" width="30"/>
-
-### Historias de usuario por modulos
+## Historias de usuario | Fase 1 <img src="https://media.tenor.com/dHk-LfzHrtwAAAAi/linux-computer.gif" alt="drawing" width="30"/>
 
 ### _Registro_
 

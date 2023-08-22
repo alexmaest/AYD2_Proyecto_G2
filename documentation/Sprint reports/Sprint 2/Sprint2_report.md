@@ -30,6 +30,7 @@ Se realizaron reuniones diarias donde se discutían los avances de la fase 1 del
 ### _Grabación de Scrum Retrospective_
 Esta reunión marcó el fin del segundo y último sprint de la primera fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo.
 
+        https://drive.google.com/file/d/1jUKTc7Yg79Co4qqKaBt_-W-nxEEGICGO/view?usp=drive_link
 
 ### _Elementos del Sprint Backlog_
 

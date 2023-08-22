@@ -2,9 +2,6 @@
 
 ## Manual de usuario | Fase 1 <img src="https://media.tenor.com/dHk-LfzHrtwAAAAi/linux-computer.gif" alt="drawing" width="30"/>
 
-###### _2023 - Laboratorio de Análisis y Diseño de Sistemas 2_
----
-
 ### _Landing Page_
 ![LandingPage](../assets/landing-page_page.png "LandingPage | RetroMusic")
 La Landing Page de Retro Music esta conformada por la barra de navegación que posee las opciones de dirigirse al registro, inicio de sesión o regresar al
@@ -109,3 +106,6 @@ perfil. Para confirmar la imagen deberá presionar el botón _"Subir"_.
 ![Artist](../assets/artist_profile_edit_page.png "Artist7 | RetroMusic")
 Si desea actualizar los datos de su perfil deberá llenar el formulario que
 se le presenta en esta página y presionar el botón _"Update your profile"_.
+
+###### _2023 - Laboratorio de Análisis y Diseño de Sistemas 2_
+---

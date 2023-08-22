@@ -95,13 +95,9 @@ node index.js
 
   ![repositoryPattern](repositoryPattern.png)
 
-### _Diagramas de patron de diseño implementado en el frontend_
+- `Patrón de composición`: Este implementado en el área de frontend, donde la arquitectura del patrón de composición es un enfoque de diseño en la programación orientada a objetos que permite crear estructuras jerárquicas complejas al combinar objetos más simples en una composición jerárquica. En este patrón, se pueden crear relaciones de "todo-parte" entre los objetos, lo que facilita la creación y manipulación de estructuras complejas de manera modular y flexible. En la arquitectura del patrón de composición, los objetos individuales y los objetos compuestos se tratan de manera uniforme a través de una interfaz común. Esto significa que se pueden aplicar las mismas operaciones a ambos tipos de objetos, lo que simplifica considerablemente el código y la interacción entre los componentes.
 
-- `Patrón de composición`: La arquitectura del patrón de composición es un enfoque de diseño en la programación orientada a objetos que permite crear estructuras jerárquicas complejas al combinar objetos más simples en una composición jerárquica. En este patrón, se pueden crear relaciones de "todo-parte" entre los objetos, lo que facilita la creación y manipulación de estructuras complejas de manera modular y flexible.
-
-  En la arquitectura del patrón de composición, los objetos individuales y los objetos compuestos se tratan de manera uniforme a través de una interfaz común. Esto significa que se pueden aplicar las mismas operaciones a ambos tipos de objetos, lo que simplifica considerablemente el código y la interacción entre los componentes.
-
-![composition](composition.jpg)
+  ![compositionPattern](composition.jpg)
 
 ### _Diagrama Entidad-Relación de la base de datos_
 
