@@ -84,6 +84,19 @@ class songModel {
       throw new Error('Error while fetching all album songs');
     }
   }
+
+
+  //JA- fase2
+  async getAllArtistSongs2() {
+    try {
+      //console.log("2")
+      const songs = await this.repository.findAllArtistSongs2();
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist songs');
+    }
+  }
 }
 
 module.exports = new songModel();

@@ -69,6 +69,35 @@ class albumRepository {
       });
     });
   }
+
+  //JA - FASE 2
+  findAllArtistAlbums2() {
+    return new Promise((resolve, reject) => {
+      const query = `SELECT a.id_album,a.nombre,a.link_foto,a.fecha_lanzamiento,a.tipo_album, u.nombre as owner FROM album as a 
+      join creador_contenido as cc on a.id_creador = cc.id_creador 
+      join usuario as u on u.id = cc.usuario_id ;`
+
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const albums = results.map(result => ({
+              id: result.id_album,
+              name: result.nombre,
+              albumUrl: result.link_foto,
+              releaseDate: result.fecha_lanzamiento,
+              type: result.tipo_album === 1 ? "Sencillo" : "Álbum",
+              owner: result.owner
+            }));
+            resolve(albums);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
 }
 
 module.exports = albumRepository;
