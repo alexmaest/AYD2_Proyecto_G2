@@ -130,6 +130,36 @@ class songRepository {
       });
     });
   }
+
+
+  //JA - fase2
+  findAllArtistSongs2() {
+    //console.log("3")
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM cancion';
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const songs = results.map(result => ({
+              id: result.id_cancion,
+              name: result.nombre,
+              songUrl: result.link_cancion,
+              duration: result.duracion,
+              genre: result.genero
+            }));
+
+            //console.log("..............")
+            //console.log(songs)
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
 }
 
 module.exports = songRepository;

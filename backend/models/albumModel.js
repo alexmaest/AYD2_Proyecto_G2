@@ -54,6 +54,17 @@ class albumModel {
       throw new Error('Error while fetching all artist albums');
     }
   }
+
+  //JA - FASE2
+  async getAllArtistAlbums2() {
+    try {
+      const albums = await this.repository.findAllArtistAlbums2();
+      return albums;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist albums');
+    }
+  }
 }
 
 module.exports = new albumModel();
