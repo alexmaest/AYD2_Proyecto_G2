@@ -1,6 +1,33 @@
 const db = require('../database');
 
 class userRepository {
+
+  saveFreeUser(user) {
+    return new Promise((resolve, reject) => {
+      const userQuery = `
+        INSERT INTO usuario (nombre, pwd, tipo_usuario, email, link_foto, fecha_nacimiento, genero)
+        VALUES (?, ?, 2, ?, ?, ?, ?);
+      `;
+
+      const userValues = [
+        user.username,
+        user.password,
+        user.email,
+        null,
+        user.birthday,
+        user.gender
+      ];
+
+      db.connection.query(userQuery, userValues, (userErr, userResult) => {
+        if (userErr) {
+          reject(userErr);
+        } else {
+          resolve(userResult.insertId);
+        }
+      });
+    });
+  }
+
   //JA
   findByEmail(email) { // para el login del usuario
     return new Promise((resolve, reject) => {
