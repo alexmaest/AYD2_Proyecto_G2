@@ -82,7 +82,8 @@ class artistRepository {
               year: 0,
               month: 0,
               day: 0,
-              gender: results[0].genero
+              gender: results[0].genero,
+              photo: results[0].link_foto
             }
 
             //const dateBirth = "2012-05-09T06:00:00.000Z";

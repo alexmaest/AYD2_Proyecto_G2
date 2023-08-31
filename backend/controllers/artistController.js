@@ -97,7 +97,7 @@ class artistController { //FG
                     //PARTE DE LA IMAGEN
                     //guardar la imagen en bucket -> db si agrego imagen sino F
                     //FORMA BUCKET
-                    if (req.body.image != null) {// porq me piden una imagen
+                    if (req.body.image != null) {// porq me piden una nueva imagen
                         //PASO 1: guardar en bucket
                         const banner = await userController.uploadImage(req.body.image)
                         if (banner === null) {

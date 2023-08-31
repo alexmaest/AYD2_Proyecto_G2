@@ -12,14 +12,11 @@ router.get('/songs/:userId', songController.getAllSongs);
 router.get('/albums/:userId', albumController.getAllAlbums);
 
 
-//router.post('/banner', artistController.updateBanner);
+
 router.post('/Profile', artistController.getInfo);
 router.post('/ProfileConfig', artistController.updateProfile);//JA
-//router.post('/uploadSong', songController.createSong);
+
 //router.post('/createAlbum', albumController.createAlbum);
 
-
-//router.delete('/deleteSong/:id',songController.deleteSong);
-//router.delete('/deleteAlbum/:id',albumController.deleteAlbum);
 
 module.exports = router;
