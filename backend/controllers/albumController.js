@@ -97,6 +97,36 @@ class albumController {
         }
     }
 
+    //JA - FASE 2
+    async getAllAlbums(req, res) {
+        try {
+            
+            //console.log(req.params.userId) <--- MAGIC
+            
+            const albums = await albumModel.getAllArtistAlbums2();
+                if (albums) {
+                    /*
+                    const albumsWithSongs = await Promise.all(
+                        albums.map(async album => {
+                            const songs = await songModel.getAllAlbumSongs(album.id);
+                            return {
+                                ...album,
+                                songs: songs || []
+                            };
+                        })
+                    );
+                    */
+                    res.status(200).json(albums);
+                } else {
+                    res.status(401).send('The albums could not be obtained');
+                }
+            
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
 }
 
 module.exports = new albumController();
