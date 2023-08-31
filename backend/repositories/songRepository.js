@@ -122,6 +122,9 @@ class songRepository {
               duration: result.duracion,
               genre: result.genero
             }));
+
+            //console.log("yyyyyyyyyyyyyyyyyyyyyyyyy")
+            //console.log(songs)
             resolve(songs);
           } else {
             resolve(null);
