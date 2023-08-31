@@ -2,10 +2,11 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
 
+const userRegisterRoute = require('./routers/register/userRegisterRoute');
+const artistRegisterRoute = require('./routers/register/artistRegisterRoute');
 const mainRoute = require('./routers/mainRoute');
 const loginRoute = require('./routers/loginRoute');
 const adminRoute = require('./routers/adminRoute');
-const artistRegisterRoute = require('./routers/register/artistRegisterRoute');
 const artistRoute = require('./routers/artistRoute')
 const userRoute = require('./routers/usersRoute')
 
@@ -26,6 +27,7 @@ class Server {
         this.app.use('/artist', artistRoute);
         this.app.use('/user', userRoute);
         this.app.use('/artistRegister', artistRegisterRoute);
+        this.app.use('/userRegister', userRegisterRoute);
     }
 
     start() {
