@@ -16,3 +16,7 @@
   background-size: cover;
   background-image: url('../../public/spacer.svg');
 }
+
+.dropdown__list li:not(:last-child) {
+  border-bottom: 1px solid #ded2a9;
+}
