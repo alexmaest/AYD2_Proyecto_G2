@@ -14,5 +14,9 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  background-image: url('../../public/spacer.svg');
+  background-image: url("../../public/spacer.svg");
+}
+
+.album-card:hover .play-icon {
+  opacity: 1;
 }
