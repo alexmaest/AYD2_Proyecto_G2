@@ -6,6 +6,16 @@ class artistModel {
     this.repository = new userRepository();
   }
 
+  async saveFreeUser(user) {
+    try {
+      const id = await this.repository.saveFreeUser(user);
+      return id;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while saving user');
+    }
+  }
+
   //JA
   async getUserByEmail(email) {
     try {
@@ -13,7 +23,7 @@ class artistModel {
       return user;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while fetching content creator by email');
+      throw new Error('Error while fetching user by email');
     }
   }
 
@@ -24,7 +34,7 @@ class artistModel {
       return user;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while fetching content creator by email');
+      throw new Error('Error while fetching user by email');
     }
   }
 
@@ -34,7 +44,7 @@ class artistModel {
       return user;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while fetching content creator by username');
+      throw new Error('Error while fetching user by username');
     }
   }
 
@@ -44,7 +54,7 @@ class artistModel {
       return user;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while fetching content creator by token');
+      throw new Error('Error while fetching user by token');
     }
   }
 
@@ -79,7 +89,7 @@ class artistModel {
       return user;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while fetching content creator by email');
+      throw new Error('Error while fetching user by email');
     }
   }
 
@@ -89,7 +99,7 @@ class artistModel {
       return userId;
     } catch (err) {
       console.error(err);
-      throw new Error('Error while changing artist password');
+      throw new Error('Error while changing user password');
     }
   }
 }
