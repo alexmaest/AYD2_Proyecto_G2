@@ -84,12 +84,15 @@ class albumRepository {
           if (results.length > 0) {
             const albums = results.map(result => ({
               id: result.id_album,
-              name: result.nombre,
-              albumUrl: result.link_foto,
+              title: result.nombre,
+              cover: result.link_foto,
               releaseDate: result.fecha_lanzamiento,
               type: result.tipo_album === 1 ? "Sencillo" : "Álbum",
-              owner: result.owner
+              artist: result.owner
             }));
+
+            //console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+            //console.log(albums)
             resolve(albums);
           } else {
             resolve(null);

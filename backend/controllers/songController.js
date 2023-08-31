@@ -133,6 +133,24 @@ class songController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+
+    //JA- fase 2
+    async getAllSongs2(req, res) {
+        try {
+            //console.log("1")
+                const songs = await songModel.getAllAlbumSongs(req.params.idAlbum);
+                if (songs) {
+                    res.status(200).json(songs);
+                } else {
+                    res.status(204).json('The songs could not be obtained');
+                }
+            
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
 }
 
 module.exports = new songController();

@@ -100,9 +100,12 @@ class albumController {
     //JA - FASE 2
     async getAllAlbums(req, res) {
         try {
-            //for que recorra todos los albumes que existen y de ahi sacar sus  array_canciones
-                const albums = await albumModel.getAllArtistAlbums2();
+            
+            //console.log(req.params.userId) <--- MAGIC
+            
+            const albums = await albumModel.getAllArtistAlbums2();
                 if (albums) {
+                    /*
                     const albumsWithSongs = await Promise.all(
                         albums.map(async album => {
                             const songs = await songModel.getAllAlbumSongs(album.id);
@@ -112,7 +115,8 @@ class albumController {
                             };
                         })
                     );
-                    res.status(200).json(albumsWithSongs);
+                    */
+                    res.status(200).json(albums);
                 } else {
                     res.status(401).send('The albums could not be obtained');
                 }
