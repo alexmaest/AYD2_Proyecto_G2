@@ -9,7 +9,9 @@ const { deleteSong } = require('../models/songModel');
 //router.get('/banner/:userId', artistController.getBanner);
 router.get('/songs/:userId', songController.getAllSongs);
 //router.get('/availableSongs/:userId', songController.getAvailableSongs);
+
 router.get('/albums/:userId', albumController.getAllAlbums);
+router.get('/albums/songs/:idAlbum', songController.getAllSongs2);
 
 
 

@@ -77,6 +77,8 @@ class songModel {
 
   async getAllAlbumSongs(albumId) {
     try {
+      //console.log("pppppppppppppppppppppppppppp")
+      //console.log(albumId)
       const songs = await this.repository.findAllAlbumSongs(albumId);
       return songs;
     } catch (err) {
