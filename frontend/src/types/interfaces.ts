@@ -11,7 +11,7 @@ export interface Song {
   id: number
   name: string
   songUrl: string
-  duration: number
+  duration: string
   genre: string
 }
 
@@ -22,4 +22,12 @@ export interface Album {
   releaseDate: string
   type: string
   songs: Song[]
+}
+
+export interface ForYouAlbum {
+  id: number
+  title: string
+  artist: string
+  cover: string
+  type: string
 }

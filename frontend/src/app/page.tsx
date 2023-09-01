@@ -12,6 +12,13 @@ export default function Home () {
             alt='RetroMusic'
             width={512}
             height={335}
+            style={
+              {
+                width: '512px',
+                height: '335px'
+              }
+            }
+            priority
             className='object-contain xl:rotate-[-20deg] xl:order-first order-last animate-wiggle-once'
           />
           <div className='flex flex-col gap-8 w-full xl:w-1/3'>
