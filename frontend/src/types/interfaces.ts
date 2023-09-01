@@ -11,7 +11,7 @@ export interface Song {
   id: number
   name: string
   songUrl: string
-  duration: number
+  duration: string
   genre: string
 }
 
