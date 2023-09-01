@@ -23,5 +23,10 @@ export const apiUrls = {
   admin: {
     artists: '/admin/artists',
     artistsManagment: '/admin/artistsManagment'
+  },
+  user: {
+    songs: '/user/songs',
+    albums: '/user/albums',
+    songsForAlbumId: '/user/albums/songs'
   }
 }
