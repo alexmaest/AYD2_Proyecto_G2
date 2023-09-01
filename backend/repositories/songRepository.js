@@ -139,7 +139,9 @@ class songRepository {
   findAllArtistSongs2() {
     //console.log("3")
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM cancion';
+      const query = `SELECT c.id_cancion ,c.nombre ,c.link_cancion ,c.duracion ,c.genero ,a.link_foto  
+      FROM cancion as c 
+      join album as a on a.id_album = c.id_album ;    `;
       db.connection.query(query, [], (err, results) => {
         if (err) {
           reject(err);
@@ -150,7 +152,8 @@ class songRepository {
               name: result.nombre,
               songUrl: result.link_cancion,
               duration: result.duracion,
-              genre: result.genero
+              genre: result.genero,
+              cover: result.link_foto
             }));
 
             //console.log("..............")
