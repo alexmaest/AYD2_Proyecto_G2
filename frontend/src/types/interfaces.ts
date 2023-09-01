@@ -23,3 +23,11 @@ export interface Album {
   type: string
   songs: Song[]
 }
+
+export interface ForYouAlbum {
+  id: number
+  title: string
+  artist: string
+  cover: string
+  type: string
+}
