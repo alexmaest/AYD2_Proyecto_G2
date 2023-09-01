@@ -10,9 +10,37 @@ interface Props {
 
 export default async function ArtistSongs ({ artistID, artistName, limit, children }: Props) {
   const songs = await fetchSongs(artistID) ?? []
+  let content
 
   if (limit !== undefined && songs.length > limit) {
     songs.splice(limit)
+  }
+
+  if (songs === null || songs.length === 0) {
+    content = (
+      <div className='w-full flex flex-col items-center justify-center'>
+        <h3 className='text-white text-2xl font-bold'>No songs uploaded yet</h3>
+        <Link
+          href='/artist/upload'
+          className='text-white text-xl font-bold hover:underline cursor-pointer'
+        >
+          Upload
+        </Link>
+      </div>
+    )
+  } else {
+    const reversedSongs = songs.reverse()
+    content = (
+      <div className='flex flex-col items-start gap-8'>
+        {reversedSongs.map((song: any) => (
+          <ArtistSong
+            key={song.id}
+            song={song}
+            artist={artistName}
+          />
+        ))}
+      </div>
+    )
   }
 
   return (
@@ -21,29 +49,7 @@ export default async function ArtistSongs ({ artistID, artistName, limit, childr
         {children}
       </div>
       <div className='w-full'>
-        {songs.length === 0 && (
-          <div className='w-full flex flex-col items-center justify-center'>
-            <h3 className='text-white text-2xl font-bold'>No songs uploaded yet</h3>
-            <Link
-              href='/artist/upload'
-              className='text-white text-xl font-bold hover:underline cursor-pointer'
-            >
-              Upload
-            </Link>
-          </div>
-        )}
-        {songs.length !== 0 &&
-          <div className='flex flex-col items-start gap-8'>
-            {songs.map((song: any) => (
-              <ArtistSong
-                key={song.id}
-                songID={song.id}
-                name={song.name}
-                artist={artistName}
-                duration={song.duration}
-              />
-            ))}
-          </div>}
+        {content}
       </div>
     </section>
   )
