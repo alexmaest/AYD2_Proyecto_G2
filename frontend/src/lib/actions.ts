@@ -1,7 +1,7 @@
 'use server'
 
 import { apiUrls, baseUrl } from '@/constants/urls'
-import { Song } from '@/types/interfaces'
+import { Album, Song } from '@/types/interfaces'
 import { revalidateTag } from 'next/cache'
 
 export async function deleteSong (song: Song) {
@@ -13,4 +13,15 @@ export async function deleteSong (song: Song) {
   })
   await res.json()
   revalidateTag('songs')
+}
+
+export async function deleteAlbum (album: Album) {
+  const res = await fetch(baseUrl + apiUrls.artist.deleteAlbum + `/${album.id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  await res.json()
+  revalidateTag('albums')
 }
