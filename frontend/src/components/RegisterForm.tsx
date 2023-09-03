@@ -26,6 +26,7 @@ function RegisterForm () {
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
   const [gender, setGender] = useState('')
+  const [isArtist, setIsArtist] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
   const [isAlertOpen, setIsAlertOpen] = useState(false)
@@ -114,7 +115,8 @@ function RegisterForm () {
         gender
       }
 
-      const response = await fetch(baseUrl + apiUrls.auth.register, {
+      const regEndpoint = isArtist ? apiUrls.auth.register : apiUrls.auth.userRegister
+      const response = await fetch(baseUrl + regEndpoint, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -160,6 +162,22 @@ function RegisterForm () {
         <p>{alertMessage}</p>
       </Alert>
       <form action='post' className='flex flex-col items-center gap-6' onSubmit={handleSubmit}>
+        <div className='w-[450px] flex flex-row justify-between items-start text-retro-white'>
+          <label htmlFor='is_artist' className='font-bold text-[16px]'>
+            Are you an artist?
+          </label>
+          <div className='flex flex-wrap flex-row items-start gap-4'>
+            <input
+              type='checkbox'
+              id='no'
+              name='is_artist'
+              value={isArtist ? 'yes' : 'no'}
+              className='h-5 w-5 accent-retro-green'
+              onChange={() => setIsArtist(!isArtist)}
+            />
+            <label htmlFor='yes'>Yes</label>
+          </div>
+        </div>
         <Input
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -256,10 +274,11 @@ function RegisterForm () {
           <div className='flex flex-wrap flex-row items-start gap-4'>
             {genders.map((gender, index) => (
               <RadioButton
+                key={index}
                 label={gender}
                 value={gender}
+                entryGender=''
                 onChange={(event) => setGender(event.target.value)}
-                key={index}
               />
             ))}
           </div>

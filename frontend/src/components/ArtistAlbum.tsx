@@ -11,7 +11,7 @@ export default function ArtistAlbum ({ album }: Props) {
   return (
     <Link
       href={`/artist/albums/${album.id}`}
-      className='p-4 bg-retro-black-900 rounded hover:bg-retro-black-800'
+      className='p-4 bg-retro-black-900 rounded hover:bg-retro-black-800 group'
     >
       <div className='flex flex-col items-start gap-2'>
         <img
@@ -19,7 +19,7 @@ export default function ArtistAlbum ({ album }: Props) {
           src={album.albumUrl}
           alt='album cover'
         />
-        <h5 className='font-bold text-retro-white text-[20px]'>{album.name}</h5>
+        <h5 className='font-bold text-retro-white text-[20px] group-hover:text-retro-orange'>{album.name}</h5>
         <p className='text-retro-white text-[16px]'>{year} - {album.type}</p>
       </div>
     </Link>

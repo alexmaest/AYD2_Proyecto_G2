@@ -43,8 +43,10 @@ function Login () {
       const role = session?.user.role
       if (role === 1) {
         redirect('/admin')
-      } else {
+      } else if (role === 2) {
         redirect('/artist')
+      } else {
+        redirect('/user')
       }
     }
   }, [session])
