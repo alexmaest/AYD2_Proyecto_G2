@@ -14,7 +14,7 @@ function RadioButton ({ label, value, entryGender, onChange }: RadioButtonProps)
         id={label}
         type='radio'
         name='default-radio'
-        className='w-4 h-4 text-retro-green checked:bg-retro-green bg-retro-green border-retro-green-300 focus:ring-retro-green focus:ring-2'
+        className='w-5 h-5 text-retro-green checked:bg-retro-green accent-retro-green border-retro-green focus:ring-retro-green focus:ring-2'
         value={value}
         onChange={onChange}
         defaultChecked={entryGender === value}
