@@ -8,7 +8,7 @@ const mainRoute = require('./routers/mainRoute');
 const loginRoute = require('./routers/loginRoute');
 const adminRoute = require('./routers/adminRoute');
 const artistRoute = require('./routers/artistRoute')
-const userRoute = require('./routers/usersRoute')
+const userRoute = require('./routers/userRoute')
 
 class Server {
     constructor() {
