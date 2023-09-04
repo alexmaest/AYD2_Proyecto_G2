@@ -18,11 +18,11 @@ class Database {
         this.connection.connect((err) => {
             if (err) {
                 console.error('Failed to connect to the database', err);
-                logEventsWrite("Failed to connect to the database")//log
+                logEventsWrite("","","","Failed to connect to the database",2)//log
                 return;
             }
             console.log('Information: Database connection succeeded');
-            logEventsWrite("Information: Database connection succeeded")//log
+            logEventsWrite("","","","Information: Database connection succeeded",2)//log
         });
     }
 }

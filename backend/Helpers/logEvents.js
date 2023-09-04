@@ -34,7 +34,7 @@ const LogInit = async () => {
 //------------------------------------------------------------------------------
 const fileName = path.join(__dirname, '../Logs', 'log.txt')
 
-const logEventsWrite = async (msg) => {
+const logEventsWrite = async (url,method,usuario,msg,type) => {
 
     const now = new Date();
     moment.locale("America/Guatemala");// para evitar bug en EC2 de otro lado del mundo
@@ -42,10 +42,14 @@ const logEventsWrite = async (msg) => {
 
     try {
 
-        if (msg === "inicio de aplicacion") {
+        if (type === 1) {//msg exlusivo cuando inicia backend
             fsP.appendFile(fileName,":::::::::::::::::::::::::::::::::::::: " + msg + " ::::::::::::::::::::::::::::::::::::::"+"\n[fecha]\t" + formattedDate + "\tinicio de backend" + "\n");
-        } else {
-            fsP.appendFile(fileName, "[fecha]\t" + formattedDate + "\t" + msg + "\n");
+       
+        } else if (type === 2) {//msg generico
+            fsP.appendFile(fileName,"[fecha]\t" + formattedDate + "\t[msg]: "+msg + "\n");
+        }
+        else {//msg especifico
+            fsP.appendFile(fileName, "[fecha]: " + formattedDate + "\t" + "[url]:\t"+url+"\t[metodo]: "+method+"\t[usuario]: "+usuario+"\t[msg]: "+msg + "\n");
         }
     } catch (error) {
         console.error(error)
