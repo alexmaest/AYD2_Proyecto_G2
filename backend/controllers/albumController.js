@@ -119,16 +119,16 @@ class albumController {
                     );
                     */
                     res.status(200).json(albums);
-                    logEventsWrite("user"+req.url,req.method,"","album enviado correctamente!",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"","album enviado correctamente!",3)//log
                 } else {
                     res.status(401).send('The albums could not be obtained');
-                    logEventsWrite("user"+req.url,req.method,"","error albumes no pudieron ser obtenidos",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"","error albumes no pudieron ser obtenidos",3)//log
                 }
             
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
-            logEventsWrite("user"+req.url,req.method,"","error servidor interno TuT",3)//log
+            logEventsWrite(req.originalUrl,req.method,"","error servidor interno TuT",3)//log
         }
     }
 
