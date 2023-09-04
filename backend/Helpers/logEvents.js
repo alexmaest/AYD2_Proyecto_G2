@@ -1,7 +1,7 @@
 const fsP = require('fs').promises;
 const path = require('path')
 const fs = require("fs");
-//const moment = require("moment");
+const moment = require("moment");
 
 
 //metodo el cual crea la carpeta Logs y el archivo log.txt
@@ -36,11 +36,12 @@ const fileName = path.join(__dirname, '../Logs', 'log.txt')
 
 const logEventsWrite = async (msg) => {
 
-    //const formattedDate = moment(now).format("YYYY-MM-DD h:mm:ss a");
-    //console.log(formattedDate);
+    const now = new Date();
+    const formattedDate = moment(now).format("YYYY-MM-DD h:mm:ss a");
+    
     try {
-
-        fsP.appendFile(fileName, msg + "\n")
+        
+        fsP.appendFile(fileName, "[fecha]\t"+formattedDate+"\t[usuario]\t"+"\t[msg]\t"+msg+"\n");
     } catch (error) {
         console.error(error)
     }
