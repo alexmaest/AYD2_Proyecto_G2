@@ -14,15 +14,15 @@ const LogInit = async () => {
 
     // Creamos la carpeta `Logs` si no existe
     const logsDir = path.join(currentDir, "Logs");
-    if (!fs.existsSync(logsDir)) {
+    if (!fs.existsSync(logsDir)) {//si no existe crea
         fs.mkdirSync(logsDir);
     }
 
     // Creamos el archivo `log.txt` en la carpeta `Logs`
     const logsFile = path.join(logsDir, "log.txt");
 
-    if (!fs.existsSync(logsFile)) {
-        fs.writeFileSync(logsFile, "", {encoding: "utf-8"});
+    if (!fs.existsSync(logsFile)) {//si no existe crea
+        fs.writeFileSync(logsFile, "", { encoding: "utf-8" });
     }
 
 }
@@ -38,14 +38,18 @@ const logEventsWrite = async (msg) => {
 
     const now = new Date();
     const formattedDate = moment(now).format("YYYY-MM-DD h:mm:ss a");
-    
+
     try {
-        
-        fsP.appendFile(fileName, "[fecha]\t"+formattedDate+"\t[usuario]\t"+"\t[msg]\t"+msg+"\n");
+
+        if (msg === "inicio de aplicacion") {
+            fsP.appendFile(fileName,":::::::::::::::::::::::::::::::::::::: " + msg + " ::::::::::::::::::::::::::::::::::::::"+"\n[fecha]\t" + formattedDate + "\tinicio de backend" + "\n");
+        } else {
+            fsP.appendFile(fileName, "[fecha]\t" + formattedDate + "\t" + msg + "\n");
+        }
     } catch (error) {
         console.error(error)
     }
 
 }
 
-module.exports = {logEventsWrite,LogInit}
+module.exports = { logEventsWrite, LogInit }
