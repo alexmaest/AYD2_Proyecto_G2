@@ -2,3 +2,12 @@
 [fecha]	2023-09-04 3:12:54 pm	inicio de backend
 [fecha]	2023-09-04 3:13:04 pm	[msg]: Failed to connect to the database
 [fecha]: 2023-09-04 3:13:17 pm	[url]:	/albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-04 3:19:09 pm	inicio de backend
+[fecha]	2023-09-04 3:19:19 pm	[msg]: Failed to connect to the database
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-04 3:19:40 pm	inicio de backend
+[fecha]	2023-09-04 3:19:50 pm	[msg]: Failed to connect to the database
+[fecha]: 2023-09-04 3:20:29 pm	[url]:	user//albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-04 3:20:30 pm	[url]:	user//albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-04 3:20:31 pm	[url]:	user//albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
