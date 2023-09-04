@@ -3,6 +3,8 @@ const artistModel = require('../models/artistModel');
 const songModel = require('../models/songModel');
 const albumModel = require('../models/albumModel');
 require('dotenv').config();
+const {logEventsWrite} = require('../Helpers/logEvents');//logs
+
 
 class albumController {
     constructor() { }
@@ -117,13 +119,16 @@ class albumController {
                     );
                     */
                     res.status(200).json(albums);
+                    logEventsWrite("album enviado correctamente!")//log
                 } else {
                     res.status(401).send('The albums could not be obtained');
+                    logEventsWrite("error albumes no pudieron ser obtenidos")//log
                 }
             
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
+            logEventsWrite("error servidor interno TuT")//log
         }
     }
 
