@@ -37,6 +37,7 @@ const fileName = path.join(__dirname, '../Logs', 'log.txt')
 const logEventsWrite = async (msg) => {
 
     const now = new Date();
+    moment.locale("America/Guatemala");// para evitar bug en EC2 de otro lado del mundo
     const formattedDate = moment(now).format("YYYY-MM-DD h:mm:ss a");
 
     try {

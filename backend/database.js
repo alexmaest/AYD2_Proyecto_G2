@@ -1,6 +1,8 @@
 require('dotenv').config();
 const mysql = require('mysql');
 
+const {logEventsWrite} = require('./Helpers/logEvents');//logs
+
 class Database {
     constructor() {
         this.connection = mysql.createConnection({
@@ -16,9 +18,11 @@ class Database {
         this.connection.connect((err) => {
             if (err) {
                 console.error('Failed to connect to the database', err);
+                logEventsWrite("Failed to connect to the database")//log
                 return;
             }
             console.log('Information: Database connection succeeded');
+            logEventsWrite("Information: Database connection succeeded")//log
         });
     }
 }
