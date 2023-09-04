@@ -37,7 +37,7 @@ class Server {
             console.log(`Information: Server running on http://localhost:${this.port}`);
             
             //escribo en el log.txt el msg inicial
-            logEventsWrite(":::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::")
+            logEventsWrite("inicio de aplicacion")
         });
     }
 }
