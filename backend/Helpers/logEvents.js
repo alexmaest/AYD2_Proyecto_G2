@@ -48,7 +48,10 @@ const logEventsWrite = async (url,method,usuario,msg,type) => {
         } else if (type === 2) {//msg generico
             fsP.appendFile(fileName,"[fecha]\t" + formattedDate + "\t[msg]: "+msg + "\n");
         }
-        else {//msg especifico
+        else if(type === 4) {//msg generico para login
+            fsP.appendFile(fileName, "[fecha]: " + formattedDate + "\t" + "[url]:\t"+url+"\t[metodo]: "+method+"\t[msg]: "+msg + "\n");
+
+        } else {//msg especifico
             fsP.appendFile(fileName, "[fecha]: " + formattedDate + "\t" + "[url]:\t"+url+"\t[metodo]: "+method+"\t[usuario]: "+usuario+"\t[msg]: "+msg + "\n");
         }
     } catch (error) {

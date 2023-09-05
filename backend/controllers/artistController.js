@@ -2,6 +2,7 @@ const artistModel = require('../models/artistModel');
 const userController = require('./userController')
 const userModel = require('../models/userModel');
 require('dotenv').config();
+const {logEventsWrite} = require('../Helpers/logEvents');//logs
 
 class artistController { //FG
     constructor() { }
@@ -11,17 +12,21 @@ class artistController { //FG
             const banner = await userController.uploadImage(req.body.image)
             if (banner === null) {
                 res.status(401).send('Error')
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","Error banner is null",3)//log
             } else {
                 const bannerCreator = await artistModel.updateArtistBanner(banner, req.body.userId)
                 if (bannerCreator === null) {
                     res.status(401).send('Error')
+                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Error bannerCreator is null",3)//log
                 } else {
                     res.status(200).send(true)
+                    logEventsWrite(req.originalUrl,req.method,"creador contenido","actualizacion de banner correctamente!",3)//log
                 }
             }
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
+            logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
         }
     }
 
@@ -30,12 +35,15 @@ class artistController { //FG
             const banner = await artistModel.getArtistBanner(req.params.userId)
             if (banner === null) {
                 res.status(401).send('Invalid user');
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","Invalid user",3)//log
             } else {
                 res.status(200).send(banner)
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","banner enviado correctamente",3)//log
             }
         } catch (err) {
             console.log(err)
             res.status(500).send('Internal Server Error');
+            logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
         }
     }
 
@@ -66,9 +74,22 @@ class artistController { //FG
 
             if (userByEmail) {// si el correo ya exite F
                 res.status(501).send('Account with that email already exist');
+                if (req.originalUrl.includes("user")) {
+                    // La URL contiene el extracto "usuario"
+                    logEventsWrite(req.originalUrl,req.method,"usuario","Account with that email already exist",3)//log
+                  }else{
+                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Account with that email already exist",3)//log
+                  }
+
             } else {
                 if (userByUsername) {// si el username ya exite F
                     res.status(502).send('Account with that username already exist');
+                    if (req.originalUrl.includes("user")) {
+                        // La URL contiene el extracto "usuario"
+                        logEventsWrite(req.originalUrl,req.method,"usuario","Account with that username already exist",3)//log
+                      }else{
+                        logEventsWrite(req.originalUrl,req.method,"creador contenido","Account with that username already exist",3)//log
+                      }
 
                     //como username y email son nuevos y validos o son los mismos procedo a actualizar la info
                 } else {
@@ -102,6 +123,12 @@ class artistController { //FG
                         const banner = await userController.uploadImage(req.body.image)
                         if (banner === null) {
                             res.status(401).send('Error')
+                            if (req.originalUrl.includes("user")) {
+                                // La URL contiene el extracto "usuario"
+                                logEventsWrite(req.originalUrl,req.method,"usuario","Error banner is null",3)//log
+                              }else{
+                                logEventsWrite(req.originalUrl,req.method,"creador contenido","Error banner is null",3)//log
+                              }
                             //console.log("F en actualizar foto en bucket")
 
                         } else {// guardo imagen en db
@@ -110,8 +137,20 @@ class artistController { //FG
                             if (bannerCreator === null) {
                                 //console.log("F en actualizar info")
                                 res.status(401).send('Error')
+                                if (req.originalUrl.includes("user")) {
+                                    // La URL contiene el extracto "usuario"
+                                    logEventsWrite(req.originalUrl,req.method,"usuario","Error bannerCreator is null",3)//log
+                                  }else{
+                                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Error bannerCreator is null",3)//log
+                                  }
                             } else {
                                 res.status(200).send('Account updated!')
+                                if (req.originalUrl.includes("user")) {
+                                    // La URL contiene el extracto "usuario"
+                                    logEventsWrite(req.originalUrl,req.method,"usuario","Account updated!",3)//log
+                                  }else{
+                                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Account updated!",3)//log
+                                  }
                             }
                         }
 
@@ -124,8 +163,20 @@ class artistController { //FG
                         if (bannerCreator === null) {
                             //console.log("F en actualizar info")
                             res.status(401).send('Error')
+                            if (req.originalUrl.includes("user")) {
+                                // La URL contiene el extracto "usuario"
+                                logEventsWrite(req.originalUrl,req.method,"usuario","Error bannerCreator is null",3)//log
+                              }else{
+                                logEventsWrite(req.originalUrl,req.method,"creador contenido","Error bannerCreator is null",3)//log
+                              }
                         } else {
                             res.status(200).send('Account updated!')
+                            if (req.originalUrl.includes("user")) {
+                                // La URL contiene el extracto "usuario"
+                                logEventsWrite(req.originalUrl,req.method,"usuario","Account updated!",3)//log
+                              }else{
+                                logEventsWrite(req.originalUrl,req.method,"creador contenido","Account updated!",3)//log
+                              }
                         }
                     }
 
@@ -147,6 +198,12 @@ class artistController { //FG
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
+            if (req.originalUrl.includes("user")) {
+                // La URL contiene el extracto "usuario"
+                logEventsWrite(req.originalUrl,req.method,"usuario","Internal Server Error",3)//log
+              }else{
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
+              }
         }
     }
 
@@ -156,12 +213,30 @@ class artistController { //FG
             const user = await artistModel.getArtistById(req.body.userId)
             if (user === null) {
                 res.status(401).send('Invalid user');
+                if (req.originalUrl.includes("user")) {
+                    // La URL contiene el extracto "usuario"
+                    logEventsWrite(req.originalUrl,req.method,"usuario","Invalid user",3)//log
+                  }else{
+                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Invalid user",3)//log
+                  }
             } else {
                 res.status(200).send(user)
+                if (req.originalUrl.includes("user")) {
+                    // La URL contiene el extracto "usuario"
+                    logEventsWrite(req.originalUrl,req.method,"usuario","informacion de usuario enviado correctamente!",3)//log
+                  }else{
+                    logEventsWrite(req.originalUrl,req.method,"creador contenido","informacion de creador de contenido enviado correctamente!",3)//log
+                  }
             }
         } catch (err) {
             console.log(err)
             res.status(500).send('Internal Server Error');
+            if (req.originalUrl.includes("user")) {
+                // La URL contiene el extracto "usuario"
+                logEventsWrite(req.originalUrl,req.method,"usuario","Internal Server Error",3)//log
+              }else{
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
+              }
         }
 
     }
@@ -171,13 +246,16 @@ class artistController { //FG
             const artist = await artistModel.getAllArtists();
             if (artist) {
                 res.status(200).json(artist);
+                logEventsWrite(req.originalUrl,req.method,"usuario","artistas enviados correctamente!",3)//log
             } else {
                 res.status(204).json('The artist could not be obtained');
+                logEventsWrite(req.originalUrl,req.method,"usuario","The artist could not be obtained",3)//log
             }
 
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
+            logEventsWrite(req.originalUrl,req.method,"usuario","Internal Server Error",3)//log
         }
     }
 }

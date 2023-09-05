@@ -17,6 +17,7 @@ class albumController {
                 const { userId, name, releaseDate, type, songs } = req.body;
                 const artistId = await artistModel.getArtistIdByUserId(userId);
                 if (!artistId) {
+                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Artist account with that id doesnt exist",3)//log
                     res.status(502).send('Artist account with that id doesnt exist');
                 } else {
                     const newAlbum = {
@@ -39,19 +40,24 @@ class albumController {
                         const updateResults = await Promise.all(updatePromises);
                         const allUpdatesSuccessful = updateResults.every(result => result);
                         if (allUpdatesSuccessful) {
+                            logEventsWrite(req.originalUrl,req.method,"creador contenido","The album has been saved",3)//log
                             res.status(200).send('The album has been saved');
                         } else {
+                            logEventsWrite(req.originalUrl,req.method,"creador contenido","The songs could not be updated",3)//log
                             res.status(501).send('The songs could not be updated');
                         }
                     } else {
+                        logEventsWrite(req.originalUrl,req.method,"creador contenido","The album could not be saved",3)//log
                         res.status(501).send('The album could not be saved');
                     }
                 }
             } else {
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","An error has occurred while uploading the album cover",3)//log
                 res.status(500).send('An error has occurred while uploading the album cover');
             }
         } catch (err) {
             console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
             res.status(500).send('Internal Server Error');
         }
     }
@@ -61,6 +67,12 @@ class albumController {
             const artistId = await artistModel.getArtistIdByUserId(req.params.userId);
             if (!artistId) {
                 res.status(502).send('Artist account with that id doesnt exist');
+                if (req.originalUrl.includes("user")) {
+                    // La URL contiene el extracto "usuario"
+                    logEventsWrite(req.originalUrl,req.method,"usuario","Artist account with that id doesnt exist",3)//log
+                  }else{
+                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Artist account with that id doesnt exist",3)//log
+                  }
             } else {
                 const albums = await albumModel.getAllArtistAlbums(artistId);
                 if (albums) {
@@ -74,13 +86,31 @@ class albumController {
                         })
                     );
                     res.status(200).json(albumsWithSongs);
+                    if (req.originalUrl.includes("user")) {
+                        // La URL contiene el extracto "usuario"
+                        logEventsWrite(req.originalUrl,req.method,"usuario","albumes de artista enviado correctamente!",3)//log
+                      }else{
+                        logEventsWrite(req.originalUrl,req.method,"creador contenido","albumes de artista enviado correctamente!",3)//log
+                      }
                 } else {
                     res.status(401).send('The albums could not be obtained');
+                    if (req.originalUrl.includes("user")) {
+                        // La URL contiene el extracto "usuario"
+                        logEventsWrite(req.originalUrl,req.method,"usuario","The albums could not be obtained",3)//log
+                      }else{
+                        logEventsWrite(req.originalUrl,req.method,"creador contenido","The albums could not be obtained",3)//log
+                      }
                 }
             }
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
+            if (req.originalUrl.includes("user")) {
+                // La URL contiene el extracto "usuario"
+                logEventsWrite(req.originalUrl,req.method,"usuario","Internal Server Error",3)//log
+              }else{
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
+              }
         }
     }
 
@@ -89,12 +119,15 @@ class albumController {
             const deletedReference = await songModel.deleteAlbum(req.params.id);
             const deleted = await albumModel.deleteAlbum(req.params.id);
             if (deleted) {
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","album eliminado con exito!",3)//log
                 res.status(200);
             } else {
+                logEventsWrite(req.originalUrl,req.method,"creador contenido","The albums could not be deleted",3)//log
                 res.status(401).send('The albums could not be deleted');
             }
         } catch (err) {
             console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
             res.status(500).send('Internal Server Error');
         }
     }
@@ -119,16 +152,16 @@ class albumController {
                     );
                     */
                     res.status(200).json(albums);
-                    logEventsWrite(req.originalUrl,req.method,"","album enviado correctamente!",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"usuario","album enviado correctamente!",3)//log
                 } else {
                     res.status(401).send('The albums could not be obtained');
-                    logEventsWrite(req.originalUrl,req.method,"","error albumes no pudieron ser obtenidos",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"usuario","error albumes no pudieron ser obtenidos",3)//log
                 }
             
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
-            logEventsWrite(req.originalUrl,req.method,"","error servidor interno TuT",3)//log
+            logEventsWrite(req.originalUrl,req.method,"usuario","error servidor interno TuT",3)//log
         }
     }
 

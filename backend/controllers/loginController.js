@@ -2,6 +2,7 @@ const userModel = require('../models/userModel');
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
+const {logEventsWrite} = require('../Helpers/logEvents');//logs
 
 class LoginController {//JA
     constructor() { }
@@ -11,10 +12,12 @@ class LoginController {//JA
         try {
             const user = await userModel.getUserByEmail(req.body.email);
             if (user === null) {
+                logEventsWrite(req.originalUrl,req.method,"","Invalid user",4)//log
                 res.status(401).send('Invalid user');
             } else {
                 const hashedPassword = await userModel.createUserHashedPassword(req.body.pwd);
                 if (hashedPassword !== user[0].pwd) {
+                    logEventsWrite(req.originalUrl,req.method,"","Invalid password",4)//log
                     res.status(401).send('Invalid password');
                 } else {
 
@@ -53,8 +56,10 @@ class LoginController {//JA
 
                     //console.log(banned)
                     if(banned){
+                        logEventsWrite(req.originalUrl,req.method,"","User banned",4)//log
                         res.status(401).send('User banned');
                     }else{
+                        logEventsWrite(req.originalUrl,req.method,"","inicio de sesion realizado con exito!",4)//log
                         res.status(200).json(User);
                     }
                 
@@ -62,6 +67,7 @@ class LoginController {//JA
             }
         } catch (err) {
             console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"","Internal Server Error",4)//log
             res.status(500).send('Internal Server Error');
         }
     }
@@ -77,6 +83,7 @@ class LoginController {//JA
                     const currentDate = new Date();
                     const tokenExpirationDate = new Date(user[0].fecha_expiracion_token);
                     if (currentDate <= tokenExpirationDate) {
+                        logEventsWrite(req.originalUrl,req.method,"","User has an active token",4)//log
                         res.status(406).send('User has an active token');
                         return;
                     }
@@ -105,17 +112,21 @@ class LoginController {//JA
                 transporter.sendMail(mailOptions, (err, info) => {
                     if (err) {
                         console.error(err);
+                        logEventsWrite(req.originalUrl,req.method,"","The email has not been sent",4)//log
                         res.status(500).send('The email has not been sent');
                     } else {
                         console.log('Information: Email sent');
+                        logEventsWrite(req.originalUrl,req.method,"","The email has been sent",4)//log
                         res.status(200).send('The email has been sent');
                     }
                 });
             } else {
+                logEventsWrite(req.originalUrl,req.method,"","User not found",4)//log
                 res.status(501).send('User not found');
             }
         } catch (err) {
             console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"","Internal Server Error",4)//log
             res.status(500).send('Internal Server Error');
         }
     }
@@ -125,6 +136,7 @@ class LoginController {//JA
             const { newPassword, token } = req.body;
             const userByToken = await userModel.getUserByToken(token);
             if (userByToken === null) {
+                logEventsWrite(req.originalUrl,req.method,"","Invalid token",4)//log
                 res.status(401).send('Invalid token');
             } else {
                 const currentDate = new Date();
@@ -139,16 +151,20 @@ class LoginController {//JA
 
                     const userAdded = await userModel.changeUserPassword(userByToken.id, newPasswordHashed, formattedDate);
                     if (userAdded) {
+                        logEventsWrite(req.originalUrl,req.method,"","User password changed",4)//log
                         res.status(200).send('User password changed');
                     } else {
+                        logEventsWrite(req.originalUrl,req.method,"","Failed user password change",4)//log
                         res.status(500).send('Failed user password change');
                     }
                 } else {
+                    logEventsWrite(req.originalUrl,req.method,"","User does not have an active token",4)//log
                     res.status(406).send('User does not have an active token');
                 }
             }
         } catch (err) {
             console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"","Internal Server Error",4)//log
             res.status(500).send('Internal Server Error');
         }
     }

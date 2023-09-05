@@ -4,3 +4,20 @@
 [fecha]: 2023-09-04 3:36:56 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
 [fecha]: 2023-09-04 3:36:59 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
 [fecha]: 2023-09-04 3:37:09 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 9:17:58 am	inicio de backend
+[fecha]	2023-09-05 9:17:59 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 9:19:08 am	[url]:	/user/artists/songs/:14	[metodo]: GET	[usuario]: creador contenido	[msg]: Artist account with that id doesnt exist
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 9:20:46 am	inicio de backend
+[fecha]	2023-09-05 9:20:46 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 9:20:51 am	[url]:	/user/artists/songs/:14	[metodo]: GET	[usuario]: usuario	[msg]: Artist account with that id doesnt exist
+[fecha]: 2023-09-05 9:22:02 am	[url]:	/artist/songs/14	[metodo]: GET	[usuario]: creador contenido	[msg]: Artist account with that id doesnt exist
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 10:21:50 am	inicio de backend
+[fecha]	2023-09-05 10:21:50 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 10:25:36 am	[url]:	/artist/songs/46	[metodo]: GET	[usuario]: creador contenido	[msg]: Artist account with that id doesnt exist
+[fecha]: 2023-09-05 10:25:36 am	[url]:	/artist/albums/46	[metodo]: GET	[usuario]: creador contenido	[msg]: Artist account with that id doesnt exist
+[fecha]: 2023-09-05 10:26:17 am	[url]:	/artist/songs/46	[metodo]: GET	[usuario]: creador contenido	[msg]: Artist account with that id doesnt exist
+[fecha]: 2023-09-05 10:26:17 am	[url]:	/artist/albums/46	[metodo]: GET	[usuario]: creador contenido	[msg]: Artist account with that id doesnt exist
+[fecha]: 2023-09-05 10:30:23 am	[url]:	/login	[metodo]: POST	[msg]: inicio de sesion realizado con exito!
