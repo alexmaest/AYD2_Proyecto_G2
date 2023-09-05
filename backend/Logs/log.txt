@@ -242,3 +242,7 @@
 [fecha]	2023-09-05 11:51:19 am	inicio de backend
 [fecha]	2023-09-05 11:51:20 am	[msg]: Information: Database connection succeeded
 [fecha]: 2023-09-05 11:52:59 am	[url]:	/login	[metodo]: POST	[usuario]: Billy Idol	[msg]: inicio de sesion realizado con exito!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 3:38:24 pm	inicio de backend
+[fecha]	2023-09-05 3:38:34 pm	[msg]: Failed to connect to the database
+[fecha]: 2023-09-05 3:40:05 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: usuario	[msg]: error servidor interno TuT
