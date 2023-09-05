@@ -1,42 +1,90 @@
-import ArtistSongs from '@/components/ArtistSongs'
 import { options } from '../api/auth/[...nextauth]/options'
 import { getServerSession } from 'next-auth/next'
 import { Suspense } from 'react'
 import Link from 'next/link'
-import ArtistAlbums from '@/components/ArtistAlbums'
+import fetchSongs from '@/lib/fetchSongs'
+import fetchAlbums from '@/lib/fetchAlbums'
+import Catalog from '@/components/Catalog'
+import ArtistAlbum from '@/components/ArtistAlbum'
+import { Album, Song } from '@/types/interfaces'
+import ArtistSong from '@/components/ArtistSong'
 
 export default async function ArtistPage () {
   const session = await getServerSession(options)
+  const songs = await fetchSongs(session?.user.id ?? 0) ?? []
+  const albums = await fetchAlbums(session?.user.id ?? 0) ?? []
+
+  if (songs.length > 3) {
+    songs.splice(3)
+  }
+
+  if (albums.length > 5) {
+    albums.splice(3)
+  }
 
   return (
     <>
       <main className='flex flex-col items-start gap-16 p-16'>
         <Suspense fallback={<div>Loading...</div>}>
-          <ArtistSongs
-            artistID={session?.user.id ?? 0}
-            artistName={session?.user.username ?? 'Unknown'}
-          >
-            <h3 className='font-bold text-3xl text-white'>Tracks</h3>
-            <Link
-              href='/artist/tracks'
-              className='text-white text-xl font-bold hover:underline cursor-pointer'
-            >
-              See All
-            </Link>
-          </ArtistSongs>
+          <Catalog>
+            <Catalog.Header title='Songs'>
+              <Link
+                href='/artist/tracks'
+                className='text-white text-xl font-bold hover:underline cursor-pointer'
+              >
+                See All
+              </Link>
+            </Catalog.Header>
+            <div className='w-full'>
+              {songs.length === 0 && (
+                <Catalog.EmptyContent
+                  text='You have no songs yet'
+                  to='/artist/upload'
+                  linkText='Upload a Song'
+                />
+              )}
+              {songs.length !== 0 &&
+                <Catalog.Content layout='vertical'>
+                  {songs.map((song: Song) => (
+                    <ArtistSong
+                      key={song.id}
+                      song={song}
+                      artist={session?.user?.username ?? 'Unknown'}
+                    />
+                  ))}
+                </Catalog.Content>}
+            </div>
+          </Catalog>
         </Suspense>
         <Suspense fallback={<div>Loading...</div>}>
-          <ArtistAlbums
-            artistID={session?.user.id ?? 0}
-          >
-            <h3 className='font-bold text-3xl text-white'>Albums</h3>
-            <Link
-              href='/artist/albums'
-              className='text-white text-xl font-bold hover:underline cursor-pointer'
-            >
-              See All
-            </Link>
-          </ArtistAlbums>
+          <Catalog>
+            <Catalog.Header title='Albums'>
+              <Link
+                href='/artist/albums'
+                className='text-white text-xl font-bold hover:underline cursor-pointer'
+              >
+                See All
+              </Link>
+            </Catalog.Header>
+            <div className='w-full'>
+              {albums.length === 0 && (
+                <Catalog.EmptyContent
+                  text='You have no albums yet'
+                  to='/artist/create-album'
+                  linkText='Add Album'
+                />
+              )}
+              {albums.length !== 0 &&
+                <Catalog.Content layout='horizontal'>
+                  {albums.map((album: Album) => (
+                    <ArtistAlbum
+                      key={album.id}
+                      album={album}
+                    />
+                  ))}
+                </Catalog.Content>}
+            </div>
+          </Catalog>
         </Suspense>
         <section className='w-full flex flex-col items-start gap-8'>
           <div className=' w-full flex justify-between items-center'>

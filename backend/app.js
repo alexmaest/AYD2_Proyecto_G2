@@ -8,7 +8,9 @@ const mainRoute = require('./routers/mainRoute');
 const loginRoute = require('./routers/loginRoute');
 const adminRoute = require('./routers/adminRoute');
 const artistRoute = require('./routers/artistRoute')
-const userRoute = require('./routers/usersRoute')
+const userRoute = require('./routers/userRoute')
+//logs
+const {logEventsWrite} = require('./Helpers/logEvents');
 
 class Server {
     constructor() {
@@ -33,6 +35,9 @@ class Server {
     start() {
         this.app.listen(this.port, () => {
             console.log(`Information: Server running on http://localhost:${this.port}`);
+            
+            //escribo en el log.txt el msg inicial
+            logEventsWrite("","","","inicio de aplicacion",1)
         });
     }
 }

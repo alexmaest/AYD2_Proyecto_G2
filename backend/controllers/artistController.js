@@ -70,7 +70,7 @@ class artistController { //FG
                 if (userByUsername) {// si el username ya exite F
                     res.status(502).send('Account with that username already exist');
 
-                //como username y email son nuevos y validos o son los mismos procedo a actualizar la info
+                    //como username y email son nuevos y validos o son los mismos procedo a actualizar la info
                 } else {
 
                     //console.log(":::::::::::::::::::::::::")
@@ -106,7 +106,7 @@ class artistController { //FG
 
                         } else {// guardo imagen en db
                             //PASO 2: ahora guardar en db + la info cambiada
-                            const bannerCreator = await artistModel.updateArtistInfo(banner, req.body,passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                            const bannerCreator = await artistModel.updateArtistInfo(banner, req.body, passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                             if (bannerCreator === null) {
                                 //console.log("F en actualizar info")
                                 res.status(401).send('Error')
@@ -116,11 +116,11 @@ class artistController { //FG
                         }
 
 
-                    //ME PIDEN UPDATE SIN CAMBIO EN IMAGEN -------------------------------------
+                        //ME PIDEN UPDATE SIN CAMBIO EN IMAGEN -------------------------------------
 
-                    }else{//guardo sin imagen
+                    } else {//guardo sin imagen
                         //console.log("---GUARDO SIN IMAGEN---")
-                        const bannerCreator = await artistModel.updateArtistInfo2(req.body,passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                        const bannerCreator = await artistModel.updateArtistInfo2(req.body, passwordNew)//guardar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                         if (bannerCreator === null) {
                             //console.log("F en actualizar info")
                             res.status(401).send('Error')
@@ -151,7 +151,7 @@ class artistController { //FG
     }
 
     //JA
-    async getInfo(req, res){// para el update de perfil en el apartado de artistas(asi ve la info que agrego en el form)
+    async getInfo(req, res) {// para el update de perfil en el apartado de artistas(asi ve la info que agrego en el form)
         try {
             const user = await artistModel.getArtistById(req.body.userId)
             if (user === null) {
@@ -164,6 +164,21 @@ class artistController { //FG
             res.status(500).send('Internal Server Error');
         }
 
+    }
+
+    async getAll(req, res) {
+        try {
+            const artist = await artistModel.getAllArtists();
+            if (artist) {
+                res.status(200).json(artist);
+            } else {
+                res.status(204).json('The artist could not be obtained');
+            }
+
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
     }
 }
 
