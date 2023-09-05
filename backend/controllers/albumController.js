@@ -11,7 +11,6 @@ class albumController {
 
     async createAlbum(req, res) {
         try {
-            console.log(req.body);
             const coverUrl = await userController.uploadImage(req.body.image)
             if (coverUrl) {
                 const { userId, name, releaseDate, type, songs } = req.body;
