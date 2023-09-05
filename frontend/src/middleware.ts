@@ -13,7 +13,7 @@ export default withAuth(
         new URL('/unauthorized', req.url)
       )
     }
-    if (req.nextUrl.pathname.startsWith('/user') && req.nextauth.token?.role !== 8) {
+    if (req.nextUrl.pathname.startsWith('/user') && req.nextauth.token?.role !== 3) {
       return NextResponse.rewrite(
         new URL('/unauthorized', req.url)
       )

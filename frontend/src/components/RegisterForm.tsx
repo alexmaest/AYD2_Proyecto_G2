@@ -18,7 +18,7 @@ const months = [
 
 const genders = ['Male', 'Female', 'Non-binary', 'Other', 'Prefer not to say']
 
-function RegisterForm () {
+function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
@@ -26,7 +26,6 @@ function RegisterForm () {
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
   const [gender, setGender] = useState('')
-  const [isArtist, setIsArtist] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
   const [isAlertOpen, setIsAlertOpen] = useState(false)
@@ -115,7 +114,7 @@ function RegisterForm () {
         gender
       }
 
-      const regEndpoint = isArtist ? apiUrls.auth.register : apiUrls.auth.userRegister
+      const regEndpoint = artistRegister ? apiUrls.auth.register : apiUrls.auth.userRegister
       const response = await fetch(baseUrl + regEndpoint, {
         headers: {
           'Content-Type': 'application/json'
@@ -162,22 +161,6 @@ function RegisterForm () {
         <p>{alertMessage}</p>
       </Alert>
       <form action='post' className='flex flex-col items-center gap-6' onSubmit={handleSubmit}>
-        <div className='w-[450px] flex flex-row justify-between items-start text-retro-white'>
-          <label htmlFor='is_artist' className='font-bold text-[16px]'>
-            Are you an artist?
-          </label>
-          <div className='flex flex-wrap flex-row items-start gap-4'>
-            <input
-              type='checkbox'
-              id='no'
-              name='is_artist'
-              value={isArtist ? 'yes' : 'no'}
-              className='h-5 w-5 accent-retro-green'
-              onChange={() => setIsArtist(!isArtist)}
-            />
-            <label htmlFor='yes'>Yes</label>
-          </div>
-        </div>
         <Input
           value={email}
           onChange={(event) => setEmail(event.target.value)}
