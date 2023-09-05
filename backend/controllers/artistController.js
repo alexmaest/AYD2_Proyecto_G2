@@ -12,21 +12,21 @@ class artistController { //FG
             const banner = await userController.uploadImage(req.body.image)
             if (banner === null) {
                 res.status(401).send('Error')
-                logEventsWrite(req.originalUrl,req.method,"creador contenido","Error banner is null",3)//log
+                logEventsWrite(req.originalUrl,req.method,"content creator","Error banner is null",3)//log
             } else {
                 const bannerCreator = await artistModel.updateArtistBanner(banner, req.body.userId)
                 if (bannerCreator === null) {
                     res.status(401).send('Error')
-                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Error bannerCreator is null",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"content creator","Error bannerCreator is null",3)//log
                 } else {
                     res.status(200).send(true)
-                    logEventsWrite(req.originalUrl,req.method,"creador contenido","actualizacion de banner correctamente!",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"content creator","banner update correctly!",3)//log
                 }
             }
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
-            logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
+            logEventsWrite(req.originalUrl,req.method,"content creator","Internal Server Error",3)//log
         }
     }
 
@@ -35,15 +35,15 @@ class artistController { //FG
             const banner = await artistModel.getArtistBanner(req.params.userId)
             if (banner === null) {
                 res.status(401).send('Invalid user');
-                logEventsWrite(req.originalUrl,req.method,"creador contenido","Invalid user",3)//log
+                logEventsWrite(req.originalUrl,req.method,"content creator","Invalid user",3)//log
             } else {
                 res.status(200).send(banner)
-                logEventsWrite(req.originalUrl,req.method,"creador contenido","banner enviado correctamente",3)//log
+                logEventsWrite(req.originalUrl,req.method,"content creator","banner sent successfully",3)//log
             }
         } catch (err) {
             console.log(err)
             res.status(500).send('Internal Server Error');
-            logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
+            logEventsWrite(req.originalUrl,req.method,"content creator","Internal Server Error",3)//log
         }
     }
 
@@ -76,9 +76,9 @@ class artistController { //FG
                 res.status(501).send('Account with that email already exist');
                 if (req.originalUrl.includes("user")) {
                     // La URL contiene el extracto "usuario"
-                    logEventsWrite(req.originalUrl,req.method,"usuario","Account with that email already exist",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"user","Account with that email already exist",3)//log
                   }else{
-                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Account with that email already exist",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"content creator","Account with that email already exist",3)//log
                   }
 
             } else {
@@ -86,9 +86,9 @@ class artistController { //FG
                     res.status(502).send('Account with that username already exist');
                     if (req.originalUrl.includes("user")) {
                         // La URL contiene el extracto "usuario"
-                        logEventsWrite(req.originalUrl,req.method,"usuario","Account with that username already exist",3)//log
+                        logEventsWrite(req.originalUrl,req.method,"user","Account with that username already exist",3)//log
                       }else{
-                        logEventsWrite(req.originalUrl,req.method,"creador contenido","Account with that username already exist",3)//log
+                        logEventsWrite(req.originalUrl,req.method,"content creator","Account with that username already exist",3)//log
                       }
 
                     //como username y email son nuevos y validos o son los mismos procedo a actualizar la info
@@ -125,9 +125,9 @@ class artistController { //FG
                             res.status(401).send('Error')
                             if (req.originalUrl.includes("user")) {
                                 // La URL contiene el extracto "usuario"
-                                logEventsWrite(req.originalUrl,req.method,"usuario","Error banner is null",3)//log
+                                logEventsWrite(req.originalUrl,req.method,"user","Error banner is null",3)//log
                               }else{
-                                logEventsWrite(req.originalUrl,req.method,"creador contenido","Error banner is null",3)//log
+                                logEventsWrite(req.originalUrl,req.method,"content creator","Error banner is null",3)//log
                               }
                             //console.log("F en actualizar foto en bucket")
 
@@ -139,17 +139,17 @@ class artistController { //FG
                                 res.status(401).send('Error')
                                 if (req.originalUrl.includes("user")) {
                                     // La URL contiene el extracto "usuario"
-                                    logEventsWrite(req.originalUrl,req.method,"usuario","Error bannerCreator is null",3)//log
+                                    logEventsWrite(req.originalUrl,req.method,"user","Error bannerCreator is null",3)//log
                                   }else{
-                                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Error bannerCreator is null",3)//log
+                                    logEventsWrite(req.originalUrl,req.method,"content creator","Error bannerCreator is null",3)//log
                                   }
                             } else {
                                 res.status(200).send('Account updated!')
                                 if (req.originalUrl.includes("user")) {
                                     // La URL contiene el extracto "usuario"
-                                    logEventsWrite(req.originalUrl,req.method,"usuario","Account updated!",3)//log
+                                    logEventsWrite(req.originalUrl,req.method,"user","Account updated!",3)//log
                                   }else{
-                                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Account updated!",3)//log
+                                    logEventsWrite(req.originalUrl,req.method,"content creator","Account updated!",3)//log
                                   }
                             }
                         }
@@ -165,17 +165,17 @@ class artistController { //FG
                             res.status(401).send('Error')
                             if (req.originalUrl.includes("user")) {
                                 // La URL contiene el extracto "usuario"
-                                logEventsWrite(req.originalUrl,req.method,"usuario","Error bannerCreator is null",3)//log
+                                logEventsWrite(req.originalUrl,req.method,"user","Error bannerCreator is null",3)//log
                               }else{
-                                logEventsWrite(req.originalUrl,req.method,"creador contenido","Error bannerCreator is null",3)//log
+                                logEventsWrite(req.originalUrl,req.method,"content creator","Error bannerCreator is null",3)//log
                               }
                         } else {
                             res.status(200).send('Account updated!')
                             if (req.originalUrl.includes("user")) {
                                 // La URL contiene el extracto "usuario"
-                                logEventsWrite(req.originalUrl,req.method,"usuario","Account updated!",3)//log
+                                logEventsWrite(req.originalUrl,req.method,"user","Account updated!",3)//log
                               }else{
-                                logEventsWrite(req.originalUrl,req.method,"creador contenido","Account updated!",3)//log
+                                logEventsWrite(req.originalUrl,req.method,"content creator","Account updated!",3)//log
                               }
                         }
                     }
@@ -200,9 +200,9 @@ class artistController { //FG
             res.status(500).send('Internal Server Error');
             if (req.originalUrl.includes("user")) {
                 // La URL contiene el extracto "usuario"
-                logEventsWrite(req.originalUrl,req.method,"usuario","Internal Server Error",3)//log
+                logEventsWrite(req.originalUrl,req.method,"user","Internal Server Error",3)//log
               }else{
-                logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
+                logEventsWrite(req.originalUrl,req.method,"content creator","Internal Server Error",3)//log
               }
         }
     }
@@ -215,17 +215,17 @@ class artistController { //FG
                 res.status(401).send('Invalid user');
                 if (req.originalUrl.includes("user")) {
                     // La URL contiene el extracto "usuario"
-                    logEventsWrite(req.originalUrl,req.method,"usuario","Invalid user",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"user","Invalid user",3)//log
                   }else{
-                    logEventsWrite(req.originalUrl,req.method,"creador contenido","Invalid user",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"content creator","Invalid user",3)//log
                   }
             } else {
                 res.status(200).send(user)
                 if (req.originalUrl.includes("user")) {
                     // La URL contiene el extracto "usuario"
-                    logEventsWrite(req.originalUrl,req.method,"usuario","informacion de usuario enviado correctamente!",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"user","User information sent successfully!",3)//log
                   }else{
-                    logEventsWrite(req.originalUrl,req.method,"creador contenido","informacion de creador de contenido enviado correctamente!",3)//log
+                    logEventsWrite(req.originalUrl,req.method,"content creator","content creator information sent successfully!",3)//log
                   }
             }
         } catch (err) {
@@ -233,9 +233,9 @@ class artistController { //FG
             res.status(500).send('Internal Server Error');
             if (req.originalUrl.includes("user")) {
                 // La URL contiene el extracto "usuario"
-                logEventsWrite(req.originalUrl,req.method,"usuario","Internal Server Error",3)//log
+                logEventsWrite(req.originalUrl,req.method,"user","Internal Server Error",3)//log
               }else{
-                logEventsWrite(req.originalUrl,req.method,"creador contenido","Internal Server Error",3)//log
+                logEventsWrite(req.originalUrl,req.method,"content creator","Internal Server Error",3)//log
               }
         }
 
@@ -246,16 +246,16 @@ class artistController { //FG
             const artist = await artistModel.getAllArtists();
             if (artist) {
                 res.status(200).json(artist);
-                logEventsWrite(req.originalUrl,req.method,"usuario","artistas enviados correctamente!",3)//log
+                logEventsWrite(req.originalUrl,req.method,"user","artists submitted successfully!",3)//log
             } else {
                 res.status(204).json('The artist could not be obtained');
-                logEventsWrite(req.originalUrl,req.method,"usuario","The artist could not be obtained",3)//log
+                logEventsWrite(req.originalUrl,req.method,"user","The artist could not be obtained",3)//log
             }
 
         } catch (err) {
             console.error(err);
             res.status(500).send('Internal Server Error');
-            logEventsWrite(req.originalUrl,req.method,"usuario","Internal Server Error",3)//log
+            logEventsWrite(req.originalUrl,req.method,"user","Internal Server Error",3)//log
         }
     }
 }
