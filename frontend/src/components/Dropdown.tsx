@@ -4,14 +4,14 @@ import { useToggle } from '@/hooks/useToggle'
 import { createContext, useContext, useEffect, useRef } from 'react'
 import { TbChevronDown } from 'react-icons/tb'
 
-const DropdownContext = createContext({ expand: false, toggleExpand: () => {} })
+const DropdownContext = createContext({ expand: false, toggleExpand: () => {}, size: 'sm' })
 const { Provider } = DropdownContext
 
-export default function Dropdown ({ children }: { children: React.ReactNode }) {
+export default function Dropdown ({ size, children }: { size: string, children: React.ReactNode }) {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const { status: expand, toggleStatus: toggleExpand, setFalse: closeDropdown } = useToggle()
 
-  const value = { expand, toggleExpand }
+  const value = { expand, size, toggleExpand }
 
   useEffect(() => {
     if (!expand) return
@@ -38,13 +38,13 @@ export default function Dropdown ({ children }: { children: React.ReactNode }) {
 }
 
 function Trigger ({ children }: { children: React.ReactNode }) {
-  const { expand, toggleExpand } = useContext(DropdownContext)
+  const { expand, size, toggleExpand } = useContext(DropdownContext)
+  const width = size === 'sm' ? 'w-24' : 'w-48'
   return (
     <button
       type='button'
-      className={`${expand ? 'bg-retro-black' : 'bg-[#1D1D1D] '} text-retro-white flex items-center justify-center hover:brightness-110 gap-4 rounded w-24 py-1 transition-all duration-300 ease-in-out font-bold text-[16px] focus:ring-2 focus:ring-retro-white-200`}
+      className={`${expand ? 'bg-retro-black' : 'bg-[#1D1D1D] '} ${width} text-retro-white flex items-center justify-center hover:brightness-110 gap-2 py-1 rounded-full transition-all duration-300 ease-in-out font-bold text-[16px] focus:ring-2 focus:ring-retro-white-200`}
       onClick={toggleExpand}
-
     >
       {children}
       {expand
@@ -57,11 +57,12 @@ function Trigger ({ children }: { children: React.ReactNode }) {
 }
 
 function Menu ({ children }: { children: React.ReactNode }) {
-  const { expand } = useContext(DropdownContext)
+  const { expand, size } = useContext(DropdownContext)
+  const transform = size === 'sm' ? '-translate-x-1/2' : ''
   return (
     expand &&
       <ul
-        className='dropdown__list absolute -translate-x-1/2 mt-2 list-none overflow-hidden rounded w-48'
+        className={`dropdown__list absolute ${transform} mt-2 list-none overflow-hidden rounded w-48`}
       >
         {children}
       </ul>

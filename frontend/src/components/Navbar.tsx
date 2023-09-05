@@ -4,6 +4,7 @@ import Button from '@/components/Button'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signIn } from 'next-auth/react'
+import Dropdown from './Dropdown'
 
 function Navbar () {
   const pathname = usePathname()
@@ -23,15 +24,38 @@ function HomeNavbar () {
         <Brand className='h-[48px] w-[182.4px]' color='#F3EFE0' />
       </Link>
       <div className='flex items-center gap-8'>
+        <Dropdown size='md'>
+          <Dropdown.Trigger>
+            <span className='py-2'>
+
+              Register
+            </span>
+          </Dropdown.Trigger>
+          <Dropdown.Menu>
+            <Dropdown.Item>
+              <Link
+                href='/register'
+                className='flex items-center justify-center px-[48px] py-[12px]'
+              >
+                <span className='text-retro-black text-center font-bold text-[16px]'>Artist</span>
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link
+                href='/register/user'
+                className='flex items-center justify-center px-[48px] py-[12px]'
+              >
+                <span className='text-retro-black text-center font-bold text-[16px]'>User</span>
+              </Link>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         <Button
-          type='black'
+          type='white'
           onClick={async () => await signIn()}
         >
-          <span className='text-retro-white text-center font-bold text-[16px]'>Login</span>
+          <span className='text-retro-black text-center font-bold text-[16px]'>Login</span>
         </Button>
-        <Link href='/register' passHref className='group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out bg-retro-white hover:brightness-90 hover:scale-105'>
-          <span className='text-retro-black text-center font-bold text-[16px]'>Register</span>
-        </Link>
       </div>
     </header>
   )

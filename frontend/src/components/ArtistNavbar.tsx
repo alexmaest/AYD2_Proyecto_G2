@@ -38,7 +38,7 @@ function ArtistNavbar () {
               <span className='text-retro-white text-center font-bold text-[16px]'>Create Album</span>
             </Link>
           </li>
-          <Dropdown>
+          <Dropdown size='sm'>
             <Dropdown.Trigger>
               <img src={photo} alt='profile' className='w-10 h-10 rounded-full' />
             </Dropdown.Trigger>
