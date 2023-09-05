@@ -7,7 +7,7 @@ export default async function fetchForYouAlbums (id: number) {
 
     const forYouAlbums: ForYouAlbum[] = await response.json()
 
-    return forYouAlbums
+    return forYouAlbums.sort(() => Math.random() - 0.5)
   } catch (err) {
     if (err instanceof Error) console.log(err.stack)
   }

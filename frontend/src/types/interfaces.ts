@@ -15,6 +15,10 @@ export interface Song {
   genre: string
 }
 
+export interface SongWithCover extends Song {
+  cover: string
+}
+
 export interface Album {
   id: number
   name: string
@@ -30,4 +34,15 @@ export interface ForYouAlbum {
   artist: string
   cover: string
   type: string
+}
+
+export interface Artist {
+  id: number
+  nombre: string
+  tipoUsuario: number
+  email: string
+  linkPhoto: string
+  genero: string
+  dateBirth: string
+  estado: number
 }
