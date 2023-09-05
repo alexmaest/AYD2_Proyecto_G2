@@ -56,10 +56,10 @@ class LoginController {//JA
 
                     //console.log(banned)
                     if(banned){
-                        logEventsWrite(req.originalUrl,req.method,"","User banned",4)//log
+                        logEventsWrite(req.originalUrl,req.method,User.username,"User banned",3)//log
                         res.status(401).send('User banned');
                     }else{
-                        logEventsWrite(req.originalUrl,req.method,"","inicio de sesion realizado con exito!",4)//log
+                        logEventsWrite(req.originalUrl,req.method,User.username,"inicio de sesion realizado con exito!",3)//log
                         res.status(200).json(User);
                     }
                 
@@ -83,7 +83,7 @@ class LoginController {//JA
                     const currentDate = new Date();
                     const tokenExpirationDate = new Date(user[0].fecha_expiracion_token);
                     if (currentDate <= tokenExpirationDate) {
-                        logEventsWrite(req.originalUrl,req.method,"","User has an active token",4)//log
+                        logEventsWrite(req.originalUrl,req.method,user[0].nombre,"User has an active token",3)//log
                         res.status(406).send('User has an active token');
                         return;
                     }
@@ -112,16 +112,16 @@ class LoginController {//JA
                 transporter.sendMail(mailOptions, (err, info) => {
                     if (err) {
                         console.error(err);
-                        logEventsWrite(req.originalUrl,req.method,"","The email has not been sent",4)//log
+                        logEventsWrite(req.originalUrl,req.method,user[0].nombre,"The email has not been sent",3)//log
                         res.status(500).send('The email has not been sent');
                     } else {
                         console.log('Information: Email sent');
-                        logEventsWrite(req.originalUrl,req.method,"","The email has been sent",4)//log
+                        logEventsWrite(req.originalUrl,req.method,user[0].nombre,"The email has been sent",3)//log
                         res.status(200).send('The email has been sent');
                     }
                 });
             } else {
-                logEventsWrite(req.originalUrl,req.method,"","User not found",4)//log
+                logEventsWrite(req.originalUrl,req.method,user[0].nombre,"User not found",3)//log
                 res.status(501).send('User not found');
             }
         } catch (err) {
