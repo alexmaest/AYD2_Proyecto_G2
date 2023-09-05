@@ -27,7 +27,7 @@ class songController {
                     logEventsWrite(req.originalUrl,req.method,"creador contenido","No detected file in request",3)//log
                     return res.status(400).send('No detected file in request');
                 }
-                const songUrl = await userController.uploadSong(req.file.buffer)
+                const songUrl = await userController.uploadSong(req.file.buffer, req.file.originalname)
                 if (songUrl) {
                     const { userId, name, duration, genre } = req.body;
                     const artistId = await artistModel.getArtistIdByUserId(userId);
