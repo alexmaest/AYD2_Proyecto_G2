@@ -1,11 +1,11 @@
 import { apiUrls, baseUrl } from '@/constants/urls'
-import { Song } from '@/types/interfaces'
+import { SongWithCover } from '@/types/interfaces'
 
 export default async function fetchSongsForAlbumId (albumId: number) {
   try {
     const response = await fetch(baseUrl + apiUrls.user.songsForAlbumId + `/${albumId}`)
 
-    const songsForAlbumId: Song[] = await response.json()
+    const songsForAlbumId: SongWithCover[] = await response.json()
 
     return songsForAlbumId
   } catch (err) {

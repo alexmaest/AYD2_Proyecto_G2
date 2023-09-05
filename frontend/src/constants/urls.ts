@@ -28,6 +28,9 @@ export const apiUrls = {
   user: {
     songs: '/user/songs',
     albums: '/user/albums',
-    songsForAlbumId: '/user/albums/songs'
+    songsForAlbumId: '/user/albums/songs',
+    artists: '/user/artists',
+    artistSongs: '/user/artists/songs',
+    artistAlbums: '/user/artists/albums'
   }
 }

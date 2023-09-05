@@ -4,3 +4,217 @@
 [fecha]: 2023-09-04 3:36:56 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
 [fecha]: 2023-09-04 3:36:59 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
 [fecha]: 2023-09-04 3:37:09 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 9:18:07 am	inicio de backend
+[fecha]	2023-09-05 9:18:08 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 9:41:15 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 9:42:04 am	inicio de backend
+[fecha]	2023-09-05 9:42:04 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 9:42:09 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:42:24 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:42:25 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:42:25 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:42:39 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:44:07 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:46:24 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:48:22 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:48:22 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:48:23 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:48:33 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:48:37 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:48:44 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:48:52 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:49:17 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:49:25 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:49:28 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:49:31 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:49:35 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:52:07 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:52:07 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:53:46 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:53:46 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:56:58 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:58:17 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:58:17 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:58:18 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:58:46 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:58:46 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:58:46 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:59:22 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:59:29 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:59:30 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:59:30 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:59:54 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 9:59:56 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:00:12 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:00:12 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:00:12 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:00:54 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:00:54 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:00:54 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:01:06 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:01:16 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:01:16 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:01:16 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:01:26 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:01:35 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:01:45 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:02:45 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:01 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:01 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:02 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:08 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:19 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:25 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:33 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:43 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:03:59 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:04:20 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:04:27 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:19 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:20 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:20 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:34 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:34 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:34 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:53 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:53 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:05:53 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:06:25 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:07:04 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:07:08 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:07:11 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:15:45 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:15:45 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:15:45 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:15:49 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:15:56 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:16:10 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 10:16:31 am	inicio de backend
+[fecha]	2023-09-05 10:16:32 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 10:16:52 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:16:59 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 10:40:05 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:40:09 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:40:20 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:41:10 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 10:41:32 am	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 10:41:41 am	inicio de backend
+[fecha]	2023-09-05 10:41:51 am	[msg]: Failed to connect to the database
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 12:08:28 pm	inicio de backend
+[fecha]	2023-09-05 12:08:38 pm	[msg]: Failed to connect to the database
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 12:08:48 pm	inicio de backend
+[fecha]	2023-09-05 12:08:58 pm	[msg]: Failed to connect to the database
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 12:40:07 pm	inicio de backend
+[fecha]	2023-09-05 12:40:07 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 12:48:20 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 12:48:37 pm	inicio de backend
+[fecha]	2023-09-05 12:48:38 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 12:48:40 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:50:40 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:50:43 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:50:46 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:51:11 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:51:11 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:51:11 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:51:26 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:51:36 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:52:46 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:53:54 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 12:54:08 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:18:33 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:18:33 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:18:33 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:18:59 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:19:18 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:19:50 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:20:09 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:20:11 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:20:31 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:21:55 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:22:18 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:22:24 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:22:42 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:23:00 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:25:38 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:25:43 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:25:56 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+[fecha]: 2023-09-05 1:25:57 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 1:27:05 pm	inicio de backend
+[fecha]	2023-09-05 1:27:05 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 1:27:08 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:27:12 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:27:23 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:27:31 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:27:38 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:27:39 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:28:05 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:30:55 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 1:36:44 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 1:37:13 pm	inicio de backend
+[fecha]	2023-09-05 1:37:13 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 1:37:15 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 1:56:24 pm	inicio de backend
+[fecha]	2023-09-05 1:56:24 pm	[msg]: Information: Database connection succeeded
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 2:20:15 pm	inicio de backend
+[fecha]	2023-09-05 2:20:15 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 2:27:42 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 2:27:49 pm	inicio de backend
+[fecha]	2023-09-05 2:27:49 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 2:27:56 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:28:47 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:29:52 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:29:52 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:29:53 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:30:22 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:30:22 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:30:23 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:30:36 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:30:44 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:30:50 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:31:03 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:33:22 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:33:22 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:33:23 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:33:23 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:34:00 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:36:34 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:36:38 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:36:40 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:37:04 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:37:04 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:37:04 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:37:34 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:37:38 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:38:03 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:38:22 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:38:22 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:38:27 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:38:35 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:38:39 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:39:06 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:39:32 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:39:53 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:39:57 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:40:10 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:40:26 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:42:03 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:42:06 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-05 2:58:24 pm	inicio de backend
+[fecha]	2023-09-05 2:58:24 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-05 2:58:45 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:58:49 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!
+[fecha]: 2023-09-05 2:58:55 pm	[url]:	/user/albums/0	[metodo]: GET	[usuario]: 	[msg]: album enviado correctamente!

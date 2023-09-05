@@ -1,13 +1,13 @@
 import { apiUrls, baseUrl } from '@/constants/urls'
-import { Song } from '@/types/interfaces'
+import { SongWithCover } from '@/types/interfaces'
 
 export default async function fetchForYouSongs (id: number) {
   try {
     const response = await fetch(baseUrl + apiUrls.user.songs + `/${id}`)
 
-    const forYouSongs: Song[] = await response.json()
+    const forYouSongs: SongWithCover[] = await response.json()
 
-    return forYouSongs
+    return forYouSongs.sort(() => Math.random() - 0.5)
   } catch (err) {
     if (err instanceof Error) console.log(err.stack)
   }

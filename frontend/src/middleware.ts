@@ -13,11 +13,11 @@ export default withAuth(
         new URL('/unauthorized', req.url)
       )
     }
-    if (req.nextUrl.pathname.startsWith('/user') && req.nextauth.token?.role !== 8) {
+    /*     if (req.nextUrl.pathname.startsWith('/user') && req.nextauth.token?.role !== 8) {
       return NextResponse.rewrite(
         new URL('/unauthorized', req.url)
       )
-    }
+    } */
   },
   {
     callbacks: {
@@ -28,7 +28,6 @@ export default withAuth(
 export const config = {
   matcher: [
     '/admin/:path*',
-    '/artist/:path*',
-    '/user/:path*'
+    '/artist/:path*'
   ]
 }
