@@ -17,7 +17,7 @@ export default withAuth(
       return NextResponse.rewrite(
         new URL('/unauthorized', req.url)
       )
-    } */
+    }
   },
   {
     callbacks: {
