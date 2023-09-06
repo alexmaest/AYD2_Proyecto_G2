@@ -246,3 +246,58 @@
 [fecha]	2023-09-05 3:38:24 pm	inicio de backend
 [fecha]	2023-09-05 3:38:34 pm	[msg]: Failed to connect to the database
 [fecha]: 2023-09-05 3:40:05 pm	[url]:	/user/albums/14	[metodo]: GET	[usuario]: usuario	[msg]: error servidor interno TuT
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-06 5:24:41 pm	inicio de backend
+[fecha]	2023-09-06 5:24:51 pm	[msg]: Failed to connect to the database
+
+
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-06 5:33:52 pm	inicio de backend
+[fecha]	2023-09-06 5:33:53 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-06 5:35:19 pm	[url]:	/user/albums/8	[metodo]: GET	[usuario]: user	[msg]: album sent successfully!
+[fecha]: 2023-09-06 5:35:19 pm	[url]:	/user/songs/8	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+[fecha]: 2023-09-06 5:35:19 pm	[url]:	/user/artists	[metodo]: GET	[usuario]: user	[msg]: artists submitted successfully!
+[fecha]: 2023-09-06 5:36:07 pm	[url]:	/login	[metodo]: POST	[usuario]: Billy Idol	[msg]: login successful!
+[fecha]: 2023-09-06 5:36:08 pm	[url]:	/user/albums/8	[metodo]: GET	[usuario]: user	[msg]: album sent successfully!
+[fecha]: 2023-09-06 5:36:08 pm	[url]:	/user/songs/8	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+[fecha]: 2023-09-06 5:36:08 pm	[url]:	/user/artists	[metodo]: GET	[usuario]: user	[msg]: artists submitted successfully!
+[fecha]: 2023-09-06 5:37:29 pm	[url]:	/artistRegister	[metodo]: POST	[usuario]: new artist user	[msg]: Account with that username already exist
+[fecha]: 2023-09-06 5:39:37 pm	[url]:	/artistRegister	[metodo]: POST	[usuario]: new artist user	[msg]: Account created
+[fecha]: 2023-09-06 5:40:06 pm	[url]:	/login	[metodo]: POST	[usuario]: Billy Idol Vevo	[msg]: login successful!
+[fecha]: 2023-09-06 5:40:11 pm	[url]:	/artist/songs/10	[metodo]: GET	[usuario]: content creator	[msg]: The songs could not be obtained
+[fecha]: 2023-09-06 5:40:12 pm	[url]:	/artist/albums/10	[metodo]: GET	[usuario]: content creator	[msg]: The albums could not be obtained
+[fecha]: 2023-09-06 5:40:27 pm	[url]:	/artist/availableSongs/10	[metodo]: GET	[usuario]: content creator	[msg]: The songs could not be deleted
+[fecha]: 2023-09-06 5:41:07 pm	[url]:	/artist/banner	[metodo]: POST	[usuario]: content creator	[msg]: banner update correctly!
+[fecha]: 2023-09-06 5:41:15 pm	[url]:	/artist/banner/10	[metodo]: GET	[usuario]: content creator	[msg]: banner sent successfully
+[fecha]: 2023-09-06 5:41:23 pm	[url]:	/artist/Profile	[metodo]: POST	[usuario]: content creator	[msg]: content creator information sent successfully!
+[fecha]: 2023-09-06 5:41:23 pm	[url]:	/artist/Profile	[metodo]: POST	[usuario]: content creator	[msg]: content creator information sent successfully!
+[fecha]: 2023-09-06 5:41:47 pm	[url]:	/artist/ProfileConfig	[metodo]: POST	[usuario]: content creator	[msg]: Account updated!
+[fecha]: 2023-09-06 5:42:35 pm	[url]:	/artist/uploadSong	[metodo]: POST	[usuario]: content creator	[msg]: The song has been saved
+[fecha]: 2023-09-06 5:43:03 pm	[url]:	/artist/uploadSong	[metodo]: POST	[usuario]: content creator	[msg]: The song has been saved
+[fecha]: 2023-09-06 5:43:35 pm	[url]:	/artist/uploadSong	[metodo]: POST	[usuario]: content creator	[msg]: The song has been saved
+[fecha]: 2023-09-06 5:43:37 pm	[url]:	/artist/availableSongs/10	[metodo]: GET	[usuario]: content creator	[msg]: songs available from artists submitted successfully!
+[fecha]: 2023-09-06 5:44:03 pm	[url]:	/artist/createAlbum	[metodo]: POST	[usuario]: content creator	[msg]: The album has been saved
+[fecha]: 2023-09-06 5:44:09 pm	[url]:	/artist/songs/10	[metodo]: GET	[usuario]: content creator	[msg]: artist songs submitted successfully!
+[fecha]: 2023-09-06 5:44:10 pm	[url]:	/artist/albums/10	[metodo]: GET	[usuario]: content creator	[msg]: artist albums sent successfully!
+[fecha]: 2023-09-06 5:44:10 pm	[url]:	/artist/songs/10	[metodo]: GET	[usuario]: content creator	[msg]: artist songs submitted successfully!
+[fecha]: 2023-09-06 5:44:10 pm	[url]:	/artist/albums/10	[metodo]: GET	[usuario]: content creator	[msg]: artist albums sent successfully!
+[fecha]: 2023-09-06 5:44:37 pm	[url]:	/login	[metodo]: POST	[usuario]: Billy Idol	[msg]: login successful!
+[fecha]: 2023-09-06 5:44:39 pm	[url]:	/user/albums/8	[metodo]: GET	[usuario]: user	[msg]: album sent successfully!
+[fecha]: 2023-09-06 5:44:39 pm	[url]:	/user/songs/8	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+[fecha]: 2023-09-06 5:44:39 pm	[url]:	/user/artists	[metodo]: GET	[usuario]: user	[msg]: artists submitted successfully!
+[fecha]: 2023-09-06 5:44:48 pm	[url]:	/user/albums/8	[metodo]: GET	[usuario]: user	[msg]: album sent successfully!
+[fecha]: 2023-09-06 5:44:48 pm	[url]:	/user/albums/songs/13	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+[fecha]: 2023-09-06 5:45:09 pm	[url]:	/user/albums/8	[metodo]: GET	[usuario]: user	[msg]: album sent successfully!
+[fecha]: 2023-09-06 5:45:09 pm	[url]:	/user/songs/8	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+[fecha]: 2023-09-06 5:45:10 pm	[url]:	/user/artists	[metodo]: GET	[usuario]: user	[msg]: artists submitted successfully!
+[fecha]: 2023-09-06 5:45:10 pm	[url]:	/artist/banner/10	[metodo]: GET	[usuario]: content creator	[msg]: banner sent successfully
+[fecha]: 2023-09-06 5:45:10 pm	[url]:	/artist/banner/10	[metodo]: GET	[usuario]: content creator	[msg]: banner sent successfully
+[fecha]: 2023-09-06 5:45:10 pm	[url]:	/user/artists	[metodo]: GET	[usuario]: user	[msg]: artists submitted successfully!
+[fecha]: 2023-09-06 5:45:10 pm	[url]:	/user/artists	[metodo]: GET	[usuario]: user	[msg]: artists submitted successfully!
+[fecha]: 2023-09-06 5:45:10 pm	[url]:	/user/artists/songs/10	[metodo]: GET	[usuario]: user	[msg]: artist songs submitted successfully!
+[fecha]: 2023-09-06 5:45:10 pm	[url]:	/user/artists/songs/10	[metodo]: GET	[usuario]: user	[msg]: artist songs submitted successfully!
+[fecha]: 2023-09-06 5:45:11 pm	[url]:	/user/artists/albums/10	[metodo]: GET	[usuario]: user	[msg]: artist albums sent successfully!
+[fecha]: 2023-09-06 5:45:11 pm	[url]:	/user/artists/albums/10	[metodo]: GET	[usuario]: user	[msg]: artist albums sent successfully!
+[fecha]: 2023-09-06 5:45:21 pm	[url]:	/artist/banner/2	[metodo]: GET	[usuario]: content creator	[msg]: banner sent successfully
+[fecha]: 2023-09-06 5:45:21 pm	[url]:	/user/artists/songs/2	[metodo]: GET	[usuario]: user	[msg]: artist songs submitted successfully!
+[fecha]: 2023-09-06 5:45:21 pm	[url]:	/user/artists/albums/2	[metodo]: GET	[usuario]: user	[msg]: artist albums sent successfully!
