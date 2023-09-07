@@ -31,6 +31,8 @@ export const apiUrls = {
     songsForAlbumId: '/user/albums/songs',
     artists: '/user/artists',
     artistSongs: '/user/artists/songs',
-    artistAlbums: '/user/artists/albums'
+    artistAlbums: '/user/artists/albums',
+    profile: '/user/Profile',
+    profileConfig: '/user/ProfileConfig'
   }
 }

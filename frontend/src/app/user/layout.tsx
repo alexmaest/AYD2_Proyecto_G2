@@ -23,10 +23,18 @@ export default function ArtistLayout ({
           <ul className='flex items-center gap-4'>
             <li>
               <Link
-                href='/artist/profile'
+                href='/user/profile'
                 className='group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out bg-[#1D1D1D] hover:brightness-90 hover:scale-105'
               >
                 <span className='text-retro-white text-center font-bold text-[16px]'>Profile</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href='/user/profile/edit'
+                className='group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out bg-[#1D1D1D] hover:brightness-90 hover:scale-105'
+              >
+                <span className='text-retro-white text-center font-bold text-[16px]'>Edit Profile</span>
               </Link>
             </li>
             <li>

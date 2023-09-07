@@ -7,6 +7,17 @@ export interface User {
   token: string
 }
 
+export interface UserProfile {
+  email: string
+  nombre: string
+  dateBirth: string
+  year: number
+  month: number
+  day: number
+  gender: number
+  photo: string
+}
+
 export interface Song {
   id: number
   name: string

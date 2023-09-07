@@ -17,7 +17,7 @@ export default withAuth(
       return NextResponse.rewrite(
         new URL('/unauthorized', req.url)
       )
-    } */
+    }
   },
   {
     callbacks: {
@@ -28,6 +28,7 @@ export default withAuth(
 export const config = {
   matcher: [
     '/admin/:path*',
-    '/artist/:path*'
+    '/artist/:path*',
+    '/user/:path*'
   ]
 }
