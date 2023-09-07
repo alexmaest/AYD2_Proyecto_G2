@@ -59,7 +59,7 @@ class LoginController {//JA
                         logEventsWrite(req.originalUrl,req.method,User.username,"User banned",3)//log
                         res.status(401).send('User banned');
                     }else{
-                        logEventsWrite(req.originalUrl,req.method,User.username,"inicio de sesion realizado con exito!",3)//log
+                        logEventsWrite(req.originalUrl,req.method,User.username,"login successful!",3)//log
                         res.status(200).json(User);
                     }
                 
