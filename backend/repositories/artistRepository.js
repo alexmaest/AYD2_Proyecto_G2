@@ -17,22 +17,6 @@ class artistRepository {
         artist.birthday,
         artist.gender
       ];
-
-      db.connection.query(userQuery, userValues, (userErr, userResult) => {
-        if (userErr) {
-          reject(userErr);
-        } else {
-          const userId = userResult.insertId;
-          const creatorQuery = `INSERT INTO creador_contenido (usuario_id) VALUES (?);`;
-          db.connection.query(creatorQuery, [userId], (creatorErr, creatorResult) => {
-            if (creatorErr) {
-              reject(creatorErr);
-            } else {
-              resolve(userId);
-            }
-          });
-        }
-      });
     });
   }
 

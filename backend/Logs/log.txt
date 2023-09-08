@@ -301,3 +301,6 @@
 [fecha]: 2023-09-06 5:45:21 pm	[url]:	/artist/banner/2	[metodo]: GET	[usuario]: content creator	[msg]: banner sent successfully
 [fecha]: 2023-09-06 5:45:21 pm	[url]:	/user/artists/songs/2	[metodo]: GET	[usuario]: user	[msg]: artist songs submitted successfully!
 [fecha]: 2023-09-06 5:45:21 pm	[url]:	/user/artists/albums/2	[metodo]: GET	[usuario]: user	[msg]: artist albums sent successfully!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-08 12:59:33 am	inicio de backend
+[fecha]	2023-09-08 12:59:34 am	[msg]: Information: Database connection succeeded
