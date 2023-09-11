@@ -1,6 +1,16 @@
+'use client'
 import { SongWithCover } from '@/types/interfaces'
+import useMusicStore from '@/store/store'
 
 export default function SongsTable ({ songs, cover, artist }: { songs?: SongWithCover[], cover?: string, artist?: string }) {
+  const { play } = useMusicStore()
+
+  const handlePlaySong = (songId: Number) => {
+    const song = songs?.find(song => song.id === songId)
+    if (song !== undefined) {
+      play(song)
+    }
+  }
   return (
     <table className='w-full text-sm text-left text-gray-400'>
       <thead className='text-xs text-gray-400'>
@@ -19,7 +29,10 @@ export default function SongsTable ({ songs, cover, artist }: { songs?: SongWith
       <tbody>
         {
               songs?.map((song, index) => (
-                <tr key={song?.id} className='hover:bg-retro-black-600 transition duration-500'>
+                <tr
+                  key={song?.id} className='hover:bg-retro-black-600 transition duration-500'
+                  onClick={() => handlePlaySong(song?.id)}
+                >
                   <th scope='row' className='px-6 py-4 font-medium whitespace-nowrap text-retro-white'>
                     {index + 1}
                   </th>

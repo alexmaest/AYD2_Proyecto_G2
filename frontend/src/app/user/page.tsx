@@ -5,6 +5,7 @@ import { options } from '../api/auth/[...nextauth]/options'
 import Album from '@/components/Album'
 import fetchArtist from '@/lib/fetchArtists'
 import Artist from '@/components/Artist'
+import SongsTable from '@/components/SongsTable'
 
 export default async function Page () {
   const session = await getServerSession(options)
@@ -26,45 +27,7 @@ export default async function Page () {
         <h1 className='font-extrabold text-2xl text-retro-white mt-5'>Songs you might like</h1>
         <div className='flex flex-row justify-center mt-5'>
           <div className='relative overflow-x-auto w-3/4'>
-            <table className='w-full text-sm text-left text-gray-400'>
-              <thead className='text-xs text-gray-400'>
-                <tr>
-                  <th scope='col' className='px-6 py-3'>
-                    #
-                  </th>
-                  <th scope='col' className='px-6 py-3'>
-                    Título
-                  </th>
-                  <th scope='col' className='px-6 py-3 text-right'>
-                    Duración
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                songs?.slice(0, 10)?.map((song, index) => (
-                  <tr key={song?.id} className='hover:bg-retro-black-600 transition duration-500'>
-                    <th scope='row' className='px-6 py-4 font-medium whitespace-nowrap text-retro-white'>
-                      {index + 1}
-                    </th>
-                    <td className='px-6 py-4'>
-                      <div className='flex items-center'>
-                        <div className='flex-shrink-0 w-10 h-10'>
-                          <img className='w-10 h-10 rounded-lg' src={song?.cover} alt='' />
-                        </div>
-                        <div className='ml-4'>
-                          <div className='text-sm font-medium text-retro-white'>{song?.name}</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className='px-6 py-4 text-right'>
-                      {song?.duration}
-                    </td>
-                  </tr>
-                ))
-              }
-              </tbody>
-            </table>
+            <SongsTable songs={songs?.slice(0, 10)} />
           </div>
         </div>
         <h1 className='font-extrabold text-2xl text-retro-white'>Artist for you</h1>

@@ -57,3 +57,13 @@ export interface Artist {
   dateBirth: string
   estado: number
 }
+
+export interface MusicState {
+  songs: Song[] | null
+  album: Album | null
+  artist: Artist | null
+  currentSong: SongWithCover | null
+  isPlaying: boolean
+  play: (song: SongWithCover) => void
+  setSongs: (songs: SongWithCover[]) => void
+}

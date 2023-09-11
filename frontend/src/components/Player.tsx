@@ -1,3 +1,5 @@
+'use client'
+import useMusicStore from '@/store/store'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   TbArrowsShuffle,
@@ -36,6 +38,8 @@ export default function Player () {
   const [currentTime, setCurrentTime] = useState(0)
   const [volume, setVolume] = useState(100)
   const [muteVolume, setMuteVolume] = useState(0)
+
+  const { currentSong } = useMusicStore()
 
   const handleRepeat = () => {
     const currentIndex = repeatStates.indexOf(repeatState)
@@ -126,7 +130,7 @@ export default function Player () {
     <footer className='flex h-[72px] w-full flex-row justify-between bg-[#1D1D1D] sticky bottom-0 z-50'>
       <audio
         ref={audioRef}
-        src='https://bucketretromusic.s3.us-east-2.amazonaws.com/file+Cold+Heart+-+PNAU+Remix.mp362556'
+        src={currentSong?.songUrl ?? ''}
         preload='metadata'
         loop
       >
@@ -134,16 +138,16 @@ export default function Player () {
       </audio>
       <div className='flex w-1/3 flex-row gap-4 p-2'>
         <img
-          src='rumours.jpg'
+          src={currentSong?.cover ?? ''}
           alt='Album Cover'
           className='h-14 w-14 cursor-pointer rounded'
         />
         <div className='flex h-full flex-col items-start justify-center'>
           <h3 className='cursor-pointer text-base text-retro-white hover:underline'>
-            Song Name
+            {currentSong?.name ?? 'Song Name'}
           </h3>
           <p className='cursor-pointer text-xs text-retro-white-300 hover:underline hover:brightness-110'>
-            Artist
+            Artist Name
           </p>
         </div>
       </div>
