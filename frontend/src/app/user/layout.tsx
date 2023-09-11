@@ -3,6 +3,7 @@ import Brand from '@/components/Brand'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
 import Button from '@/components/Button'
+import Player from '@/components/Player'
 
 export default function ArtistLayout ({
   children
@@ -49,6 +50,7 @@ export default function ArtistLayout ({
         </nav>
       </header>
       {children}
+      <Player />
     </>
   )
 }
