@@ -6,7 +6,7 @@ class userRepository {
     return new Promise((resolve, reject) => {
       const userQuery = `
         INSERT INTO usuario (nombre, pwd, tipo_usuario, email, link_foto, fecha_nacimiento, genero)
-        VALUES (?, ?, 2, ?, ?, ?, ?);
+        VALUES (?, ?, 3, ?, ?, ?, ?);
       `;
 
       const userValues = [

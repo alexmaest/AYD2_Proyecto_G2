@@ -17,7 +17,7 @@ class userController {//FG
         try {
             const res1 = await fetch(image)
             const blob = await res1.arrayBuffer()
-            const random = Math.floor(Math.random() * 10000)
+            const random = Math.floor(Math.random() * 100000)
             const filename = "file" + random
             const uploadParams = {
                 Bucket: process.env.AWS_BUCKET_NAME,
@@ -35,10 +35,11 @@ class userController {//FG
         }
     }
 
-    async uploadSong(song) {
+    async uploadSong(song, name) {
+        console.log(name);
         try {
-            const random = Math.floor(Math.random() * 10000);
-            const filename = "file" + random;
+            const random = Math.floor(Math.random() * 100000);
+            const filename = "file" + name + random;
         
             const uploadParams = {
               Bucket: process.env.AWS_BUCKET_NAME,

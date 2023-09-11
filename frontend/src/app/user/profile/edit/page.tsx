@@ -2,14 +2,15 @@
 import { useEffect, useMemo, useState } from 'react'
 import { TbEye, TbEyeOff } from 'react-icons/tb'
 import { baseUrl, apiUrls } from '@/constants/urls'
+import { useSession } from 'next-auth/react'
 import Button from '@/components/Button'
 import FormInput from '@/components/FormInput'
 import RadioButton from '@/components/RadioButton'
 import Input from '@/components/Input'
 import Select from '@/components/Select'
 import InputError from '@/components/InputError'
-import { signIn } from 'next-auth/react'
-import Alert from './Alert'
+import Alert from '@/components/Alert'
+import UploadImage from '@/components/UploadImage'
 
 const months = [
   'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September',
@@ -18,20 +19,43 @@ const months = [
 
 const genders = ['Male', 'Female', 'Non-binary', 'Other', 'Prefer not to say']
 
-function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
+function UpdateForm () {
+  const { data: session } = useSession()
+  const [file, setFile] = useState<File | null>(null)
+  const [base64Image, setBase64Image] = useState<string | null>(null)
   const [email, setEmail] = useState('')
+  const [entryEmail, setEntryEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
+  const [entryUsername, setEntryUsername] = useState('')
   const [day, setDay] = useState('')
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
   const [gender, setGender] = useState('')
+  const [entryGender, setEntryGender] = useState<number>(0)
   const [showPassword, setShowPassword] = useState(false)
   const [alertMessage, setAlertMessage] = useState('')
   const [isAlertOpen, setIsAlertOpen] = useState(false)
   const [alertType, setAlertType] = useState<'danger' | 'success'>('danger')
   const [errorMonth, setErrorMonth] = useState('')
   const [errorGender, setErrorGender] = useState('')
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file != null) {
+      const reader = new FileReader()
+
+      reader.onload = (e) => {
+        if (e.target?.result != null) {
+          const base64Data = e.target.result as string
+          setFile(file)
+          setBase64Image(base64Data)
+        }
+      }
+
+      reader.readAsDataURL(file)
+    }
+  }
 
   const validationStateEmail = useMemo(() => {
     const validateEmail = (email: string) => email.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i)
@@ -91,31 +115,25 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
       allValid = false
     }
 
-    if (month === '') {
-      setErrorMonth('Please select a month!')
-      allValid = false
-    }
-
-    if (gender === '') {
-      setErrorGender('Please select a gender!')
-      allValid = false
-    }
-
     if (!allValid) return
 
     try {
       const formattedMonth = `${months.indexOf(month) + 1}`.padStart(2, '0')
       const birthday = `${year}-${formattedMonth}-${day}`
       const formData = {
+        userId: session?.user?.id,
+        flagPassword: password !== '',
+        flagEmail: email !== entryEmail,
+        flagUsername: username !== entryUsername,
         email,
         password,
         username,
         birthday,
-        gender
+        gender: genders.indexOf(gender) + 1,
+        image: base64Image
       }
 
-      const regEndpoint = artistRegister ? apiUrls.auth.register : apiUrls.auth.userRegister
-      const response = await fetch(baseUrl + regEndpoint, {
+      const response = await fetch(baseUrl + apiUrls.user.profileConfig, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -139,7 +157,7 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
         throw new Error(message)
       }
       setAlertType('success')
-      setAlertMessage('You have successfully registered!')
+      setAlertMessage('You have successfully updated your profile!')
       setIsAlertOpen(true)
     } catch (error: any) {
       setAlertType('danger')
@@ -155,36 +173,73 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
   useEffect(() => {
     setErrorGender('')
   }, [gender])
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      try {
+        const response = await fetch(baseUrl + apiUrls.user.profile, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'POST',
+          body: JSON.stringify({ userId: session?.user?.id })
+        })
+
+        if (response.status !== 200) {
+          throw new Error('Something went wrong!')
+        }
+
+        const data = await response.json()
+
+        setEmail(data.email)
+        setEntryEmail(data.email)
+        setUsername(data.nombre)
+        setEntryUsername(data.nombre)
+        setEntryGender(data.gender)
+        setGender(genders[entryGender - 1])
+        setYear(String(data.year))
+        const formmatedDay = `${data.day as string}`.padStart(2, '0')
+        setDay(formmatedDay)
+        setMonth(months[data.month - 1])
+      } catch (error: any) {
+        setAlertType('danger')
+        setAlertMessage(error.message)
+        setIsAlertOpen(true)
+      }
+    }
+    if (session?.user != null) void getUserInfo()
+  }, [session, entryGender])
+
+  if (session?.user == null) return <h1 className='text-white font-bold'>Loading...</h1>
+
   return (
     <>
       <Alert type={alertType} className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
         <p>{alertMessage}</p>
       </Alert>
-      <form action='post' className='flex flex-col items-center gap-6' onSubmit={handleSubmit}>
+      <form action='post' className='flex flex-col items-center gap-6 mt-5' onSubmit={handleSubmit}>
         <Input
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           id='email'
           type='email'
-          label='What&apos;s your email?'
+          label='Update your email'
           placeholder='Enter your email.'
           autoComplete='email'
           isValid={validationStateEmail !== 'invalid'}
           errorMessage='Please enter a valid email address.'
-          isRequired
         />
         <Input
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           id='password'
           type='password'
-          label='Create a password'
+          label='Update your password'
           placeholder='Create a password.'
           isPassword={showPassword}
           autoComplete='off'
           isValid={validationStatePassword !== 'invalid'}
           errorMessage='Your password must be at least 8 characters long.'
-          isRequired
         >
           <button type='button' onClick={() => setShowPassword(!showPassword)}>
             {showPassword
@@ -199,17 +254,16 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
           onChange={(event) => setUsername(event.target.value)}
           id='username'
           type='text'
-          label='What should we call you?'
+          label='Update your name'
           placeholder='Enter a profile name.'
           autoComplete='off'
           isValid={validationStateUsername !== 'invalid'}
           note='This appears on your profile.'
           errorMessage='Please enter a valid username.'
-          isRequired
         />
         <FormInput width='w-[450px]'>
           <label htmlFor='date' className='font-bold text-[16px]'>
-            What&apos;s your date of birth?
+            Update your date of birth
           </label>
           <div className='w-full flex justify-between'>
             <Input
@@ -222,7 +276,6 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
               width='w-1/5'
               autoComplete='off'
               isValid={validationStateDay !== 'invalid'}
-              isRequired
             />
             <Select
               values={months}
@@ -231,6 +284,7 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
               label='Month'
               width='w-[45%]'
               isRequired
+              entryMonth={month}
               isValid={errorMonth === ''}
             />
             <Input
@@ -243,7 +297,6 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
               width='w-1/4'
               autoComplete='off'
               isValid={validationStateYear !== 'invalid'}
-              isRequired
             />
           </div>
           {validationStateDay === 'invalid' && (<InputError message='Please enter a valid day.' />)}
@@ -252,39 +305,45 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
         </FormInput>
         <FormInput width='w-[450px]'>
           <label htmlFor='gender' className='font-bold text-[16px]'>
-            What&apos;s your gender?
+            Do you want to update your gender?
           </label>
           <div className='flex flex-wrap flex-row items-start gap-4'>
-            {genders.map((gender, index) => (
-              <RadioButton
-                key={index}
-                label={gender}
-                value={gender}
-                entryGender=''
-                onChange={(event) => setGender(event.target.value)}
-              />
-            ))}
+            {genders.map((gender_, index) => {
+              return (
+                <RadioButton
+                  label={gender_}
+                  value={gender_}
+                  onChange={(event) => setGender(event.target.value)}
+                  key={index}
+                  entryGender={genders[entryGender]}
+                />
+              )
+            })}
           </div>
           {errorGender !== '' && (<InputError message={errorGender} />)}
         </FormInput>
+        <UploadImage
+          title='Click to upload your profile photo'
+          className='flex flex-col w-1/3 flex-1'
+          handleFileChange={handleFileChange}
+        >
+          <h2 className='text-white font-bold'>Profile photo</h2>
+          {
+                file == null
+                  ? (
+                    <p className='text-white text-sm'>No file updated</p>
+                    )
+                  : (
+                    <p className='text-white text-sm'>{file.name}</p>
+                    )
+            }
+        </UploadImage>
         <Button type='primary'>
-          <span className='text-retro-white text-center font-bold text-[16px]'>Sign Up</span>
+          <span className='text-retro-white text-center font-bold text-[16px]'>Update your profile</span>
         </Button>
-        <div className='flex flex-col w-full items-center gap-6'>
-          <div>
-            <span className='text-retro-white text-[16px]'>Already have an account?&nbsp;</span>
-            <button
-              className='text-retro-orange underline text-[16px] font-bold hover:scale-105'
-              onClick={async () => await signIn()}
-              type='button'
-            >
-              Log in
-            </button>
-          </div>
-        </div>
       </form>
     </>
   )
 }
 
-export default RegisterForm
+export default UpdateForm

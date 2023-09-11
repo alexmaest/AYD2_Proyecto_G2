@@ -7,12 +7,27 @@ export interface User {
   token: string
 }
 
+export interface UserProfile {
+  email: string
+  nombre: string
+  dateBirth: string
+  year: number
+  month: number
+  day: number
+  gender: number
+  photo: string
+}
+
 export interface Song {
   id: number
   name: string
   songUrl: string
   duration: string
   genre: string
+}
+
+export interface SongWithCover extends Song {
+  cover: string
 }
 
 export interface Album {
@@ -30,4 +45,15 @@ export interface ForYouAlbum {
   artist: string
   cover: string
   type: string
+}
+
+export interface Artist {
+  id: number
+  nombre: string
+  tipoUsuario: number
+  email: string
+  linkPhoto: string
+  genero: string
+  dateBirth: string
+  estado: number
 }
