@@ -121,7 +121,12 @@ class songRepository {
 
   findAllAlbumSongs(albumId) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM cancion WHERE id_album = ?';
+      const query = `SELECT c.id_cancion, c.nombre,c.link_cancion,c.duracion,c.genero,a.link_foto,u.nombre as owner
+      FROM cancion as c 
+      join album as a on c.id_album = a.id_album
+      join creador_contenido as cc on a.id_creador = cc.id_creador
+      join usuario as u on u.id = cc.usuario_id 
+      WHERE c.id_album = ?;  `
       db.connection.query(query, [albumId], (err, results) => {
         if (err) {
           reject(err);
@@ -132,7 +137,9 @@ class songRepository {
               name: result.nombre,
               songUrl: result.link_cancion,
               duration: result.duracion,
-              genre: result.genero
+              genre: result.genero,
+              cover:result.link_foto,
+              artist: result.owner
             }));
 
             //console.log("yyyyyyyyyyyyyyyyyyyyyyyyy")
