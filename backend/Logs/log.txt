@@ -305,3 +305,7 @@
 [fecha]	2023-09-11 1:54:51 pm	inicio de backend
 [fecha]	2023-09-11 1:54:51 pm	[msg]: Information: Database connection succeeded
 [fecha]: 2023-09-11 1:55:23 pm	[url]:	/user/albums/songs/13	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-11 2:13:54 pm	inicio de backend
+[fecha]	2023-09-11 2:13:55 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-11 2:14:20 pm	[url]:	/user/songs/13	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!

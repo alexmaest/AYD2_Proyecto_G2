@@ -158,9 +158,11 @@ class songRepository {
   findAllArtistSongs2() {
     //console.log("3")
     return new Promise((resolve, reject) => {
-      const query = `SELECT c.id_cancion ,c.nombre ,c.link_cancion ,c.duracion ,c.genero ,a.link_foto  
+      const query = `SELECT c.id_cancion ,c.nombre ,c.link_cancion ,c.duracion ,c.genero ,a.link_foto,u.nombre as owner 
       FROM cancion as c 
-      join album as a on a.id_album = c.id_album ;    `;
+      join album as a on a.id_album = c.id_album
+      join creador_contenido as cc on a.id_creador = cc.id_creador
+      join usuario as u on u.id = cc.usuario_id;     `;
       db.connection.query(query, [], (err, results) => {
         if (err) {
           reject(err);
@@ -172,7 +174,8 @@ class songRepository {
               songUrl: result.link_cancion,
               duration: result.duracion,
               genre: result.genero,
-              cover: result.link_foto
+              cover: result.link_foto,
+              artist: result.owner
             }));
 
             //console.log("..............")
