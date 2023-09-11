@@ -24,6 +24,7 @@ export interface Song {
   songUrl: string
   duration: string
   genre: string
+  artist: string
 }
 
 export interface SongWithCover extends Song {
@@ -56,4 +57,14 @@ export interface Artist {
   genero: string
   dateBirth: string
   estado: number
+}
+
+export interface MusicState {
+  songs: Song[] | null
+  album: Album | null
+  artist: Artist | null
+  currentSong: SongWithCover | null
+  isPlaying: boolean
+  play: (song: SongWithCover) => void
+  setSongs: (songs: SongWithCover[]) => void
 }

@@ -1,3 +1,5 @@
+'use client'
+import useMusicStore from '@/store/store'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   TbArrowsShuffle,
@@ -37,18 +39,24 @@ export default function Player () {
   const [volume, setVolume] = useState(100)
   const [muteVolume, setMuteVolume] = useState(0)
 
+  const { currentSong } = useMusicStore()
+
   const handleRepeat = () => {
     const currentIndex = repeatStates.indexOf(repeatState)
     const nextIndex = (currentIndex + 1) % repeatStates.length
     setRepeatState(repeatStates[nextIndex])
   }
 
-  const handlePlay = () => {
+  const handlePlay = async () => {
     if (audioRef.current != null) {
       if (isPlaying) audioRef.current.pause()
-      else audioRef.current.play()
+      else await audioRef.current.play()
     }
     setIsPlaying((prev) => !prev)
+  }
+
+  const handleSkipForward = () => {
+    console.log('skip forward')
   }
 
   const handleProgress = () => {
@@ -74,20 +82,26 @@ export default function Player () {
   const handleMute = () => {
     if (mute) {
       setVolume(muteVolume)
-      audioRef.current!.volume = muteVolume / 100
-      audioRef.current!.muted = false
+      if (audioRef.current != null) {
+        audioRef.current.volume = muteVolume / 100
+        audioRef.current.muted = false
+      }
     } else {
       setMuteVolume(volume)
       setVolume(0)
-      audioRef.current!.muted = true
+      if (audioRef.current != null) {
+        audioRef.current.muted = true
+      }
     }
     setMute((prev) => !prev)
   }
 
   const repeat = useCallback(() => {
-    const timeProgress = Math.floor(audioRef.current?.currentTime || 0)
+    const timeProgress = Math.floor(audioRef.current?.currentTime ?? 0)
     setCurrentTime(timeProgress)
-    progressRef.current!.value = timeProgress.toString()
+    if (progressRef.current != null) {
+      progressRef.current.value = timeProgress.toString()
+    }
 
     playAnimationRef.current = requestAnimationFrame(repeat)
   }, [audioRef, progressRef, setCurrentTime])
@@ -122,11 +136,22 @@ export default function Player () {
     return () => cancelAnimationFrame(playAnimationRef.current)
   }, [repeat])
 
+  useEffect(() => {
+    if ((audioRef.current != null) && (currentSong != null)) {
+      audioRef.current.src = currentSong.songUrl
+      audioRef.current.load()
+      void audioRef.current.play()
+      setIsPlaying(true)
+    }
+  }, [currentSong])
+
+  if (currentSong == null) return null
+
   return (
     <footer className='flex h-[72px] w-full flex-row justify-between bg-[#1D1D1D] sticky bottom-0 z-50'>
       <audio
         ref={audioRef}
-        src='https://bucketretromusic.s3.us-east-2.amazonaws.com/file+Cold+Heart+-+PNAU+Remix.mp362556'
+        src={currentSong?.songUrl ?? null}
         preload='metadata'
         loop
       >
@@ -134,16 +159,16 @@ export default function Player () {
       </audio>
       <div className='flex w-1/3 flex-row gap-4 p-2'>
         <img
-          src='rumours.jpg'
+          src={currentSong?.cover ?? ''}
           alt='Album Cover'
           className='h-14 w-14 cursor-pointer rounded'
         />
         <div className='flex h-full flex-col items-start justify-center'>
           <h3 className='cursor-pointer text-base text-retro-white hover:underline'>
-            Song Name
+            {currentSong?.name ?? 'Song Name'}
           </h3>
           <p className='cursor-pointer text-xs text-retro-white-300 hover:underline hover:brightness-110'>
-            Artist
+            {currentSong?.artist ?? 'Artist'}
           </p>
         </div>
       </div>
@@ -184,6 +209,7 @@ export default function Player () {
                 )}
           </button>
           <button
+            onClick={handleSkipForward}
             type='button'
             className='flex h-8 w-8 items-center justify-center'
           >
