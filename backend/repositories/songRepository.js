@@ -49,16 +49,19 @@ class songRepository {
   findAllArtistSongs(artistId) {
     return new Promise((resolve, reject) => {
       const query = `
-        SELECT 
-          cancion.id_cancion AS id,
-          cancion.nombre AS name,
-          cancion.link_cancion AS songUrl,
-          cancion.duracion AS duration,
-          cancion.genero AS genre,
-          album.link_foto AS albumCover
-        FROM cancion
-        JOIN album ON cancion.id_album = album.id_album
-        WHERE cancion.id_creador = ?
+      SELECT 
+        cancion.id_cancion AS id,
+        cancion.nombre AS name,
+        cancion.link_cancion AS songUrl,
+        cancion.duracion AS duration,
+        cancion.genero AS genre,
+        album.link_foto AS albumCover,
+        usuario.nombre AS artist
+      FROM cancion
+      JOIN album ON cancion.id_album = album.id_album
+      JOIN creador_contenido ON cancion.id_creador = creador_contenido.id_creador
+      JOIN usuario ON creador_contenido.usuario_id = usuario.id
+      WHERE cancion.id_creador = ?
       `;
       db.connection.query(query, [artistId], (err, results) => {
         if (err) {
@@ -71,7 +74,8 @@ class songRepository {
               songUrl: result.songUrl,
               duration: result.duration,
               genre: result.genre,
-              albumCover: result.albumCover
+              cover: result.albumCover,
+              artist: result.artist
             }));
             resolve(songs);
           } else {
