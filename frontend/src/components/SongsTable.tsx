@@ -30,7 +30,7 @@ export default function SongsTable ({ songs, cover, artist }: { songs?: SongWith
         {
               songs?.map((song, index) => (
                 <tr
-                  key={song?.id} className='hover:bg-retro-black-600 transition duration-500'
+                  key={song?.id} className='hover:bg-retro-black-600 transition duration-500 cursor-default'
                   onClick={() => handlePlaySong(song?.id)}
                 >
                   <th scope='row' className='px-6 py-4 font-medium whitespace-nowrap text-retro-white'>

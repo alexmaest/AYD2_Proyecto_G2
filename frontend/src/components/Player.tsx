@@ -47,12 +47,16 @@ export default function Player () {
     setRepeatState(repeatStates[nextIndex])
   }
 
-  const handlePlay = () => {
+  const handlePlay = async () => {
     if (audioRef.current != null) {
       if (isPlaying) audioRef.current.pause()
-      else audioRef.current.play()
+      else await audioRef.current.play()
     }
     setIsPlaying((prev) => !prev)
+  }
+
+  const handleSkipForward = () => {
+    console.log('skip forward')
   }
 
   const handleProgress = () => {
@@ -78,20 +82,26 @@ export default function Player () {
   const handleMute = () => {
     if (mute) {
       setVolume(muteVolume)
-      audioRef.current!.volume = muteVolume / 100
-      audioRef.current!.muted = false
+      if (audioRef.current != null) {
+        audioRef.current.volume = muteVolume / 100
+        audioRef.current.muted = false
+      }
     } else {
       setMuteVolume(volume)
       setVolume(0)
-      audioRef.current!.muted = true
+      if (audioRef.current != null) {
+        audioRef.current.muted = true
+      }
     }
     setMute((prev) => !prev)
   }
 
   const repeat = useCallback(() => {
-    const timeProgress = Math.floor(audioRef.current?.currentTime || 0)
+    const timeProgress = Math.floor(audioRef.current?.currentTime ?? 0)
     setCurrentTime(timeProgress)
-    progressRef.current!.value = timeProgress.toString()
+    if (progressRef.current != null) {
+      progressRef.current.value = timeProgress.toString()
+    }
 
     playAnimationRef.current = requestAnimationFrame(repeat)
   }, [audioRef, progressRef, setCurrentTime])
@@ -126,11 +136,22 @@ export default function Player () {
     return () => cancelAnimationFrame(playAnimationRef.current)
   }, [repeat])
 
+  useEffect(() => {
+    if ((audioRef.current != null) && (currentSong != null)) {
+      audioRef.current.src = currentSong.songUrl
+      audioRef.current.load()
+      void audioRef.current.play()
+      setIsPlaying(true)
+    }
+  }, [currentSong])
+
+  if (currentSong == null) return null
+
   return (
     <footer className='flex h-[72px] w-full flex-row justify-between bg-[#1D1D1D] sticky bottom-0 z-50'>
       <audio
         ref={audioRef}
-        src={currentSong?.songUrl ?? ''}
+        src={currentSong?.songUrl ?? null}
         preload='metadata'
         loop
       >
@@ -147,7 +168,7 @@ export default function Player () {
             {currentSong?.name ?? 'Song Name'}
           </h3>
           <p className='cursor-pointer text-xs text-retro-white-300 hover:underline hover:brightness-110'>
-            Artist Name
+            {currentSong?.artist ?? 'Artist'}
           </p>
         </div>
       </div>
@@ -188,6 +209,7 @@ export default function Player () {
                 )}
           </button>
           <button
+            onClick={handleSkipForward}
             type='button'
             className='flex h-8 w-8 items-center justify-center'
           >

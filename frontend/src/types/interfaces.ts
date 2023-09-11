@@ -24,6 +24,7 @@ export interface Song {
   songUrl: string
   duration: string
   genre: string
+  artist: string
 }
 
 export interface SongWithCover extends Song {
