@@ -99,6 +99,18 @@ class songModel {
       throw new Error('Error while fetching all artist songs');
     }
   }
+
+
+  //sprint 2 fase2
+  async updateMusic(songId) {//modulo admin, actualizacion del contador de la cancion escuchada
+    try {
+      const songCounter = await this.repository.updateSongCounter(songId);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
 }
 
 module.exports = new songModel();

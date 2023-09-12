@@ -213,6 +213,25 @@ class songController {
             res.status(500).send('Internal Server Error');
         }
     }
+
+    //sprint 2 - fase2
+    async musicCounter(req, res) {
+        try {
+            //console.log(req.body)
+            const songCounter = await songModel.updateMusic(req.body.id);//modulo admin visualice a todos los CC
+            if (songCounter === null) {
+                logEventsWrite(req.originalUrl, req.method, "Administrator", "Song counter can't updated!", 3)//log
+                res.status(401).send('Error')
+            } else {
+                logEventsWrite(req.originalUrl, req.method, "Administrator", "Song counter successfully updated!", 3)//log
+                res.status(204).json('The song are updated');
+            }
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl, req.method, "Administrator", "Internal Server Error", 3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
 }
 
 module.exports = new songController();

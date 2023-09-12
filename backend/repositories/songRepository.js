@@ -192,6 +192,29 @@ class songRepository {
       });
     });
   }
+
+
+
+  //sprint 2 - fase2
+  updateSongCounter(songId) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE cancion SET reproducciones = IF(reproducciones IS NULL, 1, reproducciones + 1) WHERE id_cancion = ?  ;';
+      db.connection.query(query, [songId], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
+        }
+      });
+    });
+  }
+
+
+
+
+
+
+
 }
 
 module.exports = songRepository;

@@ -309,3 +309,32 @@
 [fecha]	2023-09-11 2:13:54 pm	inicio de backend
 [fecha]	2023-09-11 2:13:55 pm	[msg]: Information: Database connection succeeded
 [fecha]: 2023-09-11 2:14:20 pm	[url]:	/user/songs/13	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 10:04:12 am	inicio de backend
+[fecha]	2023-09-12 10:04:12 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 10:05:30 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:07:07 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:07:53 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:07:54 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:07:56 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:07:57 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:08:12 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:08:21 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 10:08:34 am	inicio de backend
+[fecha]	2023-09-12 10:08:35 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 10:08:48 am	[url]:	/admin/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 10:15:30 am	inicio de backend
+[fecha]	2023-09-12 10:15:30 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 10:15:36 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:15:38 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 10:18:29 am	inicio de backend
+[fecha]	2023-09-12 10:18:30 am	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 10:19:12 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:19:13 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:19:19 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:19:20 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:19:25 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 10:19:26 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!

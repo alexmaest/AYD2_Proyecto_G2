@@ -22,5 +22,8 @@ router.post('/ProfileConfig', artistController.updateProfile);//JA
 
 //router.post('/createAlbum', albumController.createAlbum);
 
+//sprint 2
+router.post('/MusicCounter', songController.musicCounter);
+
 
 module.exports = router;
