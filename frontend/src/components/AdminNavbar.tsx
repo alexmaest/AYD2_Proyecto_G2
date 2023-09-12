@@ -9,7 +9,7 @@ export default function AdminNavbar () {
   return (
     <header>
       <nav className='flex flex-row px-16 py-2 bg-[#1D1D1D] items-center justify-between sticky top-0 z-50'>
-        <Link href='/artist'>
+        <Link href='/admin'>
           <Brand className='h-[48px] w-[182.4px]' color='#F3EFE0' />
         </Link>
         <ul className='flex items-center gap-4'>
