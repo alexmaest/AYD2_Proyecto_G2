@@ -1,5 +1,8 @@
 const e = require('express');
 const artist = require('../models/artistModel');
+const songModel = require('../models/songModel');
+const albumModel = require('../models/albumModel');
+
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 const {logEventsWrite} = require('../Helpers/logEvents');//logs
@@ -71,6 +74,20 @@ class adminController {
             //console.error(err);
             logEventsWrite(req.originalUrl,req.method,"Administrator","User not found",3)//log
             res.status(501).send('User not found');
+        }
+    }
+
+
+    //sprint 2 fase2
+    async topSongs(req, res) {
+        try {
+            const allTopSongs = await songModel.top5Songs();//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 songs sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
         }
     }
 

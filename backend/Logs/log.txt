@@ -338,3 +338,33 @@
 [fecha]: 2023-09-12 10:19:20 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
 [fecha]: 2023-09-12 10:19:25 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
 [fecha]: 2023-09-12 10:19:26 am	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: Administrator	[msg]: Song counter successfully updated!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 2:16:47 pm	inicio de backend
+[fecha]	2023-09-12 2:16:47 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 2:18:34 pm	[url]:	/admin/TopSongs	[metodo]: GET	[usuario]: Administrator	[msg]: Internal Server Error
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 2:19:16 pm	inicio de backend
+[fecha]	2023-09-12 2:19:17 pm	[msg]: Information: Database connection succeeded
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 2:20:17 pm	inicio de backend
+[fecha]	2023-09-12 2:20:17 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 2:20:23 pm	[url]:	/admin/TopSongs	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 songs sent successfully!
+[fecha]: 2023-09-12 2:20:55 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:20:57 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:21:03 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:21:11 pm	[url]:	/admin/TopSongs	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 songs sent successfully!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 2:25:27 pm	inicio de backend
+[fecha]	2023-09-12 2:25:27 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 2:25:33 pm	[url]:	/admin/TopSongs	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 songs sent successfully!
+[fecha]: 2023-09-12 2:26:56 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:26:58 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:27:04 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:27:05 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:27:13 pm	[url]:	/admin/TopSongs	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 songs sent successfully!
+[fecha]: 2023-09-12 2:27:46 pm	[url]:	/user/MusicCounter	[metodo]: POST	[usuario]: user	[msg]: Song counter successfully updated!
+[fecha]: 2023-09-12 2:27:53 pm	[url]:	/admin/TopSongs	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 songs sent successfully!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-12 2:30:52 pm	inicio de backend
+[fecha]	2023-09-12 2:30:52 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-12 2:30:56 pm	[url]:	/admin/TopSongs	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 songs sent successfully!
