@@ -23,7 +23,8 @@ export const apiUrls = {
   },
   admin: {
     artists: '/admin/artists',
-    artistsManagment: '/admin/artistsManagment'
+    artistsManagment: '/admin/artistsManagment',
+    topSongs: '/admin/TopSongs'
   },
   user: {
     songs: '/user/songs',
