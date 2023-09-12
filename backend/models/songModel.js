@@ -111,6 +111,19 @@ class songModel {
       throw new Error('Error while fetching songCounter update');
     }
   }
+
+
+  async top5Songs() {//modulo admin, top 5 de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.topSongs();
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+
 }
 
 module.exports = new songModel();
