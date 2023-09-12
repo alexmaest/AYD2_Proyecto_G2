@@ -91,6 +91,30 @@ class adminController {
         }
     }
 
+    async topAlbums(req, res) {
+        try {
+            const allTopSongs = await songModel.top5Albums();//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 albums sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async topArtists(req, res) {
+        try {
+            const allTopSongs = await songModel.top5Artists();//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 artists sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
 }
 
 module.exports = new adminController();

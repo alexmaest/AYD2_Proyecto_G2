@@ -243,6 +243,78 @@ class songRepository {
   }
 
 
+  //top 5 albums
+  topAlbums() {
+    return new Promise((resolve, reject) => {
+      const query = ` SELECT album.id_album, album.nombre, SUM(c.reproducciones) AS reproduccionesALBUM,u.nombre as artist FROM cancion as c
+      JOIN album ON c.id_album = album.id_album
+      join creador_contenido as cc on cc.id_creador = c.id_creador
+      join usuario as u on u.id  = cc.usuario_id
+      GROUP BY album.id_album
+      ORDER BY
+      reproduccionesALBUM DESC
+      LIMIT 5; `;
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          reject(null);
+        } else {
+           if (results.length > 0) {
+            const songs = results.map(result => ({
+              id: result.id_album,
+              name: result.nombre,
+              plays: result.reproduccionesALBUM,
+              artist: result.artist
+            }));
+
+            //console.log("..............")
+            //console.log(songs)
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+
+
+   //top 5 artists
+   topArtists() {
+    return new Promise((resolve, reject) => {
+      const query = ` SELECT creador_contenido.id_creador,u.nombre as nombre,u.id,SUM(cancion.reproducciones) AS reproducciones FROM cancion
+      INNER JOIN album ON cancion.id_album = album.id_album
+      INNER JOIN creador_contenido ON album.id_creador = creador_contenido.id_creador
+      INNER join usuario as u on u.id  = creador_contenido.usuario_id
+    GROUP BY
+      creador_contenido.id_creador
+    ORDER BY
+      reproducciones DESC
+    LIMIT
+      5;  `;
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          reject(null);
+        } else {
+           if (results.length > 0) {
+            const songs = results.map(result => ({
+              idCreator: result.id_creador,
+              idUsuario: result.id,
+              artist: result.nombre,
+              plays: result.reproducciones
+            }));
+
+            //console.log("..............")
+            //console.log(songs)
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
 
 
 

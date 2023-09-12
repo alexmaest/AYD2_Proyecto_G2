@@ -8,5 +8,10 @@ router.post('/artistsManagment', adminController.artistsStatus);
 
 //top 5 songs
 router.get('/TopSongs', adminController.topSongs);
+//top 5 songs
+router.get('/TopAlbums', adminController.topAlbums);
+//top 5 songs
+router.get('/TopArtists', adminController.topArtists);
+
 
 module.exports = router;
