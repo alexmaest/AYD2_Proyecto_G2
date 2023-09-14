@@ -65,6 +65,16 @@ class songModel {
     }
   }
 
+  async getAllRecomendations() {
+    try {
+      const songs = await this.repository.findAllRecomendations();
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all recomendations');
+    }
+  }
+
   async getAllArtistAvailableSongs(songId) {
     try {
       const songs = await this.repository.findAllArtistAvailableSongs(songId);

@@ -214,6 +214,21 @@ class songController {
         }
     }
 
+    async getRecomendations(req, res) {
+        try {
+                const songs = await songModel.getAllRecomendations();
+                if (songs) {
+                    res.status(200).json(songs);
+                } else {
+                    res.status(204).json('The recomendations could not be obtained');
+                }
+            
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
     //sprint 2 - fase2
     async musicCounter(req, res) {
         try {
