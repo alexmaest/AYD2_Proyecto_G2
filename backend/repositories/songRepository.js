@@ -86,6 +86,52 @@ class songRepository {
     });
   }
 
+  findAllRecomendations() {
+    return new Promise((resolve, reject) => {
+      const query = `
+      SELECT 
+        cancion.id_cancion AS id,
+        cancion.nombre AS name,
+        cancion.link_cancion AS songUrl,
+        cancion.duracion AS duration,
+        cancion.genero AS genre,
+        album.link_foto AS albumCover,
+        usuario.nombre AS artist
+      FROM cancion
+      JOIN album ON cancion.id_album = album.id_album
+      JOIN creador_contenido ON cancion.id_creador = creador_contenido.id_creador
+      JOIN usuario ON creador_contenido.usuario_id = usuario.id
+      ORDER BY cancion.genero;
+      `;
+      db.connection.query(query, (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const genres = {};
+            results.forEach(result => {
+              const genre = result.genre;
+              if (!genres[genre]) {
+                genres[genre] = [];
+              }
+              genres[genre].push({
+                id: result.id,
+                name: result.name,
+                songUrl: result.songUrl,
+                duration: result.duration,
+                cover: result.albumCover,
+                artist: result.artist
+              });
+            });
+            resolve(genres);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
   findAllArtistAvailableSongs(artistId) {
     return new Promise((resolve, reject) => {
       const query = 'SELECT * FROM cancion WHERE id_creador = ? AND id_album IS NULL';
