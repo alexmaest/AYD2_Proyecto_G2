@@ -6,6 +6,14 @@
   .section-min-height {
     min-height: calc(100dvh - 98px);
   }
+
+  .section-min-height-2 {
+    min-height: calc(100dvh - 136px);
+  }
+
+  .section-max-height {
+    max-height: calc(100dvh - 136px);
+  }
 }
 
 .spacer {
