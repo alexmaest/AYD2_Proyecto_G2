@@ -145,13 +145,11 @@ export default function Player () {
     }
   }, [currentSong])
 
-  if (currentSong == null) return null
-
   return (
     <footer className='flex h-[72px] w-full flex-row justify-between bg-[#1D1D1D] sticky bottom-0 z-50'>
       <audio
         ref={audioRef}
-        src={currentSong?.songUrl ?? null}
+        src={currentSong?.songUrl ?? undefined}
         preload='metadata'
         loop
       >
