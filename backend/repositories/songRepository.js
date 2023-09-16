@@ -171,7 +171,7 @@ class songRepository {
 
   findAllAlbumSongs(albumId) {
     return new Promise((resolve, reject) => {
-      const query = `SELECT c.id_cancion, c.nombre,c.link_cancion,c.duracion,c.genero,a.link_foto,u.nombre as owner
+      const query = `SELECT c.id_cancion, c.nombre,c.link_cancion,c.duracion,c.genero,a.link_foto,a.id_album,u.nombre as owner
       FROM cancion as c 
       join album as a on c.id_album = a.id_album
       join creador_contenido as cc on a.id_creador = cc.id_creador
@@ -189,7 +189,8 @@ class songRepository {
               duration: result.duracion,
               genre: result.genero,
               cover:result.link_foto,
-              artist: result.owner
+              artist: result.owner,
+              albumID: result.id_album//new
             }));
 
             //console.log("yyyyyyyyyyyyyyyyyyyyyyyyy")
@@ -208,7 +209,7 @@ class songRepository {
   findAllArtistSongs2() {
     //console.log("3")
     return new Promise((resolve, reject) => {
-      const query = `SELECT c.id_cancion ,c.nombre ,c.link_cancion ,c.duracion ,c.genero ,a.link_foto,u.nombre as owner 
+      const query = `SELECT c.id_cancion ,c.nombre ,c.link_cancion ,c.duracion ,c.genero ,a.link_foto,a.id_album ,u.nombre as owner 
       FROM cancion as c 
       join album as a on a.id_album = c.id_album
       join creador_contenido as cc on a.id_creador = cc.id_creador
@@ -225,7 +226,8 @@ class songRepository {
               duration: result.duracion,
               genre: result.genero,
               cover: result.link_foto,
-              artist: result.owner
+              artist: result.owner,
+              albumID: result.id_album//new
             }));
 
             //console.log("..............")
