@@ -11,7 +11,8 @@ import {
   TbRepeatOff,
   TbRepeatOnce,
   TbVolume,
-  TbVolumeOff
+  TbVolumeOff,
+  TbMusicOff
 } from 'react-icons/tb'
 
 const repeatStates = ['off', 'all', 'one'] as const
@@ -156,11 +157,15 @@ export default function Player () {
         <track kind='captions' />
       </audio>
       <div className='flex w-1/3 flex-row gap-4 p-2'>
-        <img
-          src={currentSong?.cover ?? ''}
-          alt='Album Cover'
-          className='h-14 w-14 cursor-pointer rounded'
-        />
+        {currentSong?.cover != null
+          ? (<img
+              src={currentSong?.cover ?? ''}
+              alt='Album Cover'
+              className='h-14 w-14 cursor-pointer rounded'
+             />)
+          : (
+            <TbMusicOff className='h-14 w-14 text-retro-white opacity-75' />
+            )}
         <div className='flex h-full flex-col items-start justify-center'>
           <h3 className='cursor-pointer text-base text-retro-white hover:underline'>
             {currentSong?.name ?? 'Song Name'}
