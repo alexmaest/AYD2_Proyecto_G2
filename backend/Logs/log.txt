@@ -398,3 +398,9 @@
 [fecha]	2023-09-12 3:26:05 pm	inicio de backend
 [fecha]	2023-09-12 3:26:05 pm	[msg]: Information: Database connection succeeded
 [fecha]: 2023-09-12 3:26:10 pm	[url]:	/admin/TopArtists	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 artists sent successfully!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-09-15 10:00:25 pm	inicio de backend
+[fecha]	2023-09-15 10:00:25 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-09-15 10:01:08 pm	[url]:	/user/songs/15	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
+[fecha]: 2023-09-15 10:01:39 pm	[url]:	/user/albums/songs/15	[metodo]: GET	[usuario]: user	[msg]: The songs could not be obtained
+[fecha]: 2023-09-15 10:02:07 pm	[url]:	/user/albums/songs/13	[metodo]: GET	[usuario]: user	[msg]: songs sent successfully!
