@@ -56,7 +56,8 @@ class songRepository {
         cancion.duracion AS duration,
         cancion.genero AS genre,
         album.link_foto AS albumCover,
-        usuario.nombre AS artist
+        usuario.nombre AS artist,
+        album.id_album
       FROM cancion
       JOIN album ON cancion.id_album = album.id_album
       JOIN creador_contenido ON cancion.id_creador = creador_contenido.id_creador
@@ -75,7 +76,8 @@ class songRepository {
               duration: result.duration,
               genre: result.genre,
               cover: result.albumCover,
-              artist: result.artist
+              artist: result.artist,
+              albumID: result.id_album//new
             }));
             resolve(songs);
           } else {
