@@ -18,7 +18,9 @@ router.post('/Profile', artistController.getInfo);
 router.post('/ProfileConfig', artistController.updateProfile);//JA
 
 //sprint 2
-router.post('/MusicCounter', songController.musicCounter);
 router.get('/recomendations', songController.getRecomendations);
+router.get('/userLimit/:id', songController.userLimit);
+
+router.post('/MusicCounter', songController.musicCounter);
 
 module.exports = router;
