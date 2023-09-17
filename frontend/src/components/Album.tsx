@@ -8,7 +8,7 @@ export default function Album (album: ForYouAlbum) {
       <div
         className='album-card rounded-lg w-56 py-5 bg-retro-black-900 hover:bg-retro-black-800 transition duration-500 cursor-pointer'
       >
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center relative'>
           <div className='absolute flex flex-col items-end w-40 h-40 justify-end'>
             <FaPlayCircle className='text-5xl text-retro-orange-600 shadow-2xl opacity-0 play-icon transition duration-500' />
           </div>

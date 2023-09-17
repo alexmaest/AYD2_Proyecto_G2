@@ -133,6 +133,53 @@ class userRepository {
       });
     });
   }
+
+  async getUserLimit(userId) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM cliente WHERE usuario_id = ?';
+      db.connection.query(query, [userId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const client = {
+              'reproducciones': results[0].reproducciones,
+              'fecha_reproduccion': results[0].fecha_reproduccion
+            };
+            resolve(client);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+  async resetUserLimit(userId, date) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE cliente SET reproducciones = 1, fecha_reproduccion = ? WHERE usuario_id = ?;';
+      db.connection.query(query, [date, userId], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
+        }
+      });
+    });
+  }
+
+  async setUserLimit(userId, date) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE cliente SET reproducciones = IF(reproducciones IS NULL, 1, reproducciones + 1), fecha_reproduccion = ? WHERE usuario_id = ?;';
+      db.connection.query(query, [date, userId], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
+        }
+      });
+    });
+  }
 }
 
 module.exports = userRepository;

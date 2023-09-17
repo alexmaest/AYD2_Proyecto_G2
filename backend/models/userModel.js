@@ -102,6 +102,36 @@ class artistModel {
       throw new Error('Error while changing user password');
     }
   }
+
+  async getUserLimit(userId) {
+    try {
+      const result = await this.repository.getUserLimit(userId);
+      return result;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while getting user limit');
+    }
+  }
+
+  async resetUserLimit(userId, date) {
+    try {
+      const result = await this.repository.resetUserLimit(userId, date);
+      return result;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while reseting user limit');
+    }
+  }
+
+  async setUserLimit(userId, date) {
+    try {
+      const result = await this.repository.setUserLimit(userId, date);
+      return result;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while setting user limit');
+    }
+  }
 }
 
 module.exports = new artistModel();
