@@ -175,6 +175,9 @@ node index.js
 
   - `POST /MusicCounter`: Actualiza el contador global de reproduccion de la cancion escuchada por los usuarios del servicio.
 
+  - `POST /recomendations`: Encargado de brindar una sugerencia de canciones las cuales estan causando tendencia en la aplicacion.
+
+  - `POST /userLimit`: Actualiza el contador diario de reproduccion por parte de un usuario sin subscripcion premiun.
 
 
 - ***Rutas para registro de usuario:***
