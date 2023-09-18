@@ -3,7 +3,9 @@ import { SongWithCover } from '@/types/interfaces'
 
 export default async function fetchArtistSongs (artistId: number) {
   try {
-    const response = await fetch(baseUrl + apiUrls.user.artistSongs + `/${artistId}`)
+    const response = await fetch(baseUrl + apiUrls.user.artistSongs + `/${artistId}`, {
+      cache: 'no-cache'
+    })
 
     const songs: SongWithCover[] = await response.json()
 

@@ -40,7 +40,7 @@ export default function Player () {
   const [volume, setVolume] = useState(100)
   const [muteVolume, setMuteVolume] = useState(0)
 
-  const { currentSong } = useMusicStore()
+  const { currentSong, forward, backward } = useMusicStore()
 
   const handleRepeat = () => {
     const currentIndex = repeatStates.indexOf(repeatState)
@@ -57,7 +57,11 @@ export default function Player () {
   }
 
   const handleSkipForward = () => {
-    console.log('skip forward')
+    forward()
+  }
+
+  const handleSkipBackward = () => {
+    backward()
   }
 
   const handleProgress = () => {
@@ -193,6 +197,7 @@ export default function Player () {
             />
           </button>
           <button
+            onClick={handleSkipBackward}
             type='button'
             className='flex h-8 w-8 items-center justify-center'
           >
