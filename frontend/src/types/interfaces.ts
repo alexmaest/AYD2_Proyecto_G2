@@ -60,11 +60,13 @@ export interface Artist {
 }
 
 export interface MusicState {
-  songs: Song[] | null
+  songs: SongWithCover[] | null
   album: Album | null
   artist: Artist | null
   currentSong: SongWithCover | null
   isPlaying: boolean
   play: (song: SongWithCover) => void
   setSongs: (songs: SongWithCover[]) => void
+  forward: () => void
+  backward: () => void
 }

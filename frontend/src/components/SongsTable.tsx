@@ -1,9 +1,10 @@
 'use client'
 import { SongWithCover } from '@/types/interfaces'
 import useMusicStore from '@/store/store'
+import { useEffect } from 'react'
 
 export default function SongsTable ({ songs, cover, artist }: { songs?: SongWithCover[], cover?: string, artist?: string }) {
-  const { play } = useMusicStore()
+  const { play, setSongs } = useMusicStore()
 
   const handlePlaySong = (songId: Number) => {
     const song = songs?.find(song => song.id === songId)
@@ -11,6 +12,11 @@ export default function SongsTable ({ songs, cover, artist }: { songs?: SongWith
       play(song)
     }
   }
+
+  useEffect(() => {
+    setSongs(songs as SongWithCover[])
+  }, [songs, setSongs])
+
   return (
     <table className='w-full text-sm text-left text-gray-400'>
       <thead className='text-xs text-gray-400'>

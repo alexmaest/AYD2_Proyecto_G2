@@ -11,7 +11,8 @@ import {
   TbRepeatOff,
   TbRepeatOnce,
   TbVolume,
-  TbVolumeOff
+  TbVolumeOff,
+  TbMusicOff
 } from 'react-icons/tb'
 
 const repeatStates = ['off', 'all', 'one'] as const
@@ -39,7 +40,7 @@ export default function Player () {
   const [volume, setVolume] = useState(100)
   const [muteVolume, setMuteVolume] = useState(0)
 
-  const { currentSong } = useMusicStore()
+  const { currentSong, forward, backward } = useMusicStore()
 
   const handleRepeat = () => {
     const currentIndex = repeatStates.indexOf(repeatState)
@@ -56,7 +57,11 @@ export default function Player () {
   }
 
   const handleSkipForward = () => {
-    console.log('skip forward')
+    forward()
+  }
+
+  const handleSkipBackward = () => {
+    backward()
   }
 
   const handleProgress = () => {
@@ -145,24 +150,26 @@ export default function Player () {
     }
   }, [currentSong])
 
-  if (currentSong == null) return null
-
   return (
     <footer className='flex h-[72px] w-full flex-row justify-between bg-[#1D1D1D] sticky bottom-0 z-50'>
       <audio
         ref={audioRef}
-        src={currentSong?.songUrl ?? null}
+        src={currentSong?.songUrl ?? undefined}
         preload='metadata'
         loop
       >
         <track kind='captions' />
       </audio>
       <div className='flex w-1/3 flex-row gap-4 p-2'>
-        <img
-          src={currentSong?.cover ?? ''}
-          alt='Album Cover'
-          className='h-14 w-14 cursor-pointer rounded'
-        />
+        {currentSong?.cover != null
+          ? (<img
+              src={currentSong?.cover ?? ''}
+              alt='Album Cover'
+              className='h-14 w-14 cursor-pointer rounded'
+             />)
+          : (
+            <TbMusicOff className='h-14 w-14 text-retro-white opacity-75' />
+            )}
         <div className='flex h-full flex-col items-start justify-center'>
           <h3 className='cursor-pointer text-base text-retro-white hover:underline'>
             {currentSong?.name ?? 'Song Name'}
@@ -190,6 +197,7 @@ export default function Player () {
             />
           </button>
           <button
+            onClick={handleSkipBackward}
             type='button'
             className='flex h-8 w-8 items-center justify-center'
           >
