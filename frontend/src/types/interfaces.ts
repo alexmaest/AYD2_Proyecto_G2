@@ -70,3 +70,16 @@ export interface MusicState {
   forward: () => void
   backward: () => void
 }
+
+export interface GenresRecommendation {
+  'Dance-Pop': SongWithCover[]
+  'Disco/Funk': SongWithCover[]
+  'Electronica': SongWithCover[]
+  'Hard Rock': SongWithCover[]
+  'Hip-Hop': SongWithCover[]
+  'Pop': SongWithCover[]
+  'R&B': SongWithCover[]
+  'Rock/Pop': SongWithCover[]
+  'Soul': SongWithCover[]
+  'Synth-Pop': SongWithCover[]
+}
