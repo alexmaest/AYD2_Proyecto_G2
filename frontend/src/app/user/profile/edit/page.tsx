@@ -213,11 +213,11 @@ function UpdateForm () {
   if (session?.user == null) return <h1 className='text-white font-bold'>Loading...</h1>
 
   return (
-    <>
+    <main className='section-min-height-2 flex items-center justify-center'>
       <Alert type={alertType} className='w-[450px]' isOpen={isAlertOpen} onClick={() => setIsAlertOpen(false)}>
         <p>{alertMessage}</p>
       </Alert>
-      <form action='post' className='flex flex-col items-center gap-6 mt-5' onSubmit={handleSubmit}>
+      <form action='post' className='flex flex-col items-center gap-6 section-max-height overflow-y-auto py-8 px-2' onSubmit={handleSubmit}>
         <Input
           value={email}
           onChange={(event) => setEmail(event.target.value)}
@@ -342,7 +342,7 @@ function UpdateForm () {
           <span className='text-retro-white text-center font-bold text-[16px]'>Update your profile</span>
         </Button>
       </form>
-    </>
+    </main>
   )
 }
 
