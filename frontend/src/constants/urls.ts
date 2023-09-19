@@ -36,6 +36,7 @@ export const apiUrls = {
     artistSongs: '/user/artists/songs',
     artistAlbums: '/user/artists/albums',
     profile: '/user/Profile',
-    profileConfig: '/user/ProfileConfig'
+    profileConfig: '/user/ProfileConfig',
+    recomendations: '/user/recomendations'
   }
 }
