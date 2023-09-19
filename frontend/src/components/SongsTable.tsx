@@ -2,13 +2,27 @@
 import { SongWithCover } from '@/types/interfaces'
 import useMusicStore from '@/store/store'
 import { useEffect } from 'react'
+import { apiUrls, baseUrl } from '@/constants/urls'
 
 export default function SongsTable ({ songs, cover, artist }: { songs?: SongWithCover[], cover?: string, artist?: string }) {
   const { play, setSongs } = useMusicStore()
 
-  const handlePlaySong = (songId: Number) => {
+  const handlePlaySong = async (songId: Number) => {
     const song = songs?.find(song => song.id === songId)
     if (song !== undefined) {
+      const response = await fetch(baseUrl + apiUrls.user.musicCounter, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: song.id
+        })
+      })
+      if (!response.ok) {
+        const message = `An error has occured: ${response.status}`
+        throw new Error(message)
+      }
       play(song)
     }
   }
@@ -37,7 +51,7 @@ export default function SongsTable ({ songs, cover, artist }: { songs?: SongWith
               songs?.map((song, index) => (
                 <tr
                   key={song?.id} className='hover:bg-retro-black-600 transition duration-500 cursor-default'
-                  onClick={() => handlePlaySong(song?.id)}
+                  onClick={async () => await handlePlaySong(song?.id)}
                 >
                   <th scope='row' className='px-6 py-4 font-medium whitespace-nowrap text-retro-white'>
                     {index + 1}
