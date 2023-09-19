@@ -78,12 +78,9 @@ node index.js
 
   ![archPattern](archPattern.png)
 
-- `Diagrama del diseño de arquitectura implementado:` Para el diseño de la arquitectura del proyecto actual en esta primera fase, constó de la utilización de dos servidores, estos correspondientes al área de backend y frontend, sobre los cuales se utilizaron las tecnologías React y NodeJS respectivamente, este último tiene comunicación directa con la base de datos ubicada en Amazon Web Services, donde se utilizaron las tecnologías de Amazon RDS de tipo base de datos relacional, donde también se utilizó Amazon S3 para el almacenamiento de imágenes y archivos de audio. Todo esto interactuando de forma directa con el cliente por la parte de frontend en cualquier dispositivo final, pero enfocado en un ordenador.
+- `Diagrama del diseño de arquitectura implementado:` Para el diseño de la arquitectura del proyecto actual en esta primera fase, constó de la utilización de dos servidores, estos correspondientes al área de backend y frontend, sobre los cuales se utilizaron las tecnologías React y NodeJS respectivamente, este último tiene comunicación directa con la base de datos ubicada en Amazon Web Services, donde se utilizaron las tecnologías de Amazon RDS de tipo base de datos relacional, donde también se utilizó Amazon S3 para el almacenamiento de imágenes y archivos de audio. En esta segunda fase se implementó la utilización de la nube en el apartado del frontend, como también en el backend, donde estos se incorporaron a las herramientas de Vercel y Amazon EC2 respectivamente. Todo esto interactuando de forma directa con el cliente por la parte de frontend en cualquier dispositivo final, pero enfocado en un ordenador.
 
   ![archDesign](archDesign.png)
-
-### Diagrama de despliegue
-![Despliegue](../assets/modelo_despliegue.jpg "Despliegue | RetroMusic")
 
 ### _Diagramas de patrones de diseño implementados_
 
@@ -175,6 +172,9 @@ node index.js
 
   - `POST /MusicCounter`: Actualiza el contador global de reproduccion de la cancion escuchada por los usuarios del servicio.
 
+  - `POST /recomendations`: Encargado de brindar una sugerencia de canciones las cuales estan causando tendencia en la aplicacion.
+
+  - `POST /userLimit`: Actualiza el contador diario de reproduccion por parte de un usuario sin subscripcion premiun.
 
 
 - ***Rutas para registro de usuario:***

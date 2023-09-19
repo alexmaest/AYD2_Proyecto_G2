@@ -1,8 +1,10 @@
 const userController = require('./userController')
 const artistModel = require('../models/artistModel');
 const songModel = require('../models/songModel');
+const userModel = require('../models/userModel');
 const multer = require('multer');
 require('dotenv').config();
+const { format, isToday } = require('date-fns');
 const {logEventsWrite} = require('../Helpers/logEvents');//logs
 
 class songController {
@@ -218,13 +220,16 @@ class songController {
         try {
                 const songs = await songModel.getAllRecomendations();
                 if (songs) {
+                    logEventsWrite(req.originalUrl,req.method,"user","The recomendations have been obtained",3)//log
                     res.status(200).json(songs);
                 } else {
+                    logEventsWrite(req.originalUrl,req.method,"user","The recomendations could not be obtained",3)//log
                     res.status(204).json('The recomendations could not be obtained');
                 }
             
         } catch (err) {
             console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"user","Internal Server Error",3)//log
             res.status(500).send('Internal Server Error');
         }
     }
@@ -244,6 +249,34 @@ class songController {
         } catch (err) {
             console.error(err);
             logEventsWrite(req.originalUrl, req.method, "user", "Internal Server Error", 3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async userLimit(req, res) {
+        try {
+            const result = await userModel.getUserLimit(req.params.id);
+
+            const currentDate = new Date();
+            const guatemalaTimezoneOffset = -6 * 60; // Guatemala is UTC-6
+            currentDate.setMinutes(currentDate.getMinutes() + guatemalaTimezoneOffset);
+            const formattedDate = currentDate.toISOString().slice(0, 19).replace('T', ' ');
+
+            if (result.reproducciones === 15 && isToday(new Date(result.fecha_reproduccion))) {
+                logEventsWrite(req.originalUrl,req.method,"user","userLimit reproducciones === 15 && isToday: result True",3)//log
+                res.status(200).json({ 'result': false });
+            } else if (result.reproducciones === 15 && !isToday(new Date(result.fecha_reproduccion))) {
+                const result = await userModel.resetUserLimit(req.params.id, formattedDate);
+                logEventsWrite(req.originalUrl,req.method,"user","userLimit reproducciones === 15 && !isToday: result True",3)//log
+                res.status(200).json({ 'result': true });
+            } else {
+                const result = await userModel.setUserLimit(req.params.id, formattedDate);
+                logEventsWrite(req.originalUrl,req.method,"user","userLimit else result True",3)//log
+                res.status(200).json({ 'result': true });
+            }
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"user","Internal Server Error",3)//log
             res.status(500).send('Internal Server Error');
         }
     }
