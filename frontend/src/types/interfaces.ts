@@ -65,6 +65,8 @@ export interface MusicState {
   artist: Artist | null
   currentSong: SongWithCover | null
   isPlaying: boolean
+  canPlay: boolean
+  setCanPlay: (canPlay: boolean) => void
   play: (song: SongWithCover) => void
   setSongs: (songs: SongWithCover[]) => void
   forward: () => void
@@ -82,4 +84,8 @@ export interface GenresRecommendation {
   'Rock/Pop': SongWithCover[]
   'Soul': SongWithCover[]
   'Synth-Pop': SongWithCover[]
+}
+
+export interface CanPlaySong {
+  result: boolean
 }

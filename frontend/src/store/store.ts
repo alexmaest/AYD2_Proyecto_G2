@@ -7,10 +7,17 @@ const useMusicStore = create<MusicState>()((set) => ({
   artist: null,
   currentSong: null,
   isPlaying: false,
+  canPlay: true,
+  setCanPlay: (canPlay: boolean) => {
+    set((state) => ({
+      ...state,
+      canPlay
+    }))
+  },
   play: (song: SongWithCover) => {
     set((state) => ({
       ...state,
-      currentSong: song,
+      currentSong: state.canPlay ? song : null,
       isPlaying: true
     }))
   },
@@ -27,7 +34,7 @@ const useMusicStore = create<MusicState>()((set) => ({
       const nextSong = state.songs?.[currentSongPosition === state.songs?.length - 1 ? 0 : (currentSongPosition ?? 0) + 1]
       return {
         ...state,
-        currentSong: nextSong,
+        currentSong: state.canPlay ? nextSong : null,
         isPlaying: true
       }
     })
@@ -39,7 +46,7 @@ const useMusicStore = create<MusicState>()((set) => ({
       const previousSong = state.songs?.[currentSongPosition === 0 ? state.songs?.length - 1 : (currentSongPosition ?? 0) - 1]
       return {
         ...state,
-        currentSong: previousSong,
+        currentSong: state.canPlay ? previousSong : null,
         isPlaying: true
       }
     })

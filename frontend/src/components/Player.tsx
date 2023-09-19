@@ -1,5 +1,7 @@
 'use client'
+import fetchCanPlaySong from '@/lib/fetchCanPlaySong'
 import useMusicStore from '@/store/store'
+import { useSession } from 'next-auth/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   TbArrowsShuffle,
@@ -26,6 +28,7 @@ const calculateTime = (secs: number) => {
 }
 
 export default function Player () {
+  const { data: session } = useSession()
   const playAnimationRef = useRef(0)
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const progressRef = useRef<HTMLInputElement | null>(null)
@@ -40,7 +43,7 @@ export default function Player () {
   const [volume, setVolume] = useState(100)
   const [muteVolume, setMuteVolume] = useState(0)
 
-  const { currentSong, forward, backward } = useMusicStore()
+  const { currentSong, forward, backward, canPlay, setCanPlay } = useMusicStore()
 
   const handleRepeat = () => {
     const currentIndex = repeatStates.indexOf(repeatState)
@@ -49,6 +52,8 @@ export default function Player () {
   }
 
   const handlePlay = async () => {
+    if (!canPlay) return
+
     if (audioRef.current != null) {
       if (isPlaying) audioRef.current.pause()
       else await audioRef.current.play()
@@ -149,6 +154,19 @@ export default function Player () {
       setIsPlaying(true)
     }
   }, [currentSong])
+
+  useEffect(() => {
+    const fetchCanPlay = async () => {
+      const canPlay = await fetchCanPlaySong(session?.user.id ?? 0)
+      if (canPlay?.result === false) {
+        alert('You have reached your limit of songs for today')
+      }
+      setCanPlay(canPlay?.result ?? false)
+    }
+    if (session != null) {
+      void fetchCanPlay()
+    }
+  }, [session, setCanPlay, currentSong])
 
   return (
     <footer className='flex h-[72px] w-full flex-row justify-between bg-[#1D1D1D] sticky bottom-0 z-50'>

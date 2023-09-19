@@ -37,6 +37,8 @@ export const apiUrls = {
     artistAlbums: '/user/artists/albums',
     profile: '/user/Profile',
     profileConfig: '/user/ProfileConfig',
-    recomendations: '/user/recomendations'
+    recomendations: '/user/recomendations',
+    musicCounter: '/user/MusicCounter',
+    userLimit: '/user/userLimit'
   }
 }
