@@ -5,15 +5,22 @@
 ### _Grabación de Scrum Planning_
 Esta reunión marcó el inicio del segundo sprint de la segunda fase del proyecto, donde se discutieron y repartieron las tareas que conlleva dicha propuesta realizada en la primera fase del proyecto, continuando con los roles tomados para cada integrante. Esta realizada el día 11 de Septiembre, donde a continuación se muestra su respectiva grabación:
 
+    https://drive.google.com/file/d/10RFKYpHD-e904pEpm6aE918rSVqC7gNK/view?usp=drive_link
 
 ### _Grabaciones de Daily Scrum_
 Se realizaron reuniones diarias donde se discutían los avances de la fase 2 del proyecto proporcionado, donde se respondían las preguntas: ¿Qué hice hoy?, ¿Que haré mañana?, y se discutieron dificultades para posibles soluciones dentro de las mismas. Las grabaciones inician desde el día 12 hasta el 19 de Septiembre en días hábiles, omitiendo el 14 y 15 de Septiembre al ser asueto, las cuales se presentan a continuación:
 
 - 12 de Septiembre
 
+    https://drive.google.com/file/d/1NxpAGl-3SbQ-5si8zGIK1X4z88hedvsy/view?usp=drive_link
+
 - 13 de Septiembre
 
+    https://drive.google.com/file/d/1XUK4ZTO8urW6hIb405piqR4GG0lpYIjJ/view?usp=drive_link
+
 - 18 de Septiembre
+
+    https://drive.google.com/file/d/1wfhGs2zgSJ0TouJkVduXcuJY_fi4AAgy/view?usp=drive_link
 
 - 19 de Septiembre
 
