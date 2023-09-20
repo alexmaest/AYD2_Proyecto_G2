@@ -23,14 +23,7 @@ class artistRepository {
           reject(userErr);
         } else {
           const userId = userResult.insertId;
-          const creatorQuery = `INSERT INTO creador_contenido (usuario_id) VALUES (?);`;
-          db.connection.query(creatorQuery, [userId], (creatorErr, creatorResult) => {
-            if (creatorErr) {
-              reject(creatorErr);
-            } else {
-              resolve(userId);
-            }
-          });
+          resolve(userId);
         }
       });
     });
