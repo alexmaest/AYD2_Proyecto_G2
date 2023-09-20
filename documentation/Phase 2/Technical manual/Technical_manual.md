@@ -20,6 +20,12 @@ Para el desarrollo del frontend se utilizaron las siguientes librerías y framew
 
 - React Icons: Se utilizó para la implementación de iconos en la aplicación web.
 
+Dado el crecimiento de la aplicación para la versión 2 de la misma, se notó un crecimiento en el retardo de renderizado de ciertas páginas.
+
+Esto hizo necesario el uso de ciertas funcionalidades (algunas experimentales como las server actions que trae la versión 13 de NextJS), que permitieran mejorar el rendimiento de la aplicación.
+
+Se logró haciendo uso del renderizado del lado del servidor, lo que permitió que el tiempo de carga de la aplicación disminuyera considerablemente, como también el retardo de renderizado de ciertas páginas. Solo se hizo uso del renderizado del lado del cliente donde fuera estrictamente necesario debido a la naturaleza de la aplicación.
+
 #### Backend
 
 Para el desarrollo del backend se utilizaron las siguientes librerías y frameworks:
@@ -102,7 +108,7 @@ node index.js
 
 ### _Rutas utilizadas en el backend_
 
-- ***Rutas de administrador:***
+- **_Rutas de administrador:_**
 
   - `GET /artists`: Obtiene todos los artistas registrados en la plataforma.
 
@@ -114,9 +120,7 @@ node index.js
 
   - `GET /TopArtists`: Obtiene el top 5 de artistas mas escuchados en todo el servicio.
 
-
-
-- ***Rutas de artista:***
+- **_Rutas de artista:_**
 
   - `GET /banner/:userId`: Obtiene el banner de un artista.
 
@@ -140,9 +144,7 @@ node index.js
 
   - `DELETE /deleteAlbum/:id`: Elimina un álbum.
 
-
-
-- ***Rutas para login:***
+- **_Rutas para login:_**
 
   - `POST /`: Iniciar sesión con los datos del usuario que se envían en el body de la petición.
 
@@ -150,9 +152,7 @@ node index.js
 
   - `POST /passwordChange/update`: Actualizar la contraseña del usuario.
 
-
-
-- ***Rutas para usuario:***
+- **_Rutas para usuario:_**
 
   - `GET /songs/:userId`: Obtener la lista de todos las canciones en el servicio en la vista descubrir.
 
@@ -176,19 +176,13 @@ node index.js
 
   - `POST /userLimit`: Actualiza el contador diario de reproduccion por parte de un usuario sin subscripcion premiun.
 
-
-- ***Rutas para registro de usuario:***
+- **_Rutas para registro de usuario:_**
 
   - `POST /free`: Almacena al usuario en cuestion en el servicio de RetroMusic.
 
-
-
-- ***Rutas para registro de artista:***
+- **_Rutas para registro de artista:_**
 
   - `POST /`: Almacena al artista en cuestion en el servicio de RetroMusic.
-
-
-
 
 ### _Estructura de carpetas del frontend_
 
