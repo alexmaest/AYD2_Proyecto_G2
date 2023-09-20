@@ -7,9 +7,8 @@ export default async function ProfilePage () {
 
   const user = await fetchUserProfileData(session?.user?.id ?? 0)
 
-  console.log({ user })
   return (
-    <main className='flex flex-row items-center justify-center m-12'>
+    <main className='flex flex-row items-center justify-center section-min-height-2'>
       <div className='flex flex-row items-center justify-center'>
         <div className='flex flex-col items-center space-y-5'>
           <img

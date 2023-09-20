@@ -115,7 +115,6 @@ class albumController {
 
     async deleteAlbum(req, res) {
         try {
-            const deletedReference = await songModel.deleteAlbum(req.params.id);
             const deleted = await albumModel.deleteAlbum(req.params.id);
             if (deleted) {
                 logEventsWrite(req.originalUrl,req.method,"content creator","album deleted successfully!",3)//log

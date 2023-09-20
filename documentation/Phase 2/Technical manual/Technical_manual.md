@@ -104,7 +104,7 @@ node index.js
 
 ### _Diagrama Entidad-Relación de la base de datos_
 
-![ER](er.jpg)
+![ER](er.png)
 
 ### _Rutas utilizadas en el backend_
 

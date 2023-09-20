@@ -14,8 +14,8 @@ export default async function ArtistPage ({ params }: { params: { slug: string }
   const songs = await fetchArtistSongs(artist?.id ?? 0)
   const albums = await fetchArtistAlbums(artist?.id ?? 0)
   return (
-    <main className='m-6'>
-      <article className='relative -z-10 shadow-header shadow-retro-white-200/20 rounded-lg'>
+    <main className='section-max-height overflow-y-auto flex flex-col gap-6 items-center'>
+      <article className='w-full relative -z-10 shadow-header shadow-retro-white-200/20'>
         <div className='flex absolute bottom-1/2 ml-6 space-x-3'>
           <BsFillPatchCheckFill className='w-6 h-6 text-retro-orange-500' />
           <p className='text-white'>Artista verificado</p>
@@ -24,15 +24,15 @@ export default async function ArtistPage ({ params }: { params: { slug: string }
         {banner != null && banner !== ''
           ? (
             <img
-              className='block w-full h-96 object-cover rounded-lg'
+              className='block w-full h-96 object-cover'
               src={banner} alt='Artist banner'
             />
             )
           : (
-            <div className='block w-full h-96 object-cover rounded-lg' />
+            <div className='block w-full h-96 object-cover' />
             )}
       </article>
-      <div className='mt-4'>
+      <div className='flex flex-col gap-8 w-3/4 my-8'>
         <h1 className='font-extrabold text-3xl text-white'>Popular songs</h1>
         <div className='flex flex-row items-center justify-center'>
           <div className='relative overflow-x-auto w-3/4'>
