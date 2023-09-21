@@ -3,56 +3,62 @@
 import Image from 'next/image'
 import Button from './Button'
 import { TbCircleFilled, TbPlayerPlayFilled } from 'react-icons/tb'
-import { apiUrls, baseUrl } from '@/constants/urls'
-import { revalidatePath } from 'next/cache'
-import { useRouter } from 'next/navigation'
+import { Song } from '@/types/interfaces'
+import { deleteSong } from '@/lib/actions'
+import { useTransition } from 'react'
+import Link from 'next/link'
 
-interface Pops {
-  songID: number
-  name: string
+interface Props {
+  song: Song
   artist: string
-  duration: string
 }
 
-function ArtistSong ({ songID, name, artist, duration }: Pops) {
-  const router = useRouter()
-  const handleDelete = async (id: number) => {
+function ArtistSong ({ song, artist }: Props) {
+  const [isPending, startTransition] = useTransition()
+  const onDelete = async () => {
     try {
-      const response = await fetch(baseUrl + apiUrls.artist.deleteSong + `/${id}`, {
-        method: 'DELETE'
-      })
-      if (response.status !== 200) {
-        throw new Error('Error deleting song')
-      }
-      const currentPath = window.location.pathname
-      revalidatePath(currentPath)
-      router.refresh()
+      await deleteSong(song)
     } catch (error) {
-      alert(error)
+      console.log(error)
     }
   }
-
   return (
-    <div className='w-full flex flex-row items-center justify-between'>
-      <div className='flex items-start gap-6'>
-        <Image
-          width={96}
-          height={96}
-          src='/images/album-cover.png'
-          alt='album cover'
-        />
-        <div className='flex flex-col h-24 justify-between'>
-          <h4 className='text-retro-white text-[18px] font-bold'>{name}</h4>
+    <div className='w-full gap-4 flex flex-row items-center justify-between bg-retro-black-900 rounded'>
+      <Link
+        href={song.songUrl}
+        className='w-full flex items-start gap-6 group p-4'
+        target='_blank'
+        rel='noreferrer'
+      >
+        <div
+          className='w-[80px] h-[80px] rounded-lg overflow-hidden relative transition-all duration-300 group-hover:scale-105 ease-out'
+        >
+          <Image
+            width={80}
+            height={80}
+            src='/images/album-cover.png'
+            alt='album cover'
+            className='object-fit'
+          />
+          <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 invisible group-hover:visible rounded-full bg-retro-green p-2'>
+            <TbPlayerPlayFilled
+              className=' text-retro-black text-[32px]'
+            />
+          </div>
+        </div>
+        <div className='flex flex-col h-16 justify-between'>
+          <h4 className='text-retro-white text-[18px] font-bold group-hover:text-retro-orange'>{song.name}</h4>
           <p className='text-retro-white text-[16px]'>{artist}</p>
           <div className='flex gap-2 items-center'>
             <TbPlayerPlayFilled className='text-retro-white' />
             <p className='text-retro-white text-[16px]'>0</p>
             <TbCircleFilled className='text-retro-white text-[5px]' />
-            <p className='text-retro-white text-[16px]'>{duration}</p>
+            <p className='text-retro-white text-[16px]'>{song.duration}</p>
           </div>
         </div>
-      </div>
-      <div className='flex items-center gap-6'>
+      </Link>
+      <div className='w-1 h-[96px] bg-retro-black' />
+      <form className='flex items-center gap-6 p-4'>
         <Button
           type='primary'
         >
@@ -60,11 +66,13 @@ function ArtistSong ({ songID, name, artist, duration }: Pops) {
         </Button>
         <Button
           type='secondary'
-          onClick={async () => { await handleDelete(songID) }}
+          onClick={() => startTransition(async () => await onDelete())}
         >
-          <span className='text-retro-black text-center font-bold text-[16px]'>Delete</span>
+          <span className='text-retro-black text-center font-bold text-[16px]'>
+            {isPending ? 'Deleting...' : 'Delete'}
+          </span>
         </Button>
-      </div>
+      </form>
     </div>
   )
 }

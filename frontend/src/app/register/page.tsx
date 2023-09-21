@@ -9,10 +9,12 @@ async function Register () {
   const session = await getServerSession(options)
   if (session?.user != null) {
     const role = session?.user.role
-    if (role === 0) {
+    if (role === 1) {
       redirect('/admin')
-    } else {
+    } else if (role === 2) {
       redirect('/artist')
+    } else {
+      redirect('/user')
     }
   }
 
@@ -21,8 +23,8 @@ async function Register () {
       <Link href='/' passHref>
         <Brand className='text-retro-white w-[182.4px] h-[48px]' color='#F3EFE0' />
       </Link>
-      <h4 className='text-retro-white font-bold text-[25px]'>Sign up for free to start listening.</h4>
-      <RegisterForm />
+      <h4 className='text-retro-white font-bold text-[25px] w-[450px] text-center'>Sign up for free to start uploading content.</h4>
+      <RegisterForm artistRegister />
     </section>
   )
 }

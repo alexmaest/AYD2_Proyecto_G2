@@ -5,7 +5,8 @@ export const apiUrls = {
     login: '/login',
     register: '/artistRegister',
     recoverPassword: '/login/passwordChange',
-    updatePassword: '/login/passwordChange/update'
+    updatePassword: '/login/passwordChange/update',
+    userRegister: '/userRegister/free'
   },
   artist: {
     uploadBanner: '/artist/banner',
@@ -22,6 +23,22 @@ export const apiUrls = {
   },
   admin: {
     artists: '/admin/artists',
-    artistsManagment: '/admin/artistsManagment'
+    artistsManagment: '/admin/artistsManagment',
+    topSongs: '/admin/TopSongs',
+    topAlbums: '/admin/TopAlbums',
+    topArtists: '/admin/TopArtists'
+  },
+  user: {
+    songs: '/user/songs',
+    albums: '/user/albums',
+    songsForAlbumId: '/user/albums/songs',
+    artists: '/user/artists',
+    artistSongs: '/user/artists/songs',
+    artistAlbums: '/user/artists/albums',
+    profile: '/user/Profile',
+    profileConfig: '/user/ProfileConfig',
+    recomendations: '/user/recomendations',
+    musicCounter: '/user/MusicCounter',
+    userLimit: '/user/userLimit'
   }
 }

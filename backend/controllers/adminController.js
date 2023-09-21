@@ -1,7 +1,11 @@
 const e = require('express');
 const artist = require('../models/artistModel');
+const songModel = require('../models/songModel');
+const albumModel = require('../models/albumModel');
+
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const {logEventsWrite} = require('../Helpers/logEvents');//logs
 
 class adminController {
     constructor() { }
@@ -9,9 +13,11 @@ class adminController {
     async artists(req, res) {
         try {
             const allArtists = await artist.getAllArtists();//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","user list sent successfully!",3)//log
             res.status(200).json(allArtists);
         } catch (err) {
             console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
             res.status(500).send('Internal Server Error');
         }
     }
@@ -53,9 +59,11 @@ class adminController {
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
                     console.error(err);
+                    logEventsWrite(req.originalUrl,req.method,"Administrator","The email has not been sent",3)//log
                     res.status(500).send('The email has not been sent');
                 } else {
                     console.log('Information: Email sent');
+                    logEventsWrite(req.originalUrl,req.method,"Administrator","The email has been sent",3)//log
                     res.status(200).send('The email has been sent');
                 }
             });
@@ -64,7 +72,46 @@ class adminController {
             //res.status(200).json(Artist);
         } catch (err) {
             //console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","User not found",3)//log
             res.status(501).send('User not found');
+        }
+    }
+
+
+    //sprint 2 fase2
+    async topSongs(req, res) {
+        try {
+            const allTopSongs = await songModel.top5Songs();//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 songs sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async topAlbums(req, res) {
+        try {
+            const allTopSongs = await songModel.top5Albums();//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 albums sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async topArtists(req, res) {
+        try {
+            const allTopSongs = await songModel.top5Artists();//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 artists sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
         }
     }
 

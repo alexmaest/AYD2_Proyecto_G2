@@ -3,7 +3,12 @@ import { Song } from '@/types/interfaces'
 
 export default async function fetchSongs (id: number) {
   try {
-    const response = await fetch(baseUrl + apiUrls.artist.getSongs + `/${id}`)
+    const response = await fetch(baseUrl + apiUrls.artist.getSongs + `/${id}`, {
+      cache: 'no-cache',
+      next: {
+        tags: ['songs']
+      }
+    })
 
     const songs: Song[] = await response.json()
 

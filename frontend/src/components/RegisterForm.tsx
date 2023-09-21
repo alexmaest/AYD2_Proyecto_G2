@@ -18,7 +18,7 @@ const months = [
 
 const genders = ['Male', 'Female', 'Non-binary', 'Other', 'Prefer not to say']
 
-function RegisterForm () {
+function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [username, setUsername] = useState('')
@@ -114,7 +114,8 @@ function RegisterForm () {
         gender
       }
 
-      const response = await fetch(baseUrl + apiUrls.auth.register, {
+      const regEndpoint = artistRegister ? apiUrls.auth.register : apiUrls.auth.userRegister
+      const response = await fetch(baseUrl + regEndpoint, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -256,10 +257,11 @@ function RegisterForm () {
           <div className='flex flex-wrap flex-row items-start gap-4'>
             {genders.map((gender, index) => (
               <RadioButton
+                key={index}
                 label={gender}
                 value={gender}
+                entryGender=''
                 onChange={(event) => setGender(event.target.value)}
-                key={index}
               />
             ))}
           </div>

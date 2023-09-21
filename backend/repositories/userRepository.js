@@ -1,6 +1,33 @@
 const db = require('../database');
 
 class userRepository {
+
+  saveFreeUser(user) {
+    return new Promise((resolve, reject) => {
+      const userQuery = `
+        INSERT INTO usuario (nombre, pwd, tipo_usuario, email, link_foto, fecha_nacimiento, genero)
+        VALUES (?, ?, 3, ?, ?, ?, ?);
+      `;
+
+      const userValues = [
+        user.username,
+        user.password,
+        user.email,
+        null,
+        user.birthday,
+        user.gender
+      ];
+
+      db.connection.query(userQuery, userValues, (userErr, userResult) => {
+        if (userErr) {
+          reject(userErr);
+        } else {
+          resolve(userResult.insertId);
+        }
+      });
+    });
+  }
+
   //JA
   findByEmail(email) { // para el login del usuario
     return new Promise((resolve, reject) => {
@@ -102,6 +129,53 @@ class userRepository {
           reject(err);
         } else {
           resolve(results.affectedRows > 0);
+        }
+      });
+    });
+  }
+
+  async getUserLimit(userId) {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT * FROM cliente WHERE usuario_id = ?';
+      db.connection.query(query, [userId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const client = {
+              'reproducciones': results[0].reproducciones,
+              'fecha_reproduccion': results[0].fecha_reproduccion
+            };
+            resolve(client);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+  async resetUserLimit(userId, date) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE cliente SET reproducciones = 1, fecha_reproduccion = ? WHERE usuario_id = ?;';
+      db.connection.query(query, [date, userId], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
+        }
+      });
+    });
+  }
+
+  async setUserLimit(userId, date) {
+    return new Promise((resolve, reject) => {
+      const query = 'UPDATE cliente SET reproducciones = IF(reproducciones IS NULL, 1, reproducciones + 1), fecha_reproduccion = ? WHERE usuario_id = ?;';
+      db.connection.query(query, [date, userId], (err, result) => {
+        if (err) {
+          reject(null);
+        } else {
+          resolve(result.affectedRows > 0);
         }
       });
     });

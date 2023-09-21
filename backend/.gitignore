@@ -2,3 +2,5 @@
 node_modules
 #variables
 .env
+#logs
+/Logs
