@@ -9,11 +9,37 @@
 ![Net Image](P2.PNG "Prueba#2 | RetroMusic")
 ![Net Image](P3.PNG "Prueba#3 | RetroMusic")
 
+```
+test( "Register success", async () => {
+    const data = {
+        "email": "correoTester@gmail.com",
+        "password": "password",
+        "username": "alexmaest2",
+        "birthday": "2002-01-01",
+        "gender": "Male"
+    }
+    const result = await api.post("/userRegister/free")
+    .send( data )
+    .expect(200)
+    expect(result.body.auth).toEqual( true )
+});
+```
+
+
 * ### Sección de Descubrir artistas
 
 ![Net Image](P4.PNG "Prueba#4 | RetroMusic")
 ![Net Image](P5.PNG "Prueba#5 | RetroMusic")
 ![Net Image](P6.PNG "Prueba#6 | RetroMusic")
+
+```
+test('Get recommended artists', async () => {
+    const result = await api.get("/user/recomendations")
+        .expect( 200 );
+
+    expect(result.body.correct).toEqual( true )
+})
+```
 
 * ### Visualización y deshabilitación de creadores de contenido
 
@@ -21,11 +47,25 @@
 ![Net Image](P8.PNG "Prueba#8 | RetroMusic")
 ![Net Image](P9.PNG "Prueba#9 | RetroMusic")
 
+```
+test( "Disable artist", async () => {
+    const data = {
+        "userId": 38
+    }
+    const result = await api.post("/admin/artistManagment")
+    .send( data )
+    .expect(200)
+    expect(result.body.auth).toEqual( true )
+});
+```
+
 * ### Mostrar publicidad para un cliente gratuito
 
 ![Net Image](P10.PNG "Prueba#10 | RetroMusic")
 ![Net Image](P11.PNG "Prueba#11 | RetroMusic")
 ![Net Image](P12.PNG "Prueba#12 | RetroMusic")
+
+Al tratarse de una función que se ejecuta por parte del cliente, no se le realizó una prueba unitaria con super test.
 
 * ### Visualización de un álbum
 
@@ -33,10 +73,33 @@
 ![Net Image](P14.PNG "Prueba#14 | RetroMusic")
 ![Net Image](P15.PNG "Prueba#15 | RetroMusic")
 
+```
+test('Get albums', async () => {
+    const result = await api.get("/user/artist/songs/2")
+        .expect( 200 );
+
+    expect(result.body.correct).toEqual( true )
+})
+```
+
 * ### Subir una canción como creador de contenido
 
 ![Net Image](P16.PNG "Prueba#16 | RetroMusic")
 ![Net Image](P17.PNG "Prueba#17 | RetroMusic")
+
+```
+test( "Upload a song", async () => {
+    const data = {
+        "userId": 12,
+        "name": "TV on the Radio",
+        "genre": "Rock"
+    }
+    const result = await api.post("artist/uploadSong")
+    .send( data )
+    .expect(200)
+    expect(result.body.auth).toEqual( true )
+});
+```
 
 * ### Reproducir canciones como cliente
 
@@ -44,12 +107,27 @@
 ![Net Image](P19.PNG "Prueba#19 | RetroMusic")
 ![Net Image](P20.PNG "Prueba#20 | RetroMusic")
 
+```
+test( "Play a song", async () => {
+    const result = await api.get("/artist/song/2")
+    .expect(200)
+    expect(result.body.auth).toEqual( true )
+});
+```
+
 * ### Eliminación de canciones de un creador de contenido
 
 ![Net Image](P21.PNG "Prueba#21 | RetroMusic")
 ![Net Image](P22.PNG "Prueba#22 | RetroMusic")
 ![Net Image](P23.PNG "Prueba#23 | RetroMusic")
 
+```
+test( "Play a song", async () => {
+    const result = await api.delete("/artist/deleteSong/2")
+    .expect(200)
+    expect(result.body.auth).toEqual( true )
+});
+```
 
 * ### Eliminación de álbumes de un creador de contenido
 
@@ -57,11 +135,21 @@
 ![Net Image](P25.PNG "Prueba#25 | RetroMusic")
 ![Net Image](P26.PNG "Prueba#26 | RetroMusic")
 
+```
+test( "Play a song", async () => {
+    const result = await api.delete("/artist/deleteAlbum/2")
+    .expect(200)
+    expect(result.body.auth).toEqual( true )
+});
+```
+
 * ### Recorrer álbum de canciones
 
 ![Net Image](P27.PNG "Prueba#27 | RetroMusic")
 ![Net Image](P28.PNG "Prueba#28 | RetroMusic")
 ![Net Image](P29.PNG "Prueba#29 | RetroMusic")
+
+Esta funcionalidad se maneja en la parte del cliente, por lo que no se puede realizar pruebas con super test.
 
 ## Bitacora
 
