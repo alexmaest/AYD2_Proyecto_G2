@@ -24,9 +24,12 @@ Se realizaron reuniones diarias donde se discutían los avances de la fase 2 del
 
 - 19 de Septiembre
 
+    https://drive.google.com/file/d/1Rnsb8FH6WWwC8hNd6tl0JxxoKY90Y5a8/view?usp=drive_link
+
 ### _Grabación de Scrum Retrospective_
 Esta reunión marcó el fin del segundo y último sprint de la segunda fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 20 de Septiembre.
 
+    https://drive.google.com/file/d/1UCubU7Xil4mt1_yWpMYkSVPE5BSiiYip/view?usp=drive_link
 
 ### _Elementos del Sprint Backlog_
 
