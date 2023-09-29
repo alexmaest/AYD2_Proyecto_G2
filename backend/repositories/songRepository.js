@@ -263,7 +263,7 @@ class songRepository {
   //top 5 canciones
   topSongs() {
     return new Promise((resolve, reject) => {
-      const query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays FROM cancion as c
+      const query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
       join creador_contenido as cc on cc.id_creador = c.id_creador
       join usuario as u on u.id  = cc.usuario_id  
       ORDER BY
@@ -278,7 +278,8 @@ class songRepository {
               id: result.id,
               name: result.name,
               artist: result.artist,
-              plays: result.plays
+              plays: result.plays,
+              genre: result.genre
             }));
 
             //console.log("..............")
@@ -366,6 +367,149 @@ class songRepository {
   }
 
 
+
+
+  //fase 3 --------------------------------------------------------------------------------------------------------------------------------------------
+
+  getAllSongsGenres() {
+    return new Promise((resolve, reject) => {
+      const query = `
+      SELECT DISTINCT c.genero as genre
+      FROM cancion as c;
+      `;
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+
+            //Objeto []
+           /* const genresS = results.map(result => ({
+              genre: result.genre
+            }));*/
+
+            //---------------------------------
+
+            //Strings []
+            const genresS = [];
+            results.forEach(result => genresS.push(result.genre));
+
+            resolve(genresS);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+
+  topSongsFiltro(genero) {
+    return new Promise((resolve, reject) => {
+      const query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
+      join creador_contenido as cc on cc.id_creador = c.id_creador
+      join usuario as u on u.id  = cc.usuario_id  
+      WHERE c.genero = ?
+      ORDER BY
+      c.reproducciones DESC
+      LIMIT 5;  `;
+      db.connection.query(query, [genero], (err, results) => {
+        if (err) {
+          reject(null);
+        } else {
+           if (results.length > 0) {
+            const songs = results.map(result => ({
+              id: result.id,
+              name: result.name,
+              artist: result.artist,
+              plays: result.plays,
+              genre: result.genre
+            }));
+
+            //console.log("..............")
+            //console.log(songs)
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+
+  topAlbumsFiltro(inf,sup) {
+    return new Promise((resolve, reject) => {
+      const query = ` SELECT album.id_album, album.nombre, SUM(c.reproducciones) AS reproduccionesALBUM,u.nombre as artist FROM cancion as c
+      JOIN album ON c.id_album = album.id_album
+      join creador_contenido as cc on cc.id_creador = c.id_creador
+      join usuario as u on u.id  = cc.usuario_id
+      GROUP BY album.id_album
+      HAVING SUM(c.reproducciones) BETWEEN ? AND ?
+      ORDER BY
+      reproduccionesALBUM DESC
+      LIMIT 5; `;
+      db.connection.query(query, [inf,sup], (err, results) => {
+        if (err) {
+          reject(null);
+        } else {
+           if (results.length > 0) {
+            const songs = results.map(result => ({
+              id: result.id_album,
+              name: result.nombre,
+              plays: result.reproduccionesALBUM,
+              artist: result.artist
+            }));
+
+            //console.log("..............")
+            //console.log(songs)
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+
+
+
+  top5ArtistsFiltro(inf,sup) {
+    return new Promise((resolve, reject) => {
+      const query = ` SELECT creador_contenido.id_creador,u.nombre as nombre,u.id,SUM(cancion.reproducciones) AS reproducciones FROM cancion
+      INNER JOIN album ON cancion.id_album = album.id_album
+      INNER JOIN creador_contenido ON album.id_creador = creador_contenido.id_creador
+      INNER join usuario as u on u.id  = creador_contenido.usuario_id
+    GROUP BY
+      creador_contenido.id_creador
+      HAVING SUM(cancion.reproducciones) BETWEEN ? AND ?
+    ORDER BY
+      reproducciones DESC
+    LIMIT
+      5;  `;
+      db.connection.query(query, [inf,sup], (err, results) => {
+        if (err) {
+          reject(null);
+        } else {
+           if (results.length > 0) {
+            const songs = results.map(result => ({
+              idCreator: result.id_creador,
+              idUsuario: result.id,
+              artist: result.nombre,
+              plays: result.reproducciones
+            }));
+
+            //console.log("..............")
+            //console.log(songs)
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
 
 
 
