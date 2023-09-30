@@ -155,6 +155,50 @@ class songModel {
   }
 
 
+  //fase3
+  async getAllGenres() {
+    try {
+      const songs = await this.repository.getAllSongsGenres();
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist songs');
+    }
+  }
+
+
+  async top5SongsFiltro(genero) {//modulo admin, top 5 de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.topSongsFiltro(genero);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+
+  async top5AlbumsFiltro(inf,sup) {//modulo admin, top 5 de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.topAlbumsFiltro(inf,sup);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+  async top5ArtistsFiltro(inf,sup) {//modulo admin, top 5 de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.top5ArtistsFiltro(inf,sup);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+
 }
 
 module.exports = new songModel();
