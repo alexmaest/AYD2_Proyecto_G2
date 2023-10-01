@@ -63,6 +63,9 @@ export default function Page () {
             <Link href='/' className='underline text-retro-black'>
               Privacy policy
             </Link>
+            <Link href='/recovery' className='underline text-retro-black'>
+              RECOVERY PASSWORD
+            </Link>
           </View>
           <Image
             source={require('../assets/icons/logo-black.png')} style={{
