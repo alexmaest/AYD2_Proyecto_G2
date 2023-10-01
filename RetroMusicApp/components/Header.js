@@ -6,6 +6,7 @@ export default function Header () {
     <View className='flex items-center justify-center bg-retro-black-600'>
       <Text className='font-bold text-retro-white text-2xl'>RetroMusic</Text>
       <Link href='/login' className='text-retro-white'>Login</Link>
+      <Link href='/recovery' className='text-retro-white'>Recovery password</Link>
     </View>
   )
 }
