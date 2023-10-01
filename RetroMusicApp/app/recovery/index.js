@@ -17,7 +17,6 @@ const RecoveryPassword = () => {
   const [code, setCode] = useState('')
   const [password, setPassword] = useState('')
   const [codeVisible, setCodeVisible] = useState(false)
-  const [passwordVisible, setPasswordVisible] = useState(false)
 
   const handleEmailChange = (text) => {
     setEmail(text)
@@ -31,8 +30,65 @@ const RecoveryPassword = () => {
     setPassword(text)
   }
 
-  const handleSubmit = () => {
-    console.log('email: ' + email + ' code: ' + code + ' new password: ' + password)
+  async function enviarCorreo (text) {
+    setCodeVisible(true)// para que se mire el resto
+    // console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nHago la peticion al backend hacia ruta: 5000/login/passwordChange')
+    // console.log(' >>>> recibo:' + text)
+    const email = { // newPassword, token
+      email: text
+    }
+
+    console.log(JSON.stringify(email))
+
+    try {
+      const response = await fetch('http://18.222.196.155:5000/login/passwordChange', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(email)
+      })
+
+      if (response && response.status !== 200) {
+        if (response.status === 406) {
+          console.log('This email address currently has a valid token. Please check your email.')
+        } else {
+          throw new Error("We couldn't find an account with that email address.")
+        }
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function nuevaContraseña (password, codigo) {
+    setCodeVisible(true)// para que se mire el resto
+    // console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nHago la peticion al backend hacia ruta: 5000/login/passwordChange')
+    // console.log(' >>>> recibo:' + text)
+    const body = { // newPassword, token
+      newPassword: password,
+      token: codigo
+    }
+
+    console.log(JSON.stringify(body))
+
+    try {
+      const response = await fetch('http://18.222.196.155:5000/login/passwordChange/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+
+      if (response.status !== 200) {
+        throw new Error("We couldn't update your password.")
+      }
+
+      console.log('todo salio bien!!!')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -85,16 +141,15 @@ const RecoveryPassword = () => {
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}
-                    onPress={() => setCodeVisible(true)}
+                    onPress={() => { enviarCorreo(email) }}
                   >
-                    <Text style={{ color: '#fff' }}>Siguiente</Text>
+                    <Text style={{ color: '#fff' }}>Enviar</Text>
                   </TouchableOpacity>
 
                 </View>
                 <View style={{ padding: 16, display: codeVisible ? 'flex' : 'none' }}>
                   <Text className='text-retro-blue text-md font-bold'>revise el msg enviado a su correo electronico</Text>
                 </View>
-
                 <View style={{ padding: 16, borderTopColor: '#000000', borderTopWidth: 1, display: codeVisible ? 'flex' : 'none' }}>
                   <Text className='text-retro-white text-lg font-bold'>Ingresa el codigo que te enviamos</Text>
                   <TextInput
@@ -106,20 +161,9 @@ const RecoveryPassword = () => {
                     onChangeText={handleCodeChange}
                     value={code}
                   />
-                  <TouchableOpacity
-                    style={{
-                      padding: 10,
-                      borderRadius: 15,
-                      backgroundColor: '#2196F3',
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                    }}
-                    onPress={() => setPasswordVisible(true)}
-                  >
-                    <Text style={{ color: '#fff' }}>Siguiente</Text>
-                  </TouchableOpacity>
+
                 </View>
-                <View style={{ padding: 16, borderTopColor: '#000000', borderTopWidth: 1, display: passwordVisible ? 'flex' : 'none' }}>
+                <View style={{ padding: 16, borderTopColor: '#000000', borderTopWidth: 1, display: codeVisible ? 'flex' : 'none' }}>
                   <Text className='text-retro-white text-lg font-bold'>Registra tu nueva contraseña</Text>
                   <TextInput
                     style={{ backgroundColor: '#1D1D1D', borderColor: 'gray', borderWidth: 1 }}
@@ -138,7 +182,7 @@ const RecoveryPassword = () => {
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}
-                    onPress={handleSubmit}
+                    onPress={() => { nuevaContraseña(password, code) }}
                   >
                     <Text style={{ color: '#fff' }}>Restablecer contraseña</Text>
                   </TouchableOpacity>
