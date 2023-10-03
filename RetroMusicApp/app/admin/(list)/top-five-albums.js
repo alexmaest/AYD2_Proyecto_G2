@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native'
 import { BarChart } from 'react-native-chart-kit'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import RetroButton from '../../../components/RetroButton'
 
 const chartConfig = {
   backgroundColor: '#222222',
@@ -25,6 +26,8 @@ const url = 'http://localhost:5000/admin/TopAlbums'
 const TopFiveAlbums = () => {
   const [labels, setLabels] = useState([])
   const [data, setData] = useState([])
+  const [min, setMin] = useState(0)
+  const [max, setMax] = useState(0)
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -46,9 +49,32 @@ const TopFiveAlbums = () => {
     fetchAlbums()
   }, [])
 
+  const filterAlbums = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/admin/TopAlbumsFiltro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ limInf: Number(min), limSup: Number(max) })
+      })
+      const data = await res.json()
+      setLabels(data.map((album) => album.name))
+      setData(data.map((album) => album.plays))
+    } catch (error) {
+      setLabels([])
+      setData([])
+    }
+  }
+
   return (
     <View style={styles.Container}>
       <Text style={styles.Text}>Top Five Albums</Text>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+        <TextInput style={styles.TextInput} placeholder='Min' onChangeText={text => setMin(text)} />
+        <TextInput style={styles.TextInput} placeholder='Max' onChangeText={text => setMax(text)} />
+        <RetroButton type='primary' text='Filter' handlePress={async () => { await filterAlbums() }} />
+      </View>
       <BarChart
         style={styles.Chart}
         data={{
@@ -91,5 +117,12 @@ const styles = StyleSheet.create({
   Chart: {
     marginVertical: 8,
     borderRadius: 16
+  },
+  TextInput: {
+    backgroundColor: '#F3EFE0',
+    borderRadius: 8,
+    padding: 8,
+    fontSize: 16,
+    width: '30%'
   }
 })

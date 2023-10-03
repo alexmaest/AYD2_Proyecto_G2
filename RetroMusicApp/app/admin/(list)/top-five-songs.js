@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View, Dimensions } from 'react-native'
 import { BarChart } from 'react-native-chart-kit'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import RetroButton from '../../../components/RetroButton'
+import Dropdown from '../../../components/Dropdown'
 
 const chartConfig = {
   backgroundColor: '#222222',
@@ -10,8 +12,7 @@ const chartConfig = {
   labelColor: (opacity = 1) => `rgba(34, 34, 34, ${opacity})`,
   decimalPlaces: 0,
   style: {
-    borderRadius: 8,
-    padding: 32
+    borderRadius: 8
   },
   propsForDots: {
     r: '6',
@@ -25,6 +26,8 @@ const url = 'http://localhost:5000/admin/TopSongs'
 const TopFiveSongs = () => {
   const [labels, setLabels] = useState([])
   const [data, setData] = useState([])
+  const [genres, setGenres] = useState(['All'])
+  const [selectedGenre, setSelectedGenre] = useState('All')
 
   useEffect(() => {
     const fetchSongs = async () => {
@@ -46,9 +49,56 @@ const TopFiveSongs = () => {
     fetchSongs()
   }, [])
 
+  useEffect(() => {
+    const fetchGenres = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/admin/allSongsGenres', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        const data = await res.json()
+        setGenres(['All', ...data])
+      } catch (error) {
+        setGenres(['All'])
+      }
+    }
+    fetchGenres()
+  }, [])
+
+  const filterSongs = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/admin/TopSongsFiltro', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ genre: selectedGenre })
+      })
+      const data = await res.json()
+      setLabels(data.map((song) => song.name))
+      setData(data.map((song) => song.plays))
+    } catch (error) {
+      setLabels([])
+      setData([])
+    }
+  }
+
   return (
     <View style={styles.Container}>
       <Text style={styles.Text}>Top Five Songs</Text>
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '80%',
+        zIndex: 50
+      }}
+      >
+        <Dropdown values={genres} selectedValue={selectedGenre} setSelectedValue={setSelectedGenre} />
+        <RetroButton type='primary' text='Filtrar' handlePress={async () => { await filterSongs() }} />
+      </View>
       <BarChart
         style={styles.Chart}
         data={{
@@ -80,7 +130,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 32,
-    padding: 24
+    padding: 16
   },
   Text: {
     color: '#F3EFE0',
@@ -89,7 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   Chart: {
-    marginVertical: 8,
-    borderRadius: 16
+    borderRadius: 16,
+    zIndex: 0
   }
 })
