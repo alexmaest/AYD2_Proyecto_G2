@@ -465,3 +465,20 @@
 [fecha]: 2023-09-29 2:47:00 pm	[url]:	/admin/TopArtistsFiltro	[metodo]: POST	[usuario]: Administrator	[msg]: top 5 artists with filter(inf,sup) sent successfully!
 [fecha]: 2023-09-29 2:48:24 pm	[url]:	/admin/TopArtists	[metodo]: GET	[usuario]: Administrator	[msg]: top 5 artists sent successfully!
 [fecha]: 2023-09-29 2:48:37 pm	[url]:	/admin/TopArtistsFiltro	[metodo]: POST	[usuario]: Administrator	[msg]: top 5 artists with filter(inf,sup) sent successfully!
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-10-03 4:24:41 pm	inicio de backend
+[fecha]	2023-10-03 4:24:43 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-10-03 4:25:46 pm	[url]:	/admin/TopSongsFiltro	[metodo]: POST	[usuario]: Administrator	[msg]: Internal Server Error
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-10-03 4:26:42 pm	inicio de backend
+[fecha]	2023-10-03 4:26:42 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-10-03 4:26:45 pm	[url]:	/admin/TopSongsFiltro	[metodo]: POST	[usuario]: Administrator	[msg]: Internal Server Error
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-10-03 4:27:32 pm	inicio de backend
+[fecha]	2023-10-03 4:27:32 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-10-03 4:27:36 pm	[url]:	/admin/TopSongsFiltro	[metodo]: POST	[usuario]: Administrator	[msg]: Internal Server Error
+:::::::::::::::::::::::::::::::::::::: inicio de aplicacion ::::::::::::::::::::::::::::::::::::::
+[fecha]	2023-10-03 4:27:59 pm	inicio de backend
+[fecha]	2023-10-03 4:27:59 pm	[msg]: Information: Database connection succeeded
+[fecha]: 2023-10-03 4:28:03 pm	[url]:	/admin/TopSongsFiltro	[metodo]: POST	[usuario]: Administrator	[msg]: top 5 songs with filter sent successfully!
+[fecha]: 2023-10-03 4:28:21 pm	[url]:	/admin/TopSongsFiltro	[metodo]: POST	[usuario]: Administrator	[msg]: top 5 songs with filter sent successfully!

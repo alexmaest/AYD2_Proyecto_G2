@@ -405,14 +405,29 @@ class songRepository {
 
 
   topSongsFiltro(genero) {
+    console.log(" ***** top 5 cnaiones con filtro, genero recibido: "+genero)
+    
     return new Promise((resolve, reject) => {
-      const query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
+      
+      let query =``;
+
+      if(genero=="All"){
+      query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
+      join creador_contenido as cc on cc.id_creador = c.id_creador
+      join usuario as u on u.id  = cc.usuario_id  
+      ORDER BY
+      c.reproducciones DESC
+      LIMIT 5;  `;
+    }else{
+        query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
       join creador_contenido as cc on cc.id_creador = c.id_creador
       join usuario as u on u.id  = cc.usuario_id  
       WHERE c.genero = ?
       ORDER BY
       c.reproducciones DESC
       LIMIT 5;  `;
+      }
+
       db.connection.query(query, [genero], (err, results) => {
         if (err) {
           reject(null);

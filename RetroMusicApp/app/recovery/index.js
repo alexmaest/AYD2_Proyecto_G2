@@ -32,7 +32,7 @@ const RecoveryPassword = () => {
 
   async function enviarCorreo (text) {
     setCodeVisible(true)// para que se mire el resto
-    // console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nHago la peticion al backend hacia ruta: 5000/login/passwordChange')
+    console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nEnvio de codigo(solicitud de cambio de password) a correo electronico')
     // console.log(' >>>> recibo:' + text)
     const email = { // newPassword, token
       email: text
@@ -63,7 +63,7 @@ const RecoveryPassword = () => {
 
   async function nuevaContraseña (password, codigo) {
     setCodeVisible(true)// para que se mire el resto
-    // console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nHago la peticion al backend hacia ruta: 5000/login/passwordChange')
+    console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nSolicitud de cambio de password')
     // console.log(' >>>> recibo:' + text)
     const body = { // newPassword, token
       newPassword: password,
