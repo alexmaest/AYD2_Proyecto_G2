@@ -3,7 +3,8 @@ import {
   Pressable, StyleSheet
 } from 'react-native'
 import { baseUrl, apiUrls } from '../../constants/urls'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { router } from 'expo-router'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function Page () {
@@ -32,11 +33,51 @@ export default function Page () {
 
       const data = await response.json()
       AsyncStorage.setItem('session', await JSON.stringify(data))
+
+      switch (data?.role ?? '') {
+        case 1:
+          router.push('/admin')
+          break
+        case 2:
+          router.push('/artist')
+          break
+        case 3:
+          router.push('/user')
+          break
+        default:
+          setModalVisible(true)
+          break
+      }
     } catch (error) {
       setModalVisible(true)
       console.error(error)
     }
   }
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const sessionString = await AsyncStorage.getItem('session')
+      const session = await JSON.parse(sessionString)
+      if (session) {
+        switch (session?.role ?? '') {
+          case 1:
+            router.push('/admin')
+            break
+          case 2:
+            router.push('/artist')
+            break
+          case 3:
+            router.push('/user')
+            break
+          default:
+            setModalVisible(true)
+            break
+        }
+      }
+    }
+    checkSession()
+  }, [])
+
   return (
     <View className='flex-1 items-center justify-center bg-gray-900'>
       <Modal
