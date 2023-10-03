@@ -8,9 +8,9 @@ const adminReports = () => {
       <Text style={styles.Text}>Reportes:</Text>
       <View style={styles.LinksContainer}>
         <Link href='admin/top-five-songs' style={styles.Link}>1. Top 5 canciones</Link>
-        <Link href='admin/home' style={styles.Link}>2. Top 5 artistas</Link>
-        <Link href='admin/home' style={styles.Link}>3. Top 5 álbumes</Link>
-        <Link href='admin/home' style={styles.Link}>4. Canciones mas escuchadas</Link>
+        <Link href='admin/top-five-artists' style={styles.Link}>2. Top 5 artistas</Link>
+        <Link href='admin/top-five-albums' style={styles.Link}>3. Top 5 álbumes</Link>
+        <Link href='admin/top-global-songs' style={styles.Link}>4. Canciones mas escuchadas</Link>
       </View>
     </View>
   )

@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 
 const chartConfig = {
   backgroundColor: '#222222',
-  backgroundGradientFrom: '#de6718',
-  backgroundGradientTo: '#f3aa60',
+  backgroundGradientFrom: '#20816a',
+  backgroundGradientTo: '#45bc9c',
   color: (opacity = 1) => `rgba(34, 34, 34, ${opacity})`,
   labelColor: (opacity = 1) => `rgba(34, 34, 34, ${opacity})`,
   decimalPlaces: 0,
@@ -20,14 +20,14 @@ const chartConfig = {
   }
 }
 
-const url = 'http://localhost:5000/admin/TopSongs'
+const url = 'http://localhost:5000/admin/TopAlbums'
 
-const TopFiveSongs = () => {
+const TopFiveAlbums = () => {
   const [labels, setLabels] = useState([])
   const [data, setData] = useState([])
 
   useEffect(() => {
-    const fetchSongs = async () => {
+    const fetchAlbums = async () => {
       try {
         const res = await fetch(url, {
           method: 'GET',
@@ -36,19 +36,19 @@ const TopFiveSongs = () => {
           }
         })
         const data = await res.json()
-        setLabels(data.map((song) => song.name))
-        setData(data.map((song) => song.plays))
+        setLabels(data.map((album) => album.name))
+        setData(data.map((album) => album.plays))
       } catch (error) {
         setLabels([])
         setData([])
       }
     }
-    fetchSongs()
+    fetchAlbums()
   }, [])
 
   return (
     <View style={styles.Container}>
-      <Text style={styles.Text}>Top Five Songs</Text>
+      <Text style={styles.Text}>Top Five Albums</Text>
       <BarChart
         style={styles.Chart}
         data={{
@@ -71,7 +71,7 @@ const TopFiveSongs = () => {
   )
 }
 
-export default TopFiveSongs
+export default TopFiveAlbums
 
 const styles = StyleSheet.create({
   Container: {

@@ -34,6 +34,18 @@ const AdminLayout = () => {
         name='(list)/top-five-songs'
         options={{ href: null }}
       />
+      <Tabs.Screen
+        name='(list)/top-five-artists'
+        options={{ href: null }}
+      />
+      <Tabs.Screen
+        name='(list)/top-five-albums'
+        options={{ href: null }}
+      />
+      <Tabs.Screen
+        name='(list)/top-global-songs'
+        options={{ href: null }}
+      />
     </Tabs>
   )
 }
