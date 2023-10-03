@@ -29,7 +29,7 @@ const Home = () => {
           />
         </View>
         <View
-          className='flex-1 flex-row p-4 items-center justify-between gap-4 bg-retro-orange'
+          className='flex-1 flex-row p-4 items-center justify-between gap-6 bg-retro-orange'
           style={{
             paddingVertical: 40
           }}
@@ -47,7 +47,7 @@ const Home = () => {
             <Link href='/' className='underline text-retro-black'>
               Terms of use
             </Link>
-            <Link href='/' className='underline text-retro-black'>
+            <Link href='/admin' className='underline text-retro-black'>
               Privacy policy
             </Link>
             <Link href='/recovery' className='underline text-retro-black'>

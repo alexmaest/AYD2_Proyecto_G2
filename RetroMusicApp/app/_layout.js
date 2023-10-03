@@ -4,6 +4,7 @@ export default function HomeLayout () {
   return (
     <Stack>
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+      <Stack.Screen name='admin' options={{ headerShown: false }} />
     </Stack>
   )
 }
