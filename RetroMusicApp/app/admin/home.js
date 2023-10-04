@@ -14,7 +14,7 @@ export default Admin
 const styles = StyleSheet.create({
   Container: {
     flex: 1,
-    backgroundColor: '#1D1D1D',
+    backgroundColor: '#222222',
     alignItems: 'center',
     justifyContent: 'center'
   },

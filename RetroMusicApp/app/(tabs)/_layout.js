@@ -45,9 +45,9 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
-        name='register'
+        name='userRegister'
         options={{
-          href: '/register',
+          href: '/userRegister',
           title: '',
           tabBarIcon: ({ focused, color }) => (
             <View
@@ -57,7 +57,25 @@ const _layout = () => {
                 backgroundColor: 'transparent'
               }}
             >
-              <TabBarIcon name='user-plus' color={color} size={24} focused={focused} />
+              <TabBarIcon name='user-circle-o' color={color} size={24} focused={focused} />
+            </View>
+          )
+        }}
+      />
+      <Tabs.Screen
+        name='artistRegister'
+        options={{
+          href: '/artistRegister',
+          title: '',
+          tabBarIcon: ({ focused, color }) => (
+            <View
+              style={{
+                flexDirection: 'column',
+                alignItems: 'center',
+                backgroundColor: 'transparent'
+              }}
+            >
+              <TabBarIcon name='user-circle' color={color} size={24} focused={focused} />
             </View>
           )
         }}
