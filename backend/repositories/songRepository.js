@@ -206,7 +206,6 @@ class songRepository {
     });
   }
 
-
   //JA - fase2
   findAllArtistSongs2() {
     //console.log("3")
@@ -243,8 +242,6 @@ class songRepository {
     });
   }
 
-
-
   //sprint 2 - fase2
   updateSongCounter(songId, userId) {
     console.log(">>>>>>>>>> idSong: "+songId+" userId: "+userId)
@@ -272,7 +269,6 @@ class songRepository {
       });
     });
   }
-
 
   //top 5 canciones
   topSongs() {
@@ -307,7 +303,6 @@ class songRepository {
     });
   }
 
-
   //top 5 albums
   topAlbums() {
     return new Promise((resolve, reject) => {
@@ -341,8 +336,6 @@ class songRepository {
       });
     });
   }
-
-
 
   //top 5 artists
   topArtists() {
@@ -380,9 +373,6 @@ class songRepository {
     });
   }
 
-
-
-
   //fase 3 --------------------------------------------------------------------------------------------------------------------------------------------
 
   getAllSongsGenres() {
@@ -416,7 +406,6 @@ class songRepository {
       });
     });
   }
-
 
   topSongsFiltro(genero) {
     console.log(" ***** top 5 cnaiones con filtro, genero recibido: " + genero)
@@ -466,7 +455,6 @@ class songRepository {
     });
   }
 
-
   topAlbumsFiltro(inf, sup) {
     return new Promise((resolve, reject) => {
       const query = ` SELECT album.id_album, album.nombre, SUM(c.reproducciones) AS reproduccionesALBUM,u.nombre as artist FROM cancion as c
@@ -500,9 +488,6 @@ class songRepository {
       });
     });
   }
-
-
-
 
   top5ArtistsFiltro(inf, sup) {
     return new Promise((resolve, reject) => {
@@ -540,8 +525,125 @@ class songRepository {
     });
   }
 
+  historial(userId) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        SELECT
+          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS date,
+          CONCAT(
+            '[',
+            GROUP_CONCAT(
+              '{"songID":', r.id_cancion,
+              ',"name":"', c.nombre,
+              '","songUrl":"', c.link_cancion,
+              '","duration":"', TIME_FORMAT(c.duracion, '%H:%i:%s'),
+              '","genre":"', c.genero,
+              '","cover":"', a.link_foto,
+              '","artistID":', r.id_artista,
+              ',"albumID":', r.id_album,
+              '}'
+            ),
+            ']'
+          ) AS songs
+        FROM
+          reproducciones r
+        JOIN
+          album a ON r.id_album = a.id_album
+        JOIN
+          cancion c ON r.id_cancion = c.id_cancion
+        WHERE
+          r.id_usuario = ?
+        GROUP BY
+          fecha
+        ORDER BY
+          fecha ASC
+      `;
+      db.connection.query(query, [userId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const listeningHistory = results.map(result => ({
+              date: result.date,
+              songs: JSON.parse(result.songs)
+            }));
+            resolve(listeningHistory);
+          } else {
+            resolve([]);
+          }
+        }
+      });
+    });
+  }
 
+  listenedTime(userId) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        SELECT
+          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS date,
+          SEC_TO_TIME(SUM(TIME_TO_SEC(c.duracion))) AS time
+        FROM
+          reproducciones r
+        JOIN
+          cancion c ON r.id_cancion = c.id_cancion
+        WHERE
+          r.id_usuario = ?
+        GROUP BY
+          date
+        ORDER BY
+          date ASC
+      `;
+      db.connection.query(query, [userId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const listeningHistory = results.map(result => ({
+              date: result.date,
+              time: result.time
+            }));
+            resolve(listeningHistory);
+          } else {
+            resolve([]);
+          }
+        }
+      });
+    });
+  }
 
+  listenedSongs(userId) {
+    return new Promise((resolve, reject) => {
+      const query = `
+        SELECT
+          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS date,
+          COUNT(*) AS quantity
+        FROM
+          reproducciones r
+        WHERE
+          r.id_usuario = ?
+        GROUP BY
+          date
+        ORDER BY
+          date ASC
+      `;
+      db.connection.query(query, [userId], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+            const listeningHistory = results.map(result => ({
+              date: result.date,
+              quantity: result.quantity
+            }));
+            resolve(listeningHistory);
+          } else {
+            resolve([]);
+          }
+        }
+      });
+    });
+  }
+  
   topSongsATFiltro(dateI,dateF) {
     console.log(" ***** top global cnaiones con filtro, fechas recibidas: " + dateI+" / "+dateF)
 

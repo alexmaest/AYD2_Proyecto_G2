@@ -97,7 +97,6 @@ class songModel {
     }
   }
 
-
   //JA- fase2
   async getAllArtistSongs2() {
     try {
@@ -110,7 +109,6 @@ class songModel {
     }
   }
 
-
   //sprint 2 fase2
   async updateMusic(songId,userId) {//modulo admin, actualizacion del contador de la cancion escuchada
     try {
@@ -122,7 +120,6 @@ class songModel {
     }
   }
 
-
   async top5Songs() {//modulo admin, top 5 de la canciones escuchadas
     try {
       const songCounter = await this.repository.topSongs();
@@ -132,7 +129,6 @@ class songModel {
       throw new Error('Error while fetching songCounter update');
     }
   }
-
 
   async top5Albums() {//modulo admin, top 5 de la canciones escuchadas
     try {
@@ -154,7 +150,6 @@ class songModel {
     }
   }
 
-
   //fase3
   async getAllGenres() {
     try {
@@ -166,7 +161,6 @@ class songModel {
     }
   }
 
-
   async top5SongsFiltro(genero) {//modulo admin, top 5 de la canciones escuchadas
     try {
       const songCounter = await this.repository.topSongsFiltro(genero);
@@ -176,7 +170,6 @@ class songModel {
       throw new Error('Error while fetching songCounter update');
     }
   }
-
 
   async top5AlbumsFiltro(inf,sup) {//modulo admin, top 5 de la canciones escuchadas
     try {
@@ -198,7 +191,35 @@ class songModel {
     }
   }
 
+  async getHistorial(userId) {
+    try {
+      const songs = await this.repository.historial(userId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching user historial');
+    }
+  }
 
+  async getListenedTime(userId) {
+    try {
+      const songs = await this.repository.listenedTime(userId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching user listened time');
+    }
+  }
+
+  async getListenedSongs(userId) {
+    try {
+      const songs = await this.repository.listenedSongs(userId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching user listened songs');
+    }
+  }
   async top5SongsATFiltro(dateI,dateF) {//modulo admin, top global de la canciones escuchadas
     try {
       const songCounter = await this.repository.topSongsATFiltro(dateI,dateF);
