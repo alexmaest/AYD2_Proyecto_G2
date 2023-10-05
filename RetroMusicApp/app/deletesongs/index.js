@@ -91,9 +91,14 @@ const ArtistDeleteSongs = () => {
         }
       })
       await res.json()
-      obtenerCanciones() // para que carguen de nuevo
-
-      console.log(res)
+      // despues de la peticion delete imposible que haga algo mas asique ahi se queda la cosa
+      // console.log('...............................')
+      // console.log(res)
+      /*
+      Alert.alert('Cancion borrada', 'La cancion ha sido borrada del sistema', [
+        { text: 'Aceptar', onPress: () => console.log('CANCION BORRADA') } // se borro la cancion
+      ])
+      */
     } catch (error) {
       console.log(error)
     }
@@ -106,12 +111,18 @@ const ArtistDeleteSongs = () => {
         <Button
           onPress={() => {
             // Imprime el ID de la canción
-            Alert.alert('Precausion', 'No pudimos hallar una cuenta con el correo brindado', [
-              { text: 'Aceptar', onPress: () => borrarCancion(song.id) }, // aqui ejecuto el ENDPOINT del backend
-              { text: 'Cancelar', onPress: () => console.log('borrar cancion se ha cancelado') }// aqui desiste de la accion de borrar cancion
+            Alert.alert('Precausion', 'Esta seguro que desea eliminar la cancion: ' + song.name + '?', [
+              {
+                text: 'Aceptar',
+                onPress: () => borrarCancion(song.id).then(() => {
+                  obtenerCanciones(idArtist)
+                })
+              }, // aqui ejecuto el ENDPOINT del backend para borrar cancion
+              { text: 'Cancelar', onPress: () => console.log('proceso de borrar cancion se ha cancelado') }// aqui desiste de la accion de borrar cancion
             ])
           }}
-          title={String(song.id)} // el titulo del boton a la par de la cancion
+          // title={String(song.id)} // el titulo del boton a la par de la cancion
+          title='Borrar'
         >
           Borrar
         </Button>
@@ -150,7 +161,7 @@ const ArtistDeleteSongs = () => {
         />
 
         <View style={{ padding: 16 }}>
-          <Text className='text-retro-white text-lg font-bold'>Id de artista a mostrar canciones</Text>
+          <Text className='text-retro-white text-lg font-bold' style={{ marginTop: 26 }}>Una vez borrada una cancion, porfavor utilice el boton de refrescar para ver la lista actualizada</Text>
           <TextInput
             style={{ backgroundColor: '#1D1D1D', borderColor: 'gray', borderWidth: 1 }}
             placeholderTextColor='#FFFFFF'
@@ -169,7 +180,7 @@ const ArtistDeleteSongs = () => {
             }}
             onPress={() => { obtenerCanciones(idArtist) }}
           >
-            <Text style={{ color: '#fff' }}>Enviar</Text>
+            <Text style={{ color: '#fff' }}>Refrescar</Text>
           </TouchableOpacity>
         </View>
 
