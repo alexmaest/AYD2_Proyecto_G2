@@ -44,7 +44,7 @@ const Home = () => {
             <Link href='/' className='underline text-retro-black'>
               Contact
             </Link>
-            <Link href='/' className='underline text-retro-black'>
+            <Link href='/artist' className='underline text-retro-black'>
               Terms of use
             </Link>
             <Link href='/admin' className='underline text-retro-black'>
