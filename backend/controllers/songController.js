@@ -237,8 +237,8 @@ class songController {
     //sprint 2 - fase2
     async musicCounter(req, res) {
         try {
-            //console.log(req.body)
-            const songCounter = await songModel.updateMusic(req.body.id);//modulo admin visualice a todos los CC
+            console.log(req.body)
+            const songCounter = await songModel.updateMusic(req.body.id, req.body.userId);//modulo admin visualice a todos los CC
             if (songCounter === null) {
                 logEventsWrite(req.originalUrl, req.method, "user", "Song counter can't updated!", 3)//log
                 res.status(401).send('Error')

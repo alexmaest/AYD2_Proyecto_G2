@@ -190,7 +190,7 @@ class songRepository {
               songUrl: result.link_cancion,
               duration: result.duracion,
               genre: result.genero,
-              cover:result.link_foto,
+              cover: result.link_foto,
               artist: result.owner,
               albumID: result.id_album//new
             }));
@@ -246,14 +246,28 @@ class songRepository {
 
 
   //sprint 2 - fase2
-  updateSongCounter(songId) {
+  updateSongCounter(songId, userId) {
+    console.log(">>>>>>>>>> idSong: "+songId+" userId: "+userId)
     return new Promise((resolve, reject) => {
       const query = 'UPDATE cancion SET reproducciones = IF(reproducciones IS NULL, 1, reproducciones + 1) WHERE id_cancion = ?  ;';
       db.connection.query(query, [songId], (err, result) => {
         if (err) {
           reject(null);
-        } else {
-          resolve(result.affectedRows > 0);
+
+        } else { // como actualizo el contador de la cancion, ahora pues dejamos registro de esto en la tabla REPRODUCCIONES (fase 3)
+
+          resolve(result.affectedRows > 0);// sino F
+
+          const query2 = 'CALL registrar_reproduccion(?,?);';
+          db.connection.query(query2, [songId,userId], (err, result2) => {
+            if (err) {
+              reject(null); // el proc db fallo
+            } else {
+              console.log("PROC DB REALIZADO CON EXITO!!!!!!!!!!!!!!!!")
+              console.log(result2)
+              
+            }
+          });
         }
       });
     });
@@ -273,7 +287,7 @@ class songRepository {
         if (err) {
           reject(null);
         } else {
-           if (results.length > 0) {
+          if (results.length > 0) {
             const songs = results.map(result => ({
               id: result.id,
               name: result.name,
@@ -309,7 +323,7 @@ class songRepository {
         if (err) {
           reject(null);
         } else {
-           if (results.length > 0) {
+          if (results.length > 0) {
             const songs = results.map(result => ({
               id: result.id_album,
               name: result.nombre,
@@ -330,8 +344,8 @@ class songRepository {
 
 
 
-   //top 5 artists
-   topArtists() {
+  //top 5 artists
+  topArtists() {
     return new Promise((resolve, reject) => {
       const query = ` SELECT creador_contenido.id_creador,u.nombre as nombre,u.id,SUM(cancion.reproducciones) AS reproducciones FROM cancion
       INNER JOIN album ON cancion.id_album = album.id_album
@@ -347,7 +361,7 @@ class songRepository {
         if (err) {
           reject(null);
         } else {
-           if (results.length > 0) {
+          if (results.length > 0) {
             const songs = results.map(result => ({
               idCreator: result.id_creador,
               idUsuario: result.id,
@@ -384,9 +398,9 @@ class songRepository {
           if (results.length > 0) {
 
             //Objeto []
-           /* const genresS = results.map(result => ({
-              genre: result.genre
-            }));*/
+            /* const genresS = results.map(result => ({
+               genre: result.genre
+             }));*/
 
             //---------------------------------
 
@@ -405,20 +419,20 @@ class songRepository {
 
 
   topSongsFiltro(genero) {
-    console.log(" ***** top 5 cnaiones con filtro, genero recibido: "+genero)
-    
-    return new Promise((resolve, reject) => {
-      
-      let query =``;
+    console.log(" ***** top 5 cnaiones con filtro, genero recibido: " + genero)
 
-      if(genero=="All"){
-      query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
+    return new Promise((resolve, reject) => {
+
+      let query = ``;
+
+      if (genero == "All") {
+        query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
       join creador_contenido as cc on cc.id_creador = c.id_creador
       join usuario as u on u.id  = cc.usuario_id  
       ORDER BY
       c.reproducciones DESC
       LIMIT 5;  `;
-    }else{
+      } else {
         query = ` SELECT c.id_cancion as id, c.nombre as name, u.nombre as artist, c.reproducciones as plays, c.genero as genre FROM cancion as c
       join creador_contenido as cc on cc.id_creador = c.id_creador
       join usuario as u on u.id  = cc.usuario_id  
@@ -432,7 +446,7 @@ class songRepository {
         if (err) {
           reject(null);
         } else {
-           if (results.length > 0) {
+          if (results.length > 0) {
             const songs = results.map(result => ({
               id: result.id,
               name: result.name,
@@ -453,7 +467,7 @@ class songRepository {
   }
 
 
-  topAlbumsFiltro(inf,sup) {
+  topAlbumsFiltro(inf, sup) {
     return new Promise((resolve, reject) => {
       const query = ` SELECT album.id_album, album.nombre, SUM(c.reproducciones) AS reproduccionesALBUM,u.nombre as artist FROM cancion as c
       JOIN album ON c.id_album = album.id_album
@@ -464,11 +478,11 @@ class songRepository {
       ORDER BY
       reproduccionesALBUM DESC
       LIMIT 5; `;
-      db.connection.query(query, [inf,sup], (err, results) => {
+      db.connection.query(query, [inf, sup], (err, results) => {
         if (err) {
           reject(null);
         } else {
-           if (results.length > 0) {
+          if (results.length > 0) {
             const songs = results.map(result => ({
               id: result.id_album,
               name: result.nombre,
@@ -490,7 +504,7 @@ class songRepository {
 
 
 
-  top5ArtistsFiltro(inf,sup) {
+  top5ArtistsFiltro(inf, sup) {
     return new Promise((resolve, reject) => {
       const query = ` SELECT creador_contenido.id_creador,u.nombre as nombre,u.id,SUM(cancion.reproducciones) AS reproducciones FROM cancion
       INNER JOIN album ON cancion.id_album = album.id_album
@@ -503,11 +517,11 @@ class songRepository {
       reproducciones DESC
     LIMIT
       5;  `;
-      db.connection.query(query, [inf,sup], (err, results) => {
+      db.connection.query(query, [inf, sup], (err, results) => {
         if (err) {
           reject(null);
         } else {
-           if (results.length > 0) {
+          if (results.length > 0) {
             const songs = results.map(result => ({
               idCreator: result.id_creador,
               idUsuario: result.id,
