@@ -112,9 +112,9 @@ class songModel {
 
 
   //sprint 2 fase2
-  async updateMusic(songId) {//modulo admin, actualizacion del contador de la cancion escuchada
+  async updateMusic(songId,userId) {//modulo admin, actualizacion del contador de la cancion escuchada
     try {
-      const songCounter = await this.repository.updateSongCounter(songId);
+      const songCounter = await this.repository.updateSongCounter(songId,userId);
       return songCounter;
     } catch (err) {
       console.error(err);
