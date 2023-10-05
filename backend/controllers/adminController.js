@@ -169,6 +169,31 @@ class adminController {
         }
     }
 
+    async topSongsATFiltro(req, res) {
+        try {
+            const allTopSongs = await songModel.top5SongsATFiltro(req.body.dateInit, req.body.dateFinal);//filtro de top por fechas
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top global songs with filter sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+
+    async allDatesReproducciones(req, res) {
+        try {
+            const allGenresSongs = await songModel.getAllDates();
+            logEventsWrite(req.originalUrl,req.method,"Administrator","all dates of songs from table report sent successfully!",3)//log
+            res.status(200).json(allGenresSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
 }
 
 module.exports = new adminController();

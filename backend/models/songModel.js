@@ -199,6 +199,27 @@ class songModel {
   }
 
 
+  async top5SongsATFiltro(dateI,dateF) {//modulo admin, top global de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.topSongsATFiltro(dateI,dateF);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+  async getAllDates() {
+    try {
+      const songs = await this.repository.getAllSongsDates();
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist songs');
+    }
+  }
+
+
 }
 
 module.exports = new songModel();
