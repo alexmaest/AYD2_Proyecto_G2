@@ -542,6 +542,82 @@ class songRepository {
 
 
 
+  topSongsATFiltro(dateI,dateF) {
+    console.log(" ***** top global cnaiones con filtro, fechas recibidas: " + dateI+" / "+dateF)
+
+    return new Promise((resolve, reject) => {
+
+      let query = ` SELECT r.genero, r.fecha, c.nombre as cancion, a.nombre as album, u.nombre as artista, userL.nombre as consumidor
+      FROM reproducciones as r
+      join cancion as c on c.id_cancion = r.id_cancion
+      join album as a on a.id_album = r.id_album
+      join creador_contenido as cc on cc.id_creador = r.id_artista
+      join usuario as u on cc.usuario_id = u.id
+      join usuario as userL on r.id_usuario  = userL.id
+      WHERE fecha BETWEEN ? AND ? ;   `;
+      
+
+      db.connection.query(query, [dateI,dateF], (err, results) => {
+        if (err) {
+          reject(null);
+        } else {
+          if (results.length > 0) {
+            const songs = results.map(result => ({
+              genero: result.genero,
+              fecha: result.fecha,
+              cancion: result.cancion,
+              album: result.album,
+              artista: result.artista,
+
+              consumidor: result.consumidor
+            }));
+
+            //console.log("..............")
+            //console.log(songs)
+            resolve(songs);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+
+  getAllSongsDates() {
+    return new Promise((resolve, reject) => {
+      const query = `
+      SELECT DISTINCT DATE_FORMAT(fecha, '%Y-%m-%d') as fecha
+      FROM reproducciones;
+      `;
+      db.connection.query(query, [], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          if (results.length > 0) {
+
+            //Objeto []
+            /* const genresS = results.map(result => ({
+               genre: result.genre
+             }));*/
+
+            //---------------------------------
+
+            //Strings []
+            const dates = [];
+            results.forEach(result => dates.push(result.fecha));
+
+            resolve(dates);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  }
+
+
+
 }
 
 module.exports = songRepository;

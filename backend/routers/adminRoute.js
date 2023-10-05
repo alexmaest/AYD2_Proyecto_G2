@@ -24,4 +24,9 @@ router.post('/TopAlbumsFiltro', adminController.topAlbumsFiltro);
 //top 5 artists
 router.post('/TopArtistsFiltro', adminController.topArtistsFiltro);
 
+//top canciones escuchadas a nivel global con filtrado por fecha
+router.get('/allSongsDates', adminController.allDatesReproducciones);//para el top songs por filtro de fechas, se necesita primero tener las fechas
+router.post('/TopSongsAlltime', adminController.topSongsATFiltro);
+
+
 module.exports = router;
