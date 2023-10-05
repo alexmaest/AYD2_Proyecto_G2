@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",
-    "@react-native-picker/picker": "^2.5.1",
+    "@react-native-picker/picker": "2.4.10",
     "expo": "~49.0.13",
     "expo-linking": "~5.0.2",
     "expo-router": "^2.0.0",
