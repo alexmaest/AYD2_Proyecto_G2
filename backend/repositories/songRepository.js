@@ -515,41 +515,47 @@ class songRepository {
     return new Promise((resolve, reject) => {
       const query = `
         SELECT
-          r.id_cancion AS songID,
-          c.nombre AS name,
-          c.link_cancion AS songUrl,
-          c.duracion AS duration,
-          c.genero AS genre,
-          a.link_foto AS cover,
-          r.id_artista AS artistID,
-          r.id_album AS albumID,
-          r.fecha AS date
+          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS date,
+          CONCAT(
+            '[',
+            GROUP_CONCAT(
+              '{"songID":', r.id_cancion,
+              ',"name":"', c.nombre,
+              '","songUrl":"', c.link_cancion,
+              '","duration":"', TIME_FORMAT(c.duracion, '%H:%i:%s'),
+              '","genre":"', c.genero,
+              '","cover":"', a.link_foto,
+              '","artistID":', r.id_artista,
+              ',"albumID":', r.id_album,
+              '}'
+            ),
+            ']'
+          ) AS songs
         FROM
           reproducciones r
+        JOIN
+          album a ON r.id_album = a.id_album
         JOIN
           cancion c ON r.id_cancion = c.id_cancion
         WHERE
           r.id_usuario = ?
+        GROUP BY
+          fecha
+        ORDER BY
+          fecha ASC
       `;
       db.connection.query(query, [userId], (err, results) => {
         if (err) {
           reject(err);
         } else {
           if (results.length > 0) {
-            const songs = results.map(result => ({
-              songID: result.songID,
-              name: result.name,
-              songUrl: result.songUrl,
-              duration: result.duration,
-              genre: result.genre,
-              cover: result.cover,
-              artistID: result.artistID,
-              albumID: result.albumID,
-              date: result.date
+            const listeningHistory = results.map(result => ({
+              date: result.date,
+              songs: JSON.parse(result.songs)
             }));
-            resolve(songs);
+            resolve(listeningHistory);
           } else {
-            resolve(null);
+            resolve([]);
           }
         }
       });
@@ -560,8 +566,8 @@ class songRepository {
     return new Promise((resolve, reject) => {
       const query = `
         SELECT
-          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS fecha,
-          SUM(TIME_TO_SEC(c.duracion)) AS tiempo_escuchado
+          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS date,
+          SEC_TO_TIME(SUM(TIME_TO_SEC(c.duracion))) AS time
         FROM
           reproducciones r
         JOIN
@@ -569,9 +575,9 @@ class songRepository {
         WHERE
           r.id_usuario = ?
         GROUP BY
-          fecha
+          date
         ORDER BY
-          fecha DESC
+          date ASC
       `;
       db.connection.query(query, [userId], (err, results) => {
         if (err) {
@@ -579,12 +585,12 @@ class songRepository {
         } else {
           if (results.length > 0) {
             const listeningHistory = results.map(result => ({
-              date: result.fecha,
-              listenedTime: result.tiempo_escuchado
+              date: result.date,
+              time: result.time
             }));
             resolve(listeningHistory);
           } else {
-            resolve(null);
+            resolve([]);
           }
         }
       });
@@ -595,16 +601,16 @@ class songRepository {
     return new Promise((resolve, reject) => {
       const query = `
         SELECT
-          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS fecha,
-          COUNT(*) AS cantidad_canciones
+          DATE_FORMAT(r.fecha, '%d/%m/%Y') AS date,
+          COUNT(*) AS quantity
         FROM
           reproducciones r
         WHERE
           r.id_usuario = ?
         GROUP BY
-          fecha
+          date
         ORDER BY
-          fecha DESC
+          date ASC
       `;
       db.connection.query(query, [userId], (err, results) => {
         if (err) {
@@ -612,12 +618,12 @@ class songRepository {
         } else {
           if (results.length > 0) {
             const listeningHistory = results.map(result => ({
-              fecha: result.fecha,
-              cantidadCanciones: result.cantidad_canciones
+              date: result.date,
+              quantity: result.quantity
             }));
             resolve(listeningHistory);
           } else {
-            resolve(null);
+            resolve([]);
           }
         }
       });
