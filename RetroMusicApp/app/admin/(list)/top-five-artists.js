@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Dimensions, TextInput } from 'react-native'
 import { BarChart } from 'react-native-chart-kit'
 import { useEffect, useState } from 'react'
 import RetroButton from '../../../components/RetroButton'
+import { apiUrls, baseUrl } from '../../../constants/urls'
 
 const chartConfig = {
   backgroundColor: '#222222',
@@ -21,8 +22,6 @@ const chartConfig = {
   }
 }
 
-const url = 'http://localhost:5000/admin/TopArtists'
-
 const TopFiveArtists = () => {
   const [labels, setLabels] = useState([])
   const [data, setData] = useState([])
@@ -32,7 +31,7 @@ const TopFiveArtists = () => {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const res = await fetch(url, {
+        const res = await fetch(baseUrl + apiUrls.admin.topArtists, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -51,7 +50,7 @@ const TopFiveArtists = () => {
 
   const filterArtists = async () => {
     try {
-      const res = await fetch('http://localhost:5000/admin/TopArtistsFiltro', {
+      const res = await fetch(baseUrl + apiUrls.admin.topArtistsFiltro, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
