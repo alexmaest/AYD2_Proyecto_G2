@@ -3,9 +3,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { useEffect, useState } from 'react'
 import { Picker } from '@react-native-picker/picker'
 import RetroButton from '../../../components/RetroButton'
-
-const url = 'http://localhost:5000/admin/TopSongsAlltime'
-const url2 = 'http://localhost:5000/admin/allSongsDates'
+import { apiUrls, baseUrl } from '../../../constants/urls'
 
 const TopGlobalSongs = () => {
   const [labels, setLabels] = useState([])
@@ -17,7 +15,7 @@ const TopGlobalSongs = () => {
   useEffect(() => {
     const fetchDates = async () => {
       try {
-        const res = await fetch(url2, {
+        const res = await fetch(baseUrl + apiUrls.admin.allSongsDates, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -38,7 +36,7 @@ const TopGlobalSongs = () => {
 
   const handleFilter = async () => {
     try {
-      const res = await fetch(url, {
+      const res = await fetch(baseUrl + apiUrls.admin.topGlobalSongs, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

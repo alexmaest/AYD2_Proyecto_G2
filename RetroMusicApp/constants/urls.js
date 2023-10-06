@@ -26,7 +26,13 @@ export const apiUrls = {
     artistsManagment: '/admin/artistsManagment',
     topSongs: '/admin/TopSongs',
     topAlbums: '/admin/TopAlbums',
-    topArtists: '/admin/TopArtists'
+    topArtists: '/admin/TopArtists',
+    topAlbumsFiltro: '/admin/TopAlbumsFiltro',
+    topArtistsFiltro: '/admin/TopArtistsFiltro',
+    topSongsFiltro: '/admin/TopSongsFiltro',
+    topGlobalSongs: '/admin/TopSongsAlltime',
+    allSongsGenres: '/admin/allSongsGenres',
+    allSongsDates: '/admin/allSongsDates'
   },
   user: {
     songs: '/user/songs',
