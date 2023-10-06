@@ -1,15 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
 
-const Admin = () => {
+const Artist = () => {
   return (
     <View style={styles.Container}>
-      <Text style={styles.Text}>Welcome administrator!</Text>
+      <Text style={styles.Text}>Welcome artist!</Text>
     </View>
   )
 }
 
-export default Admin
+export default Artist
 
 const styles = StyleSheet.create({
   Container: {

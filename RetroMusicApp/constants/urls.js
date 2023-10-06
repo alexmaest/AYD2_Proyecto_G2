@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 export const baseUrl = 'http://192.168.0.14:5000'
+=======
+export const baseUrl = 'http://localhost:5000'
+>>>>>>> develop
 
 export const apiUrls = {
   auth: {
@@ -9,6 +13,7 @@ export const apiUrls = {
     userRegister: '/userRegister/free'
   },
   artist: {
+<<<<<<< HEAD
     uploadBanner: '/artist/banner',
     banner: '/artist/banner',
     uploadSong: '/artist/uploadSong',
@@ -40,5 +45,11 @@ export const apiUrls = {
     recomendations: '/user/recomendations',
     musicCounter: '/user/MusicCounter',
     userLimit: '/user/userLimit'
+=======
+  },
+  admin: {
+  },
+  user: {
+>>>>>>> develop
   }
 }

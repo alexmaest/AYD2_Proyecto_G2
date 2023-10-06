@@ -5,18 +5,103 @@ import {
   TextInput,
   TouchableOpacity,
   ImageBackground,
-  SafeAreaView
+  SafeAreaView,
+  Button,
+  Alert,
+  FlatList
 } from 'react-native'
 
-import { Stack, Link } from 'expo-router'
-import HeaderButton from '../../components/HeaderButton'
+import { Link } from 'expo-router'
+// import { Stack, Link } from 'expo-router'
+// import HeaderButton from '../../components/HeaderButton'
 import { ScrollView } from 'react-native-gesture-handler'
+// import { useNavigation } from '@react-navigation/native'
 
 const RecoveryPassword = () => {
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
   const [password, setPassword] = useState('')
   const [codeVisible, setCodeVisible] = useState(false)
+  const [alert, setAlert] = useState(false)
+  const [mensaje0, setMensaje0] = useState('')
+  const [mensaje, setMensaje] = useState('')
+
+  // ojo porque cada vez que encienda la EC2 cambia la IP xc
+
+  const EC2 = '3.139.63.102'
+
+  // --------------------------------------------------------------------------------
+
+  // temporal solo para lo de borrar canciones
+  const [idArtist, setIdArtist] = useState('')
+  // para que sea el array de canciones a mostrar con botones, de un artista
+  const [songs, setSongs] = useState([])
+
+  // temporal solo para lo de borrar canciones
+  const handleIdArtistChange = (id) => {
+    setIdArtist(id)
+  }
+
+  // temporal solo para lo de borrar canciones
+  async function obtenerCanciones () {
+    console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\ncarga de todas las canciones de ese artista')
+    console.log(' >>>> artista con id:' + parseInt(idArtist))
+
+    const email = { // newPassword, token
+      userId: parseInt(idArtist)
+    }
+
+    console.log(JSON.stringify(email))
+
+    try {
+      /*
+      const response = await fetch('http://' + EC2 + ':5000/artist/songs/' + idArtist, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(email)
+      })
+      */
+
+      const response = await fetch('http://' + EC2 + ':5000/artist/songs/' + parseInt(idArtist), {
+        cache: 'no-cache',
+        next: {
+          tags: ['songs']
+        }
+      })
+
+      const songs = await response.json()
+      // console.log('::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::')
+      // console.log(songs)
+
+      // seteo las canciones con las recolectadas por el backend
+      setSongs(songs)
+
+      // Inicializa la lista de canciones obtenidas en response
+      // response()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const Song = ({ song }) => {
+    return (
+      <View style={{ padding: 16 }}>
+        <Text>{song.name}</Text>
+        <Button
+          onPress={() => {
+            // Imprime el ID de la canción
+            console.log(song.id)
+          }}
+          title={String(song.id)} // el titulo del boton a la par de la cancion
+        >
+          Borrar
+        </Button>
+      </View>
+    )
+  }
+
+  // --------------------------------------------------------------------------------
 
   const handleEmailChange = (text) => {
     setEmail(text)
@@ -31,8 +116,7 @@ const RecoveryPassword = () => {
   }
 
   async function enviarCorreo (text) {
-    setCodeVisible(true)// para que se mire el resto
-    // console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nHago la peticion al backend hacia ruta: 5000/login/passwordChange')
+    console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nEnvio de codigo(solicitud de cambio de password) a correo electronico')
     // console.log(' >>>> recibo:' + text)
     const email = { // newPassword, token
       email: text
@@ -41,7 +125,7 @@ const RecoveryPassword = () => {
     console.log(JSON.stringify(email))
 
     try {
-      const response = await fetch('http://18.222.196.155:5000/login/passwordChange', {
+      const response = await fetch('http://' + EC2 + ':5000/login/passwordChange', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -49,21 +133,38 @@ const RecoveryPassword = () => {
         body: JSON.stringify(email)
       })
 
+      var validation = false
+
       if (response && response.status !== 200) {
         if (response.status === 406) {
           console.log('This email address currently has a valid token. Please check your email.')
+          setMensaje0('Esta direccion de correo, ya posee un token valido, porfavor revise su bandeja de correo electronico!')
+          Alert.alert('Alerta', 'Esta direccion de correo, ya posee un token valido, porfavor revise su bandeja de correo electronico!', [{ text: 'Aceptar', onPress: () => console.log('alert closed') }])
+          setCodeVisible(true)// para que se mire el resto
+          return
         } else {
+          setMensaje0('No pudimos hallar una cuenta con el correo brindado')
+          Alert.alert('Error', 'No pudimos hallar una cuenta con el correo brindado', [{ text: 'Aceptar', onPress: () => console.log('alert closed') }])
+          validation = true
           throw new Error("We couldn't find an account with that email address.")
         }
       }
+      setMensaje0('revise el msg enviado a su correo electronico')
+      Alert.alert('Enviado', 'revise el msg enviado a su correo electronico', [{ text: 'Aceptar', onPress: () => console.log('alert closed') }])
     } catch (error) {
       console.log(error)
+    }
+
+    // si no arroja trow porq no existe el correo pues mostramos el siguiente paso
+    if (!validation) {
+      setCodeVisible(true)// para que se mire el resto
     }
   }
 
   async function nuevaContraseña (password, codigo) {
+    setAlert(true)
     setCodeVisible(true)// para que se mire el resto
-    // console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nHago la peticion al backend hacia ruta: 5000/login/passwordChange')
+    console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nSolicitud de cambio de password')
     // console.log(' >>>> recibo:' + text)
     const body = { // newPassword, token
       newPassword: password,
@@ -73,7 +174,7 @@ const RecoveryPassword = () => {
     console.log(JSON.stringify(body))
 
     try {
-      const response = await fetch('http://18.222.196.155:5000/login/passwordChange/update', {
+      const response = await fetch('http://' + EC2 + ':5000/login/passwordChange/update', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -82,10 +183,14 @@ const RecoveryPassword = () => {
       })
 
       if (response.status !== 200) {
+        setMensaje('no pudimos realizar el cambio de tu contraseña, porfavor revisa si el token ingresado es el correcto!')
+        Alert.alert('Error', 'no pudimos realizar el cambio de tu contraseña, porfavor revisa si el token ingresado es el correcto!', [{ text: 'Aceptar', onPress: () => console.log('alert closed') }])
         throw new Error("We couldn't update your password.")
       }
 
       console.log('todo salio bien!!!')
+      setMensaje('cambio de contraseña realizado con exito!')
+      Alert.alert('Cambio realizado', 'cambio de contraseña realizado con exito!', [{ text: 'Aceptar', onPress: () => console.log('alert closed') }])
     } catch (error) {
       console.log(error)
     }
@@ -105,18 +210,7 @@ const RecoveryPassword = () => {
           alignItems: 'center'
         }}
       >
-        <Stack.Screen
-          options={{
-            headerStyle: {
-              backgroundColor: '#1D1D1D'
-            },
-            headerLeft: () => (
-              <HeaderButton iconUrl={require('../../assets/icons/logo.png')} dimension='100%' />
-            ),
-            headerShadowVisible: false,
-            headerTitle: ''
-          }}
-        />
+
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
           <View className='flex-1 items-center justify-center max-w-full'>
             <View className='flex-1 items-center justify-center gap-8 max-w-full my-16'>
@@ -148,10 +242,10 @@ const RecoveryPassword = () => {
 
                 </View>
                 <View style={{ padding: 16, display: codeVisible ? 'flex' : 'none' }}>
-                  <Text className='text-retro-blue text-md font-bold'>revise el msg enviado a su correo electronico</Text>
+                  <Text className='text-retro-blue text-md font-bold'>{mensaje0}</Text>
                 </View>
                 <View style={{ padding: 16, borderTopColor: '#000000', borderTopWidth: 1, display: codeVisible ? 'flex' : 'none' }}>
-                  <Text className='text-retro-white text-lg font-bold'>Ingresa el codigo que te enviamos</Text>
+                  <Text className='text-retro-white text-lg font-bold'>Ingresa el codigo que te enviamos (token)</Text>
                   <TextInput
                     style={{ backgroundColor: '#1D1D1D', borderColor: 'gray', borderWidth: 1 }}
                     placeholderTextColor='#FFFFFF'
@@ -187,6 +281,9 @@ const RecoveryPassword = () => {
                     <Text style={{ color: '#fff' }}>Restablecer contraseña</Text>
                   </TouchableOpacity>
                 </View>
+                <View style={{ padding: 16, display: alert ? 'flex' : 'none' }}>
+                  <Text className='text-retro-blue text-md font-bold'>{mensaje}</Text>
+                </View>
               </View>
             </View>
 
@@ -198,13 +295,50 @@ const RecoveryPassword = () => {
             }}
           >
             <View>
-              <Link href='/login' className='underline text-retro-black'>
+              <Link href='/login' className='underline text-retro-black' style={{ fontSize: 20, fontWeight: 'bold' }}>
                 Login
               </Link>
             </View>
-
+            <View>
+              <Link href='/deletesongs' className='underline text-retro-black' style={{ fontSize: 20, fontWeight: 'bold' }}>
+                deleteSongs
+              </Link>
+            </View>
           </View>
+
+          <View style={{ padding: 16 }}>
+            <Text className='text-retro-white text-lg font-bold'>Id de artista a mostrar canciones</Text>
+            <TextInput
+              style={{ backgroundColor: '#1D1D1D', borderColor: 'gray', borderWidth: 1 }}
+              placeholderTextColor='#FFFFFF'
+              placeholder='Ingresa tu correo electrónico'
+              color='#FFFFFF'
+              onChangeText={handleIdArtistChange}
+              value={idArtist}
+            />
+            <TouchableOpacity
+              style={{
+                padding: 10,
+                borderRadius: 15,
+                backgroundColor: '#2196F3',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              onPress={() => { obtenerCanciones(idArtist) }}
+            >
+              <Text style={{ color: '#fff' }}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
+
         </ScrollView>
+
+        <FlatList
+          data={songs}
+          renderItem={({ item }) => (
+            <Song song={item} />
+          )}
+        />
+
       </ImageBackground>
     </SafeAreaView>
   )

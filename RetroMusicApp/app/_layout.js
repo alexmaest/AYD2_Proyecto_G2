@@ -5,6 +5,7 @@ export default function HomeLayout () {
     <Stack>
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
       <Stack.Screen name='admin' options={{ headerShown: false }} />
+      <Stack.Screen name='artist' options={{ headerShown: false }} />
     </Stack>
   )
 }
