@@ -541,6 +541,7 @@ class songRepository {
               '","cover":"', a.link_foto,
               '","artistID":', r.id_artista,
               ',"albumID":', r.id_album,
+              ',"artistName":"', u_artist.nombre, '"',
               '}'
             ),
             ']'
@@ -551,12 +552,16 @@ class songRepository {
           album a ON r.id_album = a.id_album
         JOIN
           cancion c ON r.id_cancion = c.id_cancion
+        JOIN
+          creador_contenido cc ON r.id_artista = cc.id_creador
+        JOIN
+          usuario u_artist ON cc.usuario_id = u_artist.id
         WHERE
           r.id_usuario = ?
         GROUP BY
-          fecha
+          date
         ORDER BY
-          fecha ASC
+          date ASC
       `;
       db.connection.query(query, [userId], (err, results) => {
         if (err) {
