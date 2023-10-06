@@ -5,6 +5,8 @@ import { Audio } from 'expo-av'
 import { useEffect, useState } from 'react'
 import RetroButton from '../../components/RetroButton'
 import Alert from '../../components/Alert'
+import { apiUrls, baseUrl } from '../../constants/urls'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const calculateTime = (millis) => {
   const secs = millis / 1000
@@ -14,7 +16,9 @@ const calculateTime = (millis) => {
   return `${minutes}:${returnedSeconds}`
 }
 
-const upload = () => {
+const upload = async () => {
+  const sessionString = await AsyncStorage.getItem('session')
+  const session = await JSON.parse(sessionString)
   const [file, setFile] = useState()
   const [name, setName] = useState('')
   const [duration, setDuration] = useState('00:00')
@@ -51,12 +55,12 @@ const upload = () => {
         type: 'application/' + fileType
       }
       const formData = new FormData()
-      formData.append('userId', 2)
+      formData.append('userId', session.id)
       formData.append('name', name)
       formData.append('duration', duration)
       formData.append('genre', genre)
       formData.append('track', fileToUpload)
-      const response = await fetch('http://192.168.1.3:5000/artist/uploadSong', {
+      const response = await fetch(baseUrl + apiUrls.artist.uploadSong, {
         method: 'POST',
         body: formData,
         headers: {
