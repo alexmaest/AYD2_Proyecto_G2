@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
   View,
   Text,
-  TextInput,
+  // TextInput,
   TouchableOpacity,
   ImageBackground,
   SafeAreaView,
@@ -13,20 +13,29 @@ import {
 
 // import { Link } from 'expo-router'
 // import { ScrollView } from 'react-native-gesture-handler'
+import { baseUrl, apiUrls } from '../../constants/urls'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const ArtistDeleteSongs = () => {
   // ojo porque cada vez que encienda la EC2 cambia la IP xc
-  const EC2 = '3.139.63.102'
+  // const EC2 = '3.139.63.102'
 
   // temporal solo para lo de borrar canciones
-  const [idArtist, setIdArtist] = useState('2')
+  const [idArtist, setIdArtist] = useState(0)
   // para que sea el array de canciones a mostrar con botones, de un artista
   const [songs, setSongs] = useState([])
 
   // Realiza la petición GET al cargar la vista
   useEffect(() => {
     const getSongs = async () => {
-      const response = await fetch('http://' + EC2 + ':5000/artist/songs/' + parseInt(idArtist), {
+      const sessionString = await AsyncStorage.getItem('session')
+      const session = await JSON.parse(sessionString)
+      setIdArtist(parseInt(session.id))
+
+      console.log('::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::')
+      console.log(session)
+
+      const response = await fetch(baseUrl + apiUrls.artist.getSongs + '/' + parseInt(session.id), {
         cache: 'no-cache',
         next: {
           tags: ['songs']
@@ -47,17 +56,21 @@ const ArtistDeleteSongs = () => {
   // --------------------------------------------------------------------------------
 
   // temporal solo para lo de borrar canciones
+  /*
   const handleIdArtistChange = (id) => {
     setIdArtist(id)
   }
+*/
 
   // temporal solo para lo de borrar canciones
   async function obtenerCanciones () {
     console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\ncarga de todas las canciones de ese artista')
-    console.log(' >>>> artista con id:' + parseInt(idArtist))
+    const sessionString = await AsyncStorage.getItem('session')
+    const session = await JSON.parse(sessionString)
+    console.log(' >>>> artista con id:' + parseInt(session.id))
 
     try {
-      const response = await fetch('http://' + EC2 + ':5000/artist/songs/' + parseInt(idArtist), {
+      const response = await fetch(baseUrl + apiUrls.artist.getSongs + '/' + parseInt(session.id), {
         cache: 'no-cache',
         next: {
           tags: ['songs']
@@ -81,10 +94,12 @@ const ArtistDeleteSongs = () => {
   // temporal solo para lo de borrar canciones
   async function borrarCancion (idCancion) {
     console.log('\n\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nborrar cancion del presente artista')
-    console.log(' >>>> artista con id:' + idArtist + '    cancion con id:' + idCancion)
+    const sessionString = await AsyncStorage.getItem('session')
+    const session = await JSON.parse(sessionString)
+    console.log(' >>>> artista con id:' + session.id + '    cancion con id:' + idCancion)
 
     try {
-      const res = await fetch('http://' + EC2 + ':5000/artist/deleteSong/' + parseInt(idCancion), {
+      const res = await fetch(baseUrl + apiUrls.artist.deleteSong + '/' + parseInt(idCancion), {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -115,7 +130,7 @@ const ArtistDeleteSongs = () => {
               {
                 text: 'Aceptar',
                 onPress: () => borrarCancion(song.id).then(() => {
-                  obtenerCanciones(idArtist)
+                  // obtenerCanciones(session)
                 })
               }, // aqui ejecuto el ENDPOINT del backend para borrar cancion
               { text: 'Cancelar', onPress: () => console.log('proceso de borrar cancion se ha cancelado') }// aqui desiste de la accion de borrar cancion
@@ -162,14 +177,7 @@ const ArtistDeleteSongs = () => {
 
         <View style={{ padding: 16 }}>
           <Text className='text-retro-white text-lg font-bold' style={{ marginTop: 26 }}>Una vez borrada una cancion, porfavor utilice el boton de refrescar para ver la lista actualizada</Text>
-          <TextInput
-            style={{ backgroundColor: '#1D1D1D', borderColor: 'gray', borderWidth: 1 }}
-            placeholderTextColor='#FFFFFF'
-            placeholder='Ingresa tu correo electrónico'
-            color='#FFFFFF'
-            onChangeText={handleIdArtistChange}
-            value={idArtist}
-          />
+
           <TouchableOpacity
             style={{
               padding: 10,
