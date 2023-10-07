@@ -18,8 +18,7 @@ const TopGlobalSongs = () => {
       const sessionString = await AsyncStorage.getItem('session')
       const session = await JSON.parse(sessionString)
 
-      const url = baseUrl + apiUrls.user.historial + `/${session?.id}`
-      console.log({ url })
+      const url = baseUrl + apiUrls.user.listenedTime + `/${session?.id}`
       try {
         const res = await fetch(url, {
           method: 'GET',
@@ -47,9 +46,7 @@ const TopGlobalSongs = () => {
       const arraySongNames = []
       data?.forEach((item) => {
         if (item.date >= startDate && item.date <= endDate) {
-          item?.songs?.forEach((song) => {
-            arraySongNames.push({ songName: song.name, artistName: song.artistName })
-          })
+          arraySongNames.push({ date: item.date, time: item.time })
         }
       })
       setLabels(arraySongNames)
@@ -61,7 +58,7 @@ const TopGlobalSongs = () => {
 
   return (
     <SafeAreaView style={styles.Container}>
-      <Text style={styles.Text}>Canciones escuchadas</Text>
+      <Text style={styles.Text}>Tiempo escuchado</Text>
       <View style={{ flexDirection: 'column', justifyContent: 'space-between', width: '100%', gap: 16 }}>
         <View
           style={{
@@ -108,13 +105,13 @@ const TopGlobalSongs = () => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.Table}>
         <View style={styles.TableRow}>
-          <Text style={styles.TableHeader}>Canción</Text>
-          <Text style={styles.TableHeader}>Artista</Text>
+          <Text style={styles.TableHeader}>Día</Text>
+          <Text style={styles.TableHeader}>Tiempo</Text>
         </View>
         {labels.map((label, index) => (
           <View key={index} style={styles.TableRow}>
-            <Text style={styles.TableCell}>{label?.songName}</Text>
-            <Text style={styles.TableCell}>{label?.artistName}</Text>
+            <Text style={styles.TableCell}>{label?.date}</Text>
+            <Text style={styles.TableCell}>{label?.time}</Text>
           </View>
         ))}
       </ScrollView>

@@ -45,6 +45,9 @@ export const apiUrls = {
     profileConfig: '/user/ProfileConfig',
     recomendations: '/user/recomendations',
     musicCounter: '/user/MusicCounter',
-    userLimit: '/user/userLimit'
+    userLimit: '/user/userLimit',
+    historial: '/user/historial',
+    listenedTime: '/user/listenedTime',
+    listenedSongs: '/user/listenedSongs'
   }
 }

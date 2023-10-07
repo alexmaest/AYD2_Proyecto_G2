@@ -34,6 +34,14 @@ const UserLayout = () => {
         name='(list)/songs-listened'
         options={{ href: null }}
       />
+      <Tabs.Screen
+        name='(list)/number-songs'
+        options={{ href: null }}
+      />
+      <Tabs.Screen
+        name='(list)/listened-time'
+        options={{ href: null }}
+      />
     </Tabs>
   )
 }

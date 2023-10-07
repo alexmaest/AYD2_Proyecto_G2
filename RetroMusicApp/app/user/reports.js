@@ -8,8 +8,8 @@ const UserReports = () => {
       <Text style={styles.Text}>Reportes:</Text>
       <View style={styles.LinksContainer}>
         <Link href='user/songs-listened' style={styles.Link}>1. Canciones escuchadas</Link>
-        <Link href='user/top-five-artists' style={styles.Link}>2. Top 5 artistas</Link>
-        <Link href='user/top-five-albums' style={styles.Link}>3. Top 5 álbumes</Link>
+        <Link href='user/listened-time' style={styles.Link}>2. Tiempo escuchado</Link>
+        <Link href='user/number-songs' style={styles.Link}>3. Número de canciones escuchadas</Link>
       </View>
     </View>
   )
