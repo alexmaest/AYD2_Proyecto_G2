@@ -3,6 +3,7 @@ import { BarChart } from 'react-native-chart-kit'
 import { useEffect, useState } from 'react'
 import RetroButton from '../../../components/RetroButton'
 import Dropdown from '../../../components/Dropdown'
+import { apiUrls, baseUrl } from '../../../constants/urls'
 
 const chartConfig = {
   backgroundColor: '#222222',
@@ -21,8 +22,6 @@ const chartConfig = {
   }
 }
 
-const url = 'http://localhost:5000/admin/TopSongs'
-
 const TopFiveSongs = () => {
   const [labels, setLabels] = useState([])
   const [data, setData] = useState([])
@@ -32,7 +31,7 @@ const TopFiveSongs = () => {
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const res = await fetch(url, {
+        const res = await fetch(baseUrl + apiUrls.admin.topSongs, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -52,7 +51,7 @@ const TopFiveSongs = () => {
   useEffect(() => {
     const fetchGenres = async () => {
       try {
-        const res = await fetch('http://localhost:5000/admin/allSongsGenres', {
+        const res = await fetch(baseUrl + apiUrls.admin.allSongsGenres, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
@@ -69,7 +68,7 @@ const TopFiveSongs = () => {
 
   const filterSongs = async () => {
     try {
-      const res = await fetch('http://localhost:5000/admin/TopSongsFiltro', {
+      const res = await fetch(baseUrl + apiUrls.admin.topSongsFiltro, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
