@@ -25,7 +25,18 @@ const ArtistLayout = () => {
           title: '',
           tabBarIcon: ({ focused }) => (
             <View style={styles.IconView}>
-              <TabBarIcon name='arrow-up' size={24} focused={focused} />
+              <TabBarIcon name='file-audio-o' size={24} focused={focused} />
+            </View>
+          )
+        }}
+      />
+      <Tabs.Screen
+        name='banner'
+        options={{
+          title: '',
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.IconView}>
+              <TabBarIcon name='area-chart' size={24} focused={focused} />
             </View>
           )
         }}
