@@ -11,6 +11,7 @@ function RadioButton ({ label, value, entryGender, onChange }: RadioButtonProps)
   return (
     <div className='flex-initial'>
       <input
+        data-testid={`cypress-${label}`}
         id={label}
         type='radio'
         name='default-radio'

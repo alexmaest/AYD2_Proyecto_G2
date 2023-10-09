@@ -16,9 +16,14 @@ const calculateTime = (millis) => {
   return `${minutes}:${returnedSeconds}`
 }
 
-const upload = async () => {
+const getID = async () => {
   const sessionString = await AsyncStorage.getItem('session')
   const session = await JSON.parse(sessionString)
+  return session.id
+}
+
+const upload = () => {
+  const id = getID()
   const [file, setFile] = useState()
   const [name, setName] = useState('')
   const [duration, setDuration] = useState('00:00')
@@ -55,7 +60,7 @@ const upload = async () => {
         type: 'application/' + fileType
       }
       const formData = new FormData()
-      formData.append('userId', session.id)
+      formData.append('userId', id)
       formData.append('name', name)
       formData.append('duration', duration)
       formData.append('genre', genre)
