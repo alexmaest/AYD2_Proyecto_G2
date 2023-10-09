@@ -104,6 +104,7 @@ function Login () {
           <Link
             href='/recover-password'
             className='text-retro-white underline text-[16px] font-bold hover:scale-105'
+            data-testid="cypress-recoveryPassword-Button"
           >
             Forgot your password?
           </Link>

@@ -91,7 +91,7 @@ function RecoverPassword () {
           type='primary'
           className='w-full'
         >
-          <span className='text-retro-white text-center font-bold text-[16px]'>Change Password</span>
+          <span data-testid="cypress-recoveryPassword-ChangeButton" className='text-retro-white text-center font-bold text-[16px]'>Change Password</span>
         </Button>
       </form>
     </main>
