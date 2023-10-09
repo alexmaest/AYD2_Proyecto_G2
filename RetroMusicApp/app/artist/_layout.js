@@ -41,6 +41,17 @@ const ArtistLayout = () => {
           )
         }}
       />
+      <Tabs.Screen
+        name='deleteAlbum'
+        options={{
+          title: '',
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.IconView}>
+              <TabBarIcon name='trash-o' size={24} focused={focused} />
+            </View>
+          )
+        }}
+      />
     </Tabs>
   )
 }
