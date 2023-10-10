@@ -99,11 +99,12 @@ function Login () {
             type='primary'
             className='w-[450px]'
           >
-            <span className='text-retro-white text-center font-bold text-[16px]'>Log In</span>
+            <span data-testid="cypress-logIn-Button" className='text-retro-white text-center font-bold text-[16px]'>Log In</span>
           </Button>
           <Link
             href='/recover-password'
             className='text-retro-white underline text-[16px] font-bold hover:scale-105'
+            data-testid="cypress-recoveryPassword-Button"
           >
             Forgot your password?
           </Link>
