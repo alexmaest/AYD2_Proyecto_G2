@@ -268,7 +268,7 @@ function RegisterForm ({ artistRegister }: { artistRegister: boolean }) {
           {errorGender !== '' && (<InputError message={errorGender} />)}
         </FormInput>
         <Button type='primary'>
-          <span className='text-retro-white text-center font-bold text-[16px]'>Sign Up</span>
+          <span data-testid="cypress-signUp-Button" className='text-retro-white text-center font-bold text-[16px]'>Sign Up</span>
         </Button>
         <div className='flex flex-col w-full items-center gap-6'>
           <div>

@@ -16,19 +16,28 @@ export default function BannerPage () {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file != null) {
-      const reader = new FileReader()
-
-      reader.onload = (e) => {
-        if (e.target?.result != null) {
-          const base64Data = e.target.result as string
-          setFile(file)
-          setBase64Image(base64Data)
+      const fileName = file.name
+      const fileExtension = fileName.split('.').pop()?.toLowerCase()
+  
+      if (fileExtension === 'jpg' || fileExtension === 'png') {
+        const reader = new FileReader()
+  
+        reader.onload = (e) => {
+          if (e.target?.result != null) {
+            const base64Data = e.target.result as string
+            setFile(file)
+            setBase64Image(base64Data)
+          }
         }
+  
+        reader.readAsDataURL(file)
+      } else {
+        setError('Error al subir la imagen')
+        setIsAlertOpen(true)
       }
-
-      reader.readAsDataURL(file)
     }
   }
+  
 
   const handleUpload = async () => {
     if (file != null) {
@@ -84,10 +93,11 @@ export default function BannerPage () {
             <p className='mb-2 text-sm text-gray-400'><span className='font-semibold'>Click to upload</span></p>
             <p className='text-xs text-gray-400'>PNG or JPG</p>
           </div>
-          <input id='dropzone-file' type='file' className='hidden' onChange={handleFileChange} />
+          <input data-testid="cypress-file" id='dropzone-file' type='file' className='hidden' onChange={handleFileChange} />
         </label>
         <div className='flex items-center justify-center flex-1'>
           <button
+            data-testid="cypress-upload-button"
             className='rounded w-2/4 h-10 bg-retro-orange-400 shadow-lg shadow-orange-300/50'
             onClick={handleUpload}
           >

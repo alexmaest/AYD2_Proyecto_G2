@@ -61,11 +61,11 @@ function RecoverPassword () {
         Enter your RetroMusic <b>email address</b> that you used to register.
         We'll send you an email with your username and a link to reset your password.
       </p>
-      <form action='post' method='post' className='flex flex-col gap-12 items-center' onSubmit={handleSubmit}>
+      <form  data-testid="cypress-recoveryPassword-email" action='post' method='post' className='flex flex-col gap-12 items-center' onSubmit={handleSubmit}>
         <Input
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          id='email'
+          id='email-recovery'
           type='email'
           label='Email'
           placeholder='Enter your email.'
@@ -77,7 +77,7 @@ function RecoverPassword () {
         <Button
           type='primary'
         >
-          <span className='text-retro-white text-center font-bold text-[16px]'>Send</span>
+          <span data-testid="cypress-recoveryPassword-SendButton" className='text-retro-white text-center font-bold text-[16px]'>Send</span>
         </Button>
       </form>
     </main>

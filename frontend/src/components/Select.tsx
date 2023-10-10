@@ -20,6 +20,7 @@ function Select ({ values, onChange, id, label, isValid, isRequired, width, entr
       <label htmlFor={id}>{label}</label>
       <InputWrapper className='relative'>
         <select
+          data-testid={`cypress-${id}`}
           name={id}
           id={id}
           className='w-full py-2 px-3 border-none rounded-md focus:outline-none h-full appearance-none bg-retro-black'

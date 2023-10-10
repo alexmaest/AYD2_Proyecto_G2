@@ -42,6 +42,7 @@ function Input ({
       </label>
       <InputWrapper className={(isValid ?? true) ? 'border-retro-white' : 'border-red-500'}>
         <input
+          data-testid={`cypress-${id}`}
           type={(isPassword ?? false) ? 'text' : type}
           id={id}
           placeholder={placeholder}
