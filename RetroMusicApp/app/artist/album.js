@@ -1,20 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Platform } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import * as DocumentPicker from 'expo-document-picker'
-import { Audio } from 'expo-av'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import RetroButton from '../../components/RetroButton'
 import Alert from '../../components/Alert'
 import { apiUrls, baseUrl } from '../../constants/urls'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-
-const calculateTime = (millis) => {
-  const secs = millis / 1000
-  const minutes = Math.floor(secs / 60)
-  const seconds = Math.floor(secs % 60)
-  const returnedSeconds = seconds < 10 ? `0${seconds}` : `${seconds}`
-  return `${minutes}:${returnedSeconds}`
-}
 
 const getID = async () => {
   const sessionString = await AsyncStorage.getItem('session')
@@ -24,17 +15,18 @@ const getID = async () => {
 
 const album = () => {
   const id = getID()
-  const [file, setFile] = useState()
-  const [name, setName] = useState('')
-  const [duration, setDuration] = useState('00:00')
-  const [genre, setGenre] = useState('')
+  const [file, setFile] = useState(null)
+  const [base64Image, setBase64Image] = useState(null)
+  const [songs, setSongs] = useState([])
+  const [albumName, setAlbumName] = useState('')
+  const [alertType, setAlertType] = useState('')
   const [alertMessage, setAlertMessage] = useState('')
-  const [alertType, setAlertType] = useState('danger')
+  const [selectedSongs, setSelectedSongs] = useState([])
 
   const selectFile = async () => {
     try {
       const res = await DocumentPicker.getDocumentAsync({
-        type: 'audio/*'
+        type: 'image/*'
       })
 
       if (!res.canceled) {
@@ -47,72 +39,104 @@ const album = () => {
     }
   }
 
-  const handleSubmit = async () => {
-    try {
-      const nameParts = file.assets[0].name.split('.')
-      const size = file.assets[0].size
-      const uri = file.assets[0].uri
-      const fileType = nameParts[nameParts.length - 1]
-      const fileToUpload = {
-        name,
-        size,
-        uri,
-        type: 'application/' + fileType
-      }
-      const formData = new FormData()
-      formData.append('userId', id)
-      formData.append('name', name)
-      formData.append('duration', duration)
-      formData.append('genre', genre)
-      formData.append('track', fileToUpload)
-      const response = await fetch(baseUrl + apiUrls.artist.uploadSong, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
+  useEffect(() => {
+    handleFileChange()
+  }, [file])
 
-      if (response.status !== 200) {
-        throw new Error('Something went wrong!')
-      }
-
-      setName('')
-      setDuration('00:00')
-      setFile(null)
-      setGenre('')
-      setAlertType('success')
-      setAlertMessage('Track uploaded successfully!')
-    } catch (error) {
-      console.log(error)
+  const handleSongPress = (id) => {
+    if (!selectedSongs.includes(id)) {
+      setSelectedSongs([...selectedSongs, id])
     }
   }
 
-  const onPlaybackStatusUpdate = (status) => {
-    if (status.isLoaded) {
-      setDuration(calculateTime(status.durationMillis))
+  const handleFileChange = async () => {
+    if (file != null) {
+      const base64 = await fileToBase64(file?.assets[0].uri)
+      setBase64Image(base64)
+    }
+  }
+
+  async function fileToBase64 (filePath) {
+    try {
+      let fileUri = filePath
+      if (Platform.OS === 'android' && !fileUri.startsWith('file://')) {
+        fileUri = `file://${fileUri}`
+      }
+
+      const response = await fetch(fileUri)
+      const blob = await response.blob()
+      const reader = new window.FileReader()
+
+      return new Promise((resolve, reject) => {
+        reader.onload = () => {
+          const base64DataWithoutHeader = reader.result.split(',')[1]
+          const base64Data = `data:image/png;base64,${base64DataWithoutHeader}`
+          resolve(base64Data)
+        }
+
+        reader.onerror = (error) => {
+          reject(error)
+        }
+
+        reader.readAsDataURL(blob)
+      })
+    } catch (error) {
+      console.error('Error reading file:', error)
+      throw error
+    }
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    try {
+      const response = await fetch(baseUrl + apiUrls.artist.createAlbum, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: albumName,
+          releaseDate: new Date(),
+          type: selectedSongs.length > 1 ? 2 : 1,
+          userId: await getID(),
+          songs: selectedSongs,
+          image: base64Image
+        })
+      })
+
+      if (!response.ok) {
+        console.log({ response })
+        throw new Error('Something went wrong')
+      }
+
+      setAlertType('success')
+      setAlertMessage('Album created successfully')
+    } catch (error) {
+      setAlertType('danger')
+      setAlertMessage(error?.message)
     }
   }
 
   useEffect(() => {
-    const calculateAudioDuration = async () => {
+    const getSongs = async () => {
       try {
-        await Audio.Sound.createAsync(
-          { uri: file.assets[0].uri },
-          {
-            shouldPlay: false,
-            isLooping: false
-          },
-          onPlaybackStatusUpdate
-        )
+        const response = await fetch(baseUrl + apiUrls.artist.getAvailableSongs + `/${await id}`)
+        if (!response.ok) {
+          throw new Error('Something went wrong')
+        }
+
+        const data = await response.json()
+
+        setSongs(data)
       } catch (error) {
-        console.log(error)
+        setAlertType('danger')
+        setAlertMessage(error.message)
       }
     }
-    if (file != null) {
-      calculateAudioDuration()
-    }
-  }, [file])
+
+    if (id != null) getSongs()
+  }, [id])
 
   return (
     <View style={styles.Container}>
@@ -130,10 +154,25 @@ const album = () => {
           : null}
         <RetroButton type='white' text='Select File' handlePress={async () => { await selectFile() }} />
         <Text style={styles.Label}>Name</Text>
-        <TextInput placeholder='Track Name' style={styles.TextInput} placeholderTextColor='#F3EFE0' onChangeText={text => { setName(text) }} />
-        <Text style={styles.Label}>Duration: {duration}</Text>
-        <Text style={styles.Label}>Genre</Text>
-        <TextInput placeholder='Track Genre' style={styles.TextInput} placeholderTextColor='#F3EFE0' onChangeText={text => { setGenre(text) }} />
+        <TextInput placeholder='Album name' style={styles.TextInput} placeholderTextColor='#F3EFE0' onChangeText={text => { setAlbumName(text) }} />
+        <View>
+          <FlatList
+            data={songs}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity onPress={() => handleSongPress(item.id)}>
+                <Text style={{ color: '#F3EFE0', fontSize: 12, fontWeight: 'bold' }}>
+                  {item.name}
+                </Text>
+              </TouchableOpacity>
+            )}
+          />
+          <Text style={{
+            color: '#F3EFE0'
+          }}
+          >Selected Songs: {selectedSongs.join(', ')}
+          </Text>
+        </View>
         <RetroButton type='primary' text='Upload' handlePress={handleSubmit} />
       </View>
     </View>
