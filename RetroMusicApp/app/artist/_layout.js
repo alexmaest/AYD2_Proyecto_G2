@@ -31,6 +31,17 @@ const ArtistLayout = () => {
         }}
       />
       <Tabs.Screen
+        name='album'
+        options={{
+          title: '',
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.IconView}>
+              <TabBarIcon name='book' size={24} focused={focused} />
+            </View>
+          )
+        }}
+      />
+      <Tabs.Screen
         name='deleteSong'
         options={{
           title: '',

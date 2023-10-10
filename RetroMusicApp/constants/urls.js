@@ -1,4 +1,4 @@
-export const baseUrl = 'http://3.14.71.79:5000'
+export const baseUrl = 'http://192.168.0.14:5000'
 
 export const apiUrls = {
   auth: {
