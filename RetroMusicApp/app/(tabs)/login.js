@@ -116,7 +116,11 @@ export default function Page () {
           value={pwd}
           secureTextEntry
         />
-        <Text className='text-white'>Forgot password?</Text>
+        <Text
+          className='text-white'
+          onPress={() => router.push('/recovery')}
+        >Forgot password?
+        </Text>
         <Button
           className='rounded bg-retro-orange-400'
           title='Login'
