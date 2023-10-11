@@ -16,14 +16,7 @@ const calculateTime = (millis) => {
   return `${minutes}:${returnedSeconds}`
 }
 
-const getID = async () => {
-  const sessionString = await AsyncStorage.getItem('session')
-  const session = await JSON.parse(sessionString)
-  return session.id
-}
-
 const upload = () => {
-  const id = getID()
   const [file, setFile] = useState()
   const [name, setName] = useState('')
   const [duration, setDuration] = useState('00:00')
@@ -43,11 +36,14 @@ const upload = () => {
         throw new Error('No File Selected')
       }
     } catch (error) {
-      console.log(error)
+      setAlertType('danger')
+      setAlertMessage('No File Selected')
     }
   }
 
   const handleSubmit = async () => {
+    const sessionString = await AsyncStorage.getItem('session')
+    const session = await JSON.parse(sessionString)
     try {
       const nameParts = file.assets[0].name.split('.')
       const size = file.assets[0].size
@@ -60,7 +56,7 @@ const upload = () => {
         type: 'application/' + fileType
       }
       const formData = new FormData()
-      formData.append('userId', id)
+      formData.append('userId', session?.id)
       formData.append('name', name)
       formData.append('duration', duration)
       formData.append('genre', genre)
@@ -84,7 +80,8 @@ const upload = () => {
       setAlertType('success')
       setAlertMessage('Track uploaded successfully!')
     } catch (error) {
-      console.log(error)
+      setAlertType('danger')
+      setAlertMessage(error.message)
     }
   }
 
@@ -106,7 +103,8 @@ const upload = () => {
           onPlaybackStatusUpdate
         )
       } catch (error) {
-        console.log(error)
+        setAlertType('danger')
+        setAlertMessage('Something went wrong 2!')
       }
     }
     if (file != null) {
