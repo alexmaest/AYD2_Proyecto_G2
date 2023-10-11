@@ -48,7 +48,7 @@ const TopGlobalSongs = () => {
       data?.forEach((item) => {
         if (item.date >= startDate && item.date <= endDate) {
           item?.songs?.forEach((song) => {
-            arraySongNames.push({ songName: song.name, artistName: song.artistName })
+            arraySongNames.push({ songName: song.name, artistName: song.artistName, date: item.date })
           })
         }
       })
@@ -108,11 +108,13 @@ const TopGlobalSongs = () => {
       </View>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.Table}>
         <View style={styles.TableRow}>
+          <Text style={styles.TableHeader}>Fecha</Text>
           <Text style={styles.TableHeader}>Canción</Text>
           <Text style={styles.TableHeader}>Artista</Text>
         </View>
         {labels.map((label, index) => (
           <View key={index} style={styles.TableRow}>
+            <Text style={styles.TableCell}>{label?.date}</Text>
             <Text style={styles.TableCell}>{label?.songName}</Text>
             <Text style={styles.TableCell}>{label?.artistName}</Text>
           </View>
