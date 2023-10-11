@@ -3,6 +3,7 @@ interface ButtonProps {
   type: 'primary' | 'secondary' | 'black' | 'white'
   className?: string
   onClick?: () => void
+  dataTestId: string
   children: React.ReactNode
 }
 
@@ -13,9 +14,10 @@ const buttonStyles = {
   white: 'bg-retro-white hover:brightness-90 hover:scale-105'
 }
 
-function Button ({ type, className, onClick, children }: ButtonProps) {
+function Button ({ type, className, onClick, dataTestId, children }: ButtonProps) {
   return (
     <button
+      data-testid={dataTestId}
       className={`group box-border flex items-center justify-center gap-4 rounded-full px-[48px] py-[12px] transition-all duration-300 ease-in-out ${buttonStyles[type]} ${className !== undefined ? className : ''}`}
       onClick={onClick}
     >

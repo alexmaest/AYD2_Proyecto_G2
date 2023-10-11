@@ -96,6 +96,7 @@ export default function Page () {
     const getSongs = async () => {
       try {
         const response = await fetch(baseUrl + apiUrls.artist.getAvailableSongs + `/${String(session?.user?.id)}`)
+        console.log(session?.user?.id)
 
         if (!response.ok) {
           throw new Error('Something went wrong')
@@ -135,6 +136,7 @@ export default function Page () {
                 <div className='flex flex-col gap-2'>
                   <label htmlFor='album-name' className='text-retro-white text-lg'>Album name</label>
                   <input
+                    data-testid='cypress-album-name'
                     type='text' id='album-name' className='rounded-full px-4 py-2 bg-[#1D1D1D] text-retro-white'
                     value={albumName}
                     onChange={handleAlbumName}
@@ -162,6 +164,7 @@ export default function Page () {
                   songs?.length > 0 && songs.map((song, index) => (
                     <li key={song.id}>
                       <input
+                        data-testid={`cypress-song-${index}`}
                         type='checkbox'
                         id={`song-${index}`}
                         name={song.name}
@@ -175,7 +178,7 @@ export default function Page () {
                   ))
                 }
                 </ul>
-                <Button type='secondary'>
+                <Button dataTestId='cypress-album-create' type='secondary'>
                   <span className='text-retro-white text-center font-bold text-[16px]'>Create</span>
                 </Button>
               </form>
@@ -185,7 +188,7 @@ export default function Page () {
         <div className='flex flex-col w-2/4 items-center'>
           <h1 className='text-retro-orange text-center font-bold text-2xl pb-12'>Preview</h1>
           <article className='flex items-center'>
-            {base64Image != null && <img className='w-72 h-72 object-cover rounded-lg' src={base64Image} alt='Preview' />}
+            {base64Image != null && <img data-testid="cypress-album-cover" className='w-72 h-72 object-cover rounded-lg' src={base64Image} alt='Preview' />}
             <h2 className='text-white font-extrabold text-xl ml-5'>{albumName}</h2>
           </article>
         </div>

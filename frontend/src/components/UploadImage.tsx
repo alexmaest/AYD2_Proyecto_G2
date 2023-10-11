@@ -17,7 +17,7 @@ export default function UploadImage (
             <p className='mb-2 text-sm text-gray-400'><span className='font-semibold'>{title}</span></p>
             <p className='text-xs text-gray-400'>PNG or JPG</p>
           </div>
-          <input id='dropzone-file' type='file' className='hidden' onChange={handleFileChange} />
+          <input data-testid="cypress-file" id='dropzone-file' type='file' className='hidden' onChange={handleFileChange} />
         </label>
       </div>
     </section>
