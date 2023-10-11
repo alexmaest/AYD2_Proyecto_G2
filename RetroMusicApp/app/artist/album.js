@@ -22,6 +22,7 @@ const album = () => {
   const [alertType, setAlertType] = useState('')
   const [alertMessage, setAlertMessage] = useState('')
   const [selectedSongs, setSelectedSongs] = useState([])
+  const [nameSelectedSongs, setNameSelectedSongs] = useState([])
 
   const selectFile = async () => {
     try {
@@ -46,6 +47,9 @@ const album = () => {
   const handleSongPress = (id) => {
     if (!selectedSongs.includes(id)) {
       setSelectedSongs([...selectedSongs, id])
+
+      const name = nameSongById(id)
+      setNameSelectedSongs([...nameSelectedSongs, name])
     }
   }
 
@@ -84,6 +88,10 @@ const album = () => {
       console.error('Error reading file:', error)
       throw error
     }
+  }
+
+  const nameSongById = (id) => {
+    return songs.find((song) => song.id === id)?.name
   }
 
   const handleSubmit = async (event) => {
@@ -170,7 +178,7 @@ const album = () => {
           <Text style={{
             color: '#F3EFE0'
           }}
-          >Selected Songs: {selectedSongs.join(', ')}
+          >Selected Songs: {nameSelectedSongs.join(', ')}
           </Text>
         </View>
         <RetroButton type='primary' text='Upload' handlePress={handleSubmit} />
