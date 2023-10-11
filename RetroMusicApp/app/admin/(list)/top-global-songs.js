@@ -6,7 +6,6 @@ import RetroButton from '../../../components/RetroButton'
 import { apiUrls, baseUrl } from '../../../constants/urls'
 
 const TopGlobalSongs = () => {
-  const [labels, setLabels] = useState([])
   const [data, setData] = useState([])
   const [dates, setDates] = useState([])
   const [startDate, setStartDate] = useState('')
@@ -44,17 +43,15 @@ const TopGlobalSongs = () => {
         body: JSON.stringify({ dateInit: startDate, dateFinal: endDate })
       })
       const data = await res.json()
-      setLabels(data.map((song) => song.cancion))
-      setData(data.map((song) => song.artista))
+      setData(data)
     } catch (error) {
-      setLabels([])
       setData([])
     }
   }
 
   return (
     <SafeAreaView style={styles.Container}>
-      <Text style={styles.Text}>Top Global de Canciones</Text>
+      <Text style={styles.Text}>Listado canciones escuchadas a nivel global</Text>
       <View style={{ flexDirection: 'column', justifyContent: 'space-between', width: '100%', gap: 16 }}>
         <View
           style={{
@@ -103,11 +100,13 @@ const TopGlobalSongs = () => {
         <View style={styles.TableRow}>
           <Text style={styles.TableHeader}>Canción</Text>
           <Text style={styles.TableHeader}>Artista</Text>
+          <Text style={styles.TableHeader}>Fecha</Text>
         </View>
-        {labels.map((label, index) => (
+        {data.map((song, index) => (
           <View key={index} style={styles.TableRow}>
-            <Text style={styles.TableCell}>{label}</Text>
-            <Text style={styles.TableCell}>{data[index]}</Text>
+            <Text style={styles.TableCell}>{song.cancion}</Text>
+            <Text style={styles.TableCell}>{song.artista}</Text>
+            <Text style={styles.TableCell}>{new Date(song.fecha).toLocaleDateString()}</Text>
           </View>
         ))}
       </ScrollView>
