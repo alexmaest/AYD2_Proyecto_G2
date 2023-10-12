@@ -151,7 +151,7 @@ class songController {
 
     async deleteAlbum(req, res) {
         try {
-            console.log(req.body)
+            //console.log(req.body)
             res.status(200)
         } catch (err) {
             console.error(err);
@@ -237,7 +237,7 @@ class songController {
     //sprint 2 - fase2
     async musicCounter(req, res) {
         try {
-            console.log(req.body)
+            //console.log(req.body)
             const songCounter = await songModel.updateMusic(req.body.id, req.body.userId);//modulo admin visualice a todos los CC
             if (songCounter === null) {
                 logEventsWrite(req.originalUrl, req.method, "user", "Song counter can't updated!", 3)//log

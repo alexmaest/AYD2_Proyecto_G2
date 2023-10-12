@@ -36,7 +36,7 @@ class userController {//FG
     }
 
     async uploadSong(song, name) {
-        console.log(name);
+        //console.log(name);
         try {
             const random = Math.floor(Math.random() * 100000);
             const filename = "file" + name + random;

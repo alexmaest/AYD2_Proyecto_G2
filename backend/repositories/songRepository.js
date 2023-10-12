@@ -244,7 +244,7 @@ class songRepository {
 
   //sprint 2 - fase2
   updateSongCounter(songId, userId) {
-    console.log(">>>>>>>>>> idSong: "+songId+" userId: "+userId)
+    //console.log(">>>>>>>>>> idSong: "+songId+" userId: "+userId)
     return new Promise((resolve, reject) => {
       const query = 'UPDATE cancion SET reproducciones = IF(reproducciones IS NULL, 1, reproducciones + 1) WHERE id_cancion = ?  ;';
       db.connection.query(query, [songId], (err, result) => {
@@ -260,8 +260,8 @@ class songRepository {
             if (err) {
               reject(null); // el proc db fallo
             } else {
-              console.log("PROC DB REALIZADO CON EXITO!!!!!!!!!!!!!!!!")
-              console.log(result2)
+              //console.log("PROC DB REALIZADO CON EXITO!!!!!!!!!!!!!!!!")
+              //console.log(result2)
               
             }
           });
@@ -408,7 +408,7 @@ class songRepository {
   }
 
   topSongsFiltro(genero) {
-    console.log(" ***** top 5 cnaiones con filtro, genero recibido: " + genero)
+    //console.log(" ***** top 5 cnaiones con filtro, genero recibido: " + genero)
 
     return new Promise((resolve, reject) => {
 
@@ -650,7 +650,7 @@ class songRepository {
   }
   
   topSongsATFiltro(dateI,dateF) {
-    console.log(" ***** top global cnaiones con filtro, fechas recibidas: " + dateI+" / "+dateF)
+    //console.log(" ***** top global cnaiones con filtro, fechas recibidas: " + dateI+" / "+dateF)
 
     return new Promise((resolve, reject) => {
 
