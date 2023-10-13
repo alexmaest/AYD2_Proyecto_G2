@@ -137,7 +137,8 @@ const ArtistDeleteSongs = () => {
             ])
           }}
           // title={String(song.id)} // el titulo del boton a la par de la cancion
-          title='Borrar'
+          title='X'
+          color='red'
         >
           Borrar
         </Button>
@@ -182,7 +183,7 @@ const ArtistDeleteSongs = () => {
             style={{
               padding: 10,
               borderRadius: 15,
-              backgroundColor: '#2196F3',
+              backgroundColor: '#1B5045',
               alignItems: 'center',
               justifyContent: 'center'
             }}
