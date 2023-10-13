@@ -74,6 +74,17 @@ const ArtistLayout = () => {
           )
         }}
       />
+      <Tabs.Screen
+        name='changeInfo'
+        options={{
+          title: '',
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.IconView}>
+              <TabBarIcon name='user-o' size={24} focused={focused} />
+            </View>
+          )
+        }}
+      />
     </Tabs>
   )
 }
