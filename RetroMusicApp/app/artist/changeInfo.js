@@ -19,6 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as DocumentPicker from 'expo-document-picker'
 import * as FileSystem from 'expo-file-system'
 import RetroButton from '../../components/RetroButton'
+import { Picker } from '@react-native-picker/picker'
 
 const RecoveryPassword = () => {
 // temporal solo para lo de borrar canciones
@@ -58,7 +59,7 @@ const RecoveryPassword = () => {
       setEmail(ArtistInfo.email)
       setUsername(ArtistInfo.nombre)
       setBirthday(ArtistInfo.year + '-' + ArtistInfo.month + '-' + ArtistInfo.day)
-      setGender(ArtistInfo.gender + '')
+      setGenderCB(ArtistInfo.gender)
       // setImagenPerfil('default.jpg')
       setPwd('***')
       setEmailFlag(false)
@@ -84,13 +85,28 @@ const RecoveryPassword = () => {
   // birthday
   const [birthday, setBirthday] = useState('2012-12-31') // del artista
 
-  // birthday
-  const [gender, setGender] = useState('777') // del artista
-
   // imagen de perfil
   //  [imagenPerfil, setImagenPerfil] = useState() // del artista
   const [selectedImageUri, setSelectedImageUri] = useState(null)
   const [base64Image, setBase64Image] = useState(null)
+
+  // generos ---------------------------------------------------------------
+  const gendersCB = [
+    { label: 'Male', value: 1 },
+    { label: 'Female', value: 2 },
+    { label: 'Non-binary', value: 3 },
+    { label: 'Other', value: 4 },
+    { label: 'Prefer not to say', value: 5 }
+  ]
+
+  const [genderCB, setGenderCB] = useState(1)
+
+  const handleGenderCBChange = (value) => {
+    console.log('nuevo genero seleccionado de comboBox: ' + value)
+    console.log(genderCB)
+    setGenderCB(value)
+    console.log(genderCB)
+  }
 
   // para msg en pantalla ---------------------------------------------------------
   const [alert, setAlert] = useState(false)
@@ -130,10 +146,6 @@ const RecoveryPassword = () => {
 
   const handleBirthdayChange = (text) => { // birthday
     setBirthday(text)
-  }
-
-  const handleGenderChange = (code) => { // gender
-    setGender(code)
   }
 
   /*
@@ -239,7 +251,7 @@ const RecoveryPassword = () => {
     setEmail(ArtistInfo.email)
     setUsername(ArtistInfo.nombre)
     setBirthday(ArtistInfo.year + '-' + ArtistInfo.month + '-' + ArtistInfo.day)
-    setGender(ArtistInfo.gender + '')
+    setGenderCB(ArtistInfo.gender)
     // setImagenPerfil('default.jpg')
     setPwd('***')
     setEmailFlag(false)
@@ -288,15 +300,15 @@ const RecoveryPassword = () => {
       >
 
         <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1 }}>
-          <View className='flex-1 items-center justify-center max-w-full'>
-            <View className='flex-1 items-center justify-center gap-8 max-w-full my-1'>
+          <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 65 }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center', gap: 25, maxWidth: '100%', marginBottom: 10 }}>
               <Text className='text-retro-white text-2xl font-bold text-center'>Perfil de artista</Text>
               <View>
                 <TouchableOpacity
                   style={{
                     padding: 10,
                     borderRadius: 15,
-                    backgroundColor: '#2196F3',
+                    backgroundColor: '#1B5045',
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}
@@ -356,15 +368,25 @@ const RecoveryPassword = () => {
                 </View>
 
                 <View style={{ padding: 16, borderTopColor: '#000000', borderTopWidth: 1 }}>
-                  <Text className='text-retro-white text-lg font-bold'>Gender (1=male,2=female,3=non-binary,4=other,5=prefer not to say)</Text>
-                  <TextInput
-                    style={{ backgroundColor: '#1D1D1D', borderColor: 'gray', borderWidth: 1 }}
-                    placeholderTextColor='#FFFFFF'
-                    placeholder='Ingresa el código que te enviamos'
-                    color='#FFFFFF'
-                    onChangeText={handleGenderChange}
-                    value={gender}
-                  />
+                  <Text className='text-retro-white text-lg font-bold'>Gender</Text>
+
+                  <Picker
+                    style={{
+                      backgroundColor: '#133830',
+                      borderWidth: 1,
+                      borderRadius: 5,
+                      padding: 10,
+                      color: '#FFFFFF', // Color del texto en el componente Picker
+                      width: '100%'
+                    }}
+                    selectedValue={genderCB}
+                    onValueChange={handleGenderCBChange}
+                  >
+                    {gendersCB.map((gender, index) => (
+                      <Picker.Item key={index} label={gender.label} value={gender.value} />
+                    ))}
+                  </Picker>
+
                 </View>
 
                 <View style={{ padding: 15, borderTopColor: '#000000', borderTopWidth: 1, marginLeft: 0 }}>
@@ -389,11 +411,11 @@ const RecoveryPassword = () => {
                     style={{
                       padding: 10,
                       borderRadius: 15,
-                      backgroundColor: '#2196F3',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      backgroundColor: '#1B5045'
                     }}
-                    onPress={() => { nuevaInfoArtista(email, pwd, username, birthday, gender, base64Image) }}
+                    onPress={() => { nuevaInfoArtista(email, pwd, username, birthday, genderCB, base64Image) }}
                   >
                     <Text style={{ color: '#fff' }}>Restablecer informacion</Text>
                   </TouchableOpacity>

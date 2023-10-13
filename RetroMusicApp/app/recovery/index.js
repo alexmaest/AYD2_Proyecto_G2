@@ -159,7 +159,7 @@ const RecoveryPassword = () => {
                     style={{
                       padding: 10,
                       borderRadius: 15,
-                      backgroundColor: '#2196F3',
+                      backgroundColor: '#1B5045',
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}
@@ -200,7 +200,7 @@ const RecoveryPassword = () => {
                     style={{
                       padding: 10,
                       borderRadius: 15,
-                      backgroundColor: '#2196F3',
+                      backgroundColor: '#1B5045',
                       alignItems: 'center',
                       justifyContent: 'center'
                     }}
