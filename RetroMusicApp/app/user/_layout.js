@@ -46,6 +46,18 @@ const UserLayout = () => {
         options={{ href: null }}
       />
       <Tabs.Screen
+        name='album'
+        options={{
+          tabBarButton: (props) => null
+        }}
+      />
+      <Tabs.Screen
+        name='artist'
+        options={{
+          tabBarButton: (props) => null
+        }}
+      />
+      <Tabs.Screen
         name='(list)/songs-listened'
         options={{ href: null }}
       />

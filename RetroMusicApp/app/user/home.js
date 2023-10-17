@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { baseUrl, apiUrls } from '../../constants/urls'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from '@react-navigation/native'
 import { router } from 'expo-router'
 
 const User = () => {
@@ -9,6 +10,7 @@ const User = () => {
   const [albums, setAlbums] = useState([])
   const [artists, setArtists] = useState([])
   const [songs, setSongs] = useState([])
+  const navigation = useNavigation()
 
   useEffect(() => {
     const getID = async () => {
@@ -58,7 +60,6 @@ const User = () => {
           }
         })
         const data = await artistResponse.json()
-        // Obtén 10 elementos aleatorios del array
         const randomSongs = getRandomElements(data, 10)
         setSongs(randomSongs)
       } catch (error) {
@@ -92,6 +93,17 @@ const User = () => {
     }
   }
 
+  const handleAlbumPress = (album) => {
+    navigation.navigate('album', { album })
+  }
+
+  const handleArtistPress = (artist) => {
+    navigation.navigate('artist', {
+      artist,
+      artistData: artists
+    })
+  }
+
   return (
     <ScrollView style={styles.Container}>
       <Text style={{ paddingTop: 50, paddingBottom: 20, paddingLeft: 20 }} className='text-retro-white font-bold text-[16px]'>Artist for you</Text>
@@ -102,10 +114,14 @@ const User = () => {
       >
         {artists.map((item) => (
           <View style={styles.ArtistContainer} key={item.id}>
-            <Image
-              style={styles.ArtistCover}
-              source={{ uri: item.linkPhoto }}
-            />
+            <TouchableOpacity
+              onPress={() => handleArtistPress(item)}
+            >
+              <Image
+                style={styles.ArtistCover}
+                source={{ uri: item.linkPhoto }}
+              />
+            </TouchableOpacity>
             <View style={styles.ArtistInfoContainer}>
               <Text style={styles.ArtistName}>{item.nombre}</Text>
               <Text style={styles.ArtistType}>{item.genero}</Text>
@@ -121,10 +137,14 @@ const User = () => {
       >
         {albums.map((item) => (
           <View style={styles.AlbumContainer} key={item.id}>
-            <Image
-              style={styles.AlbumCover}
-              source={{ uri: item.cover }}
-            />
+            <TouchableOpacity
+              onPress={() => handleAlbumPress(item)}
+            >
+              <Image
+                style={styles.AlbumCover}
+                source={{ uri: item.cover }}
+              />
+            </TouchableOpacity>
             <Text style={styles.AlbumName}>{item.title}</Text>
             <Text style={styles.AlbumType}>{item.artist} • {item.type}</Text>
           </View>
