@@ -31,6 +31,21 @@ const UserLayout = () => {
         }}
       />
       <Tabs.Screen
+        name='discover/index'
+        options={{
+          title: '',
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.IconView}>
+              <TabBarIcon name='search' size={24} focused={focused} />
+            </View>
+          )
+        }}
+      />
+      <Tabs.Screen
+        name='discover/genre'
+        options={{ href: null }}
+      />
+      <Tabs.Screen
         name='(list)/songs-listened'
         options={{ href: null }}
       />
@@ -46,7 +61,8 @@ const UserLayout = () => {
   )
 }
 
-function TabBarIcon (props) {
+// eslint-disable-next-line space-before-function-paren
+function TabBarIcon(props) {
   return (
     <FontAwesome
       size={props.size || 26}
