@@ -69,6 +69,17 @@ const UserLayout = () => {
         name='(list)/listened-time'
         options={{ href: null }}
       />
+      <Tabs.Screen
+        name='info'
+        options={{
+          title: '',
+          tabBarIcon: ({ focused }) => (
+            <View style={styles.IconView}>
+              <TabBarIcon name='user' size={24} focused={focused} />
+            </View>
+          )
+        }}
+      />
     </Tabs>
   )
 }
