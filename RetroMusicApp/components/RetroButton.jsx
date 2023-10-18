@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 24,
     minWidth: 120
+  },
+  logout: {
+    backgroundColor: '#F3AA60',
+    borderRadius: 50,
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    minWidth: 50
   }
 })
 

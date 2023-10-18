@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { baseUrl, apiUrls } from '../../constants/urls'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
-import { router } from 'expo-router'
 
 const User = () => {
   const [id, setId] = useState('')
@@ -84,15 +83,6 @@ const User = () => {
     fetchSongs()
   }, [id])
 
-  const handleLogout = async () => {
-    try {
-      await AsyncStorage.removeItem('session')
-      router.push('/login')
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   const handleAlbumPress = (album) => {
     navigation.navigate('album', { album })
   }
@@ -106,7 +96,8 @@ const User = () => {
 
   return (
     <ScrollView style={styles.Container}>
-      <Text style={{ paddingTop: 50, paddingBottom: 20, paddingLeft: 20 }} className='text-retro-white font-bold text-[16px]'>Artist for you</Text>
+      <Text style={{ color: '#F3EFE0', fontSize: 24, fontWeight: 'bold', marginLeft: 20, marginTop: 50 }}>Welcome back</Text>
+      <Text style={{ paddingTop: 20, paddingBottom: 20, paddingLeft: 20 }} className='text-retro-white font-bold text-[16px]'>Artist for you</Text>
       <ScrollView
         horizontal
         contentContainerStyle={styles.Album}
@@ -167,9 +158,6 @@ const User = () => {
           </View>
         ))}
       </ScrollView>
-      <Text style={styles.Logout} onPress={handleLogout}>
-        Logout
-      </Text>
     </ScrollView>
   )
 }
@@ -180,6 +168,10 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
     backgroundColor: '#222222'
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)'
   },
   Text: {
     color: '#F3EFE0',
