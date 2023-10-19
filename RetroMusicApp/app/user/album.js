@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { baseUrl, apiUrls } from '../../constants/urls'
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import { useRoute } from '@react-navigation/native'
+import useMusicStore from '../store/musicStore'
 
 const album = () => {
   const route = useRoute()
   const [songs, setSongs] = useState([])
   const { album } = route.params
+
+  const { setSong } = useMusicStore()
+
+  const handleOnPress = (item) => {
+    setSong(item)
+  }
 
   useEffect(() => {
     setSongs([])
@@ -48,16 +55,21 @@ const album = () => {
         style={{ marginBottom: 10, paddingLeft: 10 }}
       >
         {songs.map((item) => (
-          <View style={styles.songContainer} key={item.id}>
-            <Image
-              style={styles.songCover}
-              source={{ uri: item.cover }}
-            />
-            <View style={styles.songInfoContainer}>
-              <Text style={styles.songName}>{item.name}</Text>
-              <Text style={styles.songType}>{item.duration}</Text>
+          <TouchableOpacity
+            key={item.id}
+            onPress={() => handleOnPress(item)}
+          >
+            <View style={styles.songContainer}>
+              <Image
+                style={styles.songCover}
+                source={{ uri: item.cover }}
+              />
+              <View style={styles.songInfoContainer}>
+                <Text style={styles.songName}>{item.name}</Text>
+                <Text style={styles.songType}>{item.duration}</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>

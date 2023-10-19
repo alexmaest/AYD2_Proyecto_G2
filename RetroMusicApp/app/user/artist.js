@@ -3,6 +3,7 @@ import { baseUrl, apiUrls } from '../../constants/urls'
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native'
 import { useRoute, useNavigation } from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons'
+import useMusicStore from '../store/musicStore'
 
 const Artist = () => {
   const route = useRoute()
@@ -12,6 +13,12 @@ const Artist = () => {
   const [allArtists, setAllArtists] = useState([])
   const navigation = useNavigation()
   const { artist, artistData } = route.params
+
+  const { setSong } = useMusicStore()
+
+  const handleOnPress = (item) => {
+    setSong(item)
+  }
 
   const fetchBanner = async () => {
     try {
@@ -119,16 +126,21 @@ const Artist = () => {
         style={{ marginBottom: 10, paddingLeft: 10 }}
       >
         {songs.map((item) => (
-          <View style={styles.songContainer} key={item.id}>
-            <Image
-              style={styles.songCover}
-              source={{ uri: item.albumUrl }}
-            />
-            <View style={styles.songInfoContainer}>
-              <Text style={styles.songName}>{item.name}</Text>
-              <Text style={styles.songType}>{item.duration}</Text>
+          <TouchableOpacity
+            key={item.id}
+            onPress={() => handleOnPress(item)}
+          >
+            <View style={styles.songContainer}>
+              <Image
+                style={styles.songCover}
+                source={{ uri: item.albumUrl }}
+              />
+              <View style={styles.songInfoContainer}>
+                <Text style={styles.songName}>{item.name}</Text>
+                <Text style={styles.songType}>{item.duration}</Text>
+              </View>
             </View>
-          </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
       <Text style={{ paddingTop: 20, paddingBottom: 20, paddingLeft: 20 }} className='text-retro-white font-bold text-[16px]'>Discography</Text>
