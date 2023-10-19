@@ -12,12 +12,9 @@ const MusicPlayer = () => {
   const { song } = useMusicStore()
 
   const playSound = async () => {
-    console.log('Loading Sound')
     const { sound } = await Audio.Sound.createAsync({ uri: song?.songUrl })
     setSound(sound)
     setIsPlaying(true)
-
-    console.log('Playing Sound')
     await sound.playAsync()
   }
 
@@ -42,10 +39,14 @@ const MusicPlayer = () => {
       : undefined
   }, [sound])
 
+  useEffect(() => {
+    if (isPlaying) {
+      playSound()
+    }
+  }, [song])
+
   if (!song) {
     return null
-  } else {
-    console.log({ song })
   }
 
   return (
@@ -87,7 +88,8 @@ const styles = StyleSheet.create({
   albumArt: {
     width: 50,
     height: 50,
-    marginRight: 10
+    marginRight: 10,
+    borderRadius: 5
   },
   songInfo: {
     flex: 1
