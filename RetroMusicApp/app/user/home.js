@@ -3,12 +3,20 @@ import React, { useEffect, useState } from 'react'
 import { baseUrl, apiUrls } from '../../constants/urls'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { router } from 'expo-router'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import useMusicStore from '../store/musicStore'
 
 const User = () => {
   const [id, setId] = useState('')
   const [albums, setAlbums] = useState([])
   const [artists, setArtists] = useState([])
   const [songs, setSongs] = useState([])
+
+  const { setSong } = useMusicStore()
+
+  const handleOnPress = (item) => {
+    setSong(item)
+  }
 
   useEffect(() => {
     const getID = async () => {
@@ -137,14 +145,19 @@ const User = () => {
         style={{ marginBottom: 10 }}
       >
         {songs.map((item) => (
-          <View style={styles.AlbumContainer} key={item.id}>
-            <Image
-              style={styles.AlbumCover}
-              source={{ uri: item.cover }}
-            />
-            <Text style={styles.AlbumName}>{item.name}</Text>
-            <Text style={styles.AlbumType}>{item.artist} • {item.duration}</Text>
-          </View>
+          <TouchableOpacity
+            style={styles.AlbumContainer} key={item.id}
+            onPress={() => handleOnPress(item)}
+          >
+            <View>
+              <Image
+                style={styles.AlbumCover}
+                source={{ uri: item.cover }}
+              />
+              <Text style={styles.AlbumName}>{item.name}</Text>
+              <Text style={styles.AlbumType}>{item.artist} • {item.duration}</Text>
+            </View>
+          </TouchableOpacity>
         ))}
       </ScrollView>
       <Text style={styles.Logout} onPress={handleLogout}>
