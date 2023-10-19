@@ -85,6 +85,12 @@ const ArtistLayout = () => {
           )
         }}
       />
+      <Tabs.Screen
+        name='song'
+        options={{
+          tabBarButton: (props) => null
+        }}
+      />
     </Tabs>
   )
 }
