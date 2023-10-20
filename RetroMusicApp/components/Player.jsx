@@ -40,14 +40,10 @@ const MusicPlayer = (props) => {
         cache: 'no-cache'
       })
       const canPlay = await response.json()
-      console.log('====================================')
-      console.log('canPlaySong', canPlay.result)
-      console.log('====================================')
       if (canPlay.result === true) {
         props.setIsAlertOpen(false)
         playSound()
       } else {
-        console.log('No puedes escuchar más canciones')
         props.setIsAlertOpen(true)
       }
     } catch (err) {
@@ -71,7 +67,6 @@ const MusicPlayer = (props) => {
   }, [sound])
 
   if (!song) {
-    console.log('No hay canción')
     return null
   } else {
     console.log('Hay canción')
