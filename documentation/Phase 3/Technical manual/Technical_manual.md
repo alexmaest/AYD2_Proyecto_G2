@@ -4,11 +4,23 @@
 
 ### _Descripción_
 
-Se desea crear una aplicación web que permita a creadores de contenido (artistas) poder registrarse e iniciar sesión, al momento de iniciar sesión podrán ver la música que han subido, así como sus álbumes. Se podrán eliminar o editar a como el creador de contenido desee.
+Se desea crear una aplicación web y aplicación móvil que permita a creadores de contenido (artistas) poder registrarse e iniciar sesión, al momento de iniciar sesión podrán ver la música que han subido, así como sus álbumes. Se podrán eliminar o editar a como el creador de contenido desee.
 
-Contará con un administrador que podrá ver a todos los creadores de contenido registrados en la plataforma y podrá deshabilitar sus usuarios según lo considere necesario.
+Contará con un administrador que podrá ver a todos los creadores de contenido registrados en la plataforma y podrá deshabilitar sus usuarios según lo considere necesario. Tanto en la versión web como en la aplicación móvil, se podrán ver diferentes reportes, sin embargo, la aplicación móvil tendrá la opción extra de poder ver reportes con filtro de fecha.
 
 ### _Tecnologías utilizadas_
+
+#### Aplicación Móvil
+
+Para el desarrollo de la aplicación móvil se utilizaron las siguientes librerías y frameworks:
+
+- React Native: Se decidió, principalmente, el desarrollo de la app móvil con React Native por su baja curva de aprendizaje, ya que se utilizó ReactJS para el desarrollo de la aplicación web, lo que permitió que el desarrollo de la aplicación móvil fuera más rápido y sencillo, como también por su gran comunidad, lo que permitió que se encontraran soluciones a los problemas que se presentaron durante el desarrollo de la aplicación móvil.
+
+- React Navigation: Se utilizó para el enrutado de la aplicación móvil, ya que permite la creación de rutas de forma más sencilla, como también una mejor distribución de las mismas, lo que permite una mejor experiencia de usuario.
+
+- Expo: Como empaquetar la aplicación móvil con React Native es un proceso que requiere de ciertos conocimientos, se decidió utilizar Expo como plataforma de desarrollo, ya que provee lo necesario para el desarrollo de la misma. Expo permite ejecutar la aplicación que se está desarrollando en varios entornos, como por ejemplo en un emulador, en un dispositivo físico, etc.
+
+- Tailwind CSS: Se utilizó para el desarrollo de la interfaz de usuario, ya que permite la creación de componentes de forma más rápida y sencilla, como también una mejor distribución de los mismos, lo que permite una mejor experiencia de usuario. También, al haber trabajado con Tailwind CSS en el desarrollo de la aplicación web, se decidió utilizarlo en la aplicación móvil para mantener la consistencia en la interfaz de usuario.
 
 #### Frontend
 
@@ -40,6 +52,14 @@ La base de datos se encuentra alojada en Amazon Web Services, en la cual se util
 
 ### _Instalación_
 
+#### Aplicación Móvil
+
+Para la instalación de la aplicación móvil se debe ejecutar el siguiente comando en la carpeta del proyecto:
+
+```bash
+npm install
+```
+
 #### Frontend
 
 Para la instalación del frontend se debe ejecutar el siguiente comando en la carpeta del proyecto:
@@ -61,6 +81,16 @@ npm install
 Para poder acceder a la base de datos se debe tener instalado un cliente de MySQL y solicitar las credenciales al administrador del proyecto.
 
 ### _Ejecución_
+
+#### Aplicación Móvil
+
+Para la ejecución de la aplicación móvil se debe ejecutar el siguiente comando en la carpeta del proyecto:
+
+```bash
+npm run start
+```
+
+Este comando ejecutará la aplicación móvil en un entorno de desarrollo, lo que permitirá que se pueda ejecutar la aplicación móvil en un dispositivo físico o en un emulador. Expo (el empaquetador de la aplicación) mostrará un código QR que se debe escanear con la aplicación móvil de Expo para poder ejecutar la aplicación móvil.
 
 #### Frontend
 
@@ -120,6 +150,18 @@ node index.js
 
   - `GET /TopArtists`: Obtiene el top 5 de artistas mas escuchados en todo el servicio.
 
+  - `GET /allSongsGenres`: Obtiene la lista completa de géneros de las canciones.
+
+  - `GET /TopSongsFiltro`: Obtiene el top 5 canciones con filtro de género.
+
+  - `GET /TopAlbumsFiltro`: Obtiene el top 5 albumes con filtrado de reproducciones.
+
+  - `GET /TopArtistsFiltro`: Obtiene el top 5 artistas con filtrado de reproducciones.
+
+  - `GET /allSongsDates`: Obtiene el top canciones globales con filtrado por fechas.
+
+  - `GET /TopSongsAlltime`: Obtiene el top canciones globales con filtrado por fechas en la tabla reportes.
+
 - **_Rutas de artista:_**
 
   - `GET /banner/:userId`: Obtiene el banner de un artista.
@@ -174,7 +216,13 @@ node index.js
 
   - `POST /recomendations`: Encargado de brindar una sugerencia de canciones las cuales estan causando tendencia en la aplicacion.
 
-  - `POST /userLimit`: Actualiza el contador diario de reproduccion por parte de un usuario sin subscripcion premiun.
+  - `POST /userLimit`: Actualiza el contador diario de reproduccion por parte de un usuario sin subscripcion premium.
+
+  - `GET /historial/:idUsuario`: Obtiene el listado de canciones escuchadas por el usuario con filtrado por fecha.
+
+  - `GET /listenedTime/:idUsuario`: Obtiene la cantidad de tiempo escuchado por el usuario con filtrado por fecha.
+
+  - `GET /listenedSongs/:idUsuario`: Obtiene la cantidad de canciones escuchadas con filtrado por fecha.
 
 - **_Rutas para registro de usuario:_**
 
