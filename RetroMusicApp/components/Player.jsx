@@ -14,11 +14,9 @@ const MusicPlayer = (props) => {
   const { song } = useMusicStore()
 
   const playSound = async () => {
-    console.log('Loading Sound')
     const { sound } = await Audio.Sound.createAsync({ uri: song?.songUrl })
     setSound(sound)
     setIsPlaying(true)
-    console.log('Playing Sound')
     await sound.playAsync()
   }
 
