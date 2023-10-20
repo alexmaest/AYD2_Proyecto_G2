@@ -43,7 +43,10 @@ describe('fill register form', () => {
     // submit response wait
     cy.wait(1000)
   })
+```
+<img src="./E2E-alexis/cypress-registerUser-good.png"/>
 
+```
   it('user not passes', () => {
     // User register view
     cy.visit('http://localhost:3000/register/user/')
@@ -70,7 +73,10 @@ describe('fill register form', () => {
     // submit response wait
     cy.wait(1000)
   })
+```
+<img src="./E2E-alexis/cypress-registerUser-bad.png"/>
 
+```
   it('artist not passes', () => {
     // Artist register view
     cy.visit('http://localhost:3000/register/')
@@ -99,7 +105,11 @@ describe('fill register form', () => {
     // submit response wait
     cy.wait(1000)
   })
+```
+<img src="./E2E-alexis/cypress-registerArtist-good.png"/>
 
+
+```
   it('artist not passes', () => {
     // Artist register view
     cy.visit('http://localhost:3000/register/')
@@ -130,11 +140,8 @@ describe('fill register form', () => {
 
 
 ```
-
-<img src="./E2E-alexis/cypress-registerUser-good.png"/>
-<img src="./E2E-alexis/cypress-registerUser-bad.png"/>
-<img src="./E2E-alexis/cypress-registerArtist-good.png"/>
 <img src="./E2E-alexis/cypress-registerArtist-bad.png"/>
+
 
 ---
 ## Recuperación de contraseña de usuarios - HUG2200002 - Puntos de Historia=5 - Prioridad=Baja
@@ -389,6 +396,7 @@ Como usuario creador de contenido de la plataforma deseo subir o actualizar la i
 **Prueba asociada E2E**
 ```
 
+
 import 'cypress-file-upload'
 
 describe('fill banner form', () => {
@@ -417,7 +425,14 @@ describe('fill banner form', () => {
       // Upload response wait
       cy.wait(1000)
     })
-    
+
+```
+
+
+<img src="./E2E-alexis/cypress-banner-good.png" />
+
+
+```
     it('not passes', () => {
         // login view
         cy.visit('http://localhost:3000/login')
@@ -447,7 +462,6 @@ describe('fill banner form', () => {
 
 
 ```
-<img src="./E2E-alexis/cypress-banner-good.png" />
 <img src="./E2E-alexis/cypress-banner-bad.png" />
 
 ---
