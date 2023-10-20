@@ -14,11 +14,6 @@ const MusicPlayer = (props) => {
   const { song } = useMusicStore()
 
   const playSound = async () => {
-    /* if (!canPlaySong()) {
-      setSound(null)
-      setIsPlaying(false)
-      return
-    } */
     console.log('Loading Sound')
     const { sound } = await Audio.Sound.createAsync({ uri: song?.songUrl })
     setSound(sound)
@@ -68,8 +63,6 @@ const MusicPlayer = (props) => {
 
   if (!song) {
     return null
-  } else {
-    console.log('Hay canción')
   }
 
   return (
