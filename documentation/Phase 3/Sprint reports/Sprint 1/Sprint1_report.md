@@ -1,82 +1,51 @@
 ![Net Image](banner.jpg "Banner | RetroMusic")
 
-## Reporte Sprint 1 | Fase 2 <img src="https://media.tenor.com/dHk-LfzHrtwAAAAi/linux-computer.gif" alt="drawing" width="30"/>
+## Reporte Sprint 1 | Fase 3 <img src="https://media.tenor.com/dHk-LfzHrtwAAAAi/linux-computer.gif" alt="drawing" width="30"/>
 
 ### _Grabación de Scrum Planning_
-Esta reunión marcó el inicio del primer sprint de la segunda fase del proyecto, donde se discutieron y repartieron las tareas que conlleva dicha propuesta realizada en el primer sprint de la primera fase del mismo, continuando con los roles tomados para cada integrante. Esta realizada el día 28 de Agosto, donde a continuación se muestra su respectiva grabación:
+Esta reunión marcó el inicio del primer sprint de la tercera fase del proyecto, donde se discutieron y repartieron las tareas que conlleva dicha propuesta realizada en el primer sprint de la tercera fase del mismo, continuando con los roles tomados para cada integrante. Esta realizada el día 27 de Septiembre, donde a continuación se muestra su respectiva grabación:
 
-    https://drive.google.com/file/d/1vyGupMsz0c1gDxFXH85bbCnY006qeJvl/view?usp=drive_link
 
 ### _Grabaciones de Daily Scrum_
-Se realizaron reuniones diarias donde se discutían los avances de la fase 2 del proyecto proporcionado, donde se respondían las preguntas: ¿Qué hice hoy?, ¿Que haré mañana?, y se discutieron dificultades para posibles soluciones dentro de las mismas. Las grabaciones inician desde el día 29 de Agosto hasta el 08 de Septiembre en días hábiles, las cuales se presentan a continuación:
+Se realizaron reuniones diarias donde se discutían los avances de la fase 3 del proyecto proporcionado, donde se respondían las preguntas: ¿Qué hice hoy?, ¿Que haré mañana?, y se discutieron dificultades para posibles soluciones dentro de las mismas. Las dailys sprint se desarrollaron desde el 28 de Septiembre hasta el 10 de Octubre, sin embargo las grabaciones inician desde el día 29 de Septiembre hasta el 09 de Octubre en días hábiles, las cuales se presentan a continuación:
 
-- 29 de Agosto
 
-    https://drive.google.com/file/d/1J7Q0GgJsAfh1_SFEPHqpOHNd-_pEs_vE/view?usp=drive_link
+- 29 de Septiembre
 
-- 30 de Agosto
 
-    https://drive.google.com/file/d/1DslnAgqMg19dCpaYf8yuaUQq3DBeW_UM/view?usp=drive_link
+- 02 de Octubre
 
-- 31 de Agosto
 
-    https://drive.google.com/file/d/1x8ippVuBoP6g-S6qascVMbjP-H_K_YPB/view?usp=drive_link
+- 04 de Octubre
 
-- 01 de Septiembre
 
-    https://drive.google.com/file/d/13YjyTEnTwqhB79W3tiIlUkWWBqkYMzC7/view?usp=drive_link
+- 06 de Octubre
 
-- 04 de Septiembre
 
-    https://drive.google.com/file/d/1Wf5WOmmaVOQujfOsjL9ycyO86yf4JIGu/view?usp=drive_link
+- 09 de Octubre
 
-- 05 de Septiembre
-
-    https://drive.google.com/file/d/1UOZXQ4TfmsVBR8F1VB2A_WCQNQ0hAJKJ/view?usp=drive_link
-
-- 06 de Septiembre:
-
-    https://drive.google.com/file/d/1HGMkGu2Dzsnv7bwrrG-2536JUricO5Qt/view?usp=drive_link
-    
-- 07 de Septiembre
-
-    https://drive.google.com/file/d/1xw2mXApg2C1gvD2QHRWWD3xI6HNYA5fP/view?usp=drive_link
-
-- 08 de Septiembre
-
-    https://drive.google.com/file/d/1ZFZVt7y4n2bmVWLeWxksT_TwbwzKZeRs/view?usp=drive_link
 
 ### _Grabación de Scrum Retrospective_
-Esta reunión marcó el fin del primer sprint de la segunda fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 10 de Septiembre.
+Esta reunión marcó el fin del primer sprint de la tercera fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 11 de Octubre.
 
-    https://drive.google.com/file/d/1ocZylnOXVHXnGO2yHUueGloaQRbo91Xg/view?usp=drive_link
 
 ### _Elementos del Sprint Backlog_
 
 | Nombre | Encargado/s  | Terminado |
-| ----- | ----- | ----- | 
-| Registro usuario plan gratuito | David Maldonado y Marvin Estrada | Si |
-| Recuperación de contraseña de usuario | David Maldonado y Marvin Estrada | Si |
-| Perfil usuario plan gratuito | Rodrigo Porón | Si |
-| Perfil creador de contenido | Rodrigo Porón | Si |
-| Deshabilitar usuario creador de contenido | Rodrigo Porón y Javier Alfaro | Si | 
-| Subir banner de creador de contenido | Rodrigo Porón y Fernando Gómez | Si |
-| Subir música a la plataforma | David Maldonado y Marvin Estrada | Si |
-| Creación de albumes | Rodrigo Porón y Marvin Estrada | Si |
-| Editar perfil creador de contenido | Rodrigo Porón y Javier Alfaro | Si |
-| Eliminar album | David Maldonado y Fernando Gómez | Si |
-| Eliminar canción | David Maldonado y Fernando Gómez | Si |
-| Mostrar albumes en vista usuario | Rodrigo Porón y Javier Alfaro | Si | 
-| Mostrar canciones en vista usuario | Rodrigo Porón y Javier Alfaro | Si | 
-| Mostrar artistas en vista usuario | Rodrigo Porón y Marvin Estrada | Si | 
-| Ver datos del usuario | Rodrigo Porón y Javier Alfaro | Si | 
-| Editar datos del usuario | Rodrigo Porón y Javier Alfaro | Si | 
-| Implementación de logs para el backend para este sprint | Javier Alfaro | Si |
-| Pruebas para funcionalidades | Fernando Gómez | Si |
-| Implementación de bitácora | Fernando Gómez | Si |
-| Diseño nuevo de base de datos para este sprint | Fernando Gómez | Si |
-| Despliegue para el backend para este sprint | Marvin Estrada | Si |
-| Despliegue para el frontend para este sprint | Rodrigo Porón | Si |
+| ------ | ------------ | --------- | 
+| Landing page, navbar y footer | David Maldonado | Si |
+| Registro de usuario y artista | Marvin Estrada | Si |
+| Login de administrador, usuario y artista | Rodrigo Porón | Si |
+| Recuperación de contraseña de usuario | Javier Alfaro | Si |
+| Reportes de administrador | David Maldonado y Javier Alfaro | Si |
+| Reportes de usuario | Rodrigo Porón y Marvin Estrada | Si |
+| Subir banner de artista | Marvin Estrada | Si |
+| Subir música a la plataforma | David Maldonado | Si |
+| Creación de albumes | Rodrigo Porón | Si |
+| Eliminar canción | Javier Alfaro | Si |
+| Eliminar album | Fernando Gómez | Si |
+
+Asimismo se realizaron las pruebas End 2 End sobre cada funcionalidad, dando un total de 12 de las mismas, estas realizadas en el framework cypress, todas estas realizadas en el primer sprint de la tercera fase del proyecto.
 
 ### _Tablero previo al inicio del Sprint_
 ![Before](beforeTable.png)

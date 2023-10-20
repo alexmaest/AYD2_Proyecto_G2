@@ -3,50 +3,42 @@
 ## Reporte Sprint 2 | Fase 2 <img src="https://media.tenor.com/dHk-LfzHrtwAAAAi/linux-computer.gif" alt="drawing" width="30"/>
 
 ### _Grabación de Scrum Planning_
-Esta reunión marcó el inicio del segundo sprint de la segunda fase del proyecto, donde se discutieron y repartieron las tareas que conlleva dicha propuesta realizada en la primera fase del proyecto, continuando con los roles tomados para cada integrante. Esta realizada el día 11 de Septiembre, donde a continuación se muestra su respectiva grabación:
+Esta reunión marcó el inicio del segundo sprint de la tercera fase del proyecto, donde se discutieron y repartieron las tareas que conlleva dicha propuesta realizada en la primera fase del proyecto, continuando con los roles tomados para cada integrante. Esta realizada el día 12 de Octubre, donde a continuación se muestra su respectiva grabación:
 
-    https://drive.google.com/file/d/10RFKYpHD-e904pEpm6aE918rSVqC7gNK/view?usp=drive_link
 
 ### _Grabaciones de Daily Scrum_
-Se realizaron reuniones diarias donde se discutían los avances de la fase 2 del proyecto proporcionado, donde se respondían las preguntas: ¿Qué hice hoy?, ¿Que haré mañana?, y se discutieron dificultades para posibles soluciones dentro de las mismas. Las grabaciones inician desde el día 12 hasta el 19 de Septiembre en días hábiles, omitiendo el 14 y 15 de Septiembre al ser asueto, las cuales se presentan a continuación:
+Se realizaron reuniones diarias donde se discutían los avances de la fase 3 del proyecto proporcionado, donde se respondían las preguntas: ¿Qué hice hoy?, ¿Que haré mañana?, y se discutieron dificultades para posibles soluciones dentro de las mismas. Las dailys sprint se desarrollaron desde el 13 de Octubre hasta el 20 de Octubre en días hábiles, las cuales se presentan a continuación:
 
-- 12 de Septiembre
 
-    https://drive.google.com/file/d/1NxpAGl-3SbQ-5si8zGIK1X4z88hedvsy/view?usp=drive_link
+- 13 de Octubre
 
-- 13 de Septiembre
 
-    https://drive.google.com/file/d/1XUK4ZTO8urW6hIb405piqR4GG0lpYIjJ/view?usp=drive_link
+- 16 de Octubre
 
-- 18 de Septiembre
 
-    https://drive.google.com/file/d/1wfhGs2zgSJ0TouJkVduXcuJY_fi4AAgy/view?usp=drive_link
+- 18 de Octubre
 
-- 19 de Septiembre
 
-    https://drive.google.com/file/d/1Rnsb8FH6WWwC8hNd6tl0JxxoKY90Y5a8/view?usp=drive_link
+- 19 de Octubre
+
+
+- 20 de Octubre
+
 
 ### _Grabación de Scrum Retrospective_
-Esta reunión marcó el fin del segundo y último sprint de la segunda fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 20 de Septiembre.
+Esta reunión marcó el fin del segundo sprint de la tercera fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 23 de Octubre.
 
-    https://drive.google.com/file/d/1UCubU7Xil4mt1_yWpMYkSVPE5BSiiYip/view?usp=drive_link
 
 ### _Elementos del Sprint Backlog_
 
 | Nombre | Encargado/s  | Terminado |
 | ------ | ------------ | --------- | 
-| Reporte de top 5 canciones más escuchadas | David Maldonado y Javier Alfaro | Si | 
-| Reporte de top 5 artistas más escuchados | David Maldonado y Javier Alfaro | Si | 
-| Reporte de top 5 albumes más escuchados | David Maldonado y Javier Alfaro | Si | 
-| Reproductor de canciones en el perfil usuario Play/Pausa y Siguiente/Anterior  | David Maldonado y Marvin Estrada | Si |
-| Recomendaciones en la vista descubrir | Rodrigo Porón y Marvin Estrada | Si | 
-| Límite de reproducciones por día (15 reproducciones)  | Rodrigo Porón y Marvin Estrada | Si | 
-| Publicidad | David Maldonado y Marvin Estrada | Si |
-| Implementación de logs para el backend para este sprint | Javier Alfaro | Si |
-| Pruebas para funcionalidades | Fernando Gómez | Si |
-| Diseño nuevo de base de datos para este sprint | Fernando Gómez | Si |
+| Recomendaciones | David Maldonado | Si |
+| Reproductor de música | Rodrigo Porón | Si |
+| Visualización de artistas, álbumes y canciones | Marvin Estrada | Si |
+| Editar información de artista | Javier Alfaro | Si |
+| Límite de reproducciones | Fernando Gómez | Si |
 | Despliegue para el backend para este sprint | Marvin Estrada | Si |
-| Despliegue para el frontend para este sprint | Rodrigo Porón | Si |
 
 ### _Tablero previo al inicio del Sprint_
 ![Before](beforeTable.png)

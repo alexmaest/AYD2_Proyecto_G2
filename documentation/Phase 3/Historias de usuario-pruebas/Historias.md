@@ -131,6 +131,11 @@ describe('fill register form', () => {
 
 ```
 
+<img src="./E2E-alexis/cypress-registerUser-good.png"/>
+<img src="./E2E-alexis/cypress-registerUser-bad.png"/>
+<img src="./E2E-alexis/cypress-registerArtist-good.png"/>
+<img src="./E2E-alexis/cypress-registerArtist-bad.png"/>
+
 ---
 ## Recuperación de contraseña de usuarios - HUG2200002 - Puntos de Historia=5 - Prioridad=Baja
 
@@ -442,6 +447,9 @@ describe('fill banner form', () => {
 
 
 ```
+<img src="./E2E-alexis/cypress-banner-good.png" />
+<img src="./E2E-alexis/cypress-banner-bad.png" />
+
 ---
 ## Subir música en vista catálogo-HUG240004 - Puntos de Historia=20 Prioridad = Alta
 
