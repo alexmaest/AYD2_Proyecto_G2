@@ -21,7 +21,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.david_maldo02.RetroMusicApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,6 +31,14 @@
       "expo-router",
       "expo-document-picker"
     ],
-    "scheme": "retromusic-scheme"
+    "scheme": "retromusic-scheme",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2958aee6-f764-4a1f-89a1-c130e6210ebc"
+      }
+    }
   }
 }
