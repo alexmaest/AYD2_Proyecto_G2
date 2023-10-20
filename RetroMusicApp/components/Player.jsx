@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { baseUrl, apiUrls } from '../constants/urls'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import useMusicStore from '../app/store/musicStore'
 import { Audio } from 'expo-av'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const MusicPlayer = () => {
+const MusicPlayer = (props) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [sound, setSound] = useState(null)
   // const [currentTime, setCurrentTime] = useState(0)
@@ -12,11 +14,15 @@ const MusicPlayer = () => {
   const { song } = useMusicStore()
 
   const playSound = async () => {
+    /* if (!canPlaySong()) {
+      setSound(null)
+      setIsPlaying(false)
+      return
+    } */
     console.log('Loading Sound')
     const { sound } = await Audio.Sound.createAsync({ uri: song?.songUrl })
     setSound(sound)
     setIsPlaying(true)
-
     console.log('Playing Sound')
     await sound.playAsync()
   }
@@ -26,6 +32,28 @@ const MusicPlayer = () => {
     setIsPlaying(false)
   }
 
+  const canPlaySong = async () => {
+    try {
+      const sessionString = await AsyncStorage.getItem('session')
+      const session = await JSON.parse(sessionString)
+      const response = await fetch(baseUrl + apiUrls.user.userLimit + `/${session?.id}`, {
+        cache: 'no-cache'
+      })
+      const canPlay = await response.json()
+      console.log('====================================')
+      console.log('canPlaySong', canPlay.result)
+      console.log('====================================')
+      if (canPlay.result === true) {
+        props.setIsAlertOpen(false)
+        playSound()
+      } else {
+        console.log('No puedes escuchar más canciones')
+        props.setIsAlertOpen(true)
+      }
+    } catch (err) {
+      if (err instanceof Error) console.log(err.stack)
+    }
+  }
   /*   const handleUpdateTime = (time) => {
     setCurrentTime(time)
   } */
@@ -43,9 +71,10 @@ const MusicPlayer = () => {
   }, [sound])
 
   if (!song) {
+    console.log('No hay canción')
     return null
   } else {
-    console.log({ song })
+    console.log('Hay canción')
   }
 
   return (
@@ -57,17 +86,17 @@ const MusicPlayer = () => {
       </View>
       <View style={styles.controls}>
         {
-            isPlaying
-              ? (
-                <TouchableOpacity onPress={pauseSong}>
-                  <AntDesign name='pause' size={24} color='white' />
-                </TouchableOpacity>
-                )
-              : (
-                <TouchableOpacity onPress={playSound}>
-                  <AntDesign name='play' size={24} color='white' />
-                </TouchableOpacity>
-                )
+          isPlaying
+            ? (
+              <TouchableOpacity onPress={pauseSong}>
+                <AntDesign name='pause' size={24} color='white' />
+              </TouchableOpacity>
+              )
+            : (
+              <TouchableOpacity onPress={canPlaySong}>
+                <AntDesign name='play' size={24} color='white' />
+              </TouchableOpacity>
+              )
         }
         {/* <Text style={styles.time}>
           {currentTime} / {song?.duration}
