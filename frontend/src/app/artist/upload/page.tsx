@@ -31,6 +31,12 @@ function Upload () {
     e.preventDefault()
     const id = session?.user.id
     if (id == null) { return }
+    if (file == null) {
+      setAlertType('danger')
+      setAlertMessage('Please select a track!')
+      setIsAlertOpen(true)
+      return
+    }
     try {
       const formData = new FormData()
       formData.append('userId', `${id}`)
@@ -147,6 +153,7 @@ function Upload () {
         />
         <Button
           type='primary'
+          dataTestId='cy-upload-button'
         >
           <span className='text-retro-white text-center font-bold text-[16px]'>Upload</span>
         </Button>

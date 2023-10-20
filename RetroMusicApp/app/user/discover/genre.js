@@ -2,13 +2,16 @@ import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'rea
 import { useRoute } from '@react-navigation/native'
 import { Link } from 'expo-router'
 import { FontAwesome } from '@expo/vector-icons'
+import useMusicStore from '../../store/musicStore'
 
 const genre = () => {
   const route = useRoute()
   const { genreName, songs } = route.params
 
-  const handlePress = (uri) => {
-    console.log(uri)
+  const { setSong } = useMusicStore()
+
+  const handlePress = (item) => {
+    setSong(item)
   }
 
   return (
@@ -27,7 +30,7 @@ const genre = () => {
           <TouchableOpacity
             key={item.id}
             style={styles.AlbumContainer}
-            onPress={() => handlePress(item.songUrl)}
+            onPress={() => handlePress(item)}
           >
             <Image
               style={styles.AlbumCover}

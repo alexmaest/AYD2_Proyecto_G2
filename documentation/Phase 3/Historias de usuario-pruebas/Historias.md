@@ -12,10 +12,123 @@ Como artista/usuario necesito un apartado para poder registrarme ingresando los 
 
 **Prueba asociada E2E**
 ```
-def suma(a, b):
-  return a + b
 
-print(suma(1, 2))
+
+describe('fill register form', () => {
+  it('user passes', () => {
+    // User register view
+    cy.visit('http://localhost:3000/register/user/')
+
+    // data entry
+    cy.get('[data-testid="cypress-email"]').type("cypress@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-username"]').type("cypress")
+    cy.get('[data-testid="cypress-day"]').type("01")
+    cy.get('[data-testid="cypress-month"]').select("February")
+    cy.get('[data-testid="cypress-year"]').type("1990")
+    cy.get('[data-testid="cypress-Other"]').check()
+
+    // data validations
+    cy.get('[data-testid="cypress-email"]').should('have.value', "cypress@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').should('have.value', "password")
+    cy.get('[data-testid="cypress-username"]').should('have.value', "cypress")
+    cy.get('[data-testid="cypress-day"]').should('have.value', "01")
+    cy.get('[data-testid="cypress-month"]').should('have.value', "February")
+    cy.get('[data-testid="cypress-year"]').should('have.value', "1990")
+    cy.get('[data-testid="cypress-Other"]').should('be.checked');
+
+    // submit
+    cy.get('[data-testid="cypress-signUp-Button"]').click();
+
+    // submit response wait
+    cy.wait(1000)
+  })
+
+  it('user not passes', () => {
+    // User register view
+    cy.visit('http://localhost:3000/register/user/')
+
+    // data entry
+    cy.get('[data-testid="cypress-email"]').type("cypress")
+    cy.get('[data-testid="cypress-password"]').type("123")
+    cy.get('[data-testid="cypress-username"]').type("c")
+    cy.get('[data-testid="cypress-day"]').type("99")
+    cy.get('[data-testid="cypress-month"]').select("February")
+    cy.get('[data-testid="cypress-year"]').type("9999")
+    
+    // data validations
+    cy.get('[data-testid="cypress-email"]').should('have.value', "cypress")
+    cy.get('[data-testid="cypress-password"]').should('have.value', "123")
+    cy.get('[data-testid="cypress-username"]').should('have.value', "c")
+    cy.get('[data-testid="cypress-day"]').should('have.value', "99")
+    cy.get('[data-testid="cypress-month"]').should('have.value', "February")
+    cy.get('[data-testid="cypress-year"]').should('have.value', "9999")
+
+    // submit
+    cy.get('[data-testid="cypress-signUp-Button"]').click();
+
+    // submit response wait
+    cy.wait(1000)
+  })
+
+  it('artist not passes', () => {
+    // Artist register view
+    cy.visit('http://localhost:3000/register/')
+
+    // data entry
+    cy.get('[data-testid="cypress-email"]').type("cypressartist@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-username"]').type("cypressartist")
+    cy.get('[data-testid="cypress-day"]').type("01")
+    cy.get('[data-testid="cypress-month"]').select("February")
+    cy.get('[data-testid="cypress-year"]').type("1990")
+    cy.get('[data-testid="cypress-Other"]').check()
+
+    // data validations
+    cy.get('[data-testid="cypress-email"]').should('have.value', "cypressartist@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').should('have.value', "password")
+    cy.get('[data-testid="cypress-username"]').should('have.value', "cypressartist")
+    cy.get('[data-testid="cypress-day"]').should('have.value', "01")
+    cy.get('[data-testid="cypress-month"]').should('have.value', "February")
+    cy.get('[data-testid="cypress-year"]').should('have.value', "1990")
+    cy.get('[data-testid="cypress-Other"]').should('be.checked');
+
+    // submit
+    cy.get('[data-testid="cypress-signUp-Button"]').click();
+
+    // submit response wait
+    cy.wait(1000)
+  })
+
+  it('artist not passes', () => {
+    // Artist register view
+    cy.visit('http://localhost:3000/register/')
+
+    // data entry
+    cy.get('[data-testid="cypress-email"]').type("cypress")
+    cy.get('[data-testid="cypress-password"]').type("123")
+    cy.get('[data-testid="cypress-username"]').type("c")
+    cy.get('[data-testid="cypress-day"]').type("99")
+    cy.get('[data-testid="cypress-month"]').select("February")
+    cy.get('[data-testid="cypress-year"]').type("9999")
+    
+    // data validations
+    cy.get('[data-testid="cypress-email"]').should('have.value', "cypress")
+    cy.get('[data-testid="cypress-password"]').should('have.value', "123")
+    cy.get('[data-testid="cypress-username"]').should('have.value', "c")
+    cy.get('[data-testid="cypress-day"]').should('have.value', "99")
+    cy.get('[data-testid="cypress-month"]').should('have.value', "February")
+    cy.get('[data-testid="cypress-year"]').should('have.value', "9999")
+
+    // submit
+    cy.get('[data-testid="cypress-signUp-Button"]').click();
+
+    // submit response wait
+    cy.wait(1000)
+  })
+})
+
+
 ```
 
 ---
@@ -203,10 +316,61 @@ Como usuario, deseo poder iniciar sesión en mi cuenta personal para así accede
 
 **Prueba asociada E2E**
 ```
-def suma(a, b):
-  return a + b
 
-print(suma(1, 2))
+
+describe('Login', () => {
+  it('should log in with admin valid credentials', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("admin@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+    
+    cy.wait(1000)
+
+    cy.visit('http://localhost:3000/admin')
+
+    cy.wait(1000)
+    cy.get('[data-testid="cypress-artists"]').should('exist')
+    .should('have.text', 'Artistas')
+  })
+
+  it('should log in with artist valid credentials', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("artista1@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+
+    cy.wait(1000)
+
+    cy.visit('http://localhost:3000/artist')
+
+    cy.wait(1000)
+
+    cy.get('[data-testid="cypress-header"]').should('exist')
+  })
+
+  it('should log in with user valid credentials', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("usuario@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+
+    cy.wait(1000)
+
+    cy.visit('http://localhost:3000/user')
+
+    cy.wait(1000)
+
+    cy.get('[data-testid="cypress-recommendations"]').should('exist')
+    .should('have.text', 'Recommendations')
+  })
+
+})
+
+
 ```
 ---
 
@@ -219,10 +383,64 @@ Como usuario creador de contenido de la plataforma deseo subir o actualizar la i
 
 **Prueba asociada E2E**
 ```
-def suma(a, b):
-  return a + b
 
-print(suma(1, 2))
+import 'cypress-file-upload'
+
+describe('fill banner form', () => {
+    it('passes', () => {
+      // login view
+      cy.visit('http://localhost:3000/login')
+
+      // login form fill data
+      cy.get('[data-testid="cypress-email"]').type("artista1@retromusic.com")
+      cy.get('[data-testid="cypress-password"]').type("password")
+      cy.get('[data-testid="cypress-logIn-Button"]').click();
+      
+      // login response wait
+      cy.wait(1000)
+      
+      // banner upload view
+      cy.visit('http://localhost:3000/artist/profile/banner')
+  
+      // data entry
+      const filePath = './resources/banner.jpg';
+      cy.get('[data-testid="cypress-file"]').attachFile(filePath);
+
+      // submit
+      cy.get('[data-testid="cypress-upload-button"]').click();
+      
+      // Upload response wait
+      cy.wait(1000)
+    })
+    
+    it('not passes', () => {
+        // login view
+        cy.visit('http://localhost:3000/login')
+  
+        // login form fill data
+        cy.get('[data-testid="cypress-email"]').type("artista1@retromusic.com")
+        cy.get('[data-testid="cypress-password"]').type("password")
+        cy.get('[data-testid="cypress-logIn-Button"]').click();
+        
+        // login response wait
+        cy.wait(1000)
+        
+        // banner upload view
+        cy.visit('http://localhost:3000/artist/profile/banner')
+    
+        // data entry
+        const filePath = './resources/banner.txt';
+        cy.get('[data-testid="cypress-file"]').attachFile(filePath);
+  
+        // submit
+        cy.get('[data-testid="cypress-upload-button"]').click();
+
+        // Upload response wait
+        cy.wait(1000)
+      })
+  })
+
+
 ```
 ---
 ## Subir música en vista catálogo-HUG240004 - Puntos de Historia=20 Prioridad = Alta
@@ -233,10 +451,53 @@ Como artista necesito un apartado para poder registrarme ingresando los datos re
 
 **Prueba asociada E2E**
 ```
-def suma(a, b):
-  return a + b
 
-print(suma(1, 2))
+
+describe('upload song spec', () => {
+  it('failed upload song', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("artista1@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+
+    cy.wait(1000)
+      
+    cy.visit('http://localhost:3000/artist/upload')
+    cy.get('audio').should('not.exist')
+
+    cy.get('form').within(() => {
+      cy.get('input[id="name"]').type('test song')
+      cy.get('input[id="genre"]').type('test genre')
+      cy.get('button').click()
+      cy.wait(1000)
+    })
+  })
+
+  it('upload song', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("artista1@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+
+    cy.wait(1000)
+      
+    cy.visit('http://localhost:3000/artist/upload')
+    cy.get('audio').should('not.exist')
+
+    const filePath = 'cypress/fixtures/resources/track.mp3';
+    cy.get('form').within(() => {
+      cy.get('input[type="file"]').selectFile(filePath, { force: true });
+      cy.get('input[id="name"]').type('test song')
+      cy.get('input[id="genre"]').type('test genre')
+      cy.get('button').click()
+      cy.wait(1000)
+    })
+  })
+})
+
+
 ```
 ---
 ## Crear álbumes en el perfil del creador de contenido - HUG200003 - Puntos de Historia=20 - Prioridad=Alta
@@ -248,8 +509,74 @@ Como creador de contenido quiero tener la posibilidad de crear álbumes para agr
 
 **Prueba asociada E2E**
 ```
-def suma(a, b):
-  return a + b
 
-print(suma(1, 2))
+
+import { apiUrls, baseUrl } from '@/constants/urls'
+import 'cypress-file-upload'
+
+describe('create album spec', () => {
+  it('create single', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("artista1@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+
+    cy.wait(1000)
+      
+    cy.visit('http://localhost:3000/artist/create-album')
+    
+    cy.get('[data-testid="cypress-album-name"]').type("Album de prueba")
+    
+    const filePath = './resources/banner.jpg';
+    cy.get('[data-testid="cypress-file"]').attachFile(filePath);
+
+    cy.get('[data-testid="cypress-album-cover"]').should('exist')
+    
+    cy.get('[data-testid="cypress-song-0"]').click()
+
+    cy.intercept('POST', baseUrl + apiUrls.artist.createAlbum).as('createAlbum')
+
+    cy.get('[data-testid="cypress-album-create"]').click()
+
+    cy.wait('@createAlbum').its('response.statusCode').should('eq', 200)
+
+  })
+
+  it('create album', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("artista1@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("password")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+
+    cy.wait(1000)
+      
+    cy.visit('http://localhost:3000/artist/create-album')
+    
+    cy.get('[data-testid="cypress-album-name"]').type("Album de prueba")
+    
+    const filePath = './resources/banner.jpg';
+    cy.get('[data-testid="cypress-file"]').attachFile(filePath);
+
+    cy.get('[data-testid="cypress-album-cover"]').should('exist')
+    
+    cy.get('[data-testid="cypress-song-0"]').click()
+    cy.get('[data-testid="cypress-song-1"]').click()
+    cy.get('[data-testid="cypress-song-2"]').click()
+    cy.get('[data-testid="cypress-song-3"]').click()
+
+    cy.intercept('POST', baseUrl + apiUrls.artist.createAlbum).as('createAlbum')
+
+    cy.get('[data-testid="cypress-album-create"]').click()
+
+    cy.wait('@createAlbum').its('response.statusCode').should('eq', 200)
+
+  })
+
+  
+
+})
+
+
 ```
