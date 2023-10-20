@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { baseUrl, apiUrls } from '../constants/urls'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import useMusicStore from '../app/store/musicStore'
 import { Audio } from 'expo-av'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const MusicPlayer = () => {
+const MusicPlayer = (props) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [sound, setSound] = useState(null)
   // const [currentTime, setCurrentTime] = useState(0)
@@ -23,6 +25,24 @@ const MusicPlayer = () => {
     setIsPlaying(false)
   }
 
+  const canPlaySong = async () => {
+    try {
+      const sessionString = await AsyncStorage.getItem('session')
+      const session = await JSON.parse(sessionString)
+      const response = await fetch(baseUrl + apiUrls.user.userLimit + `/${session?.id}`, {
+        cache: 'no-cache'
+      })
+      const canPlay = await response.json()
+      if (canPlay.result === true) {
+        props.setIsAlertOpen(false)
+        playSound()
+      } else {
+        props.setIsAlertOpen(true)
+      }
+    } catch (err) {
+      if (err instanceof Error) console.log(err.stack)
+    }
+  }
   /*   const handleUpdateTime = (time) => {
     setCurrentTime(time)
   } */
@@ -58,17 +78,17 @@ const MusicPlayer = () => {
       </View>
       <View style={styles.controls}>
         {
-            isPlaying
-              ? (
-                <TouchableOpacity onPress={pauseSong}>
-                  <AntDesign name='pause' size={24} color='white' />
-                </TouchableOpacity>
-                )
-              : (
-                <TouchableOpacity onPress={playSound}>
-                  <AntDesign name='play' size={24} color='white' />
-                </TouchableOpacity>
-                )
+          isPlaying
+            ? (
+              <TouchableOpacity onPress={pauseSong}>
+                <AntDesign name='pause' size={24} color='white' />
+              </TouchableOpacity>
+              )
+            : (
+              <TouchableOpacity onPress={canPlaySong}>
+                <AntDesign name='play' size={24} color='white' />
+              </TouchableOpacity>
+              )
         }
         {/* <Text style={styles.time}>
           {currentTime} / {song?.duration}

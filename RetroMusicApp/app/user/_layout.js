@@ -1,9 +1,11 @@
 import { Tabs } from 'expo-router'
+import React, { useState } from 'react'
 import { FontAwesome } from '@expo/vector-icons'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Button } from 'react-native'
 import MusicPlayer from '../../components/Player'
 
 const UserLayout = () => {
+  const [isAlertOpen, setIsAlertOpen] = useState(false)
   return (
     <>
       <Tabs
@@ -83,7 +85,17 @@ const UserLayout = () => {
           }}
         />
       </Tabs>
-      <MusicPlayer />
+      {isAlertOpen && (
+        <View>
+          <Button
+            onClick={() => setIsAlertOpen(false)} title='You have reached your limit of songs for today'
+            style={{ backgroundColor: '#ccc', color: 'white' }}
+          >
+            Close
+          </Button>
+        </View>
+      )}
+      <MusicPlayer setIsAlertOpen={setIsAlertOpen} />
     </>
   )
 }
