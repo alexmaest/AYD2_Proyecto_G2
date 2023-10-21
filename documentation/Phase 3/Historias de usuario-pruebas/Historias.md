@@ -495,7 +495,13 @@ describe('upload song spec', () => {
       cy.wait(1000)
     })
   })
+```
 
+<img src="./E2E-javier/cypress-test-upload-song-3.png" />
+<img src="./E2E-javier/cypress-test-upload-song-1.png" />
+
+
+```
   it('upload song', () => {
     cy.visit('http://localhost:3000/login')
 
@@ -518,9 +524,13 @@ describe('upload song spec', () => {
     })
   })
 })
-
-
 ```
+
+<img src="./E2E-javier/cypress-test-upload-song-4.png" />
+<img src="./E2E-javier/cypress-test-upload-song-2.png" />
+
+
+
 ---
 ## Crear álbumes en el perfil del creador de contenido - HUG200003 - Puntos de Historia=20 - Prioridad=Alta
 
