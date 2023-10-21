@@ -134,7 +134,11 @@ node index.js
 
 ### _Diagrama Entidad-Relación de la base de datos_
 
-![ER](er.png)
+![ER](db2.png)
+
+### _Diagrama de Despliegue_
+
+![ER](deployment.png)
 
 ### _Rutas utilizadas en el backend_
 

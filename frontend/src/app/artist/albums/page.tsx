@@ -33,11 +33,12 @@ export default async function Albums () {
             )}
             {albums.length !== 0 &&
               <Catalog.Content layout='horizontal'>
-                {albums.map((album: Album) => (
+                {albums.map((album: Album, index:number) => (
                   <ArtistAlbum2
                     key={album.id}
                     artistName={session?.user?.username ?? 'Unknown'}
                     album={album}
+                    index={index + 1}
                   />
                 ))}
               </Catalog.Content>}
