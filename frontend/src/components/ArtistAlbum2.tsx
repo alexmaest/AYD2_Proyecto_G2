@@ -9,9 +9,10 @@ import { deleteAlbum } from '@/lib/actions'
 interface Props {
   artistName: string
   album: Album
+  index: number
 }
 
-export default function ArtistAlbum2 ({ artistName, album }: Props) {
+export default function ArtistAlbum2 ({ artistName, album, index }: Props) {
   const date = new Date(album.releaseDate)
   const year = date.getFullYear()
 
@@ -47,6 +48,7 @@ export default function ArtistAlbum2 ({ artistName, album }: Props) {
           <Button
             type='secondary'
             onClick={() => startTransition(async () => { await onDelete() })}
+            dataTestId={`cypress-delete-album-${index}`}
           >
             <span className='text-retro-black font-bold text-[16px]'>
               {isPending ? 'Deleting...' : 'Delete'}
