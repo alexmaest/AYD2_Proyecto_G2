@@ -384,6 +384,9 @@ describe('Login', () => {
 
 
 ```
+<img src="./E2E-rodrigo/cypress-admin-login.png" />
+<img src="./E2E-rodrigo/cypress-artist-login.png" />
+<img src="./E2E-rodrigo/cypress-user-login.png" />
 ---
 
 ## Actualización del banner de un creador de contenido-HUG230004 - Puntos de Historia=8 - Prioridad= Media
@@ -612,3 +615,5 @@ describe('create album spec', () => {
 
 
 ```
+<img src="./E2E-rodrigo/cypress-create-album.png" />
+<img src="./E2E-rodrigo/cypress-create-single.png" />

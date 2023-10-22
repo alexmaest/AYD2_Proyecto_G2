@@ -2,8 +2,6 @@
 
 ## Manual de Instalación | Fase 3 <img src="https://media.tenor.com/dHk-LfzHrtwAAAAi/linux-computer.gif" alt="drawing" width="30"/>
 
-###### _2023 - Laboratorio de Análisis y Diseño de Sistemas 2_
-
 ### Descarga
 Para descargar la aplicación de RetroMusic se deberá dirigir al siguiente
 enlace [RetroMusicAppLink](https://expo.dev/artifacts/eas/gPeco2DUF4ULSPgkF3jXjT.apk). 
@@ -42,3 +40,6 @@ aplicaciones preferidas.
 
 ![Installation](assets/installation_06.jpg)
 
+
+###### _2023 - Laboratorio de Análisis y Diseño de Sistemas 2_
+---

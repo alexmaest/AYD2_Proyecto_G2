@@ -5,6 +5,7 @@
 ### _Grabación de Scrum Planning_
 Esta reunión marcó el inicio del segundo sprint de la tercera fase del proyecto, donde se discutieron y repartieron las tareas que conlleva dicha propuesta realizada en la primera fase del proyecto, continuando con los roles tomados para cada integrante. Esta realizada el día 12 de Octubre, donde a continuación se muestra su respectiva grabación:
 
+    https://drive.google.com/file/d/1LuRtn7V34tXcBGHE-xx2adbz20PUMVqN/view?usp=share_link
 
 ### _Grabaciones de Daily Scrum_
 Se realizaron reuniones diarias donde se discutían los avances de la fase 3 del proyecto proporcionado, donde se respondían las preguntas: ¿Qué hice hoy?, ¿Que haré mañana?, y se discutieron dificultades para posibles soluciones dentro de las mismas. Las dailys sprint se desarrollaron desde el 13 de Octubre hasta el 20 de Octubre en días hábiles, las cuales se presentan a continuación:
@@ -12,18 +13,23 @@ Se realizaron reuniones diarias donde se discutían los avances de la fase 3 del
 
 - 13 de Octubre
 
+    https://drive.google.com/file/d/1QOIMk3aREZsuO7i32xRe8h-uC8qkfidr/view?usp=share_link
 
 - 16 de Octubre
 
+    https://drive.google.com/file/d/1QOIMk3aREZsuO7i32xRe8h-uC8qkfidr/view?usp=share_link
 
 - 18 de Octubre
 
+    https://drive.google.com/file/d/1ccZIL9_Y7aLKra-BXO3DEvEw1zcQApfP/view?usp=share_link
 
 - 19 de Octubre
 
+    https://drive.google.com/file/d/1dCvzAFXs4ulN8N_E7XLWyajRFNDthiQo/view?usp=share_link
 
 - 20 de Octubre
 
+    https://drive.google.com/file/d/1MT0dBWWQLH7M7HYuNMOl0i0xJ9YbsUdf/view?usp=share_link
 
 ### _Grabación de Scrum Retrospective_
 Esta reunión marcó el fin del segundo sprint de la tercera fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 23 de Octubre.

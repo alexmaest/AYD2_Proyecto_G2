@@ -5,6 +5,7 @@
 ### _Grabación de Scrum Planning_
 Esta reunión marcó el inicio del primer sprint de la tercera fase del proyecto, donde se discutieron y repartieron las tareas que conlleva dicha propuesta realizada en el primer sprint de la tercera fase del mismo, continuando con los roles tomados para cada integrante. Esta realizada el día 27 de Septiembre, donde a continuación se muestra su respectiva grabación:
 
+    https://drive.google.com/file/d/18MmeMXL5HTr0I6HG-3BHNZs7gsrWHb5c/view?usp=share_link
 
 ### _Grabaciones de Daily Scrum_
 Se realizaron reuniones diarias donde se discutían los avances de la fase 3 del proyecto proporcionado, donde se respondían las preguntas: ¿Qué hice hoy?, ¿Que haré mañana?, y se discutieron dificultades para posibles soluciones dentro de las mismas. Las dailys sprint se desarrollaron desde el 28 de Septiembre hasta el 10 de Octubre, sin embargo las grabaciones inician desde el día 29 de Septiembre hasta el 09 de Octubre en días hábiles, las cuales se presentan a continuación:
@@ -12,22 +13,28 @@ Se realizaron reuniones diarias donde se discutían los avances de la fase 3 del
 
 - 29 de Septiembre
 
+    https://drive.google.com/file/d/1K-5KRQD6BeQhBlYywDkwkd0198ik_hnw/view?usp=share_link
 
 - 02 de Octubre
 
+    https://drive.google.com/file/d/1BntaCaBvysu83bWchmq91kvHSBpGTPun/view?usp=share_link
 
 - 04 de Octubre
 
+    https://drive.google.com/file/d/1b3t6PkUPa6dp2TAL7bK_05ZQVQJxOiML/view?usp=share_link
 
 - 06 de Octubre
 
+    https://drive.google.com/file/d/1d2FVBGYyzmVnP2y3e5Jp2ZB2dMkJSPNM/view?usp=share_link
 
 - 09 de Octubre
 
+    https://drive.google.com/file/d/1d2FVBGYyzmVnP2y3e5Jp2ZB2dMkJSPNM/view?usp=share_link
 
 ### _Grabación de Scrum Retrospective_
 Esta reunión marcó el fin del primer sprint de la tercera fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 11 de Octubre.
 
+    https://drive.google.com/file/d/1d2FVBGYyzmVnP2y3e5Jp2ZB2dMkJSPNM/view?usp=share_link
 
 ### _Elementos del Sprint Backlog_
 

@@ -48,4 +48,18 @@ describe('Login', () => {
     .should('have.text', 'Recommendations')
   })
 
+  it('should log in with user invalid credentials', () => {
+    cy.visit('http://localhost:3000/login')
+
+    cy.get('[data-testid="cypress-email"]').type("usuario@retromusic.com")
+    cy.get('[data-testid="cypress-password"]').type("passworddd")
+    cy.get('[data-testid="cypress-logIn-Button"]').click();
+
+    cy.wait(1000)
+
+    cy.visit('http://localhost:3000/user')
+
+    cy.wait(1000)
+  })
+
 })
