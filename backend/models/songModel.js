@@ -97,7 +97,6 @@ class songModel {
     }
   }
 
-
   //JA- fase2
   async getAllArtistSongs2() {
     try {
@@ -110,18 +109,16 @@ class songModel {
     }
   }
 
-
   //sprint 2 fase2
-  async updateMusic(songId) {//modulo admin, actualizacion del contador de la cancion escuchada
+  async updateMusic(songId,userId) {//modulo admin, actualizacion del contador de la cancion escuchada
     try {
-      const songCounter = await this.repository.updateSongCounter(songId);
+      const songCounter = await this.repository.updateSongCounter(songId,userId);
       return songCounter;
     } catch (err) {
       console.error(err);
       throw new Error('Error while fetching songCounter update');
     }
   }
-
 
   async top5Songs() {//modulo admin, top 5 de la canciones escuchadas
     try {
@@ -132,7 +129,6 @@ class songModel {
       throw new Error('Error while fetching songCounter update');
     }
   }
-
 
   async top5Albums() {//modulo admin, top 5 de la canciones escuchadas
     try {
@@ -151,6 +147,96 @@ class songModel {
     } catch (err) {
       console.error(err);
       throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+  //fase3
+  async getAllGenres() {
+    try {
+      const songs = await this.repository.getAllSongsGenres();
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist songs');
+    }
+  }
+
+  async top5SongsFiltro(genero) {//modulo admin, top 5 de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.topSongsFiltro(genero);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+  async top5AlbumsFiltro(inf,sup) {//modulo admin, top 5 de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.topAlbumsFiltro(inf,sup);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+  async top5ArtistsFiltro(inf,sup) {//modulo admin, top 5 de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.top5ArtistsFiltro(inf,sup);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+  async getHistorial(userId) {
+    try {
+      const songs = await this.repository.historial(userId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching user historial');
+    }
+  }
+
+  async getListenedTime(userId) {
+    try {
+      const songs = await this.repository.listenedTime(userId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching user listened time');
+    }
+  }
+
+  async getListenedSongs(userId) {
+    try {
+      const songs = await this.repository.listenedSongs(userId);
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching user listened songs');
+    }
+  }
+  async top5SongsATFiltro(dateI,dateF) {//modulo admin, top global de la canciones escuchadas
+    try {
+      const songCounter = await this.repository.topSongsATFiltro(dateI,dateF);
+      return songCounter;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching songCounter update');
+    }
+  }
+
+  async getAllDates() {
+    try {
+      const songs = await this.repository.getAllSongsDates();
+      return songs;
+    } catch (err) {
+      console.error(err);
+      throw new Error('Error while fetching all artist songs');
     }
   }
 

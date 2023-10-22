@@ -18,7 +18,7 @@ export default async function Catalog ({ children }: { children: React.ReactNode
 function Header ({ title, children }: { title: string, children: React.ReactNode }) {
   return (
     <div className=' w-full flex justify-between items-center'>
-      <h3 className='font-bold text-3xl text-white'>{title}</h3>
+      <h3 data-testid="cypress-header" className='font-bold text-3xl text-white'>{title}</h3>
       <div className='flex gap-4'>
         {children}
       </div>

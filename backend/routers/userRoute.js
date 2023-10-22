@@ -23,4 +23,8 @@ router.get('/userLimit/:id', songController.userLimit);
 
 router.post('/MusicCounter', songController.musicCounter);
 
+router.get('/historial/:id', songController.historial);
+router.get('/listenedTime/:id', songController.listenedTime);
+router.get('/listenedSongs/:id', songController.listenedSongs);
+
 module.exports = router;

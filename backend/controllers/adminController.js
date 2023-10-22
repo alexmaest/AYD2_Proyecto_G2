@@ -115,6 +115,85 @@ class adminController {
         }
     }
 
+
+
+    //fase 3 all genres
+    async allGenres(req, res) {
+        try {
+            const allGenresSongs = await songModel.getAllGenres();
+            logEventsWrite(req.originalUrl,req.method,"Administrator","genres of songs sent successfully!",3)//log
+            res.status(200).json(allGenresSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+
+    async topSongsFiltro(req, res) {
+        try {
+            const allTopSongs = await songModel.top5SongsFiltro(req.body.genre);//filtro de top 5
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 songs with filter sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+
+    async topAlbumsFiltro(req, res) {
+        try {
+            const allTopSongs = await songModel.top5AlbumsFiltro(req.body.limInf,req.body.limSup);//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 albums with filter(inf,sup) sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+
+    async topArtistsFiltro(req, res) {
+        try {
+            const allTopSongs = await songModel.top5ArtistsFiltro(req.body.limInf,req.body.limSup);//modulo admin visualice a todos los CC
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top 5 artists with filter(inf,sup) sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+    async topSongsATFiltro(req, res) {
+        try {
+            const allTopSongs = await songModel.top5SongsATFiltro(req.body.dateInit, req.body.dateFinal);//filtro de top por fechas
+            logEventsWrite(req.originalUrl,req.method,"Administrator","top global songs with filter sent successfully!",3)//log
+            res.status(200).json(allTopSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
+
+    async allDatesReproducciones(req, res) {
+        try {
+            const allGenresSongs = await songModel.getAllDates();
+            logEventsWrite(req.originalUrl,req.method,"Administrator","all dates of songs from table report sent successfully!",3)//log
+            res.status(200).json(allGenresSongs);
+        } catch (err) {
+            console.error(err);
+            logEventsWrite(req.originalUrl,req.method,"Administrator","Internal Server Error",3)//log
+            res.status(500).send('Internal Server Error');
+        }
+    }
+
 }
 
 module.exports = new adminController();

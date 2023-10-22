@@ -115,7 +115,7 @@ class LoginController {//JA
                         logEventsWrite(req.originalUrl,req.method,user[0].nombre,"The email has not been sent",3)//log
                         res.status(500).send('The email has not been sent');
                     } else {
-                        console.log('Information: Email sent');
+                        //console.log('Information: Email sent');
                         logEventsWrite(req.originalUrl,req.method,user[0].nombre,"The email has been sent",3)//log
                         res.status(200).send('The email has been sent');
                     }

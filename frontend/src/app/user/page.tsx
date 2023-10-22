@@ -22,7 +22,7 @@ export default async function Page () {
         <img src='/images/ad1.png' alt='ad1' className='w-[128px] h-[512px]' />
       </div>
       <section className='flex flex-col gap-8 w-3/4 section-max-height overflow-y-auto py-8'>
-        <h1 className='font-extrabold text-2xl text-retro-white'>Recommendations</h1>
+        <h1 data-testid="cypress-recommendations" className='font-extrabold text-2xl text-retro-white'>Recommendations</h1>
         <div className='max-w-full flex flex-row justify-center'>
           <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
             <GenreRecommendation genreName='Dance-Pop' songs={genresRecommendation?.['Dance-Pop'] ?? []} backgroundColor='bg-retro-orange-600/60' />

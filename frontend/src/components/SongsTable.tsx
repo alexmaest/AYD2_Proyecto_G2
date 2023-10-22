@@ -50,6 +50,7 @@ export default function SongsTable ({ songs, cover, artist }: { songs?: SongWith
         {
               songs?.map((song, index) => (
                 <tr
+                data-testid={`cypress-song-${index+1}`}
                   key={song?.id} className='hover:bg-retro-black-600 transition duration-500 cursor-default'
                   onClick={async () => await handlePlaySong(song?.id)}
                 >
