@@ -347,6 +347,13 @@ describe('Login', () => {
     .should('have.text', 'Artistas')
   })
 
+  ```
+
+  <img src="./E2E-rodrigo/cypress-admin-login.png" />
+
+  
+  ```
+
   it('should log in with artist valid credentials', () => {
     cy.visit('http://localhost:3000/login')
 
@@ -362,6 +369,12 @@ describe('Login', () => {
 
     cy.get('[data-testid="cypress-header"]').should('exist')
   })
+
+  ```
+  <img src="./E2E-rodrigo/cypress-artist-login.png" />
+
+  
+  ```
 
   it('should log in with user valid credentials', () => {
     cy.visit('http://localhost:3000/login')
@@ -384,8 +397,6 @@ describe('Login', () => {
 
 
 ```
-<img src="./E2E-rodrigo/cypress-admin-login.png" />
-<img src="./E2E-rodrigo/cypress-artist-login.png" />
 <img src="./E2E-rodrigo/cypress-user-login.png" />
 ---
 
@@ -577,6 +588,10 @@ describe('create album spec', () => {
     cy.wait('@createAlbum').its('response.statusCode').should('eq', 200)
 
   })
+  ```
+  <img src="./E2E-rodrigo/cypress-create-single.png" />
+  
+  ```
 
   it('create album', () => {
     cy.visit('http://localhost:3000/login')
@@ -616,4 +631,3 @@ describe('create album spec', () => {
 
 ```
 <img src="./E2E-rodrigo/cypress-create-album.png" />
-<img src="./E2E-rodrigo/cypress-create-single.png" />
