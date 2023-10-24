@@ -34,6 +34,7 @@ Se realizaron reuniones diarias donde se discutían los avances de la fase 3 del
 ### _Grabación de Scrum Retrospective_
 Esta reunión marcó el fin del segundo sprint de la tercera fase del proyecto proporcionado, donde se respondían las preguntas: ¿Qué se hizo bien durante el Sprint?, ¿Qué se hizo mal durante el Sprint? y ¿Qué mejoras se deben implementar para el próximo sprint?, esto realizado por cada integrante del grupo, esta realizada el 23 de Octubre.
 
+    https://drive.google.com/file/d/1_tqg2I38xgceU951goIaZKv9pPvzExcJ/view?usp=sharing
 
 ### _Elementos del Sprint Backlog_
 
